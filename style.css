@@ -37,7 +37,8 @@ body {
 	box-sizing: content-box;
 	margin: auto;
 	width: 780px;
-	min-height: 490px;
+	overflow: hidden;
+	/*min-height: 490px;*/
 	/*min-height: 490px;
 	max-height: 1000px;*/
 	background-size: contain;
@@ -169,4 +170,5 @@ body {
 .foot {
 	margin: auto;
 	width: 758px;
+
 }
