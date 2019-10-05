@@ -20,10 +20,10 @@ body {
 .logo {
 	margin: 8px 52px;
 	display: inline-block;
-	font-size: 10px;
+	font-size: 9px;
 	font-family: "Tahoma", serif;
 	letter-spacing: 1px;
-	line-height: 1.2;
+	line-height: 1.4;
 	color: #fff;
 }
 
@@ -107,12 +107,31 @@ body {
 	float: right;
 }
 
-.news {
+.news-info {
+	/*display: flex;*/
+	justify-content: space-between;
 	float: right;
-	width: 506px;
+	width: 507px;
 	height: 230px;
-	/*border: 1px solid red;*/
 	background: url("images/blabla (1).png") top left no-repeat;
 }
 
+.news {
+	/*align-self: flex-end;*/
+	float: left;
+	padding: 4px 28px;
+	font-size: 14px;
+	letter-spacing: 3px;
+	transform: translateY(205px);
+
+}
+
+.date {
+	/*align-self: flex-end;*/
+	float: right;
+	color: #000000;
+	transform: translateY(206px);
+	padding: 0 60px;
+
+}
 
