@@ -32,9 +32,12 @@ body {
 }
 
 .main-content {
+	box-sizing: content-box;
 	margin: auto;
 	width: 780px;
-	min-height: 500px;
+	min-height: 490px;
+	/*min-height: 490px;
+	max-height: 1000px;*/
 	background-size: contain;
 	background: url("images/main_bckgr.png") repeat-y;
 }
@@ -108,7 +111,7 @@ body {
 	float: right;
 	width: 507px;
 	height: 230px;
-	background: url("images/blabla (1).png") top left no-repeat;
+	background: url("images/blabla.png") top left no-repeat;
 	margin-left: 50px;
 	margin-bottom: 10px;
 }
@@ -144,4 +147,8 @@ body {
 .text {
 	padding: 8px 25px;
 	text-indent: 20px;
+}
+.foot {
+	margin: auto;
+	width: 758px;
 }
