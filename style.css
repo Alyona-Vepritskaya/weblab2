@@ -37,7 +37,6 @@ body {
 	min-height: 500px;
 	background-size: contain;
 	background: url("images/main_bckgr.png") repeat-y;
-
 }
 
 .left-col {
@@ -72,14 +71,12 @@ body {
 	margin-top: -5px;
 }
 .items-container{
-	/*	display: inline-block;*/
 	float: right;
 	width: 176px;
 	padding-top: 22px;
 	margin-top: 2px;
 	background: transparent;
 	border-left: 2px solid #48689e;
-	/*transform: translateX(1px);*/
 
 }
 .new-items{
@@ -94,8 +91,6 @@ body {
 	transform: translateX(1px);
 }
 .item-image{
-	/*display: inline-block;*/
-	/*float: right;*/
 	text-align: center;
 	color: #000;
 	line-height: 18px;
@@ -114,6 +109,8 @@ body {
 	width: 507px;
 	height: 230px;
 	background: url("images/blabla (1).png") top left no-repeat;
+	margin-left: 50px;
+	margin-bottom: 10px;
 }
 
 .news {
@@ -123,7 +120,6 @@ body {
 	font-size: 14px;
 	letter-spacing: 3px;
 	transform: translateY(205px);
-
 }
 
 .date {
@@ -132,6 +128,20 @@ body {
 	color: #000000;
 	transform: translateY(206px);
 	padding: 0 60px;
-
 }
 
+.clearfix {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.text-content {
+	width: 590px;
+	color: #2b6caf;
+}
+
+.text {
+	padding: 8px 25px;
+	text-indent: 20px;
+}
