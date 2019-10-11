@@ -13,7 +13,7 @@ body {
 	margin: auto;
 	width: 778px;
 	height: 82px;
-	background-image: url("images/header_bckgr_cut-top.png"), radial-gradient(#2b6caf 20%, #fff 50%);
+	background: #2a6eaf url("images/header_bckgr_cut-top.png") ;
 	background-size: 100%;
 }
 
@@ -79,15 +79,18 @@ body {
 
 }
 .new-items{
-	display: inline-block;
 	float: left;
 	padding-left: 70px;
 	font-size: 12px;
 	line-height: 19px;
 	height: 19px;
-	width: 148px;
-	background: url("images/group.png") no-repeat, linear-gradient(to right, #2b6caf 30%, #fff 70%);
+	width: 76px;
+	background:#2b6caf url("images/group.png") no-repeat;
 	transform: translateX(1px);
+}
+a{
+	color: inherit;
+	text-decoration: none;
 }
 .item-image{
 	text-align: center;
@@ -105,7 +108,7 @@ body {
 	float: right;
 	width: 507px;
 	height: 230px;
-	background: url("images/blabla.png") top left no-repeat, linear-gradient(to right, #2b6caf, #fff);
+	background: url("images/blabla.png") top left no-repeat, linear-gradient(to right, #2b6caf, rgba(0,0,0,0));
 	margin-left: 50px;
 	margin-bottom: 10px;
 }
@@ -127,7 +130,7 @@ body {
 
 .clearfix {
 	content: "";
-	display: table;
+	display: block;
 	clear: both;
 }
 
