@@ -40,7 +40,6 @@ body {
 .left-col {
 	float: left;
 	width: 190px;
-
 }
 
 .navigation-bar {
@@ -70,7 +69,7 @@ body {
 }
 
 .item:hover {
-	background: linear-gradient(#00ae00, #000);
+	background: linear-gradient(#4f6fe7, #10106c);
 }
 
 .items-container {
@@ -78,7 +77,6 @@ body {
 	width: 176px;
 	padding-top: 22px;
 	margin-top: 2px;
-	/*border-left: 2px solid #48689e;*/
 }
 
 .new-items {
@@ -167,4 +165,43 @@ a {
 
 .imggg {
 	display: block;
+}
+
+.form {
+	width: 300px;
+	margin: auto;
+	border: 1px solid #2b6caf;
+	padding: 20px 0;
+	font-size: 14px;
+	background: #d9e1f2;
+	box-shadow: 0 0 20px 8px #2b6caf inset;
+	color: #000000;
+}
+
+/*#6979a0*/
+form {
+	width: min-content;
+	margin: auto;
+}
+
+.block {
+	margin: auto;
+	padding: 5px;
+}
+
+.block input {
+	display: block;
+}
+
+.submit {
+	background: linear-gradient(#b2c1e4, #6979a0);
+	border: 1px solid #474747;
+	border-bottom: 1px solid #6979a0;
+	font: inherit;
+	padding: 3px 5px;
+}
+
+.submit:hover {
+	background: linear-gradient(#4f6fe7, #10106c);
+	color: #fff
 }
