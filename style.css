@@ -2,7 +2,6 @@ body {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-weight: bold;
 	font-family: "Arial", sans-serif;
 	font-size: 10px;
 	letter-spacing: 1px;
@@ -22,7 +21,7 @@ body {
 	display: inline-block;
 	font-size: 9px;
 	font-family: "Tahoma", serif;
-	letter-spacing: 1px;
+	letter-spacing: 2px;
 	line-height: 1.4;
 	color: #fff;
 }
@@ -41,13 +40,11 @@ body {
 .left-col {
 	float: left;
 	width: 190px;
-	background: #fff;
+
 }
 
 .navigation-bar {
-	/*//width: 176px;*/
 	padding: 0 6px 0 6px;
-
 }
 
 
@@ -57,13 +54,19 @@ body {
 	border-top: 1px solid #fff;
 	border-bottom: 1px solid #6979a0;
 	font-size: 11px;
-	font-weight: normal;
-	padding-left: 20px;
+	padding: 1px 0 2px 20px;
+}
+
+.navigation-bar div:last-child {
+	background: white;
+	padding-bottom: 10px;
 }
 
 .item a {
 	display: block;
 	padding: 4px 0;
+	color: inherit;
+	text-decoration: none;
 }
 
 .item:hover {
@@ -75,9 +78,7 @@ body {
 	width: 176px;
 	padding-top: 22px;
 	margin-top: 2px;
-	background: transparent;
-	border-left: 2px solid #48689e;
-
+	/*border-left: 2px solid #48689e;*/
 }
 
 .new-items {
@@ -88,21 +89,26 @@ body {
 	height: 19px;
 	width: 76px;
 	background: #2b6caf url("images/group.png") no-repeat;
-
 }
 
 a {
+	color: inherit;
+}
+
+.item-image a {
 	display: block;
 	color: inherit;
 	text-decoration: none;
 }
 
+.item-image a {
+	margin: 30px 0 0 0;
+}
 .item-image {
 	text-align: center;
 	color: #000;
 	line-height: 18px;
 	font-size: 9px;
-	background: transparent;
 }
 
 .right-col {
@@ -128,6 +134,7 @@ a {
 	font-size: 14px;
 	letter-spacing: 3px;
 	transform: translateY(205px);
+	font-weight: bold;
 }
 
 .date {
@@ -149,7 +156,7 @@ a {
 }
 
 .text {
-	padding: 0 25px;
+	padding: 2px 25px;
 	text-indent: 20px;
 }
 
