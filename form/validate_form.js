@@ -1,44 +1,23 @@
 let psw1 = "", psw2 = "", email = "", login = "";
 document.querySelector('#psw1').addEventListener('change', () => {
     psw1 = document.querySelector('#psw1').value;
-    if (psw1.length < 8) {
-        document.querySelector('#psw1').classList.add('incorrect-input');
-        document.querySelector('.help').textContent = 'Пароль должен содержать больше 8 символов';
-    } else {
-        document.querySelector('#psw1').classList.remove('incorrect-input');
-        document.querySelector('.help').textContent = '';
-    }
+    incorrectValue(psw1, 5, '#psw1', "Пароль должен содержать больше 4 символов");
 });
 document.querySelector('#psw2').addEventListener('change', () => {
     psw2 = document.querySelector('#psw2').value;
-    if (psw2.length < 8) {
-        document.querySelector('#psw2').classList.add('incorrect-input');
-        document.querySelector('.help').textContent = 'Пароль должен содержать больше 8 символов';
-    } else {
-        document.querySelector('#psw2').classList.remove('incorrect-input');
-        document.querySelector('.help').textContent = '';
-    }
+    incorrectValue(psw2, 5, '#psw2', "Пароль должен содержать больше 4 символов");
 });
 document.querySelector('.submit')
     .addEventListener('click', () => {
         if (psw1.length === 0 || email.length === 0 || login.length === 0) {
             alert("Будьте внимательнее, заполните ВСЕ поля!!!");
         } else {
-            if (psw1 === psw2) {
-                alert("Ура, Вы зарегистрированы!!!")
-            } else {
-                alert("Будьте внимательнее, пароли не совпадают!!!");
-            }
+            (psw1 === psw2) ? alert("Ура, Вы зарегистрированы!!!") : alert("Будьте внимательнее, пароли не совпадают!!!");
         }
     });
 document.getElementById('email').addEventListener('change', () => {
     email = document.getElementById('email').value;
-    if (!emailIsValid(email) || email.length === 0) {
-        document.querySelector('#email').classList.add('incorrect-input');
-    } else {
-        document.querySelector('#email').classList.remove('incorrect-input');
-    }
-
+    incorrectValue(email, emailIsValid(email), '#email');
 });
 document.getElementById('login').addEventListener('change', () => {
     login = document.querySelector('#login').value;
@@ -50,4 +29,13 @@ document.getElementById('login').addEventListener('change', () => {
 });
 emailIsValid = (email) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+};
+incorrectValue = (value, originValue, formId, innerText = '') => {
+    if ((value.length < originValue) || !originValue) {
+        document.querySelector(formId).classList.add('incorrect-input');
+        document.querySelector('.help').textContent = innerText;
+    } else {
+        document.querySelector(formId).classList.remove('incorrect-input');
+        document.querySelector('.help').textContent = '';
+    }
 };
