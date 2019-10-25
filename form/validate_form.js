@@ -29,11 +29,11 @@ submitForm = () => {
         document.getElementById('login').classList.contains('incorrect-input') ||
         document.getElementById('email').classList.contains('incorrect-input') ||
         psw1.length === 0 || psw2.length === 0 || login.length === 0 || email.length === 0) {
-        document.getElementById('pain').innerText = 'ДУРАЧЕК, запони форму правильно!!!';
+        document.getElementById('pain').innerText = 'Запони форму правильно!!!';
         return false;
     } else {
         if (psw1 !== psw2) {
-            document.getElementById('pain').innerText = 'ДУРАЧЕК, пароли не совпадают!!!';
+            document.getElementById('pain').innerText = 'Пароли не совпадают!!!';
             return false;
         }
         return true;
