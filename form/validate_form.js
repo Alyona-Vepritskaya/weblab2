@@ -19,11 +19,9 @@ emailIsValid = (email) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 };
 incorrectValue = (value, originValue, formId, emailValue = false) => {
-    if ((value.length <= originValue) || emailValue) {
-        document.querySelector(formId).classList.add('incorrect-input');
-    } else {
+    ((value.length <= originValue) || emailValue) ?
+        document.querySelector(formId).classList.add('incorrect-input') :
         document.querySelector(formId).classList.remove('incorrect-input');
-    }
 };
 submitForm = () => {
     if (document.getElementById('psw1').classList.contains('incorrect-input') ||
