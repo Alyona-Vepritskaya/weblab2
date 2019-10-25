@@ -212,4 +212,7 @@ input{
 	border: #A41A81 solid 1px;
 	box-shadow: 0 0 1px #C50A67;
 }
-
+#pain{
+	color: #a41a81;
+	text-align: center;
+}

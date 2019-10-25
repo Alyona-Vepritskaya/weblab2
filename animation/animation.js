@@ -1,3 +1,4 @@
+/*
 document.querySelectorAll('.item').forEach(value => {
    value.addEventListener('mouseenter',()=>{
         value.style.transform = "translate(8px,0px)";
@@ -7,4 +8,4 @@ document.querySelectorAll('.item').forEach(value => {
           // value.classList.remove('animation');
            value.style.transform = "translate(0px,0px)";
        });
-})});
+})});*/
