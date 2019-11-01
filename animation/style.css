@@ -48,6 +48,10 @@ body {
 
 
 .item {
+	/*display: none;*/
+	width: 155px;
+	position: absolute;
+	top: -25px;
 	background: linear-gradient(#b2c1e4, #6979a0);
 	border: 1px solid #474747;
 	border-top: 1px solid #fff;
@@ -70,6 +74,9 @@ body {
 
 .item:hover {
 	background: linear-gradient(#4f6fe7, #10106c);
+}
+.bottom-img{
+	margin-top: 175px;
 }
 
 .items-container {
