@@ -46,11 +46,10 @@ body {
 	padding: 0 6px 0 6px;
 }
 
-
 .item {
-	/*display: none;*/
-	width: 155px;
+	width: 156px;
 	position: absolute;
+	z-index: -1;
 	top: -25px;
 	background: linear-gradient(#b2c1e4, #6979a0);
 	border: 1px solid #474747;
@@ -74,9 +73,6 @@ body {
 
 .item:hover {
 	background: linear-gradient(#4f6fe7, #10106c);
-}
-.bottom-img{
-	margin-top: 175px;
 }
 
 .items-container {
@@ -172,6 +168,8 @@ a {
 
 .imggg {
 	display: block;
+	background: linear-gradient(#2b6caf, #ffffff);
+	min-height: 88px;
 }
 
 .form {
