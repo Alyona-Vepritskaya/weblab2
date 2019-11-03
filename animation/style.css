@@ -50,7 +50,7 @@ body {
 	width: 156px;
 	position: absolute;
 	z-index: -1;
-	top: -25px;
+	top: 0;
 	background: linear-gradient(#b2c1e4, #6979a0);
 	border: 1px solid #474747;
 	border-top: 1px solid #fff;
