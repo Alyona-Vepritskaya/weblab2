@@ -17,11 +17,11 @@ function animateItem(shift, el, delay) {
         animate({
             duration: 2200,
             timing: function (timeFraction) {
-                return Math.pow(timeFraction, 3);
+                return Math.pow(timeFraction, 0.5);
             },
             draw: function (progress) {
                 el.style.top = progress * shift + 'px';
-                if (el.getBoundingClientRect().top > 165) {
+                if (el.getBoundingClientRect().top > 168) {
                     el.style.zIndex = '1';
                 }
             }

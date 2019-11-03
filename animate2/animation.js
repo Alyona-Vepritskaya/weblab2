@@ -18,14 +18,21 @@ let bounceEaseOut = makeEaseOut(bounce);
 
 function animateAll() {
     const items = document.querySelectorAll('.item');
-    document.querySelector('.bottom-img').style.marginTop = items.length * 25 + 'px';
+    let generalHeight = 0;
+    let lastHeight = [];
+    items.forEach((item) => {
+        generalHeight += item.getBoundingClientRect().height;
+        lastHeight.push(item.getBoundingClientRect().height);
+    });
+    lastHeight.unshift(25);
+    document.querySelector('.bottom-img').style.marginTop = generalHeight + 'px';
     let shift = 147;
     let delay = items.length * 300;
-    items.forEach((item) => {
+    for (let i = 0; i <= items.length - 1; i++) {
         delay -= 300;
-        shift += 25;
-        animateItem(shift, item, delay);
-    });
+        shift += lastHeight[i];
+        animateItem(shift, items[i], delay);
+    }
 }
 
 animateItem = function (shift, item, delay) {
@@ -35,7 +42,7 @@ animateItem = function (shift, item, delay) {
             timing: bounceEaseOut,
             draw: function (progress) {
                 item.style.top = progress * shift + 'px';
-                if (item.getBoundingClientRect().top > 165) {
+                if (item.getBoundingClientRect().top > 168) {
                     item.style.zIndex = '1';
                 }
             }
