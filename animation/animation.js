@@ -19,14 +19,13 @@ function animate(shift, el, delay) {
             // сколько времени прошло с начала анимации?
             let timePassed = Date.now() - start;
             if (timePassed >= 3000) {
-                clearInterval(timer); // закончить анимацию через 2 секунды
+                clearInterval(timer); // закончить анимацию через 3 секунды
                 return;
             }
             // отрисовать анимацию на момент timePassed, прошедший с начала анимации
             draw(timePassed, el, shift);
         })
     }, delay);
-
 }
 
 function draw(timePassed, el, sh) {
@@ -34,6 +33,10 @@ function draw(timePassed, el, sh) {
         el.style.zIndex = '1';
     }
     if (el.getBoundingClientRect().top <= sh) {
-        el.style.top = timePassed / 7 + 'px';
+        el.style.top = delta(timePassed) * 9 + 'px';
     }
+}
+
+function delta(timePassed) {
+    return Math.pow(timePassed,0.5)
 }
