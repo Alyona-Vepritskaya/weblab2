@@ -8,38 +8,32 @@ function animateAll() {
     items.forEach((item) => {
         delay -= 300;
         shift += 25;
-        animateItem(shift, item, delay);
+        animate(shift, item, delay);
     });
 }
 
-function animateItem(shift, el, delay) {
+function animate(shift, el, delay) {
     setTimeout(() => {
-        animate({
-            duration: 2200,
-            timing: function (timeFraction) {
-                return Math.pow(timeFraction, 0.5);
-            },
-            draw: function (progress) {
-                el.style.top = progress * shift + 'px';
-                if (el.getBoundingClientRect().top > 168) {
-                    el.style.zIndex = '1';
-                }
+        let start = Date.now(); // запомнить время начала
+        let timer = setInterval(function () {
+            // сколько времени прошло с начала анимации?
+            let timePassed = Date.now() - start;
+            if (timePassed >= 3000) {
+                clearInterval(timer); // закончить анимацию через 2 секунды
+                return;
             }
-        });
+            // отрисовать анимацию на момент timePassed, прошедший с начала анимации
+            draw(timePassed, el, shift);
+        })
     }, delay);
+
 }
 
-function animate(options) {
-    let start = performance.now();
-    requestAnimationFrame(function animate(time) {
-        // timeFraction от 0 до 1
-        let timeFraction = (time - start) / options.duration;
-        if (timeFraction > 1) timeFraction = 1;
-        // текущее состояние анимации
-        let progress = options.timing(timeFraction);
-        options.draw(progress);
-        if (timeFraction < 1) {
-            requestAnimationFrame(animate);
-        }
-    });
+function draw(timePassed, el, sh) {
+    if (el.getBoundingClientRect().top > 168) {
+        el.style.zIndex = '1';
+    }
+    if (el.getBoundingClientRect().top <= sh) {
+        el.style.top = timePassed / 7 + 'px';
+    }
 }
