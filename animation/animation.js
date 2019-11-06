@@ -2,14 +2,21 @@ window.onload = animateAll;
 
 function animateAll() {
     const items = document.querySelectorAll('.item');
-    document.querySelector('.bottom-img').style.marginTop = items.length * 25 + 'px';
+    let generalHeight = 0;
+    let lastHeight = [];
+    items.forEach((item) => {
+        generalHeight += item.getBoundingClientRect().height;
+        lastHeight.push(item.getBoundingClientRect().height);
+    });
+    lastHeight.unshift(25);
+    document.querySelector('.bottom-img').style.marginTop = generalHeight + 'px';
     let shift = 147;
     let delay = items.length * 300;
-    items.forEach((item) => {
+    for (let i = 0; i <= items.length - 1; i++) {
         delay -= 300;
-        shift += 25;
-        animate(shift, item, delay);
-    });
+        shift += lastHeight[i];
+        animate(shift, items[i], delay);
+    }
 }
 
 function animate(shift, el, delay) {
