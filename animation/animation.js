@@ -1,10 +1,11 @@
 window.onload = animateAll;
 
 function animateAll() {
+    document.querySelector('body').classList.add('over');
     const items = document.querySelectorAll('.item');
     let generalHeight = 0;
     let lastHeight = [];
-    items.forEach((item) => {
+    items.forEach(function (item) {
         generalHeight += item.getBoundingClientRect().height;
         lastHeight.push(item.getBoundingClientRect().height);
     });
@@ -17,15 +18,22 @@ function animateAll() {
         shift += lastHeight[i];
         animate(shift, items[i], delay);
     }
+    setTimeout(() => {
+        document.querySelector('.bottom-img').style.marginTop = '0';
+        document.querySelectorAll('.item').forEach((item) => {
+            item.style.position = 'static';
+        });
+        document.querySelector('body').classList.remove('over');
+    }, 2500);
 }
 
 function animate(shift, el, delay) {
-    setTimeout(() => {
+    setTimeout(function () {
         let start = Date.now(); // запомнить время начала
         let timer = setInterval(function () {
             // сколько времени прошло с начала анимации?
             let timePassed = Date.now() - start;
-            if (timePassed >= 3000) {
+            if (timePassed >= 2000) {
                 clearInterval(timer); // закончить анимацию через 3 секунды
                 return;
             }
