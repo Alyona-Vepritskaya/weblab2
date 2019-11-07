@@ -17,7 +17,6 @@ function bounce(timeFraction) {
 let bounceEaseOut = makeEaseOut(bounce);
 
 function animateAll() {
-    document.querySelector('body').classList.add('over');
     const items = document.querySelectorAll('.item');
     let generalHeight = 0;
     let lastHeight = [];
@@ -34,15 +33,7 @@ function animateAll() {
         shift += lastHeight[i];
         animateItem(shift, items[i], delay);
     }
-    setTimeout(() => {
-        document.querySelector('.bottom-img').style.marginTop = '0';
-        document.querySelectorAll('.item').forEach((item) => {
-            item.style.position = 'static';
-        });
-        document.querySelector('body').classList.remove('over');
-    }, 4000);
 }
-
 animateItem = function (shift, item, delay) {
     setTimeout(() => {
         animate({
