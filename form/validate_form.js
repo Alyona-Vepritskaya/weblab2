@@ -35,7 +35,7 @@ function submitForm() {
     psw2 = document.querySelector('#psw2').value;
     email = document.getElementById('email').value;
     login = document.querySelector('#login').value;
-    if (!(isIncorrect(psw1, 0) && isIncorrect(psw2, 0) &&
+    if (!(isIncorrect(psw1, 4) && isIncorrect(psw2, 4) &&
         isIncorrect(login, 0) && emailIsValid(email))) {
         document.getElementById('pain').innerText = 'Запони форму правильно!!!';
         return false;
