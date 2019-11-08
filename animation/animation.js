@@ -1,7 +1,6 @@
 window.onload = animateAll;
 
 function animateAll() {
-    document.querySelector('body').classList.add('over');
     const items = document.querySelectorAll('.item');
     let generalHeight = 0;
     let lastHeight = [];
@@ -13,45 +12,37 @@ function animateAll() {
     document.querySelector('.bottom-img').style.marginTop = generalHeight + 'px';
     let shift = 147;
     let delay = items.length * 300;
-    for (let i = 0; i <= items.length - 1; i++) {
+    for (let i = 0; i < items.length; i++) {
         delay -= 300;
         shift += lastHeight[i];
-        animate(shift, items[i], delay);
+        animate(0, shift, items[i], 3500, delay);
     }
-    setTimeout(() => {
-        document.querySelector('.bottom-img').style.marginTop = '0';
-        document.querySelectorAll('.item').forEach((item) => {
-            item.style.position = 'static';
-        });
-        document.querySelector('body').classList.remove('over');
-    }, 2500);
 }
 
-function animate(shift, el, delay) {
+function animate(begin, end, element, duration, delay) {
     setTimeout(function () {
-        let start = Date.now(); // запомнить время начала
-        let timer = setInterval(function () {
-            // сколько времени прошло с начала анимации?
-            let timePassed = Date.now() - start;
-            if (timePassed >= 2000) {
-                clearInterval(timer); // закончить анимацию через 3 секунды
-                return;
-            }
-            // отрисовать анимацию на момент timePassed, прошедший с начала анимации
-            draw(timePassed, el, shift);
-        })
-    }, delay);
+        let start = new Date().getTime(); // Время старта
+        setTimeout(function draw() {
+            let now = (new Date().getTime()) - start; // Текущее время
+            let progress = now / duration; // Прогресс анимации
+            let result = (end - begin) * delta(progress) + begin;
+            if (element.getBoundingClientRect().top > 168)
+                element.style.zIndex = '1';
+            element.style.top = result + "px";
+            console.log(element.getBoundingClientRect().top);
+            if (progress < 1) // Если анимация не закончилась, продолжаем
+                setTimeout(draw);
+        });
+    }, delay)
 }
 
-function draw(timePassed, el, sh) {
-    if (el.getBoundingClientRect().top > 168) {
-        el.style.zIndex = '1';
+function delta(progress) {
+    function d(progress) {
+        for (let a = 0, b = 1; 1; a += b, b /= 2) {
+            if (progress >= (7 - 4 * a) / 11)
+                return -Math.pow((11 - 6 * a - 11 * progress) / 4, 2) + Math.pow(b, 2);
+        }
     }
-    if (el.getBoundingClientRect().top <= sh) {
-        el.style.top = delta(timePassed) * 9 + 'px';
-    }
-}
 
-function delta(timePassed) {
-    return Math.pow(timePassed,0.5)
+    return 1 - d(1 - progress);
 }
