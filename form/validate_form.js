@@ -1,34 +1,42 @@
 let psw1 = "", psw2 = "", email = "", login = "";
-document.querySelector('#psw1').addEventListener('change', () => {
+document.querySelector('#psw1').addEventListener('change', function () {
     psw1 = document.querySelector('#psw1').value;
     incorrectValue(psw1, 4, '#psw1');
 });
-document.querySelector('#psw2').addEventListener('change', () => {
+document.querySelector('#psw2').addEventListener('change', function () {
     psw2 = document.querySelector('#psw2').value;
     incorrectValue(psw2, 4, '#psw2');
 });
-document.getElementById('email').addEventListener('change', () => {
+document.getElementById('email').addEventListener('change', function () {
     email = document.getElementById('email').value;
     incorrectValue(email, 0, '#email', !emailIsValid(email));
 });
-document.getElementById('login').addEventListener('change', () => {
+document.getElementById('login').addEventListener('change', function () {
     login = document.querySelector('#login').value;
     incorrectValue(login, 0, '#login');
 });
-emailIsValid = (email) => {
+
+function emailIsValid(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-};
-incorrectValue = (value, originValue, formId, emailValue = false) => {
+}
+
+function incorrectValue(value, originValue, formId, emailValue = false) {
     ((value.length <= originValue) || emailValue) ?
         document.querySelector(formId).classList.add('incorrect-input') :
         document.querySelector(formId).classList.remove('incorrect-input');
-};
-submitForm = () => {
-    if (document.getElementById('psw1').classList.contains('incorrect-input') ||
-        document.getElementById('psw2').classList.contains('incorrect-input') ||
-        document.getElementById('login').classList.contains('incorrect-input') ||
-        document.getElementById('email').classList.contains('incorrect-input') ||
-        psw1.length === 0 || psw2.length === 0 || login.length === 0 || email.length === 0) {
+}
+
+function isIncorrect(value, originValue) {
+    return value.length > originValue;
+}
+
+function submitForm() {
+    psw1 = document.querySelector('#psw1').value;
+    psw2 = document.querySelector('#psw2').value;
+    email = document.getElementById('email').value;
+    login = document.querySelector('#login').value;
+    if (!(isIncorrect(psw1, 0) && isIncorrect(psw2, 0) &&
+        isIncorrect(login, 0) && emailIsValid(email))) {
         document.getElementById('pain').innerText = 'Запони форму правильно!!!';
         return false;
     } else {
@@ -38,4 +46,4 @@ submitForm = () => {
         }
         return true;
     }
-};
+}
