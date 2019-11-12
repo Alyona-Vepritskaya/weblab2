@@ -1,6 +1,8 @@
 window.onload = animateAll;
 
 function animateAll() {
+    const begin = 0;
+    const duration = 3500;
     const items = document.querySelectorAll('.item');
     let generalHeight = 0;
     let lastHeight = [];
@@ -15,7 +17,7 @@ function animateAll() {
     for (let i = 0; i < items.length; i++) {
         delay -= 300;
         shift += lastHeight[i];
-        animate(0, shift, items[i], 3500, delay);
+        animate(begin, shift, items[i], duration, delay);
     }
 }
 
@@ -25,11 +27,10 @@ function animate(begin, end, element, duration, delay) {
         setTimeout(function draw() {
             let now = (new Date().getTime()) - start; // Текущее время
             let progress = now / duration; // Прогресс анимации
-            let result = (end - begin) * delta(progress) + begin;
+            let result = (end - begin) * delta(progress) + begin; //На сколько необходимо сдвинуть в данный момент
             if (element.getBoundingClientRect().top > 168)
                 element.style.zIndex = '1';
             element.style.top = result + "px";
-            console.log(element.getBoundingClientRect().top);
             if (progress < 1) // Если анимация не закончилась, продолжаем
                 setTimeout(draw);
         });
