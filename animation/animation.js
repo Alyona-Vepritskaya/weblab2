@@ -2,7 +2,7 @@ window.onload = animateAll;
 
 function animateAll() {
     const begin = 0;
-    const duration = 3500;
+    const duration = 1500;
     const items = document.querySelectorAll('.item');
     let generalHeight = 0;
     let lastHeight = [];
@@ -21,12 +21,16 @@ function animateAll() {
     }
 }
 
+//elem.getBoundingClientRect() возвращает координаты в контексте окна
 function animate(begin, end, element, duration, delay) {
     setTimeout(function () {
         let start = new Date().getTime(); // Время старта
         setTimeout(function draw() {
             let now = (new Date().getTime()) - start; // Текущее время
             let progress = now / duration; // Прогресс анимации
+            if (progress > 1) {
+                progress = 1;
+            }
             let result = (end - begin) * delta(progress) + begin; //На сколько необходимо сдвинуть в данный момент
             if (element.getBoundingClientRect().top > 168)
                 element.style.zIndex = '1';
@@ -38,12 +42,5 @@ function animate(begin, end, element, duration, delay) {
 }
 
 function delta(progress) {
-    function d(progress) {
-        for (let a = 0, b = 1; 1; a += b, b /= 2) {
-            if (progress >= (7 - 4 * a) / 11)
-                return -Math.pow((11 - 6 * a - 11 * progress) / 4, 2) + Math.pow(b, 2);
-        }
-    }
-
-    return 1 - d(1 - progress);
+    return Math.pow(progress, 0.5);
 }
