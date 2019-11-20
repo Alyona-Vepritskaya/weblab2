@@ -1,5 +1,4 @@
-
 <?php
 include '../general/header.php';
-include 'form.html';
+include 'main.php';
 include '../general/footer.php';

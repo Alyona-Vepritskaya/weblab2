@@ -1,4 +1,4 @@
 setTimeout(() => {
-    location.href = "http://localhost:63342/weblab2/index.html";
+    location.href = "http://localhost/general/index.php";
 }, 3000);
 

@@ -1,3 +1,14 @@
+<div class="right-col">
+    <div class="news-info">
+        <a href="">
+            <div class="news">
+                Новости
+            </div>
+        </a>
+        <div class="date">
+            30 февраля 1313
+        </div>
+    </div>
 <div class="text-content  clearfix">
     <p class="text">
         For each instruction, one may be used fram each of these groups and be placed in any

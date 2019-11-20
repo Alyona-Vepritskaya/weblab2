@@ -26,19 +26,19 @@
                 </a>
             </div>
             <div class="item">
-                <a href="../form/index.php">
+                <a href="../form_on_js/index.php">
                     <img src="../images/more.png" alt=">">
                     Регистрация js
                 </a>
             </div>
             <div class="item">
-                <a href="../form_on_php/indexF.php">
+                <a href="../form_on_php/index.php">
                     <img src="../images/more.png" alt=">">
                     Регистрация php
                 </a>
             </div>
             <div class="item">
-                <a href="#">
+                <a href="../redirect_page/index.php">
                     <img src="../images/more.png" alt=">">
                     Редирект
                 </a>
@@ -94,15 +94,5 @@
             </div>
         </div>
     </div>
-    <div class="right-col">
-        <div class="news-info">
-            <a href="">
-                <div class="news">
-                    Новости
-                </div>
-            </a>
-            <div class="date">
-                30 февраля 1313
-            </div>
-        </div>
+
 
