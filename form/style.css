@@ -69,7 +69,7 @@ body {
 }
 
 .item:hover {
-	background: linear-gradient(#4f6fe7, #10106c);
+	background: linear-gradient(#4f6fe7, #000000);
 }
 
 .items-container {
