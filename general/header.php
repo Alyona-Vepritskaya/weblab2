@@ -50,6 +50,12 @@
                 </a>
             </div>
             <div class="item">
+                <a href="../server_var/index.php">
+                    <img src="../images/more.png" alt=">">
+                    Содержимое серверных переменных
+                </a>
+            </div>
+            <div class="item">
                 <a href="#">
                     <img src="../images/more.png" alt=">">
                     O компании

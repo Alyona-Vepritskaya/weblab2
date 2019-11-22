@@ -1,14 +1,8 @@
 <?php
-function check()
-{
-    if (filter_input_('h_input', 'reg') == 'reg') {
-        $_POST['h_input'] = 'qwe';
-        return false;
-    } else {
-        return true;
-    }
-}
 
+/*if (!isset($error)) {
+    $error = '';
+}*/
 function filter_input_($name, $def)
 {
     $result = $def;
@@ -49,19 +43,19 @@ if (!(isIncorrect($psw1, 3) && isIncorrect($psw2, 3) &&
     <div class="news-info">
         <a href="">
             <div class="news">
-                Регистрация
+                Server
             </div>
         </a>
         <div class="date">
-            30 февраля 1313
+            30 февраля 666
         </div>
     </div>
     <div class="text-content  clearfix">
         <div class="form">
-            <form class="qwerty" method="post">
-                <input type="text" name="h_input" hidden="hidden">
+            <form  class="qwerty" method="post">
+                <!--  <input  type="text" name="h_input" value="reg" hidden="hidden">-->
                 <div id="pain">
-                    <?php if ($error != '' && check()) {
+                    <?php if ($error != '') {
                         echo $error;
                     } ?>
                 </div>
@@ -88,5 +82,10 @@ if (!(isIncorrect($psw1, 3) && isIncorrect($psw2, 3) &&
                     <input class="submit" type="submit">
                 </div>
             </form>
+
         </div>
-    </div>
+        <p>
+            <?php print("<pre>" . print_r($_SERVER, true) . "<pre>"); ?>
+            <?php print("<pre>" . print_r($_POST, true) . "</pre>"); ?>
+            <?php print("<pre>" . print_r($_GET, true) . "</pre>"); ?>
+        </p>
