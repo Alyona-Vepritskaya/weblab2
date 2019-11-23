@@ -213,6 +213,13 @@ input{
 	box-shadow: 0 0 1px #C50A67;
 }
 #pain{
+	 color: #a41a81;
+	 text-align: center;
+ }
+
+#registered{
+	font-size: 14px;
+	font-weight: bold;
 	color: #a41a81;
 	text-align: center;
 }
