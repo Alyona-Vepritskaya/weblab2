@@ -44,7 +44,7 @@
                 </a>
             </div>
             <div class="item">
-                <a href="#">
+                <a href="../animation/index.php">
                     <img src="../images/more.png" alt=">">
                     Анимация
                 </a>
@@ -74,7 +74,7 @@
                     Ссылки 2
                 </a>
             </div>
-            <div>
+            <div class="bottom-img">
                 <img src="../images/left-frame3.png" alt="">
             </div>
         </div>
