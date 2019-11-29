@@ -1,17 +1,17 @@
 <?php
 function check()
 {
-    if (filter_input_('h_input', 'first') == 'first') {
-        $_POST['h_input'] = 'second';
+    if ((isset($_POST['hidden_input'])) && ($_POST['hidden_input'] == 'first')) {
+        $_POST['hidden_input'] = 'second';
         return false;
     } else {
         return true;
     }
 }
 
-function filter_input_($name, $def)
+function filter_input_($name, $default)
 {
-    $result = $def;
+    $result = $default;
     if (isset($_POST[$name])) {
         $result = $_POST[$name];
     }
@@ -59,32 +59,32 @@ if (!(isIncorrect($psw1, 3) && isIncorrect($psw2, 3) &&
     </div>
     <div class="text-content  clearfix">
         <div class="form">
-            <?php if ($error != '' || !check()) { ?>
-                <form class="qwerty" method="post" id="form">
-                    <input type="text" name="h_input" hidden="hidden">
+            <?php if ($error != '' || check()) { ?>
+                <form class="qwerty" method="POST" id="form">
+                    <input type="hidden" name="hidden_input" value="first">
                     <div id="pain">
-                        <?php if ($error != '' && check()) {
+                        <?php if ($error != '' && !check()) {
                             echo $error;
                         } ?>
                     </div>
                     <div class="block">
                         Логин:
                         <input id="login" type="text" name="login"
-                               value="<?php if ($error != '') echo $login ?>">
+                               value="<?=($login)?>">
                     </div>
                     <div class="block">
                         Пароль:
                         <input id="psw1" type="password" name="psw1"
                                placeholder="введите пароль"
-                               value="<?php if ($error != '') echo $psw1 ?>">
+                               value="<?php /*if ($error != '')*/ echo $psw1 ?>">
                         <input id="psw2" type="password" name="psw2"
                                placeholder="повторите пароль"
-                               value="<?php if ($error != '') echo $psw2 ?>">
+                               value="<?php /*if ($error != '')*/ echo $psw2 ?>">
                     </div>
                     <div class="block">
                         Email:
                         <input id="email" type="text" name="email"
-                               value="<?php if ($error != '') echo $email ?>">
+                               value="<?php /*if ($error != '')*/ echo $email ?>">
                     </div>
                     <div class="block">
                         <input class="submit" type="submit">
