@@ -1,12 +1,12 @@
 <?php
+$view = '';
 function check()
 {
-    if ((isset($_POST['hidden_input'])) && ($_POST['hidden_input'] == 'first')) {
-        $_POST['hidden_input'] = 'second';
-        return false;
-    } else {
+    $f = filter_input_('hidden_input', '');
+    if ($f == 'first') {
         return true;
     }
+    return false;
 }
 
 function filter_input_($name, $default)
@@ -21,11 +21,6 @@ function filter_input_($name, $default)
     return $result;
 }
 
-$login = filter_input_('login', '');
-$psw1 = filter_input_('psw1', '');
-$psw2 = filter_input_('psw2', '');
-$email = filter_input_('email', '');
-$error = '';
 function isIncorrect($value, $originValue)
 {
     return strlen($value) > $originValue;
@@ -36,17 +31,29 @@ function emailIsValid($email)
     return preg_match("/[^\s@]+@[^\s@]+\.[^\s@]+$/", $email);
 }
 
-if (!(isIncorrect($psw1, 3) && isIncorrect($psw2, 3) &&
-    isIncorrect($login, 0) && emailIsValid($email))) {
-    $error = 'Запони форму правильно!!!';
-} elseif ($psw2 != $psw1) {
-    $error = 'Пароли не совпадают!!!';
-} else {
-    $error = '';
-}
-?>
 
-<div class="right-col">
+$login = filter_input_('login', '');
+$psw1 = filter_input_('psw1', '');
+$psw2 = filter_input_('psw2', '');
+$email = filter_input_('email', '');
+$error = '';
+
+if (check()) {
+    if (!(isIncorrect($psw1, 3) && isIncorrect($psw2, 3) &&
+        isIncorrect($login, 0) && emailIsValid($email))) {
+        $error = 'Запони форму правильно!!!';
+    } elseif ($psw2 != $psw1) {
+        $error = 'Пароли не совпадают!!!';
+    } else {
+        $error = '';
+        $view = 'ok';
+    }
+
+}
+
+?>
+<?php include '../general/header.php'; ?>
+    <div class="right-col">
     <div class="news-info">
         <a href="">
             <div class="news">
@@ -59,32 +66,32 @@ if (!(isIncorrect($psw1, 3) && isIncorrect($psw2, 3) &&
     </div>
     <div class="text-content  clearfix">
         <div class="form">
-            <?php if ($error != '' || check()) { ?>
-                <form class="qwerty" method="POST" id="form">
+            <?php if ($view == "") { ?>
+                <form class="qwerty" method="POST" id="form" action="main.php">
                     <input type="hidden" name="hidden_input" value="first">
                     <div id="pain">
-                        <?php if ($error != '' && !check()) {
+                        <?php if ($error != '') {
                             echo $error;
                         } ?>
                     </div>
                     <div class="block">
                         Логин:
                         <input id="login" type="text" name="login"
-                               value="<?=($login)?>">
+                               value="<?= ($login) ?>">
                     </div>
                     <div class="block">
                         Пароль:
                         <input id="psw1" type="password" name="psw1"
                                placeholder="введите пароль"
-                               value="<?php /*if ($error != '')*/ echo $psw1 ?>">
+                               value="">
                         <input id="psw2" type="password" name="psw2"
                                placeholder="повторите пароль"
-                               value="<?php /*if ($error != '')*/ echo $psw2 ?>">
+                               value="">
                     </div>
                     <div class="block">
                         Email:
                         <input id="email" type="text" name="email"
-                               value="<?php /*if ($error != '')*/ echo $email ?>">
+                               value="<?= ($email) ?>">
                     </div>
                     <div class="block">
                         <input class="submit" type="submit">
@@ -92,8 +99,9 @@ if (!(isIncorrect($psw1, 3) && isIncorrect($psw2, 3) &&
                 </form>
             <?php } else { ?>
                 <div id="registered">
-                    "Мои поздравления, ты зарегался!!! 🥳 "
+                    "Мои поздравления, ты зарегестировался!!! 🥳 "
                 </div>
             <?php } ?>
         </div>
     </div>
+<?php include '../general/footer.php'; ?>

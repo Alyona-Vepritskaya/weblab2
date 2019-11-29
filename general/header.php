@@ -32,7 +32,7 @@
                 </a>
             </div>
             <div class="item">
-                <a href="../form_on_php/index.php">
+                <a href="../form_on_php/main.php">
                     <img src="../images/more.png" alt=">">
                     Регистрация php
                 </a>
