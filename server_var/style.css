@@ -226,14 +226,15 @@ input {
     font-size: 13px;
     font-weight: bold;
     color: #a41a81;
-    width: 500px;
+    width: 520px;
+    height: 600px;
     /*text-align: center;*/
 }
 
 /* width */
 ::-webkit-scrollbar {
-    width: 1px;
-    height: 1px;
+    width: 3px;
+    height: 3px;
 }
 
 /* Track */
@@ -250,7 +251,15 @@ input {
 ::-webkit-scrollbar-thumb:hover {
     background: #00AEAE;
 }
-
-pre {
+.vars{
+    color: #a41a81;
+}
+td{
     color: #0000AE;
+}
+.server{
+    border: #10106c 1px double;
+    margin: 10px 0;
+    background: rgba(0,0,255,0.3);
+    font-size: 12px;
 }
