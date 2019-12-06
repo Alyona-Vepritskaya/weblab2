@@ -56,6 +56,12 @@
                 </a>
             </div>
             <div class="item">
+                <a href="../nav_dir/index.php">
+                    <img src="../images/more.png" alt=">">
+                    Файловый навигатор
+                </a>
+            </div>
+            <div class="item">
                 <a href="#">
                     <img src="../images/more.png" alt=">">
                     O компании
