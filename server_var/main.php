@@ -19,45 +19,41 @@
                     <td></td>
                 </tr>
                 <?php
-                foreach($_GET as $key => $value){
+                foreach ($_GET as $key => $value) {
                     echo "<tr><td>$key</td>";
                     echo "<td>$value</td></tr>";
 
-                }?>
+                } ?>
                 <tr>
                     <td class="vars">$_POST</td>
                     <td></td>
                 </tr>
-                <tr>
-                    <?php
-                    foreach($_POST as $key => $value){
-                        echo "<tr><td>$key</td>";
-                        echo "<td>$value</td></tr>";
 
-                    }?>
-                </tr>
-                <tr>
-                    <td class="vars">$_SERVER</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <?php
-                    foreach($_SERVER as $key => $value){
-                        echo "<tr><td>$key</td>";
-                        echo "<td>$value</td></tr>";
-                    }?>
-                </tr>
-                <tr>
-                    <td class="vars">$_COOKIE</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <?php
-                    foreach($_COOKIE as $key => $value){
-                        echo "<tr><td>$key</td>";
-                        echo "<td>$value</td></tr>";
-                    }?>
-                </tr>
+                <?php
+                foreach ($_POST as $key => $value) {
+                    echo "<tr><td>$key</td>";
+                    echo "<td>$value</td></tr>";
+
+                } ?>
+
+                <td class="vars">$_SERVER</td>
+                <td></td>
+
+                <?php
+                foreach ($_SERVER as $key => $value) {
+                    echo "<tr><td>$key</td>";
+                    echo "<td>$value</td></tr>";
+                } ?>
+
+                <td class="vars">$_COOKIE</td>
+                <td></td>
+
+                <?php
+                foreach ($_COOKIE as $key => $value) {
+                    echo "<tr><td>$key</td>";
+                    echo "<td>$value</td></tr>";
+                } ?>
+
             </table>
         </div>
     </div>

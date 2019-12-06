@@ -31,14 +31,14 @@ function emailIsValid($email)
     return preg_match("/[^\s@]+@[^\s@]+\.[^\s@]+$/", $email);
 }
 
-
-$login = filter_input_('login', '');
-$psw1 = filter_input_('psw1', '');
-$psw2 = filter_input_('psw2', '');
-$email = filter_input_('email', '');
+$login = trim(filter_input_('login', ''));
+$psw1 = trim(filter_input_('psw1', ''));
+$psw2 = trim(filter_input_('psw2', ''));
+$email = trim(filter_input_('email', ''));
 $error = '';
 
 if (check()) {
+
     if (!(isIncorrect($psw1, 3) && isIncorrect($psw2, 3) &&
         isIncorrect($login, 0) && emailIsValid($email))) {
         $error = 'Запони форму правильно!!!';
@@ -66,42 +66,43 @@ if (check()) {
     </div>
     <div class="text-content  clearfix">
         <div class="form">
-            <?php if ($view == "") { ?>
+        <?php
+            if ($view == "")
+            {
+            ?>
                 <form class="qwerty" method="POST" id="form" action="main.php">
                     <input type="hidden" name="hidden_input" value="first">
-                    <div id="pain">
-                        <?php if ($error != '') {
-                            echo $error;
-                        } ?>
-                    </div>
+                    <?php if ($error != '')
+                    {
+                        echo "<div id=\"pain\">$error</div>";
+                    }
+                    ?>
                     <div class="block">
                         Логин:
-                        <input id="login" type="text" name="login"
-                               value="<?= ($login) ?>">
+                        <input id="login" type="text" name="login" value="<?=($login)?>">
                     </div>
                     <div class="block">
                         Пароль:
-                        <input id="psw1" type="password" name="psw1"
-                               placeholder="введите пароль"
-                               value="">
-                        <input id="psw2" type="password" name="psw2"
-                               placeholder="повторите пароль"
-                               value="">
+                        <input id="psw1" type="password" name="psw1" placeholder="введите пароль" value="">
+                        <input id="psw2" type="password" name="psw2" placeholder="повторите пароль" value="">
                     </div>
                     <div class="block">
                         Email:
-                        <input id="email" type="text" name="email"
-                               value="<?= ($email) ?>">
+                        <input id="email" type="text" name="email" value="<?=($email)?>">
                     </div>
                     <div class="block">
                         <input class="submit" type="submit">
                     </div>
                 </form>
-            <?php } else { ?>
+        <?php
+            }
+            else
+             {?>
                 <div id="registered">
                     Мои поздравления, ты зарегистировался!!! 🥳
                 </div>
-            <?php } ?>
+         <?php
+             }?>
         </div>
     </div>
 <?php include '../general/footer.php'; ?>
