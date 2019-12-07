@@ -48,8 +48,7 @@ include "../general/header.php"; ?>
         </div>
     </div>
     <div class="text-content  clearfix">
-        <div id="registered">
-            Файловый навигатор
+        <div  id="registered">
             <table>
                 <tr>
                     <th>Name</th>
@@ -65,8 +64,10 @@ include "../general/header.php"; ?>
 
                 } ?>
             </table>
+
         </div>
+        <input type="file" class="submit" name="add_file">
     </div>
-    <input type="file" class="submit" name="add_file">
+
 <?php
 include "../general/footer.php";
