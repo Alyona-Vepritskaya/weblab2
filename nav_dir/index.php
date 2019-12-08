@@ -49,6 +49,9 @@ function filter_input_($name, $default)
     if (isset($_SERVER[$name])) {
         $result = $_SERVER[$name];
     }
+    if (isset($_FILES[$name])) {
+        $result = $_FILES[$name];
+    }
     if (isset($_GET[$name])) {
         $result = $_GET[$name];
     }
@@ -125,7 +128,10 @@ $dirs = sortFilesAndDirs($dirs, $path);
 $file_type = getFileDirType($dirs, $path);
 $file_size = getFileSize($dirs, $path);
 $file_date = getFileDirDate($dirs, $path);
-
+$file = filter_input_('load_to_current_dir', '');
+if (!empty($file)) {
+    $loaded_file = filter_input_('add_file', '');
+}
 include "../general/header.php"; ?>
     <div class="right-col">
     <div class="news-info">
@@ -159,13 +165,11 @@ include "../general/header.php"; ?>
                 } ?>
             </table>
         </div>
-        <input type="file" class="submit" name="add_file">
+        <form action="" method="post">
+            <input type="file" class="submit" name="add_file">
+            <input type="submit" class="submit" name="load_to_current_dir" value="Load to current directory">
+        </form>
     </div>
 
 <?php
 include "../general/footer.php";
-/**/ ?><!--
-        <script>
-            console.log('fuck');
-        </script>
---><?php

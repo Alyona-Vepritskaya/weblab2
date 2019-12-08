@@ -5,7 +5,7 @@ body {
     font-family: "Arial", sans-serif;
     font-size: 10px;
     letter-spacing: 1px;
-    color: #000 !important;
+    color: #fff;
 }
 
 .head {
@@ -197,11 +197,15 @@ form {
 .submit {
     margin: 0 160px;
     background: linear-gradient(#b2c1e4, #6979a0);
-    border: 1px solid #474747;
     border-bottom: 1px solid #6979a0;
     font: inherit;
+    font-size: 14px;
     padding: 3px 5px;
     color: #0000AE;
+}
+
+input[type='submit'] {
+    margin: 10px 210px;
 }
 
 .submit:hover {
