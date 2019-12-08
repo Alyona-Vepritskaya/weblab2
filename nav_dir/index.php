@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @param $size - in bytes
+ * @return string - size in kb, mb, gb
+ */
 function convertSize($size)
 {
     $units = 'B';
@@ -17,6 +21,23 @@ function convertSize($size)
         $units = 'GB';
     }
     return round($new_size, 2) . ' ' . $units;
+}
+
+function sortFilesAndDirs($dirs, $path)
+{
+    $directories = array();
+    $files = array();
+    foreach ($dirs as $key => $value) {
+        if (is_file($path . $value)) {
+            $files[] = $dirs[$key];
+        } else {
+            $directories[] = $dirs[$key];
+        }
+    }
+    //natcasesort - sort an array using a case insensitive algorithm
+    natcasesort($directories);
+    natcasesort($files);
+    return array_merge($directories, $files);
 }
 
 function filter_input_($name, $default)
@@ -48,12 +69,15 @@ function openDirectory($dir)
             }
             closedir($d);
         }
-    } else {
-        //TODO open & read file
     }
     return $inner_dirs;
 }
 
+/**
+ * @param $dirs - array of directories
+ * @param $path - path to file or dir
+ * @return array - creation dates
+ */
 function getFileDirDate($dirs, $path)
 {
     $file_date = array();
@@ -97,6 +121,7 @@ if (filter_input_("get_request", 'no_request') == 'no_request') {
     $path = $dir;
 }
 $dirs = openDirectory($path);
+$dirs = sortFilesAndDirs($dirs, $path);
 $file_type = getFileDirType($dirs, $path);
 $file_size = getFileSize($dirs, $path);
 $file_date = getFileDirDate($dirs, $path);
@@ -124,7 +149,10 @@ include "../general/header.php"; ?>
                 </tr>
                 <?php foreach ($dirs as $key => $value) {
                     $path_get = '../' . $value . '/';
-                    echo "<tr><td><a href='index.php?get_request=$path_get'>$value</a></td>";
+                    if (is_file($path . $value))
+                        echo "<tr><td>$value</td>";
+                    else
+                        echo "<tr><td><a href='index.php?get_request=$path_get'>$value</a></td>";
                     echo "<td>$file_type[$key]</td>";
                     echo "<td>$file_size[$key]</td>";
                     echo "<td>$file_date[$key]</td></tr>";
