@@ -1,5 +1,24 @@
 <?php
 
+function convertSize($size)
+{
+    $units = 'B';
+    $new_size = $size;
+    if ($new_size > 1024) {
+        $new_size = $new_size / 1024;
+        $units = 'KB';
+    }
+    if ($new_size > 1024) {
+        $new_size = $new_size / 1024;
+        $units = 'MB';
+    }
+    if ($new_size > 1024) {
+        $new_size = $new_size / 1024;
+        $units = 'GB';
+    }
+    return round($new_size, 2) . ' ' . $units;
+}
+
 function filter_input_($name, $default)
 {
     $result = $default;
@@ -29,6 +48,8 @@ function openDirectory($dir)
             }
             closedir($d);
         }
+    } else {
+        //TODO open & read file
     }
     return $inner_dirs;
 }
@@ -46,7 +67,10 @@ function getFileSize($dirs, $path)
 {
     $file_size = array();
     foreach ($dirs as $key => $value) {
-        $file_size[$key] = filesize($path . $value);
+        if (is_file($path . $value))
+            $file_size[$key] = convertSize(filesize($path . $value));
+        else
+            $file_size[$key] = ' - ';
     }
     return $file_size;
 }
@@ -65,7 +89,7 @@ $file_size = array();
 $file_type = array();
 $file_date = array();
 
-if (filter_input_("get_request", 'qwerty') == 'qwerty') {
+if (filter_input_("get_request", 'no_request') == 'no_request') {
     $dir = filter_input_("DOCUMENT_ROOT", '');
     $path = '../';
 } else {
@@ -108,7 +132,6 @@ include "../general/header.php"; ?>
             </table>
         </div>
         <input type="file" class="submit" name="add_file">
-
     </div>
 
 <?php

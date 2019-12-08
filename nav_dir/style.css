@@ -61,14 +61,6 @@ body {
     padding-bottom: 10px;
 }
 
-a {
-    text-decoration: none;
-}
-
-a:hover {
-   color: #AE0000;
-}
-
 .item a {
     display: block;
     padding: 4px 0;
@@ -99,6 +91,7 @@ a:hover {
 
 a {
     color: inherit;
+    text-decoration: none;
 }
 
 .item-image a {
@@ -202,16 +195,18 @@ form {
 }
 
 .submit {
+    margin: 0 160px;
     background: linear-gradient(#b2c1e4, #6979a0);
     border: 1px solid #474747;
     border-bottom: 1px solid #6979a0;
     font: inherit;
     padding: 3px 5px;
+    color: #0000AE;
 }
 
 .submit:hover {
     background: linear-gradient(#4f6fe7, #10106c);
-    color: #fff
+    color: #fff;
 }
 
 table {
@@ -225,6 +220,15 @@ td, th {
     padding: 4px 10px;
 }
 
+td a {
+    display: block;
+}
+
+td:hover {
+    border: #000000 2px solid;
+    background: #b2c1e4;
+}
+
 input {
     margin-top: 3px;
 }
@@ -235,5 +239,4 @@ input {
     font-weight: bold;
     color: #0000AE;
     width: 520px;
-
 }
