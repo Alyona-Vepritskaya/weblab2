@@ -5,7 +5,7 @@ body {
     font-family: "Arial", sans-serif;
     font-size: 10px;
     letter-spacing: 1px;
-    color: #fff;
+    color: #000 !important;
 }
 
 .head {
@@ -59,6 +59,14 @@ body {
 .navigation-bar div:last-child {
     background: white;
     padding-bottom: 10px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+   color: #AE0000;
 }
 
 .item a {
@@ -207,7 +215,7 @@ form {
 }
 
 table {
-    margin: 20px  auto ;
+    margin: 20px auto;
     border-collapse: collapse;
     border: #000000 2px solid;
 }

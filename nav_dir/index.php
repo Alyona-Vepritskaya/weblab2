@@ -1,4 +1,5 @@
 <?php
+
 function filter_input_($name, $default)
 {
     $result = $default;
@@ -14,26 +15,67 @@ function filter_input_($name, $default)
     return $result;
 }
 
+/**
+ * @param $dir - directory(if is dir)
+ * @return array - content(files & dirs)
+ */
+function openDirectory($dir)
+{
+    $inner_dirs = array();
+    if (is_dir($dir)) {
+        if ($d = opendir($dir)) {
+            while (($file = readdir($d)) !== false) {
+                $inner_dirs[] = $file;
+            }
+            closedir($d);
+        }
+    }
+    return $inner_dirs;
+}
+
+function getFileDirDate($dirs, $path)
+{
+    $file_date = array();
+    foreach ($dirs as $key => $value) {
+        $file_date[$key] = date("Y.m.d _ H:i:s", filectime($path . $value));
+    }
+    return $file_date;
+}
+
+function getFileSize($dirs, $path)
+{
+    $file_size = array();
+    foreach ($dirs as $key => $value) {
+        $file_size[$key] = filesize($path . $value);
+    }
+    return $file_size;
+}
+
+function getFileDirType($dirs, $path)
+{
+    $file_type = array();
+    foreach ($dirs as $key => $value) {
+        $file_type[$key] = filetype($path . $value);
+    }
+    return $file_type;
+}
 
 $dirs = array();
 $file_size = array();
 $file_type = array();
 $file_date = array();
-$dir = filter_input_("DOCUMENT_ROOT", '');
-if (is_dir($dir)) {
-    if ($d = opendir($dir)) {
-        while (($file = readdir($d)) !== false) {
-            $dirs[] = $file;
-        }
-        closedir($d);
-    }
-}
-foreach ($dirs as $key => $value) {
-    $file_size[] = filesize("../" . $value);
-    $file_type[] = filetype("../" . $value);
-    $file_date[] = date("F d Y H:i:s.", filectime("../" . $value));
-}
 
+if (filter_input_("get_request", 'qwerty') == 'qwerty') {
+    $dir = filter_input_("DOCUMENT_ROOT", '');
+    $path = '../';
+} else {
+    $dir = filter_input_("get_request", '');
+    $path = $dir;
+}
+$dirs = openDirectory($path);
+$file_type = getFileDirType($dirs, $path);
+$file_size = getFileSize($dirs, $path);
+$file_date = getFileDirDate($dirs, $path);
 
 include "../general/header.php"; ?>
     <div class="right-col">
@@ -48,7 +90,7 @@ include "../general/header.php"; ?>
         </div>
     </div>
     <div class="text-content  clearfix">
-        <div  id="registered">
+        <div id="registered">
             <table>
                 <tr>
                     <th>Name</th>
@@ -57,17 +99,22 @@ include "../general/header.php"; ?>
                     <th>Date</th>
                 </tr>
                 <?php foreach ($dirs as $key => $value) {
-                    echo "<tr><td>$value</td>";
+                    $path_get = '../' . $value . '/';
+                    echo "<tr><td><a href='index.php?get_request=$path_get'>$value</a></td>";
                     echo "<td>$file_type[$key]</td>";
                     echo "<td>$file_size[$key]</td>";
                     echo "<td>$file_date[$key]</td></tr>";
-
                 } ?>
             </table>
-
         </div>
         <input type="file" class="submit" name="add_file">
+
     </div>
 
 <?php
 include "../general/footer.php";
+/**/ ?><!--
+        <script>
+            console.log('fuck');
+        </script>
+--><?php
