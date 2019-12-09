@@ -111,6 +111,19 @@ function getFileDirType($dirs, $path)
     return $file_type;
 }
 
+function loadFile()
+{
+    $file = filter_input_('input_submit', '');
+    if (!empty($file)) {
+        $loaded_file = filter_input_('file', '');
+        $file_name = $loaded_file['name'];
+        $file_tmp_location = $loaded_file['tmp_name'];
+        $file_store = "./" . $file_name;
+        move_uploaded_file($file_tmp_location, $file_store);
+        //header("Refresh:0");
+    }
+}
+
 $dirs = array();
 $file_size = array();
 $file_type = array();
@@ -121,6 +134,7 @@ if (filter_input_("get_request", 'no_request') == 'no_request') {
     $path = '../';
 } else {
     $dir = filter_input_("get_request", '');
+    // $dir2 = filter_input_("get_request2", '');
     $path = $dir;
 }
 $dirs = openDirectory($path);
@@ -128,15 +142,8 @@ $dirs = sortFilesAndDirs($dirs, $path);
 $file_type = getFileDirType($dirs, $path);
 $file_size = getFileSize($dirs, $path);
 $file_date = getFileDirDate($dirs, $path);
-$file = filter_input_('input_submit', '');
-if (!empty($file)) {
-    $loaded_file = filter_input_('file', '');
-    $file_name = $loaded_file['name'];
-    $file_tmp_location = $loaded_file['tmp_name'];
-    $file_store = "$path/animation/". $file_name;
-    move_uploaded_file($file_tmp_location, $file_store);
-    //header("Refresh:0");
-}
+loadFile();
+
 include "../general/header.php"; ?>
     <div class="right-col">
     <div class="news-info">
@@ -163,7 +170,7 @@ include "../general/header.php"; ?>
                     if (is_file($path . $value))
                         echo "<tr><td>$value</td>";
                     else
-                        echo "<tr><td><a href='index.php?get_request=$path_get'>$value</a></td>";
+                        echo "<tr><td><a href='index.php?get_request=$path_get&get_request2=$value'>$value</a></td>";
                     echo "<td>$file_type[$key]</td>";
                     echo "<td>$file_size[$key]</td>";
                     echo "<td>$file_date[$key]</td></tr>";
@@ -172,7 +179,7 @@ include "../general/header.php"; ?>
         </div>
         <form action="index.php" method="post" enctype="multipart/form-data">
             <input type="file" class="submit" name="file">
-            <input type="submit" class="submit" name="input_submit" value="Load to current directory">
+            <input type="button" class="submit" name="input_submit" value="Load to current directory">
         </form>
     </div>
 
