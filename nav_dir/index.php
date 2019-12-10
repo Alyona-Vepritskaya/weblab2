@@ -23,21 +23,30 @@ function convertSize($size)
     return round($new_size, 2) . ' ' . $units;
 }
 
-function sortFilesAndDirs($dirs, $path)
+function sortDirs($dirs, $path)
 {
     $directories = array();
-    $files = array();
     foreach ($dirs as $key => $value) {
-        if (is_file($path . $value)) {
-            $files[] = $dirs[$key];
-        } else {
+        if (is_dir($path . $value)) {
             $directories[] = $dirs[$key];
         }
     }
     //natcasesort - sort an array using a case insensitive algorithm
     natcasesort($directories);
+    return $directories;
+}
+
+function sortFiles($dirs, $path)
+{
+    $files = array();
+    foreach ($dirs as $key => $value) {
+        if (is_file($path . $value)) {
+            $files[] = $dirs[$key];
+        }
+    }
+    //natcasesort - sort an array using a case insensitive algorithm
     natcasesort($files);
-    return array_merge($directories, $files);
+    return $files;
 }
 
 function filter_input_($name, $default)
@@ -116,15 +125,18 @@ function loadFile()
     $file = filter_input_('input_submit', '');
     if (!empty($file)) {
         $loaded_file = filter_input_('file', '');
-        $file_name = $loaded_file['name'];
-        $file_tmp_location = $loaded_file['tmp_name'];
-        $file_store = "./" . $file_name;
-        move_uploaded_file($file_tmp_location, $file_store);
-        //header("Refresh:0");
+        if (!empty($loaded_file)) {
+            $file_name = $loaded_file['name'];
+            $file_tmp_location = $loaded_file['tmp_name'];
+            $file_store = "./" . $file_name;
+            move_uploaded_file($file_tmp_location, $file_store);
+            //header("Refresh:0");
+        }
     }
 }
 
-$dirs = array();
+$directories = array();
+$files = array();
 $file_size = array();
 $file_type = array();
 $file_date = array();
@@ -134,14 +146,16 @@ if (filter_input_("get_request", 'no_request') == 'no_request') {
     $path = '../';
 } else {
     $dir = filter_input_("get_request", '');
-    // $dir2 = filter_input_("get_request2", '');
     $path = $dir;
 }
 $dirs = openDirectory($path);
-$dirs = sortFilesAndDirs($dirs, $path);
-$file_type = getFileDirType($dirs, $path);
-$file_size = getFileSize($dirs, $path);
-$file_date = getFileDirDate($dirs, $path);
+$directories = sortDirs($dirs, $path);
+$files = sortFiles($dirs, $path);
+$file_type = getFileDirType($files, $path);
+$file_size = getFileSize($files, $path);
+$file_date = getFileDirDate($files, $path);
+$dir_type = getFileDirType($directories, $path);
+$dir_date = getFileDirDate($directories, $path);
 loadFile();
 
 include "../general/header.php"; ?>
@@ -165,12 +179,15 @@ include "../general/header.php"; ?>
                     <th>Size</th>
                     <th>Date</th>
                 </tr>
-                <?php foreach ($dirs as $key => $value) {
+                <?php foreach ($directories as $key => $value) {
                     $path_get = '../' . $value . '/';
-                    if (is_file($path . $value))
-                        echo "<tr><td>$value</td>";
-                    else
-                        echo "<tr><td><a href='index.php?get_request=$path_get&get_request2=$value'>$value</a></td>";
+                    echo "<tr><td><a href='index.php?get_request=$path_get'>$value</a></td>";
+                    echo "<td>$dir_type[$key]</td>"; /*dir*/
+                    echo "<td>-</td>";
+                    echo "<td>$dir_date[$key]</td></tr>";
+                } ?>
+                <?php foreach ($files as $key => $value) {
+                    echo "<tr><td>$value</td>";
                     echo "<td>$file_type[$key]</td>";
                     echo "<td>$file_size[$key]</td>";
                     echo "<td>$file_date[$key]</td></tr>";
@@ -179,7 +196,7 @@ include "../general/header.php"; ?>
         </div>
         <form action="index.php" method="post" enctype="multipart/form-data">
             <input type="file" class="submit" name="file">
-            <input type="button" class="submit" name="input_submit" value="Load to current directory">
+            <input type="submit" class="submit" name="input_submit" value="Load to current directory">
         </form>
     </div>
 
