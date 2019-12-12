@@ -94,7 +94,7 @@ function getFileDirDate($dirs, $path)
 {
     $file_date = array();
     foreach ($dirs as $key => $value) {
-        $file_date[$key] = date("Y.m.d _ H:i:s", filectime($path . $value));
+        $file_date[$key] = date('Y.m.d _ H:i:s', filectime($path . $value));
     }
     return $file_date;
 }
@@ -122,21 +122,18 @@ function getFileDirType($dirs, $path)
 
 function loadFile()
 {
+    //if was submit
     $file = filter_input_('input_submit', '');
     if (!empty($file)) {
         $loaded_file = filter_input_('file', '');
+        //if chosen file
         if (!empty($loaded_file)) {
             $file_hidden = filter_input_('hidden', '');
-            if (!empty($file_hidden)) {
-                $current_path = trim($file_hidden);
-            } else {
-                $current_path = '';
-            }
+            !empty($file_hidden) ? $current_path = trim($file_hidden) : $current_path = '';
             $file_name = $loaded_file['name'];
             $file_tmp_location = $loaded_file['tmp_name'];
             $file_store = "../$current_path/" . "$file_name";
             move_uploaded_file($file_tmp_location, $file_store);
-            //header("Refresh:0");
         }
     }
 }
@@ -147,15 +144,15 @@ $file_size = array();
 $file_type = array();
 $file_date = array();
 $current_dir = '';
-if (filter_input_("get_request", 'no_request') == 'no_request') {
+if (filter_input_('get_request', 'no_request') == 'no_request') {
     $dir = filter_input_("DOCUMENT_ROOT", '');
     $path = '../';
     $current_dir = $dir;
 } else {
-    $dir = filter_input_("get_request", '');
-    $dir2 = filter_input_("get_request2", '');
+    $dir = filter_input_('get_request', '');
+    $current_value = filter_input_('get_request2', '');
     $path = $dir;
-    $current_dir = $dir2;
+    $current_dir = $current_value;
 }
 $dirs = openDirectory($path);
 $directories = sortDirs($dirs, $path);
