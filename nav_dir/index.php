@@ -126,9 +126,15 @@ function loadFile()
     if (!empty($file)) {
         $loaded_file = filter_input_('file', '');
         if (!empty($loaded_file)) {
+            $file_hidden = filter_input_('hidden', '');
+            if (!empty($file_hidden)) {
+                $current_path = trim($file_hidden);
+            } else {
+                $current_path = '';
+            }
             $file_name = $loaded_file['name'];
             $file_tmp_location = $loaded_file['tmp_name'];
-            $file_store = "./" . $file_name;
+            $file_store = "../$current_path/" . "$file_name";
             move_uploaded_file($file_tmp_location, $file_store);
             //header("Refresh:0");
         }
@@ -140,13 +146,16 @@ $files = array();
 $file_size = array();
 $file_type = array();
 $file_date = array();
-
+$current_dir = '';
 if (filter_input_("get_request", 'no_request') == 'no_request') {
     $dir = filter_input_("DOCUMENT_ROOT", '');
     $path = '../';
+    $current_dir = $dir;
 } else {
     $dir = filter_input_("get_request", '');
+    $dir2 = filter_input_("get_request2", '');
     $path = $dir;
+    $current_dir = $dir2;
 }
 $dirs = openDirectory($path);
 $directories = sortDirs($dirs, $path);
@@ -181,7 +190,7 @@ include "../general/header.php"; ?>
                 </tr>
                 <?php foreach ($directories as $key => $value) {
                     $path_get = '../' . $value . '/';
-                    echo "<tr><td><a href='index.php?get_request=$path_get'>$value</a></td>";
+                    echo "<tr><td><a href='index.php?get_request=$path_get&get_request2=$value'>$value</a></td>";
                     echo "<td>$dir_type[$key]</td>"; /*dir*/
                     echo "<td>-</td>";
                     echo "<td>$dir_date[$key]</td></tr>";
@@ -196,6 +205,7 @@ include "../general/header.php"; ?>
         </div>
         <form action="index.php" method="post" enctype="multipart/form-data">
             <input type="file" class="submit" name="file">
+            <input type="hidden" class="submit" name="hidden" value=" <?=$current_dir?>">
             <input type="submit" class="submit" name="input_submit" value="Load to current directory">
         </form>
     </div>
