@@ -71,13 +71,7 @@ function loadFile()
             $loaded_file = $_FILES['file'];
             $file_hidden = filter_input_('hidden', '');
             !empty($file_hidden) ? $current_path = $file_hidden : $current_path = '';
-            $file_name = $loaded_file['name'];
-            $file_tmp_location = $_FILES['file']['tmp_name'];
-            $file_store = trim($current_path);
-            // echo print_r($loaded_file);
-            //echo "C:\\xampp\\htdocs\\animation\\" . $file_name . "<br>";
-           // echo $file_store . $file_name;
-            move_uploaded_file($file_tmp_location, trim($file_store . $file_name));
+            move_uploaded_file($loaded_file['tmp_name'], trim($current_path . $loaded_file['name']));
         }
     }
 }
@@ -98,31 +92,20 @@ function find_path($value)
     }
 }
 
-function cutEnd($srt)
-{
-    return substr($srt, 0, strrpos($srt, '\\') + 1);
-}
-
 $directories = array();
 $files = array();
 $file_date = array();
 $dir_date = array();
 $file_size = array();
+$path = substr(__DIR__, 0, strrpos(__DIR__, '\\') + 1);
 
-$path = cutEnd(__DIR__);
 if (filter_input_('get_request', 'no_request') != 'no_request') {
     $dir = filter_input_('get_request', '');
-    if (!(strrpos($dir, '..') === false && strrpos($dir, '\\\\') === false && strrpos($dir, '//') === false))
-        $path = cutEnd(__DIR__);
-    else
-        $path .= ($dir . '\\');
+    (!(strpos($dir, '..') === false && strpos($dir, '\\\\') === false && strpos($dir, '//') === false)) ? $path = substr(__DIR__, 0, strrpos(__DIR__, '\\') + 1) : $path .= ($dir . '\\');
     $path = str_replace('\\\\', '\\', $path);
-    //echo "$path";
 }
-$current_dir = $path;
 openDirectory($path);
 loadFile();
-
 include "../general/header.php"; ?>
     <div class="right-col">
     <div class="news-info">
@@ -132,7 +115,7 @@ include "../general/header.php"; ?>
             </div>
         </a>
         <div class="date">
-            30 февраля 1313
+            30 февраля 666
         </div>
     </div>
     <div class="text-content  clearfix">
@@ -163,10 +146,9 @@ include "../general/header.php"; ?>
         </div>
         <form action="index.php" method="post" enctype="multipart/form-data">
             <input type="file" class="submit" name="file">
-            <input type="hidden" class="submit" name="hidden" value=" <?= $current_dir ?>">
+            <input type="hidden" class="submit" name="hidden" value=" <?=$path?>">
             <input type="submit" class="submit" name="input_submit" value="Load to current directory">
         </form>
     </div>
-
 <?php
 include "../general/footer.php";
