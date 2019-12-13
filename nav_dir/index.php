@@ -123,8 +123,8 @@ function getFileDirType($dirs, $path)
 function loadFile()
 {
     //if was submit
-    $file = filter_input_('input_submit', '');
-    if (!empty($file)) {
+    $submit = filter_input_('input_submit', '');
+    if (!empty($submit)) {
         $loaded_file = filter_input_('file', '');
         //if chosen file
         if (!empty($loaded_file)) {
@@ -132,27 +132,43 @@ function loadFile()
             !empty($file_hidden) ? $current_path = trim($file_hidden) : $current_path = '';
             $file_name = $loaded_file['name'];
             $file_tmp_location = $loaded_file['tmp_name'];
-            $file_store = "../$current_path/" . "$file_name";
-            move_uploaded_file($file_tmp_location, $file_store);
+            $file_store1 = "$current_path" . "$file_name";
+            move_uploaded_file($file_tmp_location, $file_store1);
         }
     }
 }
 
-$directories = array();
-$files = array();
-$file_size = array();
-$file_type = array();
-$file_date = array();
-$current_dir = '';
+function find_path($value)
+{
+    global $path;
+    global $current_dir;
+    if ($value != '.') {
+        $path_get = $path . $value . '/';
+    } else {
+        if ($path == "../") {
+            $path_get = "../" . $value . '/';
+        } else {
+            $tmp = substr($current_dir, 0, strlen($current_dir) - 2);
+            $tmp2 = strrpos($tmp, '/');
+            $final = substr($tmp, 0, $tmp2 + 1);
+            if ($tmp2 != 2) {
+                $path_get = $final;
+            } else {
+                $path_get = "../";
+            }
+        }
+    }
+    return $path_get;
+}
+
 if (filter_input_('get_request', 'no_request') == 'no_request') {
     $dir = filter_input_("DOCUMENT_ROOT", '');
     $path = '../';
-    $current_dir = $dir;
+    $current_dir = $path;
 } else {
     $dir = filter_input_('get_request', '');
-    $current_value = filter_input_('get_request2', '');
     $path = $dir;
-    $current_dir = $current_value;
+    $current_dir = $path;
 }
 $dirs = openDirectory($path);
 $directories = sortDirs($dirs, $path);
@@ -186,9 +202,9 @@ include "../general/header.php"; ?>
                     <th>Date</th>
                 </tr>
                 <?php foreach ($directories as $key => $value) {
-                    $path_get = '../' . $value . '/';
-                    echo "<tr><td><a href='index.php?get_request=$path_get&get_request2=$value'>$value</a></td>";
-                    echo "<td>$dir_type[$key]</td>"; /*dir*/
+                    $path_get = find_path($value);
+                    echo "<tr><td><a href='index.php?get_request=$path_get'>$value</a></td>";
+                    echo "<td>$dir_type[$key]</td>";
                     echo "<td>-</td>";
                     echo "<td>$dir_date[$key]</td></tr>";
                 } ?>
