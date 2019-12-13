@@ -55,12 +55,12 @@ function filter_input_($name, $default)
     if (isset($_POST[$name])) {
         $result = $_POST[$name];
     }
-    if (isset($_SERVER[$name])) {
+    /*if (isset($_SERVER[$name])) {
         $result = $_SERVER[$name];
     }
     if (isset($_FILES[$name])) {
         $result = $_FILES[$name];
-    }
+    }*/
     if (isset($_GET[$name])) {
         $result = $_GET[$name];
     }
@@ -68,21 +68,35 @@ function filter_input_($name, $default)
 }
 
 /**
- * @param $dir - directory(if is dir)
- * @return array - content(files & dirs)
+ * @param $path - directory(if is dir)
+ * @return void - content(files & dirs)
  */
-function openDirectory($dir)
+function openDirectory($path)
 {
+    global $directories;
+    global $files;
+    global $dir_date;
+    global $file_date;
+    global $file_size;
     $inner_dirs = array();
-    if (is_dir($dir)) {
-        if ($d = opendir($dir)) {
+    if (is_dir($path)) {
+        if ($d = opendir($path)) {
             while (($file = readdir($d)) !== false) {
                 $inner_dirs[] = $file;
+                (is_file($path.$file)) ? $files[] = $file : $directories[] = $file;
             }
             closedir($d);
         }
     }
-    return $inner_dirs;
+    natcasesort($files);
+    natcasesort($directories);
+    foreach ($files as $key => $value) {
+        $file_date[] = date('Y.m.d _ H:i:s', filectime($path.$value));
+        $file_size[] = convertSize(filesize($path.$value));
+    }
+    foreach ($directories as $key => $value) {
+        $dir_date[] = date('Y.m.d _ H:i:s', filectime($path.$value));
+    }
 }
 
 /**
@@ -111,15 +125,6 @@ function getFileSize($dirs, $path)
     return $file_size;
 }
 
-function getFileDirType($dirs, $path)
-{
-    $file_type = array();
-    foreach ($dirs as $key => $value) {
-        $file_type[$key] = filetype($path . $value);
-    }
-    return $file_type;
-}
-
 function loadFile()
 {
     //if was submit
@@ -140,6 +145,7 @@ function loadFile()
 
 function find_path($value)
 {
+    /*__DIR__*/
     global $path;
     global $current_dir;
     if ($value != '.') {
@@ -161,6 +167,12 @@ function find_path($value)
     return $path_get;
 }
 
+$directories = array();
+$files = array();
+$file_date = array();
+$dir_date = array();
+$file_size = array();
+
 if (filter_input_('get_request', 'no_request') == 'no_request') {
     $dir = filter_input_("DOCUMENT_ROOT", '');
     $path = '../';
@@ -171,13 +183,11 @@ if (filter_input_('get_request', 'no_request') == 'no_request') {
     $current_dir = $path;
 }
 $dirs = openDirectory($path);
-$directories = sortDirs($dirs, $path);
-$files = sortFiles($dirs, $path);
-$file_type = getFileDirType($files, $path);
-$file_size = getFileSize($files, $path);
+/*$directories = sortDirs($dirs, $path);
+$files = sortFiles($dirs, $path);*/
+/*$file_size = getFileSize($files, $path);
 $file_date = getFileDirDate($files, $path);
-$dir_type = getFileDirType($directories, $path);
-$dir_date = getFileDirDate($directories, $path);
+$dir_date = getFileDirDate($directories, $path);*/
 loadFile();
 
 include "../general/header.php"; ?>
@@ -204,13 +214,13 @@ include "../general/header.php"; ?>
                 <?php foreach ($directories as $key => $value) {
                     $path_get = find_path($value);
                     echo "<tr><td><a href='index.php?get_request=$path_get'>$value</a></td>";
-                    echo "<td>$dir_type[$key]</td>";
+                    echo "<td>dir</td>";
                     echo "<td>-</td>";
                     echo "<td>$dir_date[$key]</td></tr>";
                 } ?>
                 <?php foreach ($files as $key => $value) {
                     echo "<tr><td>$value</td>";
-                    echo "<td>$file_type[$key]</td>";
+                    echo "<td>file</td>";
                     echo "<td>$file_size[$key]</td>";
                     echo "<td>$file_date[$key]</td></tr>";
                 } ?>
@@ -218,10 +228,12 @@ include "../general/header.php"; ?>
         </div>
         <form action="index.php" method="post" enctype="multipart/form-data">
             <input type="file" class="submit" name="file">
-            <input type="hidden" class="submit" name="hidden" value=" <?=$current_dir?>">
+            <input type="hidden" class="submit" name="hidden" value=" <?= $current_dir ?>">
             <input type="submit" class="submit" name="input_submit" value="Load to current directory">
         </form>
     </div>
 
 <?php
 include "../general/footer.php";
+//echo __DIR__;
+/* libXml domXml*/
