@@ -65,18 +65,19 @@ function openDirectory($path)
 
 function loadFile()
 {
-    //if was submit
     $submit = filter_input_('input_submit', '');
     if (!empty($submit)) {
-        $loaded_file = filter_input_('file', '');
-        //if chosen file
-        if (!empty($loaded_file)) {
+        if (!empty($_FILES['file']['tmp_name'])) {
+            $loaded_file = $_FILES['file'];
             $file_hidden = filter_input_('hidden', '');
-            !empty($file_hidden) ? $current_path = trim($file_hidden) : $current_path = '';
+            !empty($file_hidden) ? $current_path = $file_hidden : $current_path = '';
             $file_name = $loaded_file['name'];
-            $file_tmp_location = $loaded_file['tmp_name'];
-            $file_store1 = "$current_path" . "$file_name";
-            move_uploaded_file($file_tmp_location, $file_store1);
+            $file_tmp_location = $_FILES['file']['tmp_name'];
+            $file_store = trim($current_path);
+            // echo print_r($loaded_file);
+            //echo "C:\\xampp\\htdocs\\animation\\" . $file_name . "<br>";
+           // echo $file_store . $file_name;
+            move_uploaded_file($file_tmp_location, trim($file_store . $file_name));
         }
     }
 }
@@ -115,8 +116,10 @@ if (filter_input_('get_request', 'no_request') != 'no_request') {
         $path = cutEnd(__DIR__);
     else
         $path .= ($dir . '\\');
-    $current_dir = $path;
+    $path = str_replace('\\\\', '\\', $path);
+    //echo "$path";
 }
+$current_dir = $path;
 openDirectory($path);
 loadFile();
 
@@ -167,5 +170,3 @@ include "../general/header.php"; ?>
 
 <?php
 include "../general/footer.php";
-//echo __DIR__;
-/* libXml domXml*/
