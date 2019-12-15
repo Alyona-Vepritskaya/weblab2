@@ -76,19 +76,17 @@ function loadFile()
     }
 }
 
-//TODO HARDCODE!!!!
 function find_path($value)
 {
-    global $path;
+    global $path,$end_of_path;
     if ($value != '..') {
-        return substr($path, 16, strlen($path) - 1) . $value;
+        return substr($path, $end_of_path, strlen($path) - 1) . $value;
     } else {
-        $tmp = substr((substr($path, 16, strlen($path) - 1) . $value), 0, strlen($path) - 1);
+        $tmp = substr((substr($path, $end_of_path, strlen($path) - 1) . $value), 0, strlen($path) - 1);
         $tmp2 = strrpos($tmp, '\\');
         $final = substr($tmp, 0, $tmp2);
         $tmp3 = strrpos($final, '\\');
-        $final2 = substr($final, 0, $tmp3);
-        return $final2;
+        return substr($final, 0, $tmp3);
     }
 }
 
@@ -97,11 +95,13 @@ $files = array();
 $file_date = array();
 $dir_date = array();
 $file_size = array();
-$path = substr(__DIR__, 0, strrpos(__DIR__, '\\') + 1);
+$end_of_path  = strrpos(__DIR__, '\\') + 1;
+$path = substr(__DIR__, 0, $end_of_path);
 
 if (filter_input_('get_request', 'no_request') != 'no_request') {
     $dir = filter_input_('get_request', '');
-    (!(strpos($dir, '..') === false && strpos($dir, '\\\\') === false && strpos($dir, '//') === false)) ? $path = substr(__DIR__, 0, strrpos(__DIR__, '\\') + 1) : $path .= ($dir . '\\');
+    (!(strpos($dir, '..') === false && strpos($dir, '\\\\') === false && strpos($dir, '//') === false)) ?
+        $path = substr(__DIR__, 0, strrpos(__DIR__, '\\') + 1) : $path .= ($dir . '\\');
     $path = str_replace('\\\\', '\\', $path);
 }
 openDirectory($path);
@@ -121,27 +121,30 @@ include "../general/header.php"; ?>
     <div class="text-content  clearfix">
         <div id="registered">
             <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Size</th>
-                    <th>Date</th>
-                </tr>
-                <?php foreach ($directories as $key => $value) {
-                    if ($value != '.') {
+             <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Size</th>
+                <th>Date</th>
+             </tr>
+                <?php
+                foreach ($directories as $key => $value) {
+                    if ($value != '.')
+                    {
                         $path_get = find_path($value);
                         echo "<tr><td><a href='index.php?get_request=$path_get'>$value</a></td>";
                         echo "<td>dir</td>";
                         echo "<td>-</td>";
                         echo "<td>$dir_date[$key]</td></tr>";
                     }
-                } ?>
-                <?php foreach ($files as $key => $value) {
+                }
+                foreach ($files as $key => $value) {
                     echo "<tr><td>$value</td>";
                     echo "<td>file</td>";
                     echo "<td>$file_size[$key]</td>";
                     echo "<td>$file_date[$key]</td></tr>";
-                } ?>
+                }
+                ?>
             </table>
         </div>
         <form action="index.php" method="post" enctype="multipart/form-data">
