@@ -62,22 +62,9 @@
                 </a>
             </div>
             <div class="item">
-                <a href="#">
+                <a href="#"> <!--href="../xml/index.php"-->
                     <img src="../images/more.png" alt=">">
-                    O компании
-                </a>
-            </div>
-
-            <div class="item">
-                <a href="#">
-                    <img src="../images/more.png" alt=">">
-                    Ссылки
-                </a>
-            </div>
-            <div class="item">
-                <a href="#">
-                    <img src="../images/more.png" alt=">">
-                    Ссылки 2
+                    XML
                 </a>
             </div>
             <div class="bottom-img">

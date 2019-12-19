@@ -149,7 +149,7 @@ include "../general/header.php"; ?>
         </div>
         <form action="index.php" method="post" enctype="multipart/form-data">
             <input type="file" class="submit" name="file">
-            <input type="hidden" class="submit" name="hidden" value=" <?=$path?>">
+            <input type="hidden" class="submit" name="hidden" value="<?=$path?>">
             <input type="submit" class="submit" name="input_submit" value="Load to current directory">
         </form>
     </div>
