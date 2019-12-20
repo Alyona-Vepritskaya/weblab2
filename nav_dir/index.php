@@ -65,20 +65,17 @@ function openDirectory($path)
 
 function loadFile()
 {
+    global $path;
     $submit = filter_input_('input_submit', '');
-    if (!empty($submit)) {
-        if (!empty($_FILES['file']['tmp_name'])) {
-            $loaded_file = $_FILES['file'];
-            $file_hidden = filter_input_('hidden', '');
-            !empty($file_hidden) ? $current_path = $file_hidden : $current_path = '';
-            move_uploaded_file($loaded_file['tmp_name'], trim($current_path . $loaded_file['name']));
-        }
+    if (!empty($submit) && (!empty($_FILES['file']['tmp_name']))) {
+        $loaded_file = $_FILES['file'];
+        move_uploaded_file($loaded_file['tmp_name'], trim($path . $loaded_file['name']));
     }
 }
 
 function find_path($value)
 {
-    global $path,$end_of_path;
+    global $path, $end_of_path;
     if ($value != '..') {
         return substr($path, $end_of_path, strlen($path) - 1) . $value;
     } else {
@@ -95,17 +92,17 @@ $files = array();
 $file_date = array();
 $dir_date = array();
 $file_size = array();
-$end_of_path  = strrpos(__DIR__, '\\') + 1;
+$end_of_path = strrpos(__DIR__, '\\') + 1;
 $path = substr(__DIR__, 0, $end_of_path);
+$dir = '';
 
 if (filter_input_('get_request', 'no_request') != 'no_request') {
     $dir = filter_input_('get_request', '');
-    (!(strpos($dir, '..') === false && strpos($dir, '\\\\') === false && strpos($dir, '//') === false)) ?
-        $path = substr(__DIR__, 0, strrpos(__DIR__, '\\') + 1) : $path .= ($dir . '\\');
+    (!(strpos($dir, '..') === false && strpos($dir, '\\\\') === false && strpos($dir, '//') === false)) ? $path = substr(__DIR__, 0, strrpos(__DIR__, '\\') + 1) : $path .= ($dir . '\\');
     $path = str_replace('\\\\', '\\', $path);
 }
-openDirectory($path);
 loadFile();
+openDirectory($path);
 include "../general/header.php"; ?>
     <div class="right-col">
     <div class="news-info">
@@ -121,16 +118,15 @@ include "../general/header.php"; ?>
     <div class="text-content  clearfix">
         <div id="registered">
             <table>
-             <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Size</th>
-                <th>Date</th>
-             </tr>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Size</th>
+                    <th>Date</th>
+                </tr>
                 <?php
                 foreach ($directories as $key => $value) {
-                    if ($value != '.')
-                    {
+                    if ($value != '.') {
                         $path_get = find_path($value);
                         echo "<tr><td><a href='index.php?get_request=$path_get'>$value</a></td>";
                         echo "<td>dir</td>";
@@ -149,7 +145,7 @@ include "../general/header.php"; ?>
         </div>
         <form action="index.php" method="post" enctype="multipart/form-data">
             <input type="file" class="submit" name="file">
-            <input type="hidden" class="submit" name="hidden" value="<?=$path?>">
+            <input type="hidden" name="get_request" value="<?= $dir ?>">
             <input type="submit" class="submit" name="input_submit" value="Load to current directory">
         </form>
     </div>
