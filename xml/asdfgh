@@ -1,0 +1,48 @@
+
+$prod_s = array();
+/**
+ * xml_parser_create() создает новый XML-анализатор
+ */
+$parser = xml_parser_create();
+
+/**
+ * @param $parser - Первый аргумент parser является ссылкой на XML-анализатор вызывающий обработчик.
+ * @param $data - Второй аргумент data должен содержать данные в виде текстовой строки.
+ */
+function echoData($parser,$data) {
+    global $prod_s;
+    $prod_s[] = $data;
+    echo $data->items[0]['type'] . "<br>";
+  //  echo $data['name'];
+}
+
+/**
+ * xml_set_character_data_handler — Установка обработчика символьных данных
+ * $parser - Ссылка на XML-анализатор.
+ * handler - строка содержащая имя функции, которая должна быть определена на момент вызова функции xml_parse() из анализатора parser.
+ */
+xml_set_character_data_handler($parser,"echoData");
+
+
+$fp=fopen("products.xml","r");
+
+while ($data=fread($fp,filesize("C:\\xampp\\htdocs\\xml\\products.xml"))) {
+    // Parse XML data
+    /**
+     * xml_parse() разбирает XML-документ
+     * $parser - Ссылка на используемый XML-анализатор.
+     * $data - Часть данных для разбора
+     */
+   $xml =  xml_parse($parser,$data) or
+    die (sprintf("XML Error: %s at line %d",
+        xml_error_string(xml_get_error_code($parser)),
+        xml_get_current_line_number($parser)));
+
+}
+
+/**
+ * xml_parser_free — Освобождение XML-анализатора
+ */
+xml_parser_free($parser);
+
+fclose($fp);

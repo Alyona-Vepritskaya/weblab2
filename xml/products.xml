@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<products>
+    <items type="computers">
+        <item name="HP Pavilion Gaming">
+            <ram value="8"/>
+            <price value="45678"></price>
+            <serial_number s_num="7DT87EA"></serial_number>
+            <prod_year year="2016"></prod_year>
+            <prod_country>USA</prod_country>
+            <image></image>
+        </item>
+        <item name="Acer Aspire 5">
+            <ram value="16"/>
+            <price value="56789"></price>
+            <serial_number s_num="7GT8GU8"></serial_number>
+            <prod_year year="2017"></prod_year>
+            <prod_country>USA</prod_country>
+            <image></image>
+        </item>
+    </items>
+    <items type="mouses">
+        <item name="Logitech M185">
+            <price value="599"></price>
+            <serial_number s_num="MAD33"></serial_number>
+            <prod_year year="2017"></prod_year>
+            <prod_country>China</prod_country>
+            <image></image>
+        </item>
+        <item name="Greenwave GM-5083RGB">
+            <price value="699"></price>
+            <serial_number s_num="MAD34"></serial_number>
+            <prod_year year="2018"></prod_year>
+            <prod_country>China</prod_country>
+            <image></image>
+        </item>
+    </items>
+    <items type="phones">
+        <item name="Xiaomi">
+            <model value="Note 10"></model>
+            <price value="799"></price>
+            <serial_number s_num="MAD35"></serial_number>
+            <prod_year year="2019"></prod_year>
+            <prod_country>China</prod_country>
+            <image></image>
+        </item>
+        <item name="MEIZU">
+            <model value="M5 Note"></model>
+            <price value="599"></price>
+            <serial_number s_num="MAD36"></serial_number>
+            <prod_year year="1016"></prod_year>
+            <prod_country>China</prod_country>
+            <image></image>
+        </item>
+        <item name="Motorola">
+            <model value="One Vision"></model>
+            <price value="299"></price>
+            <serial_number s_num="MAD37"></serial_number>
+            <prod_year year="2000"></prod_year>
+            <prod_country>China</prod_country>
+            <image></image>
+        </item>
+        <item name="Nokia">
+            <model value="3310"></model>
+            <price value="99"></price>
+            <serial_number s_num="MAD38"></serial_number>
+            <prod_year year="2617"></prod_year>
+            <prod_country>China</prod_country>
+            <image></image>
+        </item>
+        <item name="Samsung">
+            <model value="Galaxy Fold"></model>
+            <price value="2000"></price>
+            <serial_number s_num="MAD39"></serial_number>
+            <prod_year year="2090"></prod_year>
+            <prod_country>China</prod_country>
+            <image></image>
+        </item>
+        <item name="Xiaomi">
+            <model value="MiMix"></model>
+            <price value="3000"></price>
+            <serial_number s_num="MAD40"></serial_number>
+            <prod_year year="1999"></prod_year>
+            <prod_country>China</prod_country>
+            <image></image>
+        </item>
+    </items>
+</products>

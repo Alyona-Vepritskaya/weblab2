@@ -62,7 +62,7 @@
                 </a>
             </div>
             <div class="item">
-                <a href="#"> <!--href="../xml/index.php"-->
+                <a href="../xml/index.php">
                     <img src="../images/more.png" alt=">">
                     XML
                 </a>
