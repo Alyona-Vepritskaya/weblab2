@@ -1,6 +1,6 @@
 <?php
-$arrayProducts = array();
-
+$items = array();
+$item  = array();
 function parseData()
 {
     /**
@@ -13,12 +13,11 @@ function parseData()
      * которые должны быть определены на момент вызова функции xml_parse() из анализатора parser.
      */
     xml_set_element_handler($parser, "start", "stop");
-    xml_parser_set_option($parser, XML_OPTION_SKIP_WHITE, 1);
-    //?
+    /* xml_parser_set_option($parser, XML_OPTION_SKIP_WHITE, 1);*/
     xml_set_character_data_handler($parser, "data");
     $file = fopen("C:\\xampp\\htdocs\\xml\\products.xml", "r");
-    while ($data = fread($file, 4096)) {
-        if (xml_parse($parser, $data, feof($file))) {
+    while ($data = fread($file, 4000)) {
+        if (!xml_parse($parser, $data, feof($file))) {
             //die — Эквивалент функции exit  - exit ([ string $status ] ) : void
             //xml_error_string — Получение строки ошибки XML-анализатора
             //xml_get_error_code — Получает код ошибки XML-анализатора
@@ -32,17 +31,32 @@ function parseData()
 /**
  * @param $parser
  * @param $name - Второй аргумент name содержит имя элемента(тега), для которого этот обработчик вызывается
- * @param $attribs - Tретий аргумент attribs содержит ассоциативный массив с атрибутами элемента (если есть).
+ * @param $attribs - Третий аргумент attribs содержит ассоциативный массив с атрибутами элемента (если есть).
  * Индексами этого массива будут имена атрибутов, а значения массива будут соответствовать значениям атрибутов.
  */
 function start($parser, $name, $attribs)
 {
-    //switch
+    global $item;
+
+    switch ($name) {
+        case "ITEM":
+            $item["type"] = $attribs["TYPE"];
+            break;
+        case "SOME_PARAM":
+            $item["pName"] = $attribs["NAME"];
+            $item["pValue"] = $attribs["VALUE"];
+            break;
+        default:
+            break;
+    }
 }
 
 function stop($parser, $element_name)
 {
-
+    global $item,$items;
+    if ($element_name == "ITEM") {
+        $items[] = $item;
+    }
 }
 
 function data($parser, $data)
@@ -65,7 +79,12 @@ function data($parser, $data)
     <div class="text-content  clearfix">
         <div class="products">
             <?php
-
+            parseData();
+            foreach ($items as $key ) {
+                foreach ($key as $key2 => $value2) {
+                        echo $key2." => ".$value2."<br>";
+                }
+            }
             ?>
         </div>
     </div>
