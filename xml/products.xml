@@ -1,30 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<products>
-    <item type="computer">
+<!DOCTYPE items>
+<items>
+    <item type="computers">
         <name>HP Pavilion Gaming</name>
         <price>3$</price>
-        <serial_number>7DT87EA</serial_number>
+        <id>7DT87EA</id>
         <prod_year>2016</prod_year>
         <prod_country>USA</prod_country>
-        <image></image>
+        <image>../images/Computer1.png</image>
         <some_param value="8" name="ram"/>
     </item>
-    <item type="computer">
+    <item type="computers">
+        <name>HP Pavilion Gaming</name>
+        <price>3$</price>
+        <id>7DT87EA</id>
+        <prod_year>2016</prod_year>
+        <prod_country>USA</prod_country>
+        <image>../images/Computer2.png</image>
+        <some_param value="8" name="ram"/>
+    </item>
+    <item type="computers">
+        <name>HP Pavilion Gaming</name>
+        <price>3$</price>
+        <id>7DT87EA</id>
+        <prod_year>2016</prod_year>
+        <prod_country>USA</prod_country>
+        <image>../images/Computer3.png</image>
+        <some_param value="8" name="ram"/>
+    </item>
+    <item type="computers">
         <name>Lenovo X67</name>
         <price>3555$</price>
-        <serial_number>HGYG77GJ</serial_number>
+        <id>是</id>
         <prod_year>2016</prod_year>
         <prod_country>Australia</prod_country>
-        <image></image>
+        <image>../images/Computer4.jpg</image>
         <some_param value="9" name="ram"/>
     </item>
-    <item type="phone">
+    <item type="phones">
         <name>IPhone X</name>
         <price>566$</price>
-        <serial_number>7DT7EAE</serial_number>
+        <id>7DT7EAE</id>
         <prod_year>2011</prod_year>
         <prod_country>USA</prod_country>
-        <image></image>
+        <image>../images/iphpro.jpg</image>
         <some_param value="red" name="color"/>
     </item>
-</products>
+    <item type="phones">
+        <name>IPhone 11</name>
+        <price>566$</price>
+        <id>7DT7EAE</id>
+        <prod_year>2011</prod_year>
+        <prod_country>USA</prod_country>
+        <image>../images/iphpro.jpg</image>
+        <some_param value="red" name="color"/>
+    </item>
+    <item type="phones">
+        <name>IPhone X PRO</name>
+        <price>566$</price>
+        <id>7DT7EAE</id>
+        <prod_year>2011</prod_year>
+        <prod_country>USA</prod_country>
+        <image>../images/iph.jpg</image>
+        <some_param value="red" name="color"/>
+    </item>
+    <item type="phones">
+        <name>IPhone 11 PRO</name>
+        <price>5665$</price>
+        <id>7DT7EAE</id>
+        <prod_year>2011</prod_year>
+        <prod_country>USA</prod_country>
+        <image>../images/iph.jpg</image>
+        <some_param value="red" name="color"/>
+    </item>
+</items>

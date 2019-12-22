@@ -1,6 +1,6 @@
 <?php
 $items = array();
-$item  = array();
+$item = array();
 function parseData()
 {
     /**
@@ -13,7 +13,7 @@ function parseData()
      * которые должны быть определены на момент вызова функции xml_parse() из анализатора parser.
      */
     xml_set_element_handler($parser, "start", "stop");
-    /* xml_parser_set_option($parser, XML_OPTION_SKIP_WHITE, 1);*/
+    xml_parser_set_option($parser, XML_OPTION_SKIP_WHITE, 1);
     xml_set_character_data_handler($parser, "data");
     $file = fopen("C:\\xampp\\htdocs\\xml\\products.xml", "r");
     while ($data = fread($file, 4000)) {
@@ -37,10 +37,9 @@ function parseData()
 function start($parser, $name, $attribs)
 {
     global $item;
-
     switch ($name) {
         case "ITEM":
-            $item["type"] = $attribs["TYPE"];
+            $item["TYPE"] = $attribs["TYPE"];
             break;
         case "SOME_PARAM":
             $item["pName"] = $attribs["NAME"];
@@ -53,15 +52,23 @@ function start($parser, $name, $attribs)
 
 function stop($parser, $element_name)
 {
-    global $item,$items;
+    global $item, $items, $currentData;
+    if ($element_name != "ITEM" && $element_name != "SOME_PARAM" && $element_name != "ITEMS") {
+        $item[$element_name] = $currentData;
+    }
     if ($element_name == "ITEM") {
         $items[] = $item;
     }
 }
 
+/**
+ * @param $parser
+ * @param $data - string in tag
+ */
 function data($parser, $data)
 {
-
+    global $currentData;
+    $currentData = $data;
 }
 
 ?>
@@ -79,11 +86,25 @@ function data($parser, $data)
     <div class="text-content  clearfix">
         <div class="products">
             <?php
+            $currentType = '';
             parseData();
-            foreach ($items as $key ) {
-                foreach ($key as $key2 => $value2) {
-                        echo $key2." => ".$value2."<br>";
+            foreach ($items as $item) {
+                if ($item['TYPE'] != $currentType) { ?>
+                    <div class="item-name"><?= strtoupper($item['TYPE'][0]) . substr($item['TYPE'], 1) ?></div>
+                    <?php
+                    $currentType = $item['TYPE'];
                 }
+                ?>
+                <div class="product">
+                    <div class="item-name"><?= $item['NAME'] ?></div>
+                    <img src="<?= $item['IMAGE'] ?>" alt="img">
+                    <div>Serial number: <?= $item['ID'] ?></div>
+                    <div>Price: <?= $item['PRICE'] ?></div>
+                    <div>Production date: <?= $item['PROD_YEAR'] ?></div>
+                    <div>Production country: <?= $item['PROD_COUNTRY'] ?></div>
+                    <div><?= strtoupper($item['pName'][0]) . substr($item['pName'], 1) ?>: <?= $item['pValue'] ?></div>
+                </div>
+                <?php
             }
             ?>
         </div>
