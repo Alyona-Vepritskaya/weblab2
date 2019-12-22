@@ -1,0 +1,17 @@
+<!DOCTYPE products [
+        <!ELEMENT products (items)*>
+        <!ELEMENT items (item)+>
+        <!ATTLIST items
+                type CDATA #REQUIRED>
+        <!ELEMENT item (name|price|id|prod_year|prod_country|image|(some_param)*)+>
+        <!ELEMENT name (#PCDATA)>
+        <!ELEMENT price (#PCDATA)>
+        <!ELEMENT id (#PCDATA)>
+        <!ELEMENT prod_year (#PCDATA)>
+        <!ELEMENT prod_country (#PCDATA)>
+        <!ELEMENT image (#PCDATA)>
+        <!ELEMENT some_param (#PCDATA)>
+        <!ATTLIST some_param
+                name CDATA #REQUIRED
+                value CDATA #REQUIRED>
+        ]>
