@@ -4,35 +4,35 @@
     <items type="computers">
         <item>
             <name>HP Pavilion Gaming</name>
-            <price>3$</price>
+            <price>3456 $</price>
             <id>7DT87EA</id>
             <prod_year>2016</prod_year>
-            <prod_country>USA</prod_country>
+            <prod_country>Canada</prod_country>
             <image>../images/Computer1.png</image>
             <some_param value="8" name="ram"/>
         </item>
         <item>
-            <name>HP Pavilion Gaming</name>
-            <price>3$</price>
-            <id>7DT87EA</id>
-            <prod_year>2016</prod_year>
+            <name>HP X 86</name>
+            <price>3778.89 $</price>
+            <id>689GYH6</id>
+            <prod_year>2015</prod_year>
             <prod_country>USA</prod_country>
             <image>../images/Computer2.png</image>
             <some_param value="8" name="ram"/>
         </item>
         <item>
-            <name>HP Pavilion Gaming</name>
-            <price>3$</price>
-            <id>7DT87EA</id>
-            <prod_year>2016</prod_year>
+            <name>Mac 56</name>
+            <price>2343 $</price>
+            <id>89T87EA</id>
+            <prod_year>2013</prod_year>
             <prod_country>USA</prod_country>
             <image>../images/Computer3.png</image>
-            <some_param value="8" name="ram"/>
+            <some_param value="16" name="ram"/>
         </item>
         <item>
             <name>Lenovo X67</name>
-            <price>3555$</price>
-            <id>是</id>
+            <price>3555 $</price>
+            <id>45GTYH67</id>
             <prod_year>2016</prod_year>
             <prod_country>Australia</prod_country>
             <image>../images/Computer4.jpg</image>
@@ -41,40 +41,78 @@
     </items>
     <items type="phones">
         <item>
-            <name>IPhone 1</name>
-            <price>566$</price>
+            <name>IPhone X</name>
+            <price>999.78 $</price>
             <id>7DT7EAE</id>
+            <prod_year>1995</prod_year>
+            <prod_country>USA</prod_country>
+            <image>../images/i12.jpg</image>
+            <some_param value="gray" name="color"/>
+        </item>
+        <item>
+            <name>IPhone 10</name>
+            <price>780 $</price>
+            <id>FTG78GT</id>
             <prod_year>2011</prod_year>
             <prod_country>USA</prod_country>
             <image>../images/iphpro.jpg</image>
-            <some_param value="red" name="color"/>
+            <some_param value="black" name="color"/>
         </item>
         <item>
-            <name>IPhone 2</name>
-            <price>566$</price>
-            <id>7DT7EAE</id>
+            <name>IPhone 7</name>
+            <price>566 $</price>
+            <id>AE1010AE</id>
             <prod_year>2011</prod_year>
-            <prod_country>USA</prod_country>
-            <image>../images/iphpro.jpg</image>
-            <some_param value="red" name="color"/>
+            <prod_country>UK</prod_country>
+            <image>../images/iph11max.jpg</image>
+            <some_param value="gold" name="color"/>
         </item>
         <item>
-            <name>IPhone 3</name>
-            <price>566$</price>
-            <id>7DT7EAE</id>
-            <prod_year>2011</prod_year>
+            <name>IPhone 11 Pro Max</name>
+            <price>666 $</price>
+            <id>AE56TF7Y</id>
+            <prod_year>2020</prod_year>
             <prod_country>USA</prod_country>
-            <image>../images/iph.jpg</image>
-            <some_param value="red" name="color"/>
+            <image>../images/iphone-11-pro-max.jpeg</image>
+            <some_param value="green" name="color"/>
         </item>
         <item>
-            <name>IPhone 4</name>
-            <price>5665$</price>
-            <id>7DT7EAE</id>
-            <prod_year>2011</prod_year>
+            <name>Xiaomi Redmi Note 8</name>
+            <price>994 $</price>
+            <id>7OPKJ90</id>
+            <prod_year>2018</prod_year>
+            <prod_country>UA</prod_country>
+            <image>../images/xi.jpg</image>
+            <some_param value="blue" name="color"/>
+        </item>
+        <item>
+            <name>Nokia X Pro</name>
+            <price>999.9 $</price>
+            <id>YHJU67Y</id>
+            <prod_year>2019</prod_year>
             <prod_country>USA</prod_country>
-            <image>../images/iph.jpg</image>
-            <some_param value="red" name="color"/>
+            <image>../images/nokia.jpg</image>
+            <some_param value="black" name="color"/>
+        </item>
+    </items>
+    <items type="mouses">
+        <item>
+            <name>Mouse Pro Gamer</name>
+            <price>45.9 $</price>
+            <id>HU7U67Y</id>
+            <prod_year>2019</prod_year>
+            <prod_country>USA</prod_country>
+            <image>../images/ms.jpg</image>
+            <some_param value="3" name="Number of buttons"/>
+        </item>
+        <item>
+            <name>Remy</name>
+            <price>12.99 $</price>
+            <id>Ratatouille</id>
+            <prod_year>2000</prod_year>
+            <prod_country>France</prod_country>
+            <image>../images/remy.png</image>
+            <some_param value="4" name="Number of paws"/>
         </item>
     </items>
 </products>

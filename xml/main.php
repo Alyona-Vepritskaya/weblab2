@@ -92,12 +92,23 @@ function data($parser, $data)
     <div class="text-content  clearfix">
         <div class="products">
             <?php
-            $currentType = '';
             parseData();
-            foreach ($products as $items => $item) {
-                echo $items;
-                foreach ($item as $key => $value) {
-                    echo $value['NAME'] . "<br>";
+            foreach ($products as $itemsType => $items)
+            { ?>
+                <div class="item-name"><?=strtoupper($itemsType[0]).substr($itemsType, 1)?></div>
+                <?php
+                foreach ($items as $key => $item)
+                { ?>
+                    <div class="product">
+                        <div class="item-name"><?=$item['NAME']?></div>
+                        <img src="<?=$item['IMAGE']?>" alt="img">
+                        <div>Serial number: <?=$item['ID']?></div>
+                        <div>Price: <?=$item['PRICE']?></div>
+                        <div>Production date: <?=$item['PROD_YEAR']?></div>
+                        <div>Production country: <?=$item['PROD_COUNTRY']?></div>
+                        <div><?= strtoupper($item['pName'][0]).substr($item['pName'], 1).": ".$item['pValue']?></div>
+                    </div>
+                <?php
                 }
             }
             ?>
