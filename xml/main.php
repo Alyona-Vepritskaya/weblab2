@@ -38,7 +38,7 @@ function start($parser, $name, $attribs)
 {
     global $item;
     switch ($name) {
-        case "ITEM":
+        case "ITEMS":
             $item["TYPE"] = $attribs["TYPE"];
             break;
         case "SOME_PARAM":
@@ -90,19 +90,19 @@ function data($parser, $data)
             parseData();
             foreach ($items as $item) {
                 if ($item['TYPE'] != $currentType) { ?>
-                    <div class="item-name"><?= strtoupper($item['TYPE'][0]) . substr($item['TYPE'], 1) ?></div>
+                    <divclass="item-name"><?=strtoupper($item['TYPE'][0]).substr($item['TYPE'], 1)?></div>
                     <?php
                     $currentType = $item['TYPE'];
                 }
                 ?>
                 <div class="product">
-                    <div class="item-name"><?= $item['NAME'] ?></div>
-                    <img src="<?= $item['IMAGE'] ?>" alt="img">
-                    <div>Serial number: <?= $item['ID'] ?></div>
-                    <div>Price: <?= $item['PRICE'] ?></div>
-                    <div>Production date: <?= $item['PROD_YEAR'] ?></div>
-                    <div>Production country: <?= $item['PROD_COUNTRY'] ?></div>
-                    <div><?= strtoupper($item['pName'][0]) . substr($item['pName'], 1) ?>: <?= $item['pValue'] ?></div>
+                    <div class="item-name"><?=$item['NAME']?></div>
+                    <img src="<?=$item['IMAGE']?>" alt="img">
+                    <div>Serial number: <?=$item['ID']?></div>
+                    <div>Price: <?=$item['PRICE']?></div>
+                    <div>Production date: <?=$item['PROD_YEAR']?></div>
+                    <div>Production country: <?=$item['PROD_COUNTRY']?></div>
+                    <div><?=strtoupper($item['pName'][0]) . substr($item['pName'], 1)?>: <?=$item['pValue']?></div>
                 </div>
                 <?php
             }
