@@ -41,7 +41,7 @@
     </items>
     <items type="phones">
         <item>
-            <name>IPhone X</name>
+            <name>IPhone 1</name>
             <price>566$</price>
             <id>7DT7EAE</id>
             <prod_year>2011</prod_year>
@@ -50,7 +50,7 @@
             <some_param value="red" name="color"/>
         </item>
         <item>
-            <name>IPhone 11</name>
+            <name>IPhone 2</name>
             <price>566$</price>
             <id>7DT7EAE</id>
             <prod_year>2011</prod_year>
@@ -59,7 +59,7 @@
             <some_param value="red" name="color"/>
         </item>
         <item>
-            <name>IPhone X PRO</name>
+            <name>IPhone 3</name>
             <price>566$</price>
             <id>7DT7EAE</id>
             <prod_year>2011</prod_year>
@@ -68,7 +68,7 @@
             <some_param value="red" name="color"/>
         </item>
         <item>
-            <name>IPhone 11 PRO</name>
+            <name>IPhone 4</name>
             <price>5665$</price>
             <id>7DT7EAE</id>
             <prod_year>2011</prod_year>
