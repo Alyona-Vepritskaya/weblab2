@@ -3,6 +3,7 @@ $path = "../images/";
 $products = array();
 $items = array();
 $item = array();
+$item_p = array();
 function parseData()
 {
     /**
@@ -38,15 +39,18 @@ function parseData()
  */
 function start($parser, $name, $attribs)
 {
-    global $item, $itemsType, $items;
+    global $item, $itemsType, $items,$item_p;
     switch ($name) {
+        case "ITEM":
+            $item = array();
+            break;
         case "ITEMS":
             $items = array();
+            $item['params'] = array();
             $itemsType = $attribs["TYPE"];
             break;
         case "SOME_PARAM":
-            $item["pName"] = $attribs["NAME"];
-            $item["pValue"] = $attribs["VALUE"];
+            $item['params'][] = Array("name" => $attribs["NAME"], "value" => $attribs["VALUE"]);
             break;
         default:
             break;
@@ -56,7 +60,7 @@ function start($parser, $name, $attribs)
 function stop($parser, $element_name)
 {
 
-    global $item, $items, $currentData, $itemsType, $products;
+    global $item, $items, $currentData, $itemsType, $products,$item_p;
     if ($element_name != "ITEM" && $element_name != "SOME_PARAM" && $element_name != "PRODUCTS" && $element_name != "ITEMS") {
         $item[$element_name] = $currentData;
     }
@@ -107,7 +111,11 @@ function data($parser, $data)
                         <div>Price: <?=$item['PRICE']?></div>
                         <div>Production date: <?=$item['PROD_YEAR']?></div>
                         <div>Production country: <?=$item['PROD_COUNTRY']?></div>
-                        <div><?= strtoupper($item['pName'][0]).substr($item['pName'], 1).": ".$item['pValue']?></div>
+                        <?php
+                        foreach ($item['params'] as $k => $v){
+                            echo "<div>".$v['name'].": ".$v['value']."<br>"."</div>";
+                        }
+                        ?>
                     </div>
                 <?php
                 }

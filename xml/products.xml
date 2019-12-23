@@ -27,7 +27,7 @@
             <prod_year>2016</prod_year>
             <prod_country>Canada</prod_country>
             <image>Computer1.png</image>
-            <some_param value="HM" name="brand"/><!--!!-->
+            <some_param value="HM" name="Brand"/><!--!!-->
         </item>
         <item s_num="a1234">
             <name>HP X 86</name>
@@ -36,8 +36,8 @@
             <prod_year>2015</prod_year>
             <prod_country>USA</prod_country>
             <image>Computer2.png</image>
-            <some_param value="8" name="ram"/>
-            <some_param value="16" name="rom"/>
+            <some_param value="8" name="Ram"/>
+            <some_param value="16" name="Rom"/>
         </item>
         <item s_num="a1235">
             <name>Mac 56</name>
@@ -46,7 +46,7 @@
             <prod_year>2013</prod_year>
             <prod_country>USA</prod_country>
             <image>Computer3.png</image>
-            <some_param value="16" name="ram"/>
+            <some_param value="16" name="Ram"/>
         </item>
         <item s_num="a1236">
             <name>Lenovo X67</name>
@@ -55,7 +55,7 @@
             <prod_year>2016</prod_year>
             <prod_country>Australia</prod_country>
             <image>Computer4.jpg</image>
-            <some_param value="9" name="ram"/>
+            <some_param value="9" name="Ram"/>
         </item>
     </items>
     <items type="phones">
@@ -66,7 +66,7 @@
             <prod_year>1995</prod_year>
             <prod_country>USA</prod_country>
             <image>i12.jpg</image>
-            <some_param value="gray" name="color"/>
+            <some_param value="gray" name="Color"/>
         </item>
         <item s_num="a1238">
             <name>IPhone 10</name>
@@ -75,7 +75,7 @@
             <prod_year>2011</prod_year>
             <prod_country>USA</prod_country>
             <image>iphpro.jpg</image>
-            <some_param value="black" name="color"/>
+            <some_param value="black" name="Color"/>
         </item>
         <item s_num="a1239">
             <name>IPhone 7</name>
@@ -84,7 +84,7 @@
             <prod_year>2011</prod_year>
             <prod_country>UK</prod_country>
             <image>iph11max.jpg</image>
-            <some_param value="gold" name="color"/>
+            <some_param value="gold" name="Color"/>
         </item>
         <item s_num="a1231">
             <name>IPhone 11 Pro Max</name>
@@ -93,7 +93,7 @@
             <prod_year>2020</prod_year>
             <prod_country>USA</prod_country>
             <image>iphone-11-pro-max.jpeg</image>
-            <some_param value="green" name="color"/>
+            <some_param value="green" name="Color"/>
         </item>
         <item s_num="a12">
             <name>Xiaomi Redmi Note 8</name>
@@ -102,7 +102,7 @@
             <prod_year>2018</prod_year>
             <prod_country>UA</prod_country>
             <image>xi.jpg</image>
-            <some_param value="blue" name="color"/>
+            <some_param value="blue" name="Color"/>
         </item>
         <item s_num="a13">
             <name>Nokia X Pro</name>
@@ -111,7 +111,7 @@
             <prod_year>2019</prod_year>
             <prod_country>USA</prod_country>
             <image>nokia.jpg</image>
-            <some_param value="black" name="color"/>
+            <some_param value="black" name="Color"/>
         </item>
     </items>
     <items type="mouses">
@@ -132,6 +132,7 @@
             <prod_country>France</prod_country>
             <image>remy.png</image>
             <some_param value="4" name="Number of paws"/>
+            <some_param value="7" name="Number of buttons"/>
         </item>
     </items>
 </products>
