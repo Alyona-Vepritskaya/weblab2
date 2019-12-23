@@ -3,8 +3,10 @@
         <!ELEMENT products (items)*>
         <!ELEMENT items (item)+>
         <!ATTLIST items
-                type CDATA #REQUIRED>
-        <!ELEMENT item (name|price|id|prod_year|prod_country|image|(some_param)*)+>
+                type ID #REQUIRED>
+        <!ELEMENT item (name,price,id,prod_year,prod_country,image,some_param*)>
+        <!ATTLIST item
+                s_num ID #REQUIRED>
         <!ELEMENT name (#PCDATA)>
         <!ELEMENT price (#PCDATA)>
         <!ELEMENT id (#PCDATA)>
@@ -18,116 +20,117 @@
         ]>
 <products>
     <items type="computers">
-        <item>
+        <item s_num="a123">
             <name>HP Pavilion Gaming</name>
             <price>3456 $</price>
             <id>7DT87EA</id>
             <prod_year>2016</prod_year>
             <prod_country>Canada</prod_country>
-            <image>../images/Computer1.png</image>
-            <some_param value="8" name="ram"/>
+            <image>Computer1.png</image>
+            <some_param value="HM" name="brand"/><!--!!-->
         </item>
-        <item>
+        <item s_num="a1234">
             <name>HP X 86</name>
             <price>3778.89 $</price>
             <id>689GYH6</id>
             <prod_year>2015</prod_year>
             <prod_country>USA</prod_country>
-            <image>../images/Computer2.png</image>
+            <image>Computer2.png</image>
             <some_param value="8" name="ram"/>
+            <some_param value="16" name="rom"/>
         </item>
-        <item>
+        <item s_num="a1235">
             <name>Mac 56</name>
             <price>2343 $</price>
             <id>89T87EA</id>
             <prod_year>2013</prod_year>
             <prod_country>USA</prod_country>
-            <image>../images/Computer3.png</image>
+            <image>Computer3.png</image>
             <some_param value="16" name="ram"/>
         </item>
-        <item>
+        <item s_num="a1236">
             <name>Lenovo X67</name>
             <price>3555 $</price>
             <id>45GTYH67</id>
             <prod_year>2016</prod_year>
             <prod_country>Australia</prod_country>
-            <image>../images/Computer4.jpg</image>
+            <image>Computer4.jpg</image>
             <some_param value="9" name="ram"/>
         </item>
     </items>
     <items type="phones">
-        <item>
+        <item s_num="a1237">
             <name>IPhone X</name>
             <price>999.78 $</price>
             <id>7DT7EAE</id>
             <prod_year>1995</prod_year>
             <prod_country>USA</prod_country>
-            <image>../images/i12.jpg</image>
+            <image>i12.jpg</image>
             <some_param value="gray" name="color"/>
         </item>
-        <item>
+        <item s_num="a1238">
             <name>IPhone 10</name>
             <price>780 $</price>
             <id>FTG78GT</id>
             <prod_year>2011</prod_year>
             <prod_country>USA</prod_country>
-            <image>../images/iphpro.jpg</image>
+            <image>iphpro.jpg</image>
             <some_param value="black" name="color"/>
         </item>
-        <item>
+        <item s_num="a1239">
             <name>IPhone 7</name>
             <price>566 $</price>
             <id>AE1010AE</id>
             <prod_year>2011</prod_year>
             <prod_country>UK</prod_country>
-            <image>../images/iph11max.jpg</image>
+            <image>iph11max.jpg</image>
             <some_param value="gold" name="color"/>
         </item>
-        <item>
+        <item s_num="a1231">
             <name>IPhone 11 Pro Max</name>
             <price>666 $</price>
             <id>AE56TF7Y</id>
             <prod_year>2020</prod_year>
             <prod_country>USA</prod_country>
-            <image>../images/iphone-11-pro-max.jpeg</image>
+            <image>iphone-11-pro-max.jpeg</image>
             <some_param value="green" name="color"/>
         </item>
-        <item>
+        <item s_num="a12">
             <name>Xiaomi Redmi Note 8</name>
             <price>994 $</price>
             <id>7OPKJ90</id>
             <prod_year>2018</prod_year>
             <prod_country>UA</prod_country>
-            <image>../images/xi.jpg</image>
+            <image>xi.jpg</image>
             <some_param value="blue" name="color"/>
         </item>
-        <item>
+        <item s_num="a13">
             <name>Nokia X Pro</name>
             <price>999.9 $</price>
             <id>YHJU67Y</id>
             <prod_year>2019</prod_year>
             <prod_country>USA</prod_country>
-            <image>../images/nokia.jpg</image>
+            <image>nokia.jpg</image>
             <some_param value="black" name="color"/>
         </item>
     </items>
     <items type="mouses">
-        <item>
+        <item s_num="a1">
             <name>Mouse Pro Gamer</name>
             <price>45.9 $</price>
             <id>HU7U67Y</id>
             <prod_year>2019</prod_year>
             <prod_country>USA</prod_country>
-            <image>../images/ms.jpg</image>
+            <image>ms.jpg</image>
             <some_param value="3" name="Number of buttons"/>
         </item>
-        <item>
+        <item s_num="a2">
             <name>Remy</name>
             <price>12.99 $</price>
             <id>Ratatouille</id>
             <prod_year>2000</prod_year>
             <prod_country>France</prod_country>
-            <image>../images/remy.png</image>
+            <image>remy.png</image>
             <some_param value="4" name="Number of paws"/>
         </item>
     </items>

@@ -1,4 +1,5 @@
 <?php
+$path = "../images/";
 $products = array();
 $items = array();
 $item = array();
@@ -16,7 +17,7 @@ function parseData()
     xml_set_element_handler($parser, "start", "stop");
     xml_parser_set_option($parser, XML_OPTION_SKIP_WHITE, 1);
     xml_set_character_data_handler($parser, "data");
-    $file = fopen("C:\\xampp\\htdocs\\xml\\products.xml", "r");
+    $file = fopen("products.xml", "r");
     while ($data = fread($file, 4000)) {
         if (!xml_parse($parser, $data, feof($file))) {
             //die — Эквивалент функции exit  - exit ([ string $status ] ) : void
@@ -101,7 +102,7 @@ function data($parser, $data)
                 { ?>
                     <div class="product">
                         <div class="item-name"><?=$item['NAME']?></div>
-                        <img src="<?=$item['IMAGE']?>" alt="img">
+                        <img src="<?=$path.$item['IMAGE']?>" alt="img">
                         <div>Serial number: <?=$item['ID']?></div>
                         <div>Price: <?=$item['PRICE']?></div>
                         <div>Production date: <?=$item['PROD_YEAR']?></div>
