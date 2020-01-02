@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../general/style.css">
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Web_lab2</title>
 </head>
