@@ -116,6 +116,7 @@ function data($parser, $data)
                             echo "<div>".$v['name'].": ".$v['value']."<br>"."</div>";
                         }
                         ?>
+                        <input class="buy-item" type="submit" value="Buy now">
                     </div>
                 <?php
                 }

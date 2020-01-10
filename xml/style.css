@@ -2,6 +2,7 @@
     color: #0000AE;
     margin: 250px 20px 0;
     font-weight: bold;
+    font-size: 12px;
 }
 
 .product {
@@ -30,10 +31,28 @@
     padding: 10px;
     color: #10106c;
     text-align: center;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .product .item-name {
-    font-size: 12px;
+    font-size: 14px;
+}
+.buy-item{
+    transition: all ease 0.5s;
+    margin: 10px auto;
+    font: inherit;
+    font-size: 14px;
+    display: block;
+    padding: 10px 16px;
+    border: 2px solid white;
+    background: linear-gradient(360deg,#0734ED,#10106c);
+    color: white;
+    letter-spacing: 1px;
+}
+.buy-item:hover,
+.buy-item:focus{
+    transition: all ease 0.5s;
+    background: linear-gradient(360deg,#95DBFE,#5AA9FB);
+    color: #0000AE;
 }
 
