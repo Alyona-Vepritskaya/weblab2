@@ -105,6 +105,10 @@ function data($parser, $data)
                 foreach ($items as $key => $item)
                 { ?>
                     <div class="product">
+                        <?php
+                        if(strpos($item['ID'],'AE') > 0 || strpos($item['ID'],'AE') === 0){
+                          echo  '<div class="sales">Sale</div>';
+                       } ?>
                         <div class="item-name"><?=$item['NAME']?></div>
                         <img src="<?=$path.$item['IMAGE']?>" alt="img">
                         <div>Serial number: <?=$item['ID']?></div>

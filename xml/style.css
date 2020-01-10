@@ -6,13 +6,20 @@
 }
 
 .product {
+    transition: 1s ease all;
     box-sizing: border-box;
-    border: 1px #10106c solid;
+    border: 5px #10106c solid;
     box-shadow: #0000AE 0 0 10px inset;
     width: 47%;
     display: inline-block;
     margin: 5px;
-    padding: 15px;
+    padding: 10px 15px 0;
+    overflow: hidden;
+}
+.product:hover {
+    background: mintcream;
+    transform: scale(1.05);
+    transition: 1s ease all;
 }
 
 .product img {
@@ -55,4 +62,11 @@
     background: linear-gradient(360deg,#95DBFE,#5AA9FB);
     color: #0000AE;
 }
-
+.sales{
+    font-size: 18px;
+    text-align: center;
+    height: 1.3rem;
+    transform: rotate(40deg) translate(80px, -45px);
+    border: 1px solid darkmagenta;
+    background: rgba(255, 119, 191,0.7);
+}
