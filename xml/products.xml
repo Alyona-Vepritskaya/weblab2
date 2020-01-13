@@ -133,6 +133,7 @@
             <image>remy.png</image>
             <some_param value="4" name="Number of paws"/>
             <some_param value="7" name="Number of buttons"/>
+            <some_param value="8" name="Number of eyes"/>
         </item>
     </items>
 </products>

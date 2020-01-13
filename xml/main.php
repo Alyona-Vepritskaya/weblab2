@@ -111,16 +111,18 @@ function data($parser, $data)
                        } ?>
                         <div class="item-name"><?=$item['NAME']?></div>
                         <img src="<?=$path.$item['IMAGE']?>" alt="img">
-                        <div>Serial number: <?=$item['ID']?></div>
-                        <div>Price: <?=$item['PRICE']?></div>
-                        <div>Production date: <?=$item['PROD_YEAR']?></div>
-                        <div>Production country: <?=$item['PROD_COUNTRY']?></div>
-                        <?php
-                        foreach ($item['params'] as $k => $v){
-                            echo "<div>".$v['name'].": ".$v['value']."<br>"."</div>";
-                        }
-                        ?>
-                        <input class="buy-item" type="submit" value="Buy now">
+                        <div class="description">
+                            <div>Serial number: <?=$item['ID']?></div>
+                            <div>Price: <?=$item['PRICE']?></div>
+                            <div>Production date: <?=$item['PROD_YEAR']?></div>
+                            <div>Production country: <?=$item['PROD_COUNTRY']?></div>
+                            <?php
+                            foreach ($item['params'] as $k => $v){
+                                echo "<div>".$v['name'].": ".$v['value']."<br>"."</div>";
+                            }
+                            ?>
+                            <input class="buy-item" type="submit" value="Buy now">
+                        </div>
                     </div>
                 <?php
                 }
