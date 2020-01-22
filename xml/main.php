@@ -112,6 +112,13 @@ function data($parser, $data)
                         <div class="item-name"><?=$item['NAME']?></div>
                         <img src="<?=$path.$item['IMAGE']?>" alt="img">
                         <div class="description">
+                            <div class="wrapper">
+                                <img  src="../images/star.svg" alt="star">
+                                <img  src="../images/star.svg" alt="star">
+                                <img  src="../images/star.svg" alt="star">
+                                <img  src="../images/star.svg" alt="star">
+                                <img  src="../images/star.svg" alt="star">
+                            </div>
                             <div>Serial number: <?=$item['ID']?></div>
                             <div>Price: <?=$item['PRICE']?></div>
                             <div>Production date: <?=$item['PROD_YEAR']?></div>

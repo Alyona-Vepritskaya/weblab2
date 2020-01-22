@@ -69,6 +69,12 @@
                     XML
                 </a>
             </div>
+            <div class="item">
+                <a href="../single_xml/index.php">
+                    <img src="../images/more.png" alt=">">
+                    Single_XML
+                </a>
+            </div>
             <div class="bottom-img">
                 <img src="../images/left-frame3.png" alt="">
             </div>
