@@ -43,6 +43,7 @@ function start($parser, $name, $attribs)
     switch ($name) {
         case "ITEM":
             $item = array();
+            $item['ID'] = $attribs["S_NUM"];
             break;
         case "ITEMS":
             $items = array();
@@ -61,7 +62,7 @@ function stop($parser, $element_name)
 {
 
     global $item, $items, $currentData, $itemsType, $products,$item_p;
-    if ($element_name != "ITEM" && $element_name != "SOME_PARAM" && $element_name != "PRODUCTS" && $element_name != "ITEMS") {
+    if ($element_name != "ITEM" && $element_name != "SOME_PARAM" && $element_name != "PRODUCTS" && $element_name != "ITEMS" && $element_name != "ID") {
         $item[$element_name] = $currentData;
     }
     if ($element_name == "ITEM") {
