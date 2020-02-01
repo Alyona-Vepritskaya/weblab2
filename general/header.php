@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="../general/style.css">
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono&display=swap" rel="stylesheet">
@@ -70,9 +71,9 @@
                 </a>
             </div>
             <div class="item">
-                <a href="../single_xml/index.php">
+                <a href="../xml2/index.php">
                     <img src="../images/more.png" alt=">">
-                    Single_XML
+                    XML_2
                 </a>
             </div>
             <div class="bottom-img">
