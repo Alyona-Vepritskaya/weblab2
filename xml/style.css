@@ -90,9 +90,11 @@
     right: 0;
 }
 
-
-.buy-item:hover,
 .buy-item:focus {
+    outline: none;
+}
+
+.buy-item:hover {
     transition: all ease 0.5s;
     background: linear-gradient(360deg, #95DBFE, #5AA9FB);
     color: #0000AE;
