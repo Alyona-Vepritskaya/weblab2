@@ -12,7 +12,7 @@ document.getElementById('email').addEventListener('change', function () {
     incorrectValue(email, 0, '#email', !emailIsValid(email));
 });
 document.getElementById('login').addEventListener('change', function () {
-    login = document.querySelector('#login').value;
+    login = document.querySelector('#login').value.trim();
     incorrectValue(login, 0, '#login');
 });
 
