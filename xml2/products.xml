@@ -43,14 +43,14 @@
             <prod_country>USA</prod_country>
             <image>Computer3.png</image>
             <params>
-                <param>
+               <!-- <param>
                     <param_name>Rom</param_name>
                     <param_value><![CDATA[16]]></param_value>
                 </param>
                 <param>
                     <param_name>Ram</param_name>
                     <param_value><![CDATA[8]]></param_value>
-                </param>
+                </param>-->
             </params>
         </item>
         <item s_num="G689GYH6">
