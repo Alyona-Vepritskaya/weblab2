@@ -1,14 +1,14 @@
 let psw1 = "", psw2 = "", email = "", login = "";
 document.querySelector('#psw1').addEventListener('change', function () {
-    psw1 = document.querySelector('#psw1').value;
+    psw1 = document.querySelector('#psw1').value.trim();
     incorrectValue(psw1, 4, '#psw1');
 });
 document.querySelector('#psw2').addEventListener('change', function () {
-    psw2 = document.querySelector('#psw2').value;
+    psw2 = document.querySelector('#psw2').value.trim();
     incorrectValue(psw2, 4, '#psw2');
 });
 document.getElementById('email').addEventListener('change', function () {
-    email = document.getElementById('email').value;
+    email = document.getElementById('email').value.trim();
     incorrectValue(email, 0, '#email', !emailIsValid(email));
 });
 document.getElementById('login').addEventListener('change', function () {
