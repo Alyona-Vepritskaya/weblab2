@@ -120,10 +120,6 @@ function data($parser, $data)
                 foreach ($items as $key => $item)
                 { ?>
                     <div class="product">
-                        <?php
-                        if(strpos($item['ID'],'AE') > 0 || strpos($item['ID'],'AE') === 0){
-                          echo  '<div class="sales">Sale</div>';
-                       } ?>
                         <div class="item-name"><?=$item['NAME']?></div>
                         <img src="<?=$path.$item['IMAGE']?>" alt="img">
                         <div class="description">
@@ -132,7 +128,7 @@ function data($parser, $data)
                             <div>Production date: <?=$item['PROD_YEAR']?></div>
                             <div>Production country: <?=$item['PROD_COUNTRY']?></div>
                             <div class="details" s_num="<?=$item['ID']?>">
-                                <input  class="buy-item more" type="submit" value="More">
+                                <input name="More"  class="buy-item more" type="submit" value="More">
                             </div>
                         </div>
                     </div>
@@ -144,8 +140,3 @@ function data($parser, $data)
     </div>
     <script src="more.js" type="text/javascript"></script>
 </div>
-    <!--  --><?php
-/*                            foreach ($item['PARAMS'] as $k => $v){
-                                echo "<div>".$v['name'].": ".$v['value']."<br>"."</div>";
-                            }
-                            */?>

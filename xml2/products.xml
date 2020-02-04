@@ -126,6 +126,14 @@
             <prod_country>UK</prod_country>
             <image>iph11max.jpg</image>
             <params>
+                <param>
+                    <param_name>Brand</param_name>
+                    <param_value><![CDATA[QWERTY]]></param_value>
+                </param>
+                <param>
+                    <param_name>Ram</param_name>
+                    <param_value><![CDATA[8]]></param_value>
+                </param>
             </params>
         </item>
         <item s_num="AE56TF7Y">

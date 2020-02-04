@@ -102,6 +102,11 @@
     color: #0000AE;
 }
 
+.buy-item:disabled{
+    background: linear-gradient(360deg, slategrey, #6979a0);
+    color: white;
+}
+
 .sales {
     width: 70px;
     position: absolute;
@@ -129,6 +134,40 @@
     height: 25px;
 }
 
-.details span{
-    color:#95DBFE;
+.close{
+    color: white;
+    width: 30px;
+    height: 20px;
+    background: #0000AE;
+    border: 0;
+    border-radius: 5px;
+    font: inherit;
+}
+
+.details span {
+    border-radius: 10px;
+    border: blue 2px solid;
+    color: navy;
+    position: absolute;
+    bottom: 60px;
+    width: 200px;
+    text-align: center;
+    padding: 5px;
+    background: #95DBFE;
+}
+
+.details span div{
+    padding: 3px;
+}
+
+.details span:after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -8px;
+    width: 0; height: 0;
+    border-top: 8px solid #95DBFE;
+    border-right: 8px solid transparent;
+    border-left: 8px solid transparent;
 }

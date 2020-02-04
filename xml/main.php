@@ -106,20 +106,9 @@ function data($parser, $data)
                 foreach ($items as $key => $item)
                 { ?>
                     <div class="product">
-                        <?php
-                        if(strpos($item['ID'],'AE') > 0 || strpos($item['ID'],'AE') === 0){
-                          echo  '<div class="sales">Sale</div>';
-                       } ?>
                         <div class="item-name"><?=$item['NAME']?></div>
                         <img src="<?=$path.$item['IMAGE']?>" alt="img">
                         <div class="description">
-                            <div class="wrapper">
-                                <img  src="../images/star.svg" alt="star">
-                                <img  src="../images/star.svg" alt="star">
-                                <img  src="../images/star.svg" alt="star">
-                                <img  src="../images/star.svg" alt="star">
-                                <img  src="../images/star.svg" alt="star">
-                            </div>
                             <div>Serial number: <?=$item['ID']?></div>
                             <div>Price: <?=$item['PRICE']?></div>
                             <div>Production date: <?=$item['PROD_YEAR']?></div>
