@@ -12,7 +12,7 @@
         <!ELEMENT prod_year (#PCDATA)>
         <!ELEMENT prod_country (#PCDATA)>
         <!ELEMENT image (#PCDATA)>
-        <!ELEMENT params (param*)>
+        <!ELEMENT params (param+)>
         <!ELEMENT param (param_name,param_value)>
         <!ELEMENT param_name (#PCDATA)>
         <!ELEMENT param_value (#PCDATA)>

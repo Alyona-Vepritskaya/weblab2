@@ -1,0 +1,17 @@
+#pain {
+    color: #a41a81;
+    text-align: center;
+}
+.block input[type="checkbox"]{
+     display: inline-block;
+ }
+
+.block input[type="button"]{
+    background: #6979a0;
+    width: 124px;
+}
+
+.incorrect-input{
+    border: 1px solid mediumvioletred;
+}
+
