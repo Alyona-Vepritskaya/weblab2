@@ -12,10 +12,10 @@
     <div class="text-content  clearfix">
         <div class="form">
             <form action="" class="qwerty" >
-                <div id="pain"></div>
                 <div class="block">
                     Login:
                     <input id="login" type="text">
+                    <div class="error"> </div>
                 </div>
                 <div class="block">
                     Password:
@@ -23,10 +23,12 @@
                            placeholder="input password">
                     <input id="psw2" type="password"
                            placeholder="repeat password">
+                    <div class="error"> </div>
                 </div>
                 <div class="block">
                     Email:
                     <input id="email" type="text">
+                    <div class="error"> </div>
                 </div>
                 <div class="block">
                     Choose your interests
@@ -43,7 +45,7 @@
                     <div><input type="checkbox" name="irritate" value="irritate">Irritate people</div>
                     <div><input type="checkbox" name="working" value="working">Working</div>
                     <input class="submit" type="button" value="Select all" id="all">
-                    <input class="submit" type="button" value="Invert all" id="invert">
+                    <input class="submit" type="button" value="Invert all" id="inv">
                     <input class="submit" type="button" value="Remove selection" id="no">
                 </div>
                 <div class="block">

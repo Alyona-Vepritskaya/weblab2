@@ -1,95 +1,86 @@
-$(function () {
-    $('#all').click(() => {
-        $("input[type=checkbox]").prop('checked', true);
+$(document).ready(
+    function () {
+        $('#all').click(function () {
+            $("input[type=checkbox]").prop('checked', true);
 
-    });
-    $('#no').click(() => {
-        $("input[type=checkbox]").prop('checked', false);
-    });
-    $('#invert').click(() => {
-        $("input[type=checkbox]").each(() => {
-            ($(this).prop('checked')) ? $(this).prop('checked', false) : $(this).prop('checked', true);
         });
-    });
-    $("form").submit(function (event) {
-            const login = $('#login').val().trim();
-            const psw1 = $('#psw1').val().trim();
-            const psw2 = $('#psw2').val().trim();
-            const email = $('#email').val();
-            if (!(isIncorrect(psw1, 4) && isIncorrect(psw2, 4) &&
-                isIncorrect(login, 0) && emailIsValid(email))) {
-                incorrectValue(login,0,'#login');
-                incorrectValue(psw1,4,'#psw1');
-                incorrectValue(psw2,4,'#psw2');
-                incorrectValue(email,4,'#email');
-                event.preventDefault();
-            } else {
-                if (psw1 !== psw2) {
+        $('#no').click(function () {
+            $("input[type=checkbox]").prop('checked', false);
+        });
+        $('#inv').click(function () {
+            $("input[type=checkbox]").each(function () {
+                ($(this).prop('checked')) ? $(this).prop('checked', false) : $(this).prop('checked', true);
+            });
+        });
+        $("form").submit(function (event) {
+                const login = $('#login').val().trim();
+                const psw1 = $('#psw1').val().trim();
+                const psw2 = $('#psw2').val().trim();
+                const email = $('#email').val();
+                if (!(isIncorrect(psw1, 4) && isIncorrect(psw2, 4) &&
+                    isIncorrect(login, 0) && emailIsValid(email))) {
+                    incorrectValue(login, 0, '#login');
+                    incorrectValue(psw1, 4, '#psw1');
+                    incorrectValue(psw2, 4, '#psw2');
+                    incorrectValue(email, 4, '#email');
                     event.preventDefault();
+                } else {
+                    if (psw1 !== psw2) {
+                        $('#psw2').next().text('Passwords don\'t match !!!');
+                        $('#psw2').addClass('incorrect-input');
+                        $('#psw1').addClass('incorrect-input');
+                        event.preventDefault();
+                    }
                 }
             }
+        );
+        $('#login').change(function () {
+            const login = $('#login').val().trim();
+            incorrectValue(login, 4, '#login');
+        });
+        $('#psw1').change(function () {
+            const login = $('#psw1').val().trim();
+            incorrectValue(login, 4, '#psw1');
+        });
+        $('#psw2').change(function () {
+            const login = $('#psw2').val().trim();
+            incorrectValue(login, 4, '#psw2');
+        });
+        $('#email').change(function () {
+            const login = $('#email').val().trim();
+            incorrectValue(login, 4, '#email');
+        });
+
+    });
+
+function incorrectValue(value, originValue, formId, emailValue = false) {
+    if ((value.length <= originValue) || emailValue) {
+        $(formId).addClass('incorrect-input');
+        switch (formId) {
+            case '#login':
+                $(formId).next().text('Login must have at least 3 character');
+                break;
+            case '#email':
+                $(formId).next().text('Incorrect email format');
+                break;
+            case '#psw2':
+            case 'psw1':
+                $(formId).next().text('Password must have at least 3 character');
+                break;
+            default:
+                break;
         }
-    );
-    function incorrectValue(value, originValue, formId, emailValue = false) {
-        ((value.length <= originValue) || emailValue) ?
-            $(formId).addClass('incorrect-input') :
-            $(formId).removeClass('incorrect-input');
+    } else {
+        $(formId).removeClass('incorrect-input');
+        $(formId).next().text('');
     }
-    function emailIsValid(email) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
-    function isIncorrect(value, originValue) {
-        return value.length > originValue;
-    }
-});
 
-
-/*let psw1 = "", psw2 = "", email = "", login = "";
-document.querySelector('#psw1').addEventListener('change', function () {
-    psw1 = document.querySelector('#psw1').value.trim();
-    incorrectValue(psw1, 4, '#psw1');
-});
-document.querySelector('#psw2').addEventListener('change', function () {
-    psw2 = document.querySelector('#psw2').value.trim();
-    incorrectValue(psw2, 4, '#psw2');
-});
-document.getElementById('email').addEventListener('change', function () {
-    email = document.getElementById('email').value.trim();
-    incorrectValue(email, 0, '#email', !emailIsValid(email));
-});
-document.getElementById('login').addEventListener('change', function () {
-    login = document.querySelector('#login').value.trim();
-    incorrectValue(login, 0, '#login');
-});
+}
 
 function emailIsValid(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-function incorrectValue(value, originValue, formId, emailValue = false) {
-    ((value.length <= originValue) || emailValue) ?
-        document.querySelector(formId).classList.add('incorrect-input') :
-        document.querySelector(formId).classList.remove('incorrect-input');
-}
-
 function isIncorrect(value, originValue) {
     return value.length > originValue;
 }
-
-function submitForm() {
-    psw1 = document.querySelector('#psw1').value;
-    psw2 = document.querySelector('#psw2').value;
-    email = document.getElementById('email').value;
-    login = document.querySelector('#login').value;
-    if (!(isIncorrect(psw1, 4) && isIncorrect(psw2, 4) &&
-        isIncorrect(login, 0) && emailIsValid(email))) {
-        document.getElementById('pain').innerText = 'Запони форму правильно!!!';
-        return false;
-    } else {
-        if (psw1 !== psw2) {
-            document.getElementById('pain').innerText = 'Пароли не совпадают!!!';
-            return false;
-        }
-        return true;
-    }
-}*/
