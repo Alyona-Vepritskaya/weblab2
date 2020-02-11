@@ -2,7 +2,7 @@
     color: #a41a81;
     text-align: center;
     font-size: 10px;
-    margin: 3px 0 0 0;
+    margin-top: 4px;
 }
 
 .block input[type="checkbox"] {
@@ -13,8 +13,15 @@
     background: #6979a0;
     width: 124px;
 }
-
+input::placeholder {
+    color: navy;
+}
 .incorrect-input {
     border: 1px solid mediumvioletred;
+    background: hotpink;
+}
+
+#all{
+    margin-top: 8px;
 }
 
