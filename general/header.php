@@ -82,6 +82,12 @@
                     jquery form
                 </a>
             </div>
+            <div class="item">
+                <a href="../carusel_jquery/index.php">
+                    <img src="../images/more.png" alt=">">
+                    jCarousel
+                </a>
+            </div>
             <div class="bottom-img">
                 <img src="../images/left-frame3.png" alt="">
             </div>
