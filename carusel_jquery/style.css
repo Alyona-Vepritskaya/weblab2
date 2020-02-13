@@ -1,5 +1,5 @@
 .wrapper {
-    width: 90%;
+    width: 88%;
     margin: 30px auto;
     text-align: center;
 }
@@ -27,7 +27,7 @@ Position must be relative!
 }
 
 .jcarousel ul {
-    width: 400%; /* 100% * img count */
+    width: 600%; /* 100% * img count */
     position: relative;
     margin: 0;
     padding: 0;
@@ -37,7 +37,6 @@ Position must be relative!
 .jcarousel li {
     /* Required only for block elements like <li>'s */
     float: left;
-    width: 0;
     height: 100%;
 }
 
@@ -45,9 +44,6 @@ Position must be relative!
     width: 100%;
 }
 
-/**
- *  pagination
- */
 .jcarousel-pagination {
     width: 100%;
     position: absolute;
@@ -68,7 +64,7 @@ Position must be relative!
     background: #000;
 }
 
-/* Control*/
+/* Arrows */
 .jc-left, .jc-right {
     margin: 5px;
     border-radius: 80%;

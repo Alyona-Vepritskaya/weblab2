@@ -1,37 +1,38 @@
-/**
- *  Set up jcarousel
- */
 $(document).ready(
     function () {
-    /**
-     * animateend - Triggered after the carousel has finished a animation.
-     */
-    $('.jcarousel').jcarousel().on('jcarousel:animateend', function (event, carousel) {
-        var id = $(carousel._visible['0']).index();
-        $('.jp-item').removeClass('active');
-        $('.jp-item').eq(id).addClass('active');
-    });
-});
 
-$(document).ready(function () {
-    // set width of item
-    $('.jcarousel li').width($('.jcarousel').width());
+        const jCarousel = '.jcarousel';
+        const jItem = '.jp-item';
 
-    // move slider
-    $('body').on('click', '.jc-right', function (e) {
-        e.preventDefault();
-        $('.jcarousel').jcarousel('scroll', '+=1');
-    });
+        // set width of item
+        const wrapperWidth = $(jCarousel).width();
+        $('.jcarousel li').width(wrapperWidth);
 
-    $('body').on('click', '.jc-left', function () {
-        event.preventDefault();
-        $('.jcarousel').jcarousel('scroll', '-=1');
-    });
+        // move slider ->
+        $('.jc-right').click(function () {
+            //+=offset
+            // Scrolls the carousel forward by the given offset relatively from the current position.
+            $(jCarousel).jcarousel('scroll', '+=1');
+        });
 
-    $('body').on('click', '.jp-item', function () {
-        event.preventDefault();
-        var id = $(this).index();
-        $('.jcarousel').jcarousel('scroll', id);
-    });
+        // move slider <-
+        $('.jc-left').click(function () {
+            $(jCarousel).jcarousel('scroll', '-=1');
+        });
 
-});
+        $('.jp-item').click(function () {
+            let id = $(this).index();
+            $(jCarousel).jcarousel('scroll', id);
+        });
+
+        $(jCarousel).jcarousel().on('jcarousel:animateend', function (event, carousel) {
+            // "this" refers to the root element
+            // "carousel" is the jCarousel instance
+            // visible() - Returns all visible items as jQuery object
+            let id_visible = $(carousel.visible()).index();
+            $(jItem).removeClass('active');
+            $(jItem).eq(id_visible).addClass('active');
+        });
+    }
+);
+

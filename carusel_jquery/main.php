@@ -17,20 +17,23 @@
                     <li><img src="https://images.unsplash.com/photo-1541623089466-8e777dd05d70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt=""/></li>
                     <li><img src="https://images.unsplash.com/photo-1541442510208-33bf9a34886f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" alt=""/></li>
                     <li><img src="https://images.unsplash.com/photo-1541169477997-6ed649539ec4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" alt=""/></li>
+                    <li><img src="https://images.unsplash.com/photo-1433087639215-37846ea63501?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" alt=""/></li>
+                    <li><img src="https://images.unsplash.com/photo-1552575358-c91311522b16?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" alt=""/></li>
                 </ul>
                 <p class="jcarousel-pagination">
-                    <a class="jp-item active" href=""></a>
-                    <a class="jp-item" href=""></a>
-                    <a class="jp-item" href=""></a>
-                    <a class="jp-item" href=""></a>
+                    <a class="jp-item active" href="#"></a>
+                    <a class="jp-item" href="#"></a>
+                    <a class="jp-item" href="#"></a>
+                    <a class="jp-item" href="#"></a>
+                    <a class="jp-item" href="#"></a>
+                    <a class="jp-item" href="#"></a>
                 </p>
-                <!--   <p class="jcarousel-control"> -->
-                <a href="" class="jc-left">
+                <span class="jc-left">
                     <img src="../images/iconmonstr-arrow-left-circle-thin.svg" alt="">
-                </a>
-                <a href="" class="jc-right">
+                </span>
+                <span class="jc-right">
                     <img src="../images/iconmonstr-arrow-right-circle-thin.svg" alt="">
-                </a>
+                </span>
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
