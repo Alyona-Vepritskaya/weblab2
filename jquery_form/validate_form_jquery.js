@@ -22,6 +22,8 @@ $(document).ready(
                     incorrectValue(psw1, 4, '#psw1');
                     incorrectValue(psw2, 4, '#psw2');
                     incorrectValue(email, 4, '#email', !emailIsValid(email));
+                    $('#psw2').val('');
+                    $('#psw1').val('');
                     event.preventDefault();
                 } else {
                     if (psw1 != psw2) {
