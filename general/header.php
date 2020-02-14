@@ -41,6 +41,12 @@
                 </a>
             </div>
             <div class="item">
+                <a href="../jquery_form/index.php">
+                    <img src="../images/more.png" alt=">">
+                    Регистрация jquery
+                </a>
+            </div>
+            <div class="item">
                 <a href="../redirect_page/index.php">
                     <img src="../images/more.png" alt=">">
                     Редирект
@@ -73,13 +79,13 @@
             <div class="item">
                 <a href="../xml2/index.php">
                     <img src="../images/more.png" alt=">">
-                    XML_2
+                    XML_2_ajax
                 </a>
             </div>
             <div class="item">
-                <a href="../jquery_form/index.php">
+                <a href="../xml_jquery/index.php">
                     <img src="../images/more.png" alt=">">
-                    jquery form
+                    XML_3_ajax_jQuery
                 </a>
             </div>
             <div class="item">

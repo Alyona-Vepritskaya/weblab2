@@ -3,51 +3,26 @@ $(document).ready(
         $('.more').each(function () {
             $(this).click(function () {
                 const id = $(this).parent().attr('s_num');
+                const windowW = $(this).parent().children('span');
                 $.ajax({
                     dataType: 'json',
-                    url: 'getMoreInfo.php?item='+id,
+                    url: 'getMoreInfo.php?item=' + id,
                     success: function (jsondata) {
-
-                        const obj = jsondata;
-                        console.log(obj)
+                        let details = '';
+                        for (let i = 0; i < jsondata.length; i++) {
+                            details += '<div>' + jsondata[i]['name'] + ': ' + jsondata[i]['value'] + '</div>';
+                        }
+                        windowW.append(details);
+                        windowW.slideDown();
                     }
                 });
             })
         });
+        $('.close').each(function () {
+            $(this).click(function () {
+                $(this).parent().slideUp();
+                $(this).parent().children('div').remove()
+            })
+        })
     }
 );
-
-
-/*document.querySelectorAll('.more').forEach(function (item) {
-    item.addEventListener('click', function (event) {
-        if (event.target.name == 'More') {
-            let el = document.createElement('span');
-            const xmlhttp = new XMLHttpRequest();
-            if (xmlhttp != undefined) {
-                xmlhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        const obj = JSON.parse(this.responseText);
-                        el.innerHTML = obj.map(function (item) {
-                            return '<div>' + item['name'] + ': ' + item['value'] + '</div>';
-                        });
-                        el.innerHTML = el.innerHTML.replace(/\,/g, '');
-                        el.innerHTML += '<input type="button" name="close" value="X" class="close" onclick="closePlease(this)">';
-                        event.target.parentNode.appendChild(el);
-                    }
-                };
-            }
-            xmlhttp.open("GET", "getMoreInfo.php?item=" + event.target.parentNode.attributes.getNamedItem('s_num').value, true);
-            xmlhttp.send();
-            item.disabled = true;
-        }
-    })
-});
-
-function closePlease(element) {
-    element.parentElement.parentElement.childNodes.forEach(it => {
-        if (it.classList != undefined && it.classList.contains('buy-item')) {
-            it.disabled = false;
-        }
-    });
-    element.parentNode.style.display = 'none';
-}*/

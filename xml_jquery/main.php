@@ -128,6 +128,9 @@ function data($parser, $data)
                             <div>Production date: <?=$item['PROD_YEAR']?></div>
                             <div>Production country: <?=$item['PROD_COUNTRY']?></div>
                             <div class="details" s_num="<?=$item['ID']?>">
+                                <span class="detail">
+                                    <input type="button" name="close" value="X" class="close">
+                                </span>
                                 <input name="More"  class="buy-item more" type="submit" value="More">
                             </div>
                         </div>
