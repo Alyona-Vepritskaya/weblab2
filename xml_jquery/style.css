@@ -86,10 +86,14 @@
     right: 0;
 }
 
-.buy-item:focus {
+.buy-item:focus,
+.close:focus {
     outline: none;
 }
 
+.close:hover {
+    background:#000000;
+}
 
 .buy-item:hover {
     transition: all ease 0.5s;

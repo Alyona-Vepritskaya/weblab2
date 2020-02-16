@@ -6,12 +6,11 @@ document.querySelectorAll('.more').forEach(function (item) {
             if (xmlhttp != undefined) {
                 xmlhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
-                        const obj = JSON.parse(this.responseText);
-                        el.innerHTML = obj.map(function (item) {
-                            return '<div>' + item['name'] + ': ' + item['value'] + '</div>';
-                        });
-                        el.innerHTML = el.innerHTML.replace(/\,/g, '');
-                        el.innerHTML += '<input type="button" name="close" value="X" class="close" onclick="closePlease(this)">';
+                        const jsonData = JSON.parse(this.responseText);
+                        for (let i = 0; i < jsonData.length; i++) {
+                            el.innerHTML += '<div>' + jsonData[i]['name'] + ': ' + jsonData[i]['value'] + '</div>';
+                        }
+                        el.innerHTML += '<input type="button" value="X" class="close" onclick="closePlease(this)">';
                         event.target.parentNode.appendChild(el);
                     }
                 };
