@@ -33,7 +33,8 @@
                 <div class="block">
                     Choose your interests
                 </div>
-                <div class="block">
+
+                <div class="block qwerty">
                     <div><input type="checkbox" name="do_nothing" value="do_nothing">Doing nothing</div>
                     <div><input type="checkbox" name="drinking" value="drinking">Drinking</div>
                     <div><input type="checkbox" name="t_travel" value="t_travel">Time traveling</div>

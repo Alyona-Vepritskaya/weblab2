@@ -1,13 +1,12 @@
-$(document).ready(
-    function () {
+$(document).ready(function () {
         $('#all').click(function () {
-            $("input[type=checkbox]").prop('checked', true)
+            $(".qwerty input[type=checkbox]").prop('checked', true)
         });
         $('#no').click(function () {
-            $("input[type=checkbox]").prop('checked', false);
+            $(".qwerty input[type=checkbox]").prop('checked', false);
         });
         $('#inv').click(function () {
-            $("input[type=checkbox]").each(function () {
+            $(".qwerty input[type=checkbox]").each(function () {
                 ($(this).prop('checked')) ? $(this).prop('checked', false) : $(this).prop('checked', true);
             });
         });
@@ -22,16 +21,12 @@ $(document).ready(
                     incorrectValue(psw1, 4, '#psw1');
                     incorrectValue(psw2, 4, '#psw2');
                     incorrectValue(email, 4, '#email', !emailIsValid(email));
-                    $('#psw2').val('');
-                    $('#psw1').val('');
                     event.preventDefault();
                 } else {
                     if (psw1 != psw2) {
                         $('#psw2').next().text('Passwords don\'t match !!!');
                         $('#psw2').addClass('incorrect-input');
                         $('#psw1').addClass('incorrect-input');
-                        $('#psw2').val('');
-                        $('#psw1').val('');
                         event.preventDefault();
                     }
                 }

@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono&display=swap" rel="stylesheet">
     <title>Web_lab2</title>
+    <script>var jsHost = 'http://localhost/xml_jquery/';</script>
 </head>
 <header class="head">
     <div class="logo">

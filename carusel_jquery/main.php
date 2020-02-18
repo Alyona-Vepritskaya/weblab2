@@ -13,12 +13,12 @@
         <div class="wrapper">
             <div class="jcarousel">
                 <ul>
-                    <li><img src="https://images.unsplash.com/photo-1552575358-c91311522b16?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" alt=""/></li>
-                    <li><img src="https://images.unsplash.com/photo-1501675423372-9bfa95849e62?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" alt=""/></li>
-                    <li><img src="https://images.unsplash.com/photo-1473654729523-203e25dfda10?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" alt=""/></li>
-                    <li><img src="https://images.unsplash.com/photo-1543227058-a915b154e9bd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2036&q=80" alt=""/></li>
-                    <li><img src="https://images.unsplash.com/photo-1456440286046-98764af9fd1b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" alt=""/></li>
-                    <li><img src="https://images.unsplash.com/photo-1519832064761-bbc1d76d4ef8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1934&q=80" alt=""/></li>
+                    <li><img src="../images/photo-1552575358-c91311522b16.jfif" alt=""/></li>
+                    <li><img src="../images/photo-1473654729523-203e25dfda10.jfif" alt=""/></li>
+                    <li><img src="../images/photo-1501675423372-9bfa95849e62.jfif" alt=""/></li>
+                    <li><img src="../images/photo-1543227058-a915b154e9bd.jfif" alt=""/></li>
+                    <li><img src="../images/photo-1456440286046-98764af9fd1b.jfif" alt=""/></li>
+                    <li><img src="../images/photo-1519832064761-bbc1d76d4ef8.jfif" alt=""/></li>
                 </ul>
                 <p class="jcarousel-pagination">
                     <a class="jp-item active" href="#"></a>

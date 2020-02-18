@@ -4,6 +4,14 @@ $(document).ready(
         const jCarousel = '.jcarousel';
         const jItem = '.jp-item';
 
+        $(jCarousel).jcarousel().on('jcarousel:animateend', function (event, carousel) {
+            // "this" refers to the root element
+            // "carousel" is the jCarousel instance
+            // visible() - Returns all visible items as jQuery object
+            let id_visible = $(carousel.visible()).index();
+            $(jItem).removeClass('active');
+            $(jItem).eq(id_visible).addClass('active');
+        });
         // set width of item
         const wrapperWidth = $(jCarousel).width();
         $('.jcarousel li').width(wrapperWidth);
@@ -25,14 +33,7 @@ $(document).ready(
             $(jCarousel).jcarousel('scroll', id);
         });
 
-        $(jCarousel).jcarousel().on('jcarousel:animateend', function (event, carousel) {
-            // "this" refers to the root element
-            // "carousel" is the jCarousel instance
-            // visible() - Returns all visible items as jQuery object
-            let id_visible = $(carousel.visible()).index();
-            $(jItem).removeClass('active');
-            $(jItem).eq(id_visible).addClass('active');
-        });
+
     }
 );
 
