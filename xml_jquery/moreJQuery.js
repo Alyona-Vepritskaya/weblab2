@@ -12,7 +12,6 @@ function getPar(id, callback) {
         }
     });
 }
-
 $(document).ready(
     function () {
         $('.more').click(function () {

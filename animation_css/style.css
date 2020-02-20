@@ -1,0 +1,40 @@
+.item {
+    width: 156px;
+   /* position: absolute;*/
+   /* z-index: -1;*/
+    top: 0;
+   /* background: linear-gradient(#b2c1e4, #6979a0);*/
+    border: 1px solid #474747;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #6979a0;
+    font-size: 11px;
+    padding: 1px 10px 2px 20px;
+}
+.item/*:nth-child(9) */{
+    visibility: hidden;
+    width: 156px;
+    /* position: absolute;*/
+    /* z-index: -1;*/
+    top: 0;
+    /* background: linear-gradient(#b2c1e4, #6979a0);*/
+    border: 1px solid #474747;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #6979a0;
+    font-size: 11px;
+    padding: 1px 10px 2px 20px;
+    background-color: red;
+    position: relative;
+    animation-name: example;
+    animation-delay: 1s;
+    animation-duration: 5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    /*animation: bubble 1.0s forwards;*/
+}
+@keyframes example {
+    0%   {background-color:red; left:0px; top:-330px; visibility: visible;}
+    100% {background-color:red; left:0px; top:0px;visibility: visible;}
+}
+.over {
+    overflow: hidden;
+}

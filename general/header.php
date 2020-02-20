@@ -56,7 +56,13 @@
             <div class="item">
                 <a href="../animation/index.php">
                     <img src="../images/more.png" alt=">">
-                    Анимация
+                    Анимация js
+                </a>
+            </div>
+            <div class="item">
+                <a href="../animation_css/index.php">
+                    <img src="../images/more.png" alt=">">
+                    Анимация css
                 </a>
             </div>
             <div class="item">
