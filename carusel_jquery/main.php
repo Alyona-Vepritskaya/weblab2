@@ -2,7 +2,7 @@
     <div class="news-info">
         <a href="">
             <div class="news">
-                Регистрация
+                Carousel
             </div>
         </a>
         <div class="date">
