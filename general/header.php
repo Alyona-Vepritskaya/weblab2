@@ -42,7 +42,7 @@
                 </a>
             </div>
             <div class="item">
-                <a href="../jquery_form/index.php">
+                <a href="../form_on_jquery/index.php">
                     <img src="../images/more.png" alt=">">
                     Регистрация jquery
                 </a>
