@@ -1,6 +1,5 @@
 .item {
   visibility: hidden;
-  width: 156px;
   border: 1px solid #474747;
   border-top: 1px solid #fff;
   border-bottom: 1px solid #6979a0;
@@ -16,7 +15,7 @@
 @keyframes omg {
   0% {
     left: 0;
-    top: -330px;
+    top: -360px;
     visibility: visible;
   }
   100% {
@@ -30,8 +29,8 @@
   overflow: hidden;
 }
 
-$d: 14;
-@for $i from 1 to 13 {
+$d: 15;
+@for $i from 1 to 15 {
   .item:nth-child(#{$i}) {
     animation-delay: $d * 0.25s;
   }

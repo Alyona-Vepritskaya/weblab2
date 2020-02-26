@@ -48,6 +48,12 @@
                 </a>
             </div>
             <div class="item">
+                <a href="../form_on_html5/index.php">
+                    <img src="../images/more.png" alt=">">
+                    Регистрация HTML5
+                </a>
+            </div>
+            <div class="item">
                 <a href="../redirect_page/index.php">
                     <img src="../images/more.png" alt=">">
                     Редирект
@@ -99,6 +105,12 @@
                 <a href="../carusel_jquery/index.php">
                     <img src="../images/more.png" alt=">">
                     jCarousel
+                </a>
+            </div>
+            <div class="item">
+                <a href="../table/index.php">
+                    <img src="../images/more.png" alt=">">
+                    Table
                 </a>
             </div>
             <div class="bottom-img">

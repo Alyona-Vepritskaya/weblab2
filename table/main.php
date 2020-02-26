@@ -11,8 +11,8 @@
     </div>
     <div class="text-content  clearfix">
         <div class="text">
-            Таблица
-            <table class="text">
+          <h2> Таблица 1. </h2>
+            <table>
                 <tr>
                     <th>Имя</th>
                     <th>Фамилия</th>
