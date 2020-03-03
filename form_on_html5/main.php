@@ -1,4 +1,5 @@
 <div class="right-col">
+    <script src="validate_form.js"></script>
     <div class="news-info">
         <a href="">
             <div class="news">
@@ -11,11 +12,11 @@
     </div>
     <div class="text-content  clearfix">
         <div class="form" >
-            <form action="" class="qwerty" onsubmit="return submitForm()" >
+            <form action="" class="qwerty" onsubmit="return submitForm()" method="post">
                 <div id="pain"></div>
                 <div class="block">
                     Логин:
-                    <input id="login" type="text" required pattern=".*[^ ].*">
+                    <input id="login" type="text" required pattern="[^ ]">
                 </div>
                 <div class="block">
                     Пароль:

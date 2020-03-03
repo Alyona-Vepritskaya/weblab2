@@ -11,7 +11,7 @@
     </div>
     <div class="text-content  clearfix">
         <div class="form">
-            <form action="" class="qwerty" >
+            <form action="" class="qwerty"method="post">
                 <div class="block">
                     Login:
                     <input id="login" type="text">

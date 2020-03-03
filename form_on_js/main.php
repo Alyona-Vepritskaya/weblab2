@@ -11,7 +11,7 @@
     </div>
     <div class="text-content  clearfix">
         <div class="form" >
-            <form action="" class="qwerty" onsubmit="return submitForm()">
+            <form action="" class="qwerty" onsubmit="return submitForm()" method="post">
                 <div id="pain"></div>
                 <div class="block">
                     Логин:

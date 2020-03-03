@@ -10,24 +10,24 @@
         </div>
     </div>
     <div class="text-content  clearfix">
-        <div class="text">
+        <div class="container">
           <h2> Таблица 1. </h2>
-            <table>
+            <table class="super_table">
                 <tr>
                     <th>Имя</th>
                     <th>Фамилия</th>
                     <th>Отчество</th>
                     <th>Возраст</th>
                     <th>Пол</th>
-                    <th>Долг $</th>
+                    <th>Долг</th>
                 </tr>
                 <tr>
-                    <td>Александр</td>
-                    <td>Годунов</td>
-                    <td>Сергеевич</td>
+                    <td>Алексей</td>
+                    <td>Веном</td>
+                    <td>Валерьевич</td>
                     <td>40</td>
-                    <td>Мужчина</td>
-                    <td>10000.00</td>
+                    <td>Не указано</td>
+                    <td>1000.00</td>
                 </tr>
                 <tr>
                     <td>Гоша</td>
