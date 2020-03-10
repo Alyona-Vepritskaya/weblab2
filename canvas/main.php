@@ -2,7 +2,7 @@
     <div class="news-info">
         <a href="">
             <div class="news">
-                Редирект
+                Canvas
             </div>
         </a>
         <div class="date">
@@ -11,16 +11,11 @@
     </div>
     <div class="text-content  clearfix">
         <div class="text contain">
-            <div class="item-name">  Enter the values seperated by a comma </div>
-            <input type="text" name="number" id="num">
-            <input class="buy-item" type="button" value="Generate" name="submit" onclick="draw()">
-            <input class="buy-item" type="button" value="Clear" name="clear" onclick="reset()">
+            <input class="buy-item" type="button" value="Generate numbers" id="generate">
+            <div id="numbers"></div>
         </div>
-
     </div>
-<div class="outer">
-    <canvas id="histogram" width="500px" height="280px" class="canvas"></canvas>
-</div>
-
-
+    <div class="outer">
+        <canvas id="histogram" width="500px" height="280px" class="canvas"></canvas>
+    </div>
     <script src="canvas.js"></script>

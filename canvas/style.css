@@ -7,7 +7,7 @@
 .buy-item {
     /* width: 3rem;*/
     transition: all ease 0.5s;
-    margin: 10px auto 0;
+    margin: 15px auto 0;
     font: inherit;
     font-size: 15px;
     font-weight: bold;
@@ -46,9 +46,10 @@
 
 .outer {
     text-align: center;
-    padding: 20px;
+    padding: 10px;
 }
 
 .canvas {
     border: 1px solid #000033;
+    /*border-radius: 10px;*/
 }
