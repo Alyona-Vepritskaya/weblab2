@@ -113,6 +113,12 @@
                     Table
                 </a>
             </div>
+            <div class="item">
+                <a href="../canvas/index.php">
+                    <img src="../images/more.png" alt=">">
+                    Histogram
+                </a>
+            </div>
             <div class="bottom-img">
                 <img src="../images/left-frame3.png" alt="">
             </div>
