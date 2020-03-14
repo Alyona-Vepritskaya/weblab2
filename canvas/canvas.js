@@ -1,6 +1,19 @@
 const X_AXIS = 445; // px
 const Y_AXIS = 225; // px
 
+$(document).ready(
+    function () {
+        $.ajax({
+            dataType: 'json',
+            url: jsHost2 + 'getInfo.php',
+            success: function (jsondata) {
+                console.log(jsondata);
+                draw(jsondata);
+            }
+        });
+    }
+);
+
 const drawLine = (ctx, x1, y1, x2, y2) => {
     ctx.beginPath();
     ctx.moveTo(x1, y1);
@@ -32,7 +45,8 @@ const draw = (n) => {
     let last_shift = 0;
     for (let i = 0; i < n.length; i++) {
         let height = -(((n[i] * 100) / max) * Y_AXIS) / 100;
-        ctx.fillStyle = "#10106c";
+        let randomColor = Math.floor(Math.random()*16777215).toString(16);
+        ctx.fillStyle = `#${randomColor}`;
         ctx.fillRect(last_shift + ((x_shift / 2) - (width / 2)), bottom_line, width, height);
         drawLine(ctx, last_shift, 251, last_shift, 257); //short lines
         ctx.fillStyle = "#000";
@@ -56,4 +70,4 @@ document.getElementById('generate').addEventListener("click", () => {
     draw(n);
 });
 
-draw([1, 2, 3, 4, 5, 6, 7, 8]);
+/*draw([1, 2, 3, 4, 5, 6, 7, 8]);*/

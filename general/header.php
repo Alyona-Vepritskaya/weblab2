@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono&display=swap" rel="stylesheet">
     <title>Web_lab2</title>
     <script>var jsHost = 'http://localhost/xml_jquery/';</script>
+    <script>var jsHost2 = 'http://localhost/canvas/';</script>
 </head>
 <header class="head">
     <div class="logo">
