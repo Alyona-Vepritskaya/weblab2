@@ -24,7 +24,7 @@ const drawLine = (ctx, x1, y1, x2, y2) => {
 
 const draw = (n) => {
     document.getElementById('numbers').innerHTML = `${n}`;
-    const max = Math.max(...n);
+    const max = Math.ceil(Math.max(...n) / 100) * 100;
     //Create canvas item
     const canvas = document.getElementById('histogram');
     const ctx = canvas.getContext('2d');

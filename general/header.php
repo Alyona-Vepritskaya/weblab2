@@ -120,6 +120,12 @@
                     Histogram
                 </a>
             </div>
+            <div class="item">
+                <a href="../resizeImg/index.php">
+                    <img src="../images/more.png" alt=">">
+                    ReSize
+                </a>
+            </div>
             <div class="bottom-img">
                 <img src="../images/left-frame3.png" alt="">
             </div>

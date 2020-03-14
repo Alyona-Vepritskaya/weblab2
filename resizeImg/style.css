@@ -1,0 +1,64 @@
+.submit {
+    margin: 10px auto;
+    background: linear-gradient(#b2c1e4, #6979a0);
+    border-bottom: 1px solid #6979a0;
+    font: inherit;
+    font-size: 14px;
+    padding: 3px 5px;
+    color: #0000AE;
+    display: block;
+}
+
+/*input[type='submit'] {
+    margin: 10px 210px;
+}*/
+
+.submit:hover {
+    background: linear-gradient(#4f6fe7, #10106c);
+    color: #fff;
+}
+
+table {
+    margin: 20px auto;
+    border-collapse: collapse;
+    border: #000000 2px solid;
+}
+
+td, th {
+    border: #000000 2px solid;
+    padding: 4px 10px;
+}
+
+td a {
+    display: block;
+    text-decoration: none;
+}
+
+td:hover {
+    border: #000000 2px solid;
+    background: #b2c1e4;
+}
+
+input {
+    margin-top: 3px;
+}
+
+.qwerty {
+    width: 100%;
+    text-align: left;
+    padding: 0 60px;
+    box-sizing: border-box;
+}
+
+.labels {
+    margin-top: 3px;
+    line-height: 25px;
+    float: left;
+    width: 42%;
+}
+
+.inputs {
+    float: left;
+    width: 50%;
+    margin: 0 0 10px 0;
+}
