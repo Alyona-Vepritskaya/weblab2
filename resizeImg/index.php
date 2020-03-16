@@ -25,8 +25,8 @@ $cropHeight = filter_input_('r_height', '');
 $cropWidth = filter_input_('r_width', '');
 $loaded_file = loadFile();
 $init_size = getimagesize($loaded_file['tmp_name']);
-$init_height = $init_size[1];
-$init_width = $init_size[0];
+$height = $init_size[1];
+$width = $init_size[0];
 /*
  * 1    IMAGETYPE_GIF
  * 2	IMAGETYPE_JPEG
@@ -47,33 +47,22 @@ switch ($img_type) {
     default:
         break;
 }
-$width = $init_width;
-$height = $init_height;
-/*$kw = $cropWidth / $width;
-$kh = $cropHeight / $height;*/
+
 $k = $cropHeight / $cropWidth;
-
-/*$centreX = round($width / 2);
-$centreY = round($height / 2);
-$cropWidthHalf = round(($width * $kh - $cropWidth) / 2); // could hard-code this but I'm keeping it flexible
-$cropHeightHalf = round(($height * $kw - $cropHeight) / 2);
-
-$x1 = max(0, $centreX - $cropWidthHalf);
-$y1 = max(0, $centreY - $cropHeightHalf);*/
-
 
 if($cropHeight<$cropWidth) {
     if ($k < 1 && $k > 0.5) {
         $newCropWidth = $height * $cropWidth / $cropHeight;
-        echo $newCropWidth;
-        $im2 = imagecrop($image, ['x' => 0, 'y' => 0, 'width' => $newCropWidth, 'height' => $height]);
+        $kal = ($width - $newCropWidth)/2;
+        echo $kal;
+        $im2 = imagecrop($image, ['x' => $kal , 'y' => 0, 'width' => $newCropWidth, 'height' => $height]);
         $image_p = imagecreatetruecolor($cropWidth, $cropHeight);
         imagecopyresampled($image_p, $im2, 0, 0, 0, 0, $cropWidth, $cropHeight, $newCropWidth, $height);
         imagejpeg($image_p, 'example-cropped.jpeg');
     } else {
         $newCropHeight = $width * $cropHeight / $cropWidth;
-        echo $newCropHeight;
-        $im2 = imagecrop($image, ['x' => 0, 'y' => 0, 'width' => $width, 'height' => $newCropHeight]);
+        $kal = ($height - $newCropHeight)/2;
+        $im2 = imagecrop($image, ['x' => 0, 'y' => $kal, 'width' => $width, 'height' => $newCropHeight]);
         $image_p = imagecreatetruecolor($cropWidth, $cropHeight);
         imagecopyresampled($image_p, $im2, 0, 0, 0, 0, $cropWidth, $cropHeight, $width, $newCropHeight);
         imagejpeg($image_p, 'example-cropped.jpeg');
@@ -81,16 +70,16 @@ if($cropHeight<$cropWidth) {
 }else{
     if ($k < 1 && $k > 0.5) {
         $newCropHeight = $width * $cropHeight / $cropWidth;
-        echo $newCropHeight;
-        $im2 = imagecrop($image, ['x' => 0, 'y' => 0, 'width' => $width, 'height' => $newCropHeight]);
+        $kal = ($height - $newCropHeight)/2;
+        $im2 = imagecrop($image, ['x' => 0, 'y' =>$kal, 'width' => $width, 'height' => $newCropHeight]);
         $image_p = imagecreatetruecolor($cropWidth, $cropHeight);
         imagecopyresampled($image_p, $im2, 0, 0, 0, 0, $cropWidth, $cropHeight, $width, $newCropHeight);
         imagejpeg($image_p, 'example-cropped.jpeg');
 
     } else {
         $newCropWidth = $height * $cropWidth / $cropHeight;
-        echo $newCropWidth;
-        $im2 = imagecrop($image, ['x' => 0, 'y' => 0, 'width' => $newCropWidth, 'height' => $height]);
+        $kal = ($width - $newCropWidth)/2;
+        $im2 = imagecrop($image, ['x' => $kal, 'y' => 0, 'width' => $newCropWidth, 'height' => $height]);
         $image_p = imagecreatetruecolor($cropWidth, $cropHeight);
         imagecopyresampled($image_p, $im2, 0, 0, 0, 0, $cropWidth, $cropHeight, $newCropWidth, $height);
         imagejpeg($image_p, 'example-cropped.jpeg');
