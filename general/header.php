@@ -121,7 +121,7 @@
                 </a>
             </div>
             <div class="item">
-                <a href="../resizeImg/index.php">
+                <a href="../resize_img/index.php">
                     <img src="../images/more.png" alt=">">
                     ReSize
                 </a>
