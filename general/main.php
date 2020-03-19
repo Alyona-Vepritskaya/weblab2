@@ -12,7 +12,7 @@
 <div class="text-content  clearfix">
     <p class="text">
         <a href="http://fanserial.net/40477-hodyachie-mertvecy-9-sezon-11-seriya-voznagrazhdenie.html#fox"> 1 </a>
-        <a href="http://fansuuuuial.net/40477-hodyachie-mertvecy-9-sezon-11-seriya-voznagrazhdenie.html#fox"> 2 </a>
+        <a href="https://github.com/wild-arctic-fox56"> 2 </a>
         For each instruction, one may be used fram each of these groups and be placed in any
         order Using redundant prefixes (more than one prefix from a group) is reserved and may cause
         unpredictable behavior.

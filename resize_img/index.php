@@ -40,32 +40,28 @@ function loadFile(){
     }
 }
 
-function set_text_and_save($img){
+function set_text_and_save($im){
     global $img_type;
-    echo $img_type;
     $text = "     Alyona\nVeprytskaya";
     $font = dirname(__FILE__) . '/ArialBlack.ttf';
     //Write text to the image using TrueType fonts
-    imagettftext($img, 10, 0, 10, 20, imagecolorallocate($img, 245, 34, 109), $font, $text);
+    imagettftext($im, 10, 0, 10, 20, imagecolorallocate($im, 245, 34, 109), $font, $text);
     // Output the image
     switch ($img_type) {
         case 1:
-            //header('Content-Type: image/gif');//indicates the type of data transmitted
-            imagegif($img, 'example-cropped.gif');
+            header('Content-Type: image/gif');//indicates the type of data transmitted
+            imagegif($im);
             break;
         case 2:
-            //header('Content-Type: image/jpeg');//indicates the type of data transmitted
-            imagejpeg($img, 'example-cropped.jpeg');
-            break;
         case 3:
-            //header('Content-Type: image/png');//indicates the type of data transmitted
-            imagepng($img,'example-cropped.png');
+            header('Content-Type: image/jpeg');
+            imagejpeg($im, NULL, 75);
             break;
         default: // unsupported type
             break;
     }
     // Free up memory
-    imagedestroy($img);
+    imagedestroy($im);
 }
 
 function crop_width($image, $height, $width){
