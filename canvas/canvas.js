@@ -1,18 +1,26 @@
 const X_AXIS = 445; // px
 const Y_AXIS = 225; // px
 
-$(document).ready(
-    function () {
-        $.ajax({
-            dataType: 'json',
-            url: jsHost2 + 'getInfo.php',
-            success: function (jsondata) {
-                console.log(jsondata);
-                draw(jsondata);
+window.onload = init_histogram;
+
+function init_histogram() {
+    const xmlhttp = new XMLHttpRequest();
+    if (xmlhttp !== undefined) {
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                try {
+                    const jsonData = JSON.parse(this.responseText);
+                    console.log(jsonData);
+                    draw(jsonData);
+                } catch (e) {
+                    console.log(e);
+                }
             }
-        });
+        };
     }
-);
+    xmlhttp.open("GET", `getInfo.php?qwerty=${Math.random()}`, true);
+    xmlhttp.send();
+}
 
 const drawLine = (ctx, x1, y1, x2, y2) => {
     ctx.beginPath();
@@ -45,7 +53,7 @@ const draw = (n) => {
     let last_shift = 0;
     for (let i = 0; i < n.length; i++) {
         let height = -(((n[i] * 100) / max) * Y_AXIS) / 100;
-        let randomColor = Math.floor(Math.random()*16777215).toString(16);
+        let randomColor = Math.floor(Math.random() * 16777215).toString(16);
         ctx.fillStyle = `#${randomColor}`;
         ctx.fillRect(last_shift + ((x_shift / 2) - (width / 2)), bottom_line, width, height);
         drawLine(ctx, last_shift, 251, last_shift, 257); //short lines
@@ -69,5 +77,3 @@ document.getElementById('generate').addEventListener("click", () => {
         n.push(Math.floor(Math.random() * 500));
     draw(n);
 });
-
-/*draw([1, 2, 3, 4, 5, 6, 7, 8]);*/

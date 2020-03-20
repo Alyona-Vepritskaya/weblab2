@@ -68,7 +68,8 @@ function crop_width($image, $height, $width){
     global $crop_width, $crop_height;
     $new_crop_width = round($height * $crop_width / $crop_height);
     $shift = round(($width - $new_crop_width) / 2);
-    $cropped_image = imagecrop($image, ['x' => $shift, 'y' => 0, 'width' => $new_crop_width, 'height' => $height]);
+    $arr = array('x' => $shift, 'y' => 0, 'width' => $new_crop_width, 'height' => $height);
+    $cropped_image = imagecrop($image, $arr);
     $result_image = imagecreatetruecolor($crop_width, $crop_height);
     imagecopyresampled($result_image, $cropped_image, 0, 0, 0, 0, $crop_width, $crop_height, $new_crop_width, $height);
     set_text_and_save($result_image);
@@ -78,7 +79,8 @@ function crop_height($image, $height, $width){
     global $crop_width, $crop_height;
     $new_crop_height = round($width * $crop_height / $crop_width);
     $shift = round(($height - $new_crop_height) / 2);
-    $cropped_image = imagecrop($image, ['x' => 0, 'y' => $shift, 'width' => $width, 'height' => $new_crop_height]);
+    $arr = array('x' => 0, 'y' => $shift, 'width' => $width, 'height' => $new_crop_height);
+    $cropped_image = imagecrop($image, $arr);
     $result_image = imagecreatetruecolor($crop_width, $crop_height);
     imagecopyresampled($result_image, $cropped_image, 0, 0, 0, 0, $crop_width, $crop_height, $width, $new_crop_height);
     set_text_and_save($result_image);
