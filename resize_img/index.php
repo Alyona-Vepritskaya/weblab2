@@ -19,17 +19,19 @@ function loadFile(){
         $height = $init_size[1];
         $width = $init_size[0];
         //determine img type  -- [ 1 - gif; 2 - jpeg; 3 - png ]
-        $img_type = exif_imagetype($loaded_file['tmp_name']); //uint
+        $pos = strpos($loaded_file['name'],'.');
+        $img_type = substr($loaded_file['name'],$pos+1);
         //create img
         $image = null;
         switch ($img_type) {
-            case 1:
+            case "gif":
                 $image = imagecreatefromgif($loaded_file['tmp_name']);
                 break;
-            case 2:
+            case "jpg":
+            case "jpeg":
                 $image = imagecreatefromjpeg($loaded_file['tmp_name']);
                 break;
-            case 3:
+            case "png":
                 $image = imagecreatefrompng($loaded_file['tmp_name']);
                 break;
             default: // unsupported type
@@ -48,12 +50,13 @@ function set_text_and_save($im){
     imagettftext($im, 10, 0, 10, 20, imagecolorallocate($im, 245, 34, 109), $font, $text);
     // Output the image
     switch ($img_type) {
-        case 1:
+        case "gif":
             header('Content-Type: image/gif');//indicates the type of data transmitted
             imagegif($im);
             break;
-        case 2:
-        case 3:
+        case "jpg":
+        case "jpeg":
+        case "png":
             header('Content-Type: image/jpeg');
             imagejpeg($im, NULL, 75);
             break;
@@ -64,12 +67,19 @@ function set_text_and_save($im){
     imagedestroy($im);
 }
 
+function crop_img($src, array $rect){
+    $img = imagecreatetruecolor($rect['width'], $rect['height']);
+    imagecopy($img, $src, 0, 0, $rect['x'], $rect['y'], $rect['width'], $rect['height']);
+    return $img;
+}
+
 function crop_width($image, $height, $width){
     global $crop_width, $crop_height;
     $new_crop_width = round($height * $crop_width / $crop_height);
     $shift = round(($width - $new_crop_width) / 2);
     $arr = array('x' => $shift, 'y' => 0, 'width' => $new_crop_width, 'height' => $height);
-    $cropped_image = imagecrop($image, $arr);
+    $cropped_image = crop_img($image, $arr);
+    /*$cropped_image = imagecrop($image, $arr); not work */
     $result_image = imagecreatetruecolor($crop_width, $crop_height);
     imagecopyresampled($result_image, $cropped_image, 0, 0, 0, 0, $crop_width, $crop_height, $new_crop_width, $height);
     set_text_and_save($result_image);
@@ -80,7 +90,8 @@ function crop_height($image, $height, $width){
     $new_crop_height = round($width * $crop_height / $crop_width);
     $shift = round(($height - $new_crop_height) / 2);
     $arr = array('x' => 0, 'y' => $shift, 'width' => $width, 'height' => $new_crop_height);
-    $cropped_image = imagecrop($image, $arr);
+    $cropped_image = crop_img($image, $arr);
+    /*$cropped_image = imagecrop($image, $arr); not work */
     $result_image = imagecreatetruecolor($crop_width, $crop_height);
     imagecopyresampled($result_image, $cropped_image, 0, 0, 0, 0, $crop_width, $crop_height, $width, $new_crop_height);
     set_text_and_save($result_image);
