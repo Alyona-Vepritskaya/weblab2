@@ -4,7 +4,7 @@
 $randomNumber = rand(1,10);
 $arr = array($randomNumber);
 for ($i = 0; $i < $randomNumber; $i++) {
-    $arr[$i] = rand(0,400);
+    $arr[$i] = rand(0,300);
 }
 $myJSON = json_encode($arr);
 echo $myJSON;

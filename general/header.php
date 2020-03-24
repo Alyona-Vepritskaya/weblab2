@@ -7,14 +7,16 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono&display=swap" rel="stylesheet">
     <title>Web_lab2</title>
-    <script>var jsHost = 'http://localhost/xml_jquery/';</script>
-    <script>var jsHost2 = 'http://localhost/canvas/';</script>
+    <script>var jsHostLocal = 'http://localhost/';</script>
+    <script>var jsHost0 = 'http://k503labs.ukrdomen.com/535a/Veprytskaya/';</script>
+    <script>var jsHost = 'http://localhost//xml_jquery/'; //TODO</script>
+   <!-- <script>var jsHost2 = 'http://k503labs.ukrdomen.com/535a/Veprytskaya/canvas/';</script>-->
 </head>
 <header class="head">
     <div class="logo">
         <div>
             <a href="">
-                <img src="../images/Smart.png" alt="SMART">
+                <img src="http://localhost/images/Smart.png" alt="SMART">
             </a>
         </div>
         computers & mobile
@@ -22,7 +24,7 @@
 </header>
 <main class="main-content">
     <div class="left-col">
-        <img class="imggg" src="../images/header_bckgr.png" alt="">
+        <img class="imggg" src="http://k503labs.ukrdomen.com/535a/Veprytskaya/images/header_bckgr.png" alt="">
         <div class="navigation-bar">
             <div class="item">
                 <a href="../general/index.php">
