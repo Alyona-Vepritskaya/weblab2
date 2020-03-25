@@ -101,14 +101,20 @@ function crop_and_resize($image, $height, $width){
             crop_width($image, $height, $width);
         } else {
             $coefficient = $crop_width / $crop_height;
-            ($coefficient > 0.5) ? crop_height($image, $height, $width) : crop_width($image, $height, $width);
+            $coefficient2 = $width / $height;
+            (($coefficient > 0.5) && ($coefficient > $coefficient2)) ?
+                crop_height($image, $height, $width) :
+                crop_width($image, $height, $width);
         }
     } elseif ($crop_height < $crop_width) {
         if ($width == $height || $width < $height) {
             crop_height($image, $height, $width);
         } else {
             $coefficient = $crop_height / $crop_width;
-            ($coefficient > 0.5) ? crop_width($image, $height, $width) : crop_height($image, $height, $width);
+            $coefficient2 = $height / $width;
+            (($coefficient > 0.5) && ($coefficient > $coefficient2)) ?
+                crop_width($image, $height, $width) :
+                crop_height($image, $height, $width);
         }
     } else { //$crop_height == $crop_width
         ($height > $width) ? crop_height($image, $height, $width) : crop_width($image, $height, $width);
