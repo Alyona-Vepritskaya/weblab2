@@ -18,9 +18,9 @@ function loadFile(){
         //get real size
         $height = $init_size[1];
         $width = $init_size[0];
-        //determine img type  -- [ 1 - gif; 2 - jpeg; 3 - png ]
-        $pos = strpos($loaded_file['name'],'.');
-        $img_type = substr($loaded_file['name'],$pos+1);
+        //determine img type
+        $pos = strpos($loaded_file['name'], '.');
+        $img_type = substr($loaded_file['name'], $pos + 1);
         //create img
         $image = null;
         switch ($img_type) {
@@ -63,8 +63,7 @@ function set_text_and_save($im){
         default: // unsupported type
             break;
     }
-    // Free up memory
-    imagedestroy($im);
+    imagedestroy($im); // Free up memory
 }
 
 function crop_img($src, array $rect){
@@ -79,7 +78,6 @@ function crop_width($image, $height, $width){
     $shift = round(($width - $new_crop_width) / 2);
     $arr = array('x' => $shift, 'y' => 0, 'width' => $new_crop_width, 'height' => $height);
     $cropped_image = crop_img($image, $arr);
-    /*$cropped_image = imagecrop($image, $arr); not work */
     $result_image = imagecreatetruecolor($crop_width, $crop_height);
     imagecopyresampled($result_image, $cropped_image, 0, 0, 0, 0, $crop_width, $crop_height, $new_crop_width, $height);
     set_text_and_save($result_image);
@@ -91,7 +89,6 @@ function crop_height($image, $height, $width){
     $shift = round(($height - $new_crop_height) / 2);
     $arr = array('x' => 0, 'y' => $shift, 'width' => $width, 'height' => $new_crop_height);
     $cropped_image = crop_img($image, $arr);
-    /*$cropped_image = imagecrop($image, $arr); not work */
     $result_image = imagecreatetruecolor($crop_width, $crop_height);
     imagecopyresampled($result_image, $cropped_image, 0, 0, 0, 0, $crop_width, $crop_height, $width, $new_crop_height);
     set_text_and_save($result_image);
@@ -99,15 +96,24 @@ function crop_height($image, $height, $width){
 
 function crop_and_resize($image, $height, $width){
     global $crop_width, $crop_height;
-    //count coefficient needed size
-    $coefficient = round($crop_height / $crop_width);
-    ($crop_height < $crop_width) ?
-        (($coefficient < 1 && $coefficient > 0.5) ?
-            crop_width($image, $height, $width) : crop_height($image, $height, $width)) :
-        (($coefficient < 1 && $coefficient > 0.5) ?
-            crop_height($image, $height, $width) : crop_width($image, $height, $width));
+    if ($crop_height > $crop_width) {
+        if ($width == $height || $width > $height) {
+            crop_width($image, $height, $width);
+        } else {
+            $coefficient = $crop_width / $crop_height;
+            ($coefficient > 0.5) ? crop_height($image, $height, $width) : crop_width($image, $height, $width);
+        }
+    } elseif ($crop_height < $crop_width) {
+        if ($width == $height || $width < $height) {
+            crop_height($image, $height, $width);
+        } else {
+            $coefficient = $crop_height / $crop_width;
+            ($coefficient > 0.5) ? crop_width($image, $height, $width) : crop_height($image, $height, $width);
+        }
+    } else { //$crop_height == $crop_width
+        ($height > $width) ? crop_height($image, $height, $width) : crop_width($image, $height, $width);
+    }
 }
-
 $crop_height = filter_input_('r_height', '');
 $crop_width = filter_input_('r_width', '');
 loadFile();
