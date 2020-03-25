@@ -1,5 +1,6 @@
 <?php
 $error_message = null;
+$new_url = null;
 function filter_input_($name, $default){
     $result = $default;
     if (isset($_POST[$name]))
@@ -43,27 +44,30 @@ function loadFile(){
 }
 
 function set_text_and_save($im){
-    global $img_type;
+    global $img_type, $new_url;
     $text = "     Alyona\nVeprytskaya";
     $font = dirname(__FILE__) . '/ArialBlack.ttf';
     //Write text to the image using TrueType fonts
     imagettftext($im, 10, 0, 10, 20, imagecolorallocate($im, 245, 34, 109), $font, $text);
     // Output the image
+    $rnd = rand(0,9999999999);
+    $img_name = 'tmp'.$rnd;
     switch ($img_type) {
         case "gif":
-            header('Content-Type: image/gif');//indicates the type of data transmitted
-            imagegif($im);
+            $img_full_name = $img_name.'.gif';
+            imagegif($im,$img_full_name);
             break;
         case "jpg":
         case "jpeg":
         case "png":
-            header('Content-Type: image/jpeg');
-            imagejpeg($im, NULL, 75);
+        $img_full_name = $img_name.".jpeg";
+            imagejpeg($im, $img_full_name);
             break;
         default: // unsupported type
             break;
     }
     imagedestroy($im); // Free up memory
+    $new_url = "<a href='http://k503labs.ukrdomen.com/535a/Veprytskaya/resize_img/img.php?name=$img_full_name' target='_blank'>Click me</a>";
 }
 
 function crop_img($src, array $rect){
@@ -150,6 +154,9 @@ include "../general/header.php"; ?>
                 <input type="file" class="submit" name="file" required>
                 <input type="submit" class="submit" name="input_submit" value="Resize">
             </form>
+            <div class="output-img">
+                <?=$new_url?>
+            </div>
         </div>
     </div>
 <?php

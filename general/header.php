@@ -9,6 +9,7 @@
     <title>Web_lab2</title>
     <script>var jsHost = 'http://k503labs.ukrdomen.com/535a/Veprytskaya/xml_jquery/';</script>
 </head>
+<body>
 <header class="head">
     <div class="logo">
         <div>

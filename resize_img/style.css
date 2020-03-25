@@ -69,3 +69,10 @@ input {
     font-weight: bold;
     margin: 5px 0 10px;
 }
+
+.output-img{
+    text-align: center;
+    color: #0000AE;
+    font-weight: bold;
+    font-size: 14px;
+}
