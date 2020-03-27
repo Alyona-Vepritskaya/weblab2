@@ -113,6 +113,22 @@ if (!empty($id)) {
                         </div>
                     </div>
                 </div>
+                <form action="" name="review" method="post" class="form">
+                    <div class="block">
+                        Input name:
+                        <input id="name" type="text" required">
+                    </div>
+                    <div class="block">
+                        Input email:
+                        <input id="name" type="email" required>
+                    </div>
+                    <div class="block">
+                    <textarea required class="area" name="comment">
+                    </textarea>
+                    </div>
+                    <div class="block">
+                        <input type="submit" class="buy-item more" value="Submit">
+                </form>
                 <?php
             } ?>
         </div>
