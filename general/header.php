@@ -127,7 +127,7 @@
                 </a>
             </div>
             <div class="item">
-                <a href="http://k503labs.ukrdomen.com/535a/Veprytskaya/sql/main.php">
+                <a href="http://k503labs.ukrdomen.com/535a/Veprytskaya/sql/index.php">
                     <img src="http://k503labs.ukrdomen.com/535a/Veprytskaya/images/more.png" alt=">">
                     SQL
                 </a>

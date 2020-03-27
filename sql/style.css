@@ -1,3 +1,20 @@
+.products {
+    color: #0000AE;
+    margin: 250px 20px 0;
+    font-weight: bold;
+    font-size: 12px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.product .item-name {
+    font-size: 15px;
+    color: white;
+    padding: 8px;
+    background: #000033;
+    border-radius: 100% 0 100% 0 / 0 100% 0 100%;
+    text-align: center;
+}
+
 .buy-item {
     width: 75%;
     transition: all ease 0.5s;
@@ -12,6 +29,8 @@
     color: white;
     letter-spacing: 1px;
     border-radius: 10px;
+    text-decoration: none;
+    text-align: center;
 }
 
 .buy-item:hover {
@@ -21,6 +40,38 @@
     cursor: pointer;
 }
 
-.buy-item:focus {
-    outline: none;
+.product {
+    box-sizing: border-box;
+    transition: 0.5s ease all;
+    border-radius: 20px;
+    width: 45%;
+    border-right: 2px solid #000033;
+    border-left: 2px solid #000033;
+    display: inline-block;
+    margin: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.product > img {
+    min-height: 150px;
+    display: block;
+    margin: 5px auto;
+    width: 150px;
+}
+
+.description {
+    background: #000033;
+    color: white;
+    padding: 10px 20px ;
+}
+
+.description img {
+    margin: 4px 2px;
+    width: 25px;
+    height: 25px;
+}
+
+.description div{
+   margin: 5px;
 }
