@@ -1,5 +1,5 @@
 <?php
-$path = "../images/";
+$path = "http://k503labs.ukrdomen.com/535a/Veprytskaya/images/";
 $products = array();
 $items = array();
 $item = array();

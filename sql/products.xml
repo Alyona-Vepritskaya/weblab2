@@ -18,7 +18,7 @@
         <!ELEMENT param_value (#PCDATA)>
         ]>
 <products>
-    <items type="computers">
+    <items type="Computers">
         <item s_num="DT87EA">
             <name>HP Pavilion Gaming</name>
             <price>3456 $</price>
@@ -88,7 +88,7 @@
             </params>
         </item>
     </items>
-    <items type="phones">
+    <items type="Phones">
         <item s_num="DT7EAE">
             <name>IPhone X</name>
             <price>999.78 $</price>
@@ -176,7 +176,7 @@
             </params>
         </item>
     </items>
-    <items type="mouses">
+    <items type="Mouses">
         <item s_num="ae">
             <name>Mouse Pro Gamer</name>
             <price>45.9 $</price>

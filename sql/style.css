@@ -1,0 +1,26 @@
+.buy-item {
+    width: 75%;
+    transition: all ease 0.5s;
+    margin: 10px auto;
+    font: inherit;
+    font-weight: bold;
+    font-size: 15px;
+    display: block;
+    padding: 10px 16px;
+    border: none;
+    background: linear-gradient(360deg, #0734ED, #10106c);
+    color: white;
+    letter-spacing: 1px;
+    border-radius: 10px;
+}
+
+.buy-item:hover {
+    transition: all ease 0.5s;
+    background: linear-gradient(360deg, #95DBFE, #5AA9FB);
+    color: #0000AE;
+    cursor: pointer;
+}
+
+.buy-item:focus {
+    outline: none;
+}
