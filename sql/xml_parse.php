@@ -21,7 +21,7 @@ function parseData()
 
 function start($parser, $name, $attribs)
 {
-    global $item, $itemsType, $items,$item_params, $single_param;;
+    global $item, $itemsType, $items, $item_params, $single_param;;
     switch ($name) {
         case "ITEM":
             $item = array();
@@ -44,9 +44,9 @@ function start($parser, $name, $attribs)
 
 function stop($parser, $element_name)
 {
-    global $item, $items, $currentData, $itemsType, $products,$item_params,$single_param;
-    if ($element_name != "ITEM"  && $element_name != "PRODUCTS" && $element_name != "ITEMS" && $element_name !="PARAMS"
-        && $element_name !="PARAM" && $element_name !="PARAM_NAME" && $element_name !="PARAM_VALUE") {
+    global $item, $items, $currentData, $itemsType, $products, $item_params, $single_param;
+    if ($element_name != "ITEM" && $element_name != "PRODUCTS" && $element_name != "ITEMS" && $element_name != "PARAMS"
+        && $element_name != "PARAM" && $element_name != "PARAM_NAME" && $element_name != "PARAM_VALUE") {
         $item[$element_name] = $currentData;
     }
     if ($element_name == "ITEM") {
@@ -55,16 +55,16 @@ function stop($parser, $element_name)
     if ($element_name == "ITEMS") {
         $products[$itemsType] = $items;
     }
-    if($element_name == "PARAMS"){
+    if ($element_name == "PARAMS") {
         $item['PARAMS'] = $item_params;
     }
-    if($element_name == "PARAM"){
+    if ($element_name == "PARAM") {
         $item_params[] = $single_param;
     }
-    if($element_name == "PARAM_NAME"){
+    if ($element_name == "PARAM_NAME") {
         $single_param['name'] = $currentData;
     }
-    if($element_name == "PARAM_VALUE"){
+    if ($element_name == "PARAM_VALUE") {
         $single_param['value'] = $currentData;
     }
 }

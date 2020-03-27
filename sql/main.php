@@ -22,6 +22,9 @@ $all_products = null;
 $one_product = null;
 $current_section = null;
 $current_product = null;
+$email = trim(filter_input_('email', ''));
+$name = trim(filter_input_('name', ''));
+$comment = trim(filter_input_('comment', ''));
 $q = filter_input_("section", '');
 $id = filter_input_("id", '');
 //get products
@@ -35,6 +38,12 @@ function get_product($prod_id)
 {
     global $p_model, $one_product;
     $one_product = $p_model->get_product_params($prod_id);
+}
+
+function set_comment($email, $id, $name, $comment)
+{
+    global $p_model;
+    $p_model->set_product_reviews($email, $id, $name, $comment);
 }
 
 function filter_input_($name, $default)
@@ -57,6 +66,11 @@ if (!empty($id)) {
     $current_product = $id;
     get_product($current_product);
 }
+
+if (!empty($email) && !empty($name) && !empty($comment) && !empty($id)) {
+    set_comment($email, $id, $name, $comment);
+}
+
 ?>
 <div class="right-col">
     <div class="news-info">
@@ -116,11 +130,11 @@ if (!empty($id)) {
                 <form action="" name="review" method="post" class="form">
                     <div class="block">
                         Input name:
-                        <input id="name" type="text" required">
+                        <input name="name" id="name" type="text" required">
                     </div>
                     <div class="block">
                         Input email:
-                        <input id="name" type="email" required>
+                        <input name="email" id="email" type="email" required>
                     </div>
                     <div class="block">
                     <textarea required class="area" name="comment">

@@ -8,6 +8,7 @@ class ProductModel
     private $products;
     private $params;
     private $mysqli;
+    private $comments;
 
     public function __construct($mysqli)
     {
@@ -77,5 +78,14 @@ class ProductModel
 
     function get_product_reviews($product_id)
     {
+    }
+
+    function set_product_reviews($email, $product_id, $name, $comment)
+    {
+        $sql_insert = "insert into " . DBT_REVIEWS . " (name, email, comment, id_product)
+         values ('$name','$email','$comment','$product_id');";
+        if ($this->mysqli->query($sql_insert) !== TRUE) {
+            echo "Error: " . $sql_insert . "<br>" . $this->mysqli->error;
+        }
     }
 }

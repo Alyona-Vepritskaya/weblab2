@@ -1,5 +1,5 @@
 <?php
-function insert_data($products,$mysqli)
+function insert_data($products, $mysqli)
 {
     global $products, $mysqli;
     $id_section = 1;
