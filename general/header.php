@@ -126,6 +126,12 @@
                     ReSize
                 </a>
             </div>
+            <div class="item">
+                <a href="../sql/main.php"><!--TODO-->
+                    <img src="http://k503labs.ukrdomen.com/535a/Veprytskaya/images/more.png" alt=">">
+                    SQL
+                </a>
+            </div>
             <div class="bottom-img">
                 <img src="http://k503labs.ukrdomen.com/535a/Veprytskaya/images/left-frame3.png" alt="">
             </div>
