@@ -6,8 +6,8 @@ include_once 'connect-inc.php';
 class MyDB {
     private static $mysqli = null;
 
-    /*private function __construct() { }
-    private function __clone() { }*/
+    private function __construct() { }
+    private function __clone() { }
 
     public static function get_db_instance()
     {
