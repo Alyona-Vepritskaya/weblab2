@@ -3,9 +3,9 @@ include_once 'connect-inc.php';
 function create_struct($mysqli)
 {
     //sql to drop tables
-    $sql_drop0 = "drop table if exists " . DBT_SECTIONS . ";";
+    $sql_drop2 = "drop table if exists " . DBT_SECTIONS . ";";
     $sql_drop1 = "drop table if exists " . DBT_PARAM . ";";
-    $sql_drop2 = "drop table if exists " . DBT_PRODUCTS . ";";
+    $sql_drop0 = "drop table if exists " . DBT_PRODUCTS . ";";
     $sql_drop3 = "drop table if exists " . DBT_REVIEWS . ";";
 
     if (($mysqli->query($sql_drop0) !== true) || ($mysqli->query($sql_drop1) !== true) ||

@@ -6,7 +6,6 @@ $item = array();
 $item_params = array();
 function parseData()
 {
-    global $products;
     $parser = xml_parser_create();
     xml_set_element_handler($parser, "start", "stop");
     xml_parser_set_option($parser, XML_OPTION_SKIP_WHITE, 1);
@@ -18,7 +17,6 @@ function parseData()
         }
     }
     xml_parser_free($parser);
-    return $products;
 }
 
 function start($parser, $name, $attribs)
