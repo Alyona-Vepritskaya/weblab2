@@ -33,6 +33,10 @@
     text-align: center;
 }
 
+.buy-item:focus {
+    outline: none;
+}
+
 .buy-item:hover {
     transition: all ease 0.5s;
     background: linear-gradient(360deg, #95DBFE, #5AA9FB);
@@ -63,7 +67,7 @@
 .description {
     background: #000033;
     color: white;
-    padding: 10px 20px ;
+    padding: 10px 20px;
 }
 
 .description img {
@@ -72,6 +76,6 @@
     height: 25px;
 }
 
-.description div{
-   margin: 5px;
+.description div {
+    margin: 5px;
 }

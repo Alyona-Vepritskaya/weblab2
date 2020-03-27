@@ -19,16 +19,30 @@ insert_data($products, $mysqli);
 $p_model = new ProductModel($mysqli);
 $sections = $p_model->get_sections();
 $prod = null;
+$current_section = null;
 //get products
 function get_products($section_id)
 {
     global $p_model, $prod;
     $prod = $p_model->get_products($section_id);
-    /*print_r($prod);*/
 }
 
-if (isset($_GET['section'])) {
-    $section_id = $_GET['section'];
+function filter_input_($name, $default)
+{
+    $result = $default;
+    if (isset($_POST[$name])) {
+        $result = $_POST[$name];
+    }
+    if (isset($_GET[$name])) {
+        $result = $_GET[$name];
+    }
+    return $result;
+}
+
+$q = filter_input_("section", '');
+if (!empty($q)) {
+    $section_id = $q;
+    $current_section = $section_id;
     get_products($section_id);
 }
 ?>
@@ -45,28 +59,30 @@ if (isset($_GET['section'])) {
     </div>
     <div class="text-content  clearfix">
         <div class="products">
-        <?php
-        foreach ($sections as $key => $value) { ?>
-            <a href="index.php?section=<?= $key ?>" class="buy-item"><?= $value ?></a>
             <?php
-        }
-        foreach ($prod as $key => $value) { ?>
-            <div class="product">
-                <div class="item-name"><?=$value['name']?></div>
-                <img src="<?=$path.$value['img']?>" alt="img">
-                <div class="description">
-                    <div>Serial number: <?=$value['s_num']?></div>
-                    <div>Price: <?=$value['prise']?></div>
-                    <div>Production date: <?=$value['year']?></div>
-                    <div>Production country: <?=$value['country']?></div>
-                    <div class="details">
-                        <input name="More"  class="buy-item more" type="submit" value="More">
-                    </div>
-                </div>
-            </div>
-            <?php
-        }
-        ?>
+            foreach ($sections as $key => $value) { ?>
+                <a href="index.php?section=<?= $key ?>" class="buy-item"><?= $value ?></a>
+                <?php
+                if ($current_section == $key) {
+                    foreach ($prod as $k => $v) { ?>
+                        <div class="product">
+                            <div class="item-name"><?= $v['name'] ?></div>
+                            <img src="<?= $path . $v['img'] ?>" alt="img">
+                            <div class="description">
+                                <div>Serial number: <?= $v['s_num'] ?></div>
+                                <div>Price: <?= $v['prise'] ?></div>
+                                <div>Production date: <?= $v['year'] ?></div>
+                                <div>Production country: <?= $v['country'] ?></div>
+                                <div class="details">
+                                    <input name="More" class="buy-item more" type="submit" value="More">
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                }
+            }
+            ?>
         </div>
     </div>
 
