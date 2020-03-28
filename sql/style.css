@@ -89,3 +89,23 @@
     height: 80px;
     width: 400px;
 }
+
+.comment {
+    border: #000033 1px solid;
+    margin: 10px 20px;
+    padding: 10px 20px;
+    text-align: left;
+    background: #d9e1f2;
+    color: black;
+}
+
+.quote {
+    border: 2px solid gray;
+    background: #AEAEAE;
+    padding: 5px;
+    color: black;
+}
+
+.comment > div {
+    padding: 5px 45px;
+}

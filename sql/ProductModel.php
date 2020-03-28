@@ -78,6 +78,19 @@ class ProductModel
 
     function get_product_reviews($product_id)
     {
+        $this->comments = array();
+        $sql_select = "select * from " . DBT_REVIEWS . " where id_product ='" . $product_id . "';";
+        $result = $this->mysqli->query($sql_select);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $item = array();
+                $item['name'] = $row['name'];
+                $item['email'] = $row['email'];
+                $item['comment'] = $row['comment'];
+                $this->comments[] = $item;
+            }
+        }
+        return $this->comments;
     }
 
     function set_product_reviews($email, $product_id, $name, $comment)
