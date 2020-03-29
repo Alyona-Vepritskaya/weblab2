@@ -91,21 +91,35 @@
 }
 
 .comment {
-    border: #000033 1px solid;
+    border: #000033 2px solid;
     margin: 10px 20px;
     padding: 10px 20px;
     text-align: left;
-    background: #d9e1f2;
-    color: black;
+    background: #0000AE;
+    color: white;
+    border-radius: 20px;
+    font-size: 13px;
 }
 
 .quote {
-    border: 2px solid gray;
-    background: #AEAEAE;
+    border: 2px solid #5AA9FB;
+    background: #95DBFE;
     padding: 5px;
     color: black;
+    font: inherit;
 }
 
 .comment > div {
     padding: 5px 45px;
+}
+
+.form2 {
+    width: 500px;
+    margin: auto;
+    border: 2px solid #000033;
+    padding: 30px 0;
+    font-size: 14px;
+    background: #000033;
+    color: #fff;
+    border-radius: 20px;
 }

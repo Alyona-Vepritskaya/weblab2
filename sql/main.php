@@ -144,7 +144,7 @@ if (check()) {
                     </div>
                 </div>
             </div>
-            <form action="" name="review" method="POST" class="form">
+            <form action="" name="review" method="POST" class="form2">
                 <input type="hidden" name="hidden_input" value="first">
                 <div class="block">
                     Input name:
@@ -154,12 +154,15 @@ if (check()) {
                     Input email:
                     <input name="email" id="email" type="email" required>
                 </div>
-                Write comment:(max 200 symbols)
+                <div class="block">
+                    Write comment:(max 200 symbols)
+                </div>
                 <div class="block">
                     <textarea maxlength="200" required class="area" name="comment"></textarea>
                 </div>
                 <div class="block">
                     <input type="submit" class="buy-item more" value="Submit">
+                </div>
             </form>
         </div>
         <?php
@@ -167,7 +170,7 @@ if (check()) {
         foreach ($comments as $key => $value) { ?>
             <div class="comment">
                 <div>User : <?= $value['name'] ?></div>
-                <div>Email: <?= $value['email'] ?></div>
+                <div>Email: <a href="mailto:<?= $value['email'] ?>"><?= $value['email'] ?></a></div>
                 <blockquote class="quote"><?= $value['comment'] ?></blockquote>
             </div>
         <?php }
