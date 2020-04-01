@@ -38,7 +38,7 @@ function create_struct($mysqli)
         id         int primary key auto_increment,
         name       varchar(60)  not null default '',
         s_num      varchar(60)  not null unique,
-        price      decimal(30,2) not null,
+        price      decimal(10,2) not null,
         year       year         not null,
         country    varchar(60)  not null default '',
         img        varchar(100) not null,

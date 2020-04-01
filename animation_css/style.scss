@@ -37,7 +37,7 @@
   overflow: hidden;
 }
 
-$d: 17;
+$d: 18;
 @for $i from 1 to $d {
   .item:nth-child(#{$i}) {
     animation-delay: $d * 0.25s;
