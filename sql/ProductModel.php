@@ -36,6 +36,7 @@ class ProductModel
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $item = array();
+                $item['id'] = $row["id"];
                 $item['name'] = $row["name"];
                 $item['year'] = $row["year"];
                 $item['country'] = $row["country"];
@@ -51,11 +52,12 @@ class ProductModel
     function get_product_params($product_id)
     {
         $this->params = array();
-        $sql_select = "select * from " . DBT_PRODUCTS . " where s_num ='" . $product_id . "';";
+        $sql_select = "select * from " . DBT_PRODUCTS . " where id =" . $product_id . ";";
         $result = $this->mysqli->query($sql_select);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $this->params['name'] = $row["name"];
+                $this->params['id_section'] = $row["id_section"];
                 $this->params['year'] = $row["year"];
                 $this->params['country'] = $row["country"];
                 $this->params['s_num'] = $row["s_num"];
@@ -63,7 +65,7 @@ class ProductModel
                 $this->params['price'] = $row["price"];
             }
         }
-        $sql_select2 = "select * from " . DBT_PARAM . " where id_product ='" . $product_id . "';";
+        $sql_select2 = "select * from " . DBT_PARAM . " where id_product =" . $product_id . ";";
         $result2 = $this->mysqli->query($sql_select2);
         if ($result2->num_rows > 0) {
             while ($row = $result2->fetch_assoc()) {
@@ -95,8 +97,9 @@ class ProductModel
 
     function set_product_reviews($email, $product_id, $name, $comment)
     {
+        $tmp = htmlspecialchars($comment);
         $sql_insert = "insert into " . DBT_REVIEWS . " (name, email, comment, id_product)
-         values ('$name','$email','$comment','$product_id');";
+         values ('$name','$email','$tmp','$product_id');";
         if ($this->mysqli->query($sql_insert) !== TRUE) {
             echo "Error: " . $sql_insert . "<br>" . $this->mysqli->error;
         }

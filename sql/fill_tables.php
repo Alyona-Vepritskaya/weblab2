@@ -3,6 +3,7 @@ function insert_data($products, $mysqli)
 {
     global $products, $mysqli;
     $id_section = 1;
+    $id_prod = 1;
     foreach ($products as $itemsType => $items) {
         // section
         $sql = "insert into " . DBT_SECTIONS . " (name) value ('$itemsType');";
@@ -13,7 +14,8 @@ function insert_data($products, $mysqli)
             //product
             $name = $item['NAME'];
             $s_num = $item['ID'];
-            $price = $item['PRICE'];
+            $price = number_format($item['PRICE'],2);
+            echo $price;
             $year = $item['PROD_YEAR'];
             $country = $item['PROD_COUNTRY'];
             $img = $item['IMAGE'];
@@ -22,16 +24,25 @@ function insert_data($products, $mysqli)
             if ($mysqli->query($sql1) !== TRUE) {
                 echo "Error: " . $sql1 . "<br>" . $mysqli->error;
             }
+            //img
+            $sql6 = "insert into " . DBT_IMG . " (name, sort, id_product)
+            values ('$img','1','$id_prod');";
+            if ($mysqli->query($sql6) !== TRUE) {
+                echo "Error: " . $sql6 . "<br>" . $mysqli->error;
+            }
+            $sort = 1;
             foreach ($item['PARAMS'] as $k => $v) {
-                //params
+                //param
                 $nam = $v['name'];
                 $val = $v['value'];
-                $sql2 = "insert into " . DBT_PARAM . " ( name, value, id_product)
-                values ('$nam','$val','$s_num');";
+                $sql2 = "insert into " . DBT_PARAM . " ( name, value, sort, id_product)
+                values ('$nam','$val','$sort','$id_prod');";
                 if ($mysqli->query($sql2) !== TRUE) {
                     echo "Error: " . $sql2 . "<br>" . $mysqli->error;
                 }
+                $sort++;
             }
+            $id_prod++;
         }
         $id_section++;
     }

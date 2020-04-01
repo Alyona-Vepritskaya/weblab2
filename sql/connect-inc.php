@@ -8,4 +8,5 @@ define("DB_PREFIX", "veprytskaya_");
 define("DBT_PRODUCTS", DB_PREFIX . "products");
 define("DBT_SECTIONS", DB_PREFIX . "sections");
 define("DBT_PARAM", DB_PREFIX . "param");
+define("DBT_IMG", DB_PREFIX . "images");
 define("DBT_REVIEWS", DB_PREFIX . "reviews");

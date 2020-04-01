@@ -9,13 +9,14 @@ include_once 'ProductModel.php';
 // ------------ connect to db ------------
 $mysqli = MyDB::get_db_instance();
 // ------------- create struct -----------
-create_struct($mysqli);
+/*create_struct($mysqli);*/
 // ------------- insert data from xml -----------
 //get data
-parseData();
+/*parseData();*/
 //add to DB
-insert_data($products, $mysqli);
+/*insert_data($products, $mysqli);*/
 // ------------- select data -----------
+
 $p_model = new ProductModel($mysqli);
 $sections = $p_model->get_sections();
 
@@ -40,24 +41,19 @@ function check()
     return false;
 }
 
-function get_products($section_id)
+function get_products($p_model, $section_id)
 {
-    global $p_model, $all_products;
-    $all_products = $p_model->get_products($section_id);
+    return $p_model->get_products($section_id);
 }
 
-function get_product($prod_id)
+function get_product($p_model, $prod_id)
 {
-    global $p_model, $one_product, $comments;
-    $one_product = $p_model->get_product_params($prod_id);
-    $comments = $p_model->get_product_reviews($prod_id);
+    return array("params" => $p_model->get_product_params($prod_id), "comments" => $p_model->get_product_reviews($prod_id));
 }
 
-function set_comment($email, $id, $name, $comment)
+function set_comment($p_model, $email, $id, $name, $comment)
 {
-    global $p_model;
     $p_model->set_product_reviews($email, $id, $name, $comment);
-    get_product($id);
 }
 
 function filter_input_($name, $default)
@@ -75,17 +71,22 @@ function filter_input_($name, $default)
 //section click
 if (!empty($q)) {
     $current_section = $q;
-    get_products($current_section);
+    $all_products = get_products($p_model, $current_section);
 }
 //product click
 if (!empty($id)) {
     $current_product = $id;
-    get_product($current_product);
+    $tmp = get_product($p_model, $current_product);
+    $one_product = $tmp['params'];
+    $comments = $tmp['comments'];
 }
 //check form submit
 if (check()) {
     if (!empty($email) && !empty($name) && !empty($comment) && !empty($id)) {
-        set_comment($email, $id, $name, $comment);
+        set_comment($p_model, $email, $id, $name, $comment);
+        $tmp = get_product($p_model, $current_product);
+        $one_product = $tmp['params'];
+        $comments = $tmp['comments'];
     }
 }
 ?>
@@ -105,20 +106,20 @@ if (check()) {
             <?php
             if (is_null($one_product)) {
                 foreach ($sections as $key => $value) { ?>
-                    <a href="index.php?section=<?=$key?>" class="buy-item"><?=$value?></a>
+                    <a href="index.php?section=<?= $key ?>" class="buy-item"><?= $value ?></a>
                     <?php
                     if ($current_section == $key) {
                         foreach ($all_products as $k => $v) { ?>
                             <div class="product">
-                                <div class="item-name"><?=$v['name']?></div>
-                                <img src="<?=$path . $v['img']?>" alt="img">
+                                <div class="item-name"><?= $v['name'] ?></div>
+                                <img src="<?= $path . $v['img'] ?>" alt="img">
                                 <div class="description">
-                                    <div>Serial number: <?=$v['s_num']?></div>
-                                    <div>Price: <?=$v['price']?></div>
-                                    <div>Production date: <?=$v['year']?></div>
-                                    <div>Production country: <?=$v['country']?></div>
+                                    <div>Serial number: <?= $v['s_num'] ?></div>
+                                    <div>Price: <?= $v['price'] ?></div>
+                                    <div>Production date: <?= $v['year'] ?></div>
+                                    <div>Production country: <?= $v['country'] ?></div>
                                     <div class="details">
-                                        <a href="index.php?id=<?=$v['s_num']?>" class="buy-item more">More</a>
+                                        <a href="index.php?id=<?= $v['id'] ?>" class="buy-item more">More</a>
                                     </div>
                                 </div>
                             </div>
@@ -128,8 +129,9 @@ if (check()) {
                 }
             } else {
             ?>
+            <a href="index.php?section=<?= $one_product['id_section'] ?>" class="buy-item more">Back</a>
             <div class="product">
-                <div class="item-name"><?=$one_product['name']?></div>
+                <div class="item-name"><?= $one_product['name'] ?></div>
                 <img src="<?= $path . $one_product['img'] ?>" alt="img">
                 <div class="description">
                     <div>Serial number: <?= $one_product['s_num'] ?></div>

@@ -21,7 +21,7 @@
     <items type="Computers">
         <item s_num="DT87EA">
             <name>HP Pavilion Gaming</name>
-            <price>3456 $</price>
+            <price>346</price>
             <prod_year>2016</prod_year>
             <prod_country>Canada</prod_country>
             <image>Computer1.png</image>
@@ -38,7 +38,7 @@
         </item>
         <item s_num="Y89T87EA">
             <name>Mac 56</name>
-            <price>2343 $</price>
+            <price>233</price>
             <prod_year>2013</prod_year>
             <prod_country>USA</prod_country>
             <image>Computer3.png</image>
@@ -55,7 +55,7 @@
         </item>
         <item s_num="G689GYH6">
             <name>HP X 86</name>
-            <price>3778.89 $</price>
+            <price>378.89</price>
             <prod_year>2015</prod_year>
             <prod_country>USA</prod_country>
             <image>Computer2.png</image>
@@ -72,7 +72,7 @@
         </item>
         <item s_num="T45GTYH67">
             <name>Lenovo X67</name>
-            <price>3555 $</price>
+            <price>355</price>
             <prod_year>2016</prod_year>
             <prod_country>Australia</prod_country>
             <image>Computer4.jpg</image>
@@ -91,7 +91,7 @@
     <items type="Phones">
         <item s_num="DT7EAE">
             <name>IPhone X</name>
-            <price>999.78 $</price>
+            <price>999.78</price>
             <prod_year>1995</prod_year>
             <prod_country>USA</prod_country>
             <image>i12.jpg</image>
@@ -108,7 +108,7 @@
         </item>
         <item s_num="FTG78GT">
             <name>IPhone 10</name>
-            <price>780 $</price>
+            <price>780</price>
             <prod_year>2011</prod_year>
             <prod_country>USA</prod_country>
             <image>iphpro.jpg</image>
@@ -121,7 +121,7 @@
         </item>
         <item s_num="AE1010AE">
             <name>IPhone 7</name>
-            <price>566 $</price>
+            <price>566</price>
             <prod_year>2011</prod_year>
             <prod_country>UK</prod_country>
             <image>iph11max.jpg</image>
@@ -138,7 +138,7 @@
         </item>
         <item s_num="AE56TF7Y">
             <name>IPhone 11 Pro Max</name>
-            <price>666 $</price>
+            <price>666</price>
             <prod_year>2020</prod_year>
             <prod_country>USA</prod_country>
             <image>iphone-11-pro-max.jpeg</image>
@@ -151,7 +151,7 @@
         </item>
         <item s_num="R7OPKJ90">
             <name>Xiaomi Redmi Note 8</name>
-            <price>994 $</price>
+            <price>994</price>
             <prod_year>2018</prod_year>
             <prod_country>UA</prod_country>
             <image>xi.jpg</image>
@@ -164,7 +164,7 @@
         </item>
         <item s_num="YHJU67Y">
             <name>Nokia X Pro</name>
-            <price>999.9 $</price>
+            <price>99.9</price>
             <prod_year>2019</prod_year>
             <prod_country>USA</prod_country>
             <image>nokia.jpg</image>
@@ -179,7 +179,7 @@
     <items type="Mouses">
         <item s_num="ae">
             <name>Mouse Pro Gamer</name>
-            <price>45.9 $</price>
+            <price>45.9</price>
             <prod_year>2019</prod_year>
             <prod_country>USA</prod_country>
             <image>ms.jpg</image>
@@ -192,7 +192,7 @@
         </item>
         <item s_num="Ratatouille">
             <name>Remy</name>
-            <price>12.99 $</price>
+            <price>12.99</price>
             <prod_year>2000</prod_year>
             <prod_country>France</prod_country>
             <image>remy.png</image>
