@@ -1,5 +1,6 @@
 <?php
 include_once 'connect-inc.php';
+include_once "MyDB.php";
 function create_struct($mysqli)
 {
     $sql_select = "select * from " . DBT_REVIEWS . ";";
@@ -98,3 +99,7 @@ function create_struct($mysqli)
         }
     }
 }
+
+$mysqli = MyDB::get_db_instance();
+create_struct($mysqli);
+

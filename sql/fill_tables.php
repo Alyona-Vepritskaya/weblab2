@@ -1,4 +1,6 @@
 <?php
+include_once "MyDB.php";
+include_once "xml_parse.php";
 function insert_data($products, $mysqli)
 {
     global $products, $mysqli;
@@ -15,7 +17,6 @@ function insert_data($products, $mysqli)
             $name = $item['NAME'];
             $s_num = $item['ID'];
             $price = number_format($item['PRICE'],2);
-            echo $price;
             $year = $item['PROD_YEAR'];
             $country = $item['PROD_COUNTRY'];
             $img = $item['IMAGE'];
@@ -47,3 +48,7 @@ function insert_data($products, $mysqli)
         $id_section++;
     }
 }
+
+$mysqli = MyDB::get_db_instance();
+parseData();
+insert_data($products,$mysqli);

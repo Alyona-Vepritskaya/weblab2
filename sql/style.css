@@ -107,6 +107,7 @@
     padding: 5px;
     color: black;
     font: inherit;
+    overflow: hidden;
 }
 
 .comment > div {
