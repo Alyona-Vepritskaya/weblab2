@@ -132,6 +132,12 @@
                     SQL
                 </a>
             </div>
+            <div class="item">
+                <a href="http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/index.php">
+                    <img src="http://k503labs.ukrdomen.com/535a/Veprytskaya/images/more.png" alt=">">
+                    CMS
+                </a>
+            </div>
             <div class="bottom-img">
                 <img src="http://k503labs.ukrdomen.com/535a/Veprytskaya/images/left-frame3.png" alt="">
             </div>
