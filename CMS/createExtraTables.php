@@ -39,6 +39,7 @@ function create_extra_tables($mysqli)
         id             int primary key auto_increment,
         author         varchar(30) not null,
         name           varchar(50) not null,
+        img            varchar(50) not null,
         content        text        not null,
         published_date datetime
     );";

@@ -36,6 +36,7 @@ h2 {
 }
 
 #formContent {
+    letter-spacing: 1px;
     -webkit-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
     background: #fff;
@@ -49,6 +50,7 @@ h2 {
 }
 
 #formFooter {
+    letter-spacing: 1px;
     background-color: #f6f6f6;
     border-top: 1px solid #dce8f1;
     padding: 25px;
