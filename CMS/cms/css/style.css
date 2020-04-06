@@ -37,33 +37,16 @@ li a:focus{
 }
 
 .content{
-    min-height: 80vh;
+    min-height: 82vh;
 }
 
 .footer{
     background: #000033;
     color: #fff;
     text-align: center;
-    padding: 21px 0;
+    padding: 20px 0;
 }
 
-/*html {
-    font-size: 14px;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    min-width: 300px;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    text-rendering: optimizeLegibility;
-}
-
-body {
-    color: #666;
-    font-family: "Source Sans Pro", "Helvetica", "Arial", sans-serif;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.4;
-}*/
 
 a {
     text-decoration: none;
