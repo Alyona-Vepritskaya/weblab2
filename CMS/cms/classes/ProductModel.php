@@ -49,7 +49,7 @@ class ProductModel
         return $this->products;
     }
 
-    function get_product_params($product_id)
+    function get_product($product_id)
     {
         $this->params = array();
         $sql_select = "select * from " . DBT_PRODUCTS . " where id =" . $product_id . ";";
@@ -78,7 +78,7 @@ class ProductModel
         return $this->params;
     }
 
-    function set_product_params($product_id, $name, $country, $price, $year, $img, $s_num)
+    function update_product($product_id, $name, $country, $price, $year, $img, $s_num)
     {
         $this->params = array();
         $sql_update = "update " . DBT_PRODUCTS . "
@@ -95,6 +95,16 @@ class ProductModel
         //TODO - update params
     }
 
+    function add_param($product_id,$param_name,$param_value)
+    {
+        $sql_insert = "insert into " . DBT_PARAM . " (name, value, id_product)
+         values ('$param_name','$param_value','$product_id');";
+        if ($this->mysqli->query($sql_insert) !== TRUE) {
+            echo "Error: " . $sql_insert . "<br>" . $this->mysqli->error;
+        }
+    }
+
+    //comments
     function get_product_reviews($product_id)
     {
         $this->comments = array();
@@ -112,7 +122,7 @@ class ProductModel
         return $this->comments;
     }
 
-    function set_product_reviews($email, $product_id, $name, $comment)
+    function add_product_reviews($email, $product_id, $name, $comment)
     {
         $tmp = htmlspecialchars($comment);
         $sql_insert = "insert into " . DBT_REVIEWS . " (name, email, comment, id_product)

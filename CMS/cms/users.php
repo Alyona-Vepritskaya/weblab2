@@ -3,64 +3,58 @@ include "../inc/connect-inc.php";
 include "../classes/MyDB.php";
 include "classes/UserModel.php";
 
-// соединение с базой и другая инициализация
+$mysqli = MyDB::get_db_instance();
 
 $action = getVar("action", ""); //?
-$viewmode = "";
 
-$userModel = new UserModel();
+$viewMode = "";
 
-switch($action)
-{
-   /* case "edit":
-        $uid = getVar("uid", 0);
-        $uid0 intval($uid);
-		if($uid0 == 0 )
+$u_Model = new UserModel($mysqli);
+
+switch ($action) {
+    case "edit":
+        $id = getVar("uid", 0); //?
+        $id0 = intval($id);
+        if ($id0 == 0)
             break;
-
-		$viewmode = "edit";
-
-		$uinfo = $userModel->getUserInfo($uid);
-		break;
-
+        $viewMode = "edit";
+        $info = $u_Model->getUser($id);
+        break;
     case "del":
-        $uid = getVar("uid", 0);
-        $uid0 intval($uid);
-		if($uid0 == 0 )
+        $id = getVar("uid", 0);
+        $id0 = intval($id);
+        if ($id0 == 0)
             break;
-
-		$userModel->removeUser($uid);
-		break;
-
+        $u_Model->deleteUser($id);
+        break;
     case "update":
-        $uid = getVar("uid", 0);
-        $uid0 intval($uid);
-		if($uid0 == 0 )
+        $id = getVar("uid", 0);
+        $id0 = intval($id);
+        if ($id0 == 0)
             break;
-
-		$uname = getVar("uname", "");
-
-		$userModel->saveUser($uid, $uname);
-		break;
-
+        $u_name = getVar("u_name", "");
+        $u_password = getVar("u_name", "");
+        $u_Model->updateUser($id, $u_name, $u_password);
+        break;
     case "add":
-        ....*/
+        $viewMode = "add";
 }
 
-if( $viewmode == "" )
-    $ulist = $userModel->getList();
+if ($viewMode == "")
+    $u_list = $u_Model->getUsers();
 
 
 include "inc/header.php";
 
-if( $viewmode == "edit" )
-{
+if ($viewMode == "edit") {
     // Тут показать интерфейс с формой редктирования пользователя
-}
-else
-{
+} else {
+    // $u_list
     // Тут показать интерфейс с таблицой всех пользователей, где в таблицу напротив каждого пользователя есть две кнопочки - Редактироваи и Удалить
     // Плюс под таблицей можно сделать форму создания нового пользователя
+    if($viewMode == "add"){
+        //поакзать форму для добавления
+    }
 }
 
 include "inc/footer.php";

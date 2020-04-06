@@ -133,7 +133,7 @@
                 </a>
             </div>
             <div class="item">
-                <a href="http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/index.php">
+                <a href="../CMS/index.php">
                     <img src="http://k503labs.ukrdomen.com/535a/Veprytskaya/images/more.png" alt=">">
                     CMS
                 </a>
