@@ -1,6 +1,6 @@
 <?php
 
-class Sessions
+class AllSessions
 {
     private $ses_id;
 
