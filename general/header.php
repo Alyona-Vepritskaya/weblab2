@@ -133,11 +133,18 @@
                 </a>
             </div>
             <div class="item">
-                <a href="../CMS/index.php">
+                <a href="../CMS/prodList.php">
                     <img src="http://k503labs.ukrdomen.com/535a/Veprytskaya/images/more.png" alt=">">
-                    CMS
+                    CMS products
                 </a>
             </div>
+            <div class="item">
+                <a href="../CMS/newsList.php">
+                    <img src="http://k503labs.ukrdomen.com/535a/Veprytskaya/images/more.png" alt=">">
+                    CMS news
+                </a>
+            </div>
+            <!--TODO pages-->
             <div class="bottom-img">
                 <img src="http://k503labs.ukrdomen.com/535a/Veprytskaya/images/left-frame3.png" alt="">
             </div>

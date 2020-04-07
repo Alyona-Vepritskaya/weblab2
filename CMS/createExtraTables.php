@@ -8,6 +8,7 @@ function create_extra_tables($mysqli)
     $sql_drop0 = "drop table if exists " . DBT_USERS . ";";
     $sql_drop1 = "drop table if exists " . DBT_USERS_SESSIONS . ";";
     $sql_drop2 = "drop table if exists " . DBT_NEWS . ";";
+    $sql_drop3 = "drop table if exists " . DBT_PAGES . ";";
 
     if ($mysqli->query($sql_drop0) !== true) {
         echo "Error dropping table: " . $mysqli->error;
@@ -18,12 +19,15 @@ function create_extra_tables($mysqli)
     if ($mysqli->query($sql_drop2) !== true) {
         echo "Error dropping table: " . $mysqli->error;
     }
+    if ($mysqli->query($sql_drop3) !== true) {
+        echo "Error dropping table: " . $mysqli->error;
+    }
 
     // sql to create tables
     $sql0 = "create table " . DBT_USERS . "
     (
         id       int primary key auto_increment,
-        login    varchar(100) not null,
+        login    varchar(100) not null unique,
         password varchar(100) not null
     );";
     $sql1 = "create table " . DBT_USERS_SESSIONS . "
@@ -37,9 +41,16 @@ function create_extra_tables($mysqli)
     $sql2 = "create table " . DBT_NEWS . "
     (
         id             int primary key auto_increment,
-        author         varchar(30) not null,
+        url            varchar(80) not null,
         name           varchar(50) not null,
-        img            varchar(50) not null,
+        content        text        not null,
+        published_date datetime
+    );";
+    $sql3 = "create table " . DBT_PAGES . "
+    (
+        id             int primary key auto_increment,
+        url            varchar(80) not null,
+        name           varchar(50) not null,
         content        text        not null,
         published_date datetime
     );";
@@ -51,6 +62,9 @@ function create_extra_tables($mysqli)
         echo "Error creating table: " . $mysqli->error;
     }
     if ($mysqli->query($sql2) !== true) {
+        echo "Error creating table: " . $mysqli->error;
+    }
+    if ($mysqli->query($sql3) !== true) {
         echo "Error creating table: " . $mysqli->error;
     }
 }

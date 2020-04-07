@@ -23,8 +23,7 @@ class ArticlesModel
                 $article = array();
                 $article['name'] = $row["name"];
                 $article['id'] = $row["id"];
-                $article['author'] = $row["author"];
-                $article['img'] = $row["img"];
+                $article['url'] = $row["url"];
                 $article['content'] = $row["content"];
                 $article['published_date'] = $row["published_date"];
                 $this->news[] = $article;
@@ -41,9 +40,8 @@ class ArticlesModel
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $this->article['name'] = $row["name"];
-                $article['img'] = $row["img"];
+                $this->article['url'] = $row["url"];
                 $this->article['id'] = $row["id"];
-                $this->article['author'] = $row["author"];
                 $this->article['content'] = $row["content"];
                 $this->article['published_date'] = $row["published_date"];
             }
@@ -51,12 +49,11 @@ class ArticlesModel
         return $this->article;
     }
 
-    public function updateArticle($a_id, $name, $author, $content, $img)
+    public function updateArticle($a_id, $name, $content, $url)
     {
         $sql_update = "update " . DBT_NEWS . "
         set name   = '" . $name . "',
-            author = '" . $author . "',
-            img = '$img',
+            url = '$url',
             content = '" . $content . "',
             published_date = CURDATE() ,
         where id = '" . $a_id . "';";
@@ -73,10 +70,10 @@ class ArticlesModel
         }
     }
 
-    public function addArticle($name, $author, $content, $img)
+    public function addArticle($name, $content, $url)
     {
-        $sql_insert = "insert into " . DBT_NEWS . " (name, author,content,published_date,img)
-         values ('$name','$author','$content',CURDATE(),'$img');";
+        $sql_insert = "insert into " . DBT_NEWS . " (name,content,published_date,url)
+         values ('$name','$content',CURDATE(),'$url');";
         if ($this->mysqli->query($sql_insert) !== TRUE) {
             echo "Error: " . $sql_insert . "<br>" . $this->mysqli->error;
         }

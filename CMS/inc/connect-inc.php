@@ -14,3 +14,4 @@ define("DBT_REVIEWS", DB_PREFIX . "reviews");
 define("DBT_USERS", DB_PREFIX . "users");
 define("DBT_USERS_SESSIONS", DB_PREFIX . "users_sessions");
 define("DBT_NEWS", DB_PREFIX . "news");
+define("DBT_PAGES", DB_PREFIX . "pages");
