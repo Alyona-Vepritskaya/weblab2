@@ -3,11 +3,17 @@ include '../general/header.php';
 include_once "classes/MyDB.php";
 include_once 'inc/connect-inc.php';
 include "cms/classes/PagesModel.php";
+include "inc/filter_input_.php";
 
+$current_page = null;
 $mysqli = MyDB::get_db_instance();
 $model = new PagesModel($mysqli);
 $pages = $model->getPages();
 
+$action = filter_input_("page", "");
+if (!empty($action)) {
+    $current_page = $model->getPageByUrl($action);
+}
 ?>
     <div class="right-col">
     <div class="news-info">
@@ -22,8 +28,19 @@ $pages = $model->getPages();
     </div>
     <div class="text-content  clearfix">
         <div class="articles">
-            <?php foreach ($pages as $key => $value) { ?>
-                    <a href="pageList.php?page=<?= $value['url'] ?>"><?= $value['url'] ?></a>
+            <ul>
+                <?php foreach ($pages as $key => $value) { ?>
+                    <li>
+                        <a href="pageList.php?page=<?= $value['url'] ?>"><?= $value['url'] ?></a>
+                    </li>
+                <?php } ?>
+            </ul>
+            <?php if (!is_null($current_page)) { ?>
+                <div class="article">
+                    <h3><?= $current_page['name'] ?></h3>
+                    <p><?= $current_page['content'] ?></p>
+                    <div class="published-date"><?= $current_page['published_date'] ?></div>
+                </div>
             <?php } ?>
         </div>
     </div>

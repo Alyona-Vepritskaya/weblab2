@@ -144,7 +144,18 @@
                     CMS news
                 </a>
             </div>
-            <!--TODO pages-->
+            <div class="item">
+                <a href="../CMS/pageList.php">
+                    <img src="http://k503labs.ukrdomen.com/535a/Veprytskaya/images/more.png" alt=">">
+                    CMS pages
+                </a>
+            </div>
+            <div class="item">
+                <a href="../CMS/usersList.php">
+                    <img src="http://k503labs.ukrdomen.com/535a/Veprytskaya/images/more.png" alt=">">
+                    CMS users
+                </a>
+            </div>
             <div class="bottom-img">
                 <img src="http://k503labs.ukrdomen.com/535a/Veprytskaya/images/left-frame3.png" alt="">
             </div>

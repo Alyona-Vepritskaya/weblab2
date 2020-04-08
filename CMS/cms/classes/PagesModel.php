@@ -49,6 +49,23 @@ class PagesModel
         return $this->page;
     }
 
+    public function getPageByUrl($url)
+    {
+        $this->page = array();
+        $sql_select = "select * from " . DBT_PAGES . " where url='" . $url . "';";
+        $result = $this->mysqli->query($sql_select);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $this->page['name'] = $row["name"];
+                $this->page['url'] = $row["url"];
+                $this->page['id'] = $row["id"];
+                $this->page['content'] = $row["content"];
+                $this->page['published_date'] = $row["published_date"];
+            }
+        }
+        return $this->page;
+    }
+
     public function updatePage($a_id, $name, $content, $url)
     {
         $sql_update = "update " . DBT_PAGES . "
