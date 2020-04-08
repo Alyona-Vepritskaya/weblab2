@@ -6,10 +6,30 @@ class PagesModel
 {
     private $mysqli;
     private $page;
+    private $pages;
 
     public function __construct($mysqli)
     {
         $this->mysqli = $mysqli;
+    }
+
+    public function getPages()
+    {
+        $this->pages = array();
+        $sql_select = "select * from " . DBT_PAGES . ";";
+        $result = $this->mysqli->query($sql_select);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $article = array();
+                $article['name'] = $row["name"];
+                $article['id'] = $row["id"];
+                $article['url'] = $row["url"];
+                $article['content'] = $row["content"];
+                $article['published_date'] = $row["published_date"];
+                $this->pages[] = $article;
+            }
+        }
+        return $this->pages;
     }
 
     public function getPage($a_id)
@@ -35,7 +55,7 @@ class PagesModel
         set name   = '" . $name . "',
             url = '$url',
             content = '" . $content . "',
-            published_date = CURDATE() ,
+            published_date = CURDATE()
         where id = '" . $a_id . "';";
         if ($this->mysqli->query($sql_update) !== true) {
             echo "Error updating record: " . $this->mysqli->error;

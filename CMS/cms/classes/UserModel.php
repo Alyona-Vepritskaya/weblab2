@@ -43,9 +43,22 @@ class UserModel
         return $this->user;
     }
 
-    public function updateUser($u_id,$u_login,$_psw)
+    public function getUserByFields($login)
     {
-        $sql_update = "update ".DBT_USERS."
+        $u_id = 0;
+        $sql_select = "select * from " . DBT_USERS . " where login='$login';";
+        $result = $this->mysqli->query($sql_select);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $u_id = $row["id"];
+            }
+        }
+        return $u_id;
+    }
+
+    public function updateUser($u_id, $u_login, $_psw)
+    {
+        $sql_update = "update " . DBT_USERS . "
         set login   = '" . $u_login . "',
             password = PASSWORD('" . $_psw . "')
         where id = '" . $u_id . "';";

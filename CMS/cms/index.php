@@ -1,9 +1,12 @@
 <?php
-include_once "classes/AllSessions.php";
-include_once "classes/UserAllSessions.php";
+include_once "classes/Sessions.php";
+include_once "classes/UserSessions.php";
 include_once "classes/UserModel.php";
 include_once "../classes/MyDB.php";
+include_once "../inc/filter_input_.php";
 
+$s = new Sessions();
+$s_id = $s->getSesId();
 function check()
 {
     $f = filter_input_('hidden_input', '');
@@ -13,37 +16,30 @@ function check()
     return false;
 }
 
-function filter_input_($name, $default)
-{
-    $result = $default;
-    if (isset($_POST[$name])) {
-        $result = $_POST[$name];
-    }
-    if (isset($_GET[$name])) {
-        $result = $_GET[$name];
-    }
-    return $result;
-}
-$password = filter_input_('password','');
-$login = filter_input_('login','');
+$password = filter_input_('password', '');
+$login = filter_input_('login', '');
+
 //check form submit
 //TODO
 /*if (check()) {
     $mysqli = MyDB::get_db_instance();
-  //$session = new Sessions();
-    $u_ses = new UserAllSessions();
     if (!empty($password) && !empty($login)) {
-        if ($u_ses->checkUser($login, $password)) {
-            //user exists
-        }else{
-            $user = new UserModel($mysqli);
+        $user = new UserModel($mysqli);
+        if ($user->getUserByFields($login) != 0) {
+            //user exist with this login exist
+        } else {
+            //create user
             $user->addUser($login,$password);
-            $u_ses->makeUserAuth($u_ses->getUserId(),session_id());
-           //echo "dfghjk";
+            //get id
+            $u_id = $user->getUserByFields($login);
+            //create session
+            $u_ses = new UserSessions();
+            $u_ses->makeUserAuth($u_id,$u_ses->getSesId());
             header('Location: http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/cms/home.php');
         }
     }
 }*/
+header('Location: http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/cms/home.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

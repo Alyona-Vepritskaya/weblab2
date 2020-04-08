@@ -55,8 +55,8 @@ class ArticlesModel
         set name   = '" . $name . "',
             url = '$url',
             content = '" . $content . "',
-            published_date = CURDATE() ,
-        where id = '" . $a_id . "';";
+            published_date = CURDATE() 
+        where id = $a_id;";
         if ($this->mysqli->query($sql_update) !== true) {
             echo "Error updating record: " . $this->mysqli->error;
         }

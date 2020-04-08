@@ -1,8 +1,9 @@
-*{
+* {
     font-family: 'Ubuntu', sans-serif;
     letter-spacing: 1px;
     margin: 0;
 }
+
 ul {
     list-style-type: none;
     margin: 0;
@@ -26,26 +27,26 @@ li a {
 
 li a:hover {
     transition: 0.3s ease-in-out;
-    background:linear-gradient(360deg, #95DBFE, #5AA9FB);
+    background: linear-gradient(360deg, #95DBFE, #5AA9FB);
     color: blue;
 }
 
-li a:focus{
-    background:linear-gradient(360deg, #95DBFE, #5AA9FB);
+li a:focus {
+    background: linear-gradient(360deg, #95DBFE, #5AA9FB);
     color: blue;
     font-weight: bold;
 }
 
-.content{
-    min-height: 82vh;
+.content {
+    text-align: center;
 }
 
-.footer{
+/*.footer{
     background: #000033;
     color: #fff;
     text-align: center;
     padding: 20px 0;
-}
+}*/
 
 
 a {
@@ -58,144 +59,98 @@ div, h2, p, figure {
     padding: 0;
 }
 
-.header {
+#customers {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 10px auto;
+}
+
+#customers td, #customers th {
+    border: 1px solid #0000AE;
+    padding: 8px;
+}
+
+#customers tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#customers tr:hover {
+    background-color: #ddd;
+}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
     color: white;
-    padding: 40px 0 20px;
-    text-align: center;
 }
 
-.header h1 {
-    font-size: 40px;
-    font-weight: bold;
-}
-
-.header h2 a {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+.buy-item {
+    transition: all ease 0.5s;
+    margin: 10px auto;
+    font: inherit;
+    font-size: 24px;
+    display: block;
+    padding: 10px 70px;
+    border: none;
+    background: linear-gradient(360deg, #0734ED, #10106c);
     color: white;
-    font-size: 20px;
-    opacity: 0.5;
+    letter-spacing: 1px;
+    border-radius: 18px;
 }
 
-.header h2 a:hover {
-    border-bottom-color: white;
-    opacity: 1;
+.buy-item:focus,
+.close:focus {
+    outline: none;
 }
 
-.main {
-    margin: 0 auto;
-    max-width: 1040px;
-    padding: 10px;
-}
-
-.column {
-    flex: 1;
-    flex-direction: column;
-}
-
-.article {
-    background: white;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    color: #666;
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    flex-basis: auto;
-    margin: 10px;
-}
-
-.article:hover,
-.article:focus {
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-    color: #444;
-}
-
-.article-image {
-    background: #eee;
-    display: block;
-    padding-top: 75%;
-    position: relative;
-    width: 100%;
-}
-
-.article-image img {
-    display: block;
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-}
-
-.article-image.is-3by2 {
-    padding-top: 66.6666%;
-}
-
-.article-image.is-16by9 {
-    padding-top: 56.25%;
-}
-
-.article-body {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    padding: 20px;
-}
-
-.article-title {
-    color: #333;
-    flex-shrink: 0;
-    font-size: 1.4em;
-    font-weight: 700;
-    line-height: 1.2;
-}
-
-.article-content {
-    flex: 1;
-    margin-top: 5px;
-}
-
-.article-info {
-    display: flex;
-    font-size: 0.85em;
-    justify-content: space-between;
-    margin-top: 10px;
-}
-
-@media screen and (min-width: 800px) {
-    .columns,
-    .column {
-        display: flex;
-    }
-}
-
-@media screen and (min-width: 1000px) {
-    .first-article {
-        flex-direction: row;
-    }
-
-    .first-article .article-body {
-        flex: 1;
-    }
-
-    .first-article .article-image {
-        height: 300px;
-        order: 2;
-        padding-top: 0;
-        width: 400px;
-    }
-
-    .main-column {
-        flex: 3;
-    }
-
-    .nested-column {
-        max-width: 900px;
-        margin: auto;
-    }
-}
-
-.big-title{
-    text-align: center;
-    padding: 5px;
+.buy-item:hover,
+.buy-item2:hover{
+    transition: all ease 0.5s;
+    background: linear-gradient(360deg, #95DBFE, #5AA9FB);
     color: #0000AE;
+}
+
+.buy-item:disabled {
+    background: linear-gradient(360deg, slategrey, #6979a0);
+    color: white;
+}
+
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.buy-item2 {
+    transition: all ease 0.5s;
+    font: inherit;
+    display: block;
+    padding: 10px 10px;
+    border: none;
+    background: linear-gradient(360deg, #0734ED, #10106c);
+    color: white;
+    letter-spacing: 1px;
+    border-radius: 18px;
+}
+
+.f1 {
+    color: inherit;
+    text-align: center;
+    width: 60%;
+    margin: 20px auto;
+    background: #5AA9FB;
+    padding: 10px;
+    border: 3px solid #0000AE;
+}
+
+.edit {
+    margin: 10px auto;
+    min-width: 98%;
+    min-height: 300px;
 }
