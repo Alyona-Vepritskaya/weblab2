@@ -40,7 +40,7 @@ if ($viewMode == "edit") { ?>
     <div class="form-inside">
         <form class="f1" action="users.php?action=update&id=<?= $info['id'] ?>" method="post">
             Login
-            <input required pattern="[^ ]" class="fadeIn second" type="text" name="login" value="<?= $info['login'] ?>">
+            <input required class="fadeIn second" type="text" name="login" value="<?= $info['login'] ?>">
             Password
             <input required name="password" class="fadeIn second" type="password" value="">
             <input type="submit" class="buy-item" value="Update">
@@ -67,7 +67,7 @@ if ($viewMode == "edit") { ?>
         <form class="f1" action="users.php?action=add" method="post">
             <input type="hidden" name="hidden_input" value="add_user">
             Login
-            <input required pattern="[^ ]" type="text" class="fadeIn second" name="login" placeholder="">
+            <input required type="text" class="fadeIn second" name="login" placeholder="">
             Password
             <input required type="password" class="fadeIn second" name="password" placeholder="">
             <input type="submit" class="buy-item" value="Add User">

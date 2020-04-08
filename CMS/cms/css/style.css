@@ -106,7 +106,7 @@ div, h2, p, figure {
 }
 
 .buy-item:hover,
-.buy-item2:hover{
+.buy-item2:hover {
     transition: all ease 0.5s;
     background: linear-gradient(360deg, #95DBFE, #5AA9FB);
     color: #0000AE;
@@ -117,7 +117,7 @@ div, h2, p, figure {
     color: white;
 }
 
-input[type=password],input[type=text], select {
+input[type=password], input[type=email], input[type=text], select {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;

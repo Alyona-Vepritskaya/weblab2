@@ -42,7 +42,7 @@ if ($viewMode == "edit") { ?>
     <div class="form-inside">
         <form class="f1" action="news.php?action=update&id=<?= $info['id'] ?>" method="post">
             Title
-            <input required pattern="[^ ]" class="fadeIn second" type="text" name="name" value="<?= $info['name'] ?>">
+            <input required  class="fadeIn second" type="text" name="name" value="<?= $info['name'] ?>">
             Content
             <textarea required name="content" class="edit"><?= $info['content'] ?></textarea>
             Url
@@ -73,7 +73,7 @@ if ($viewMode == "edit") { ?>
         <form class="f1" action="news.php?action=add" method="post">
             <input type="hidden" name="hidden_input" value="add_article">
             Article name
-            <input required pattern="[^ ]" type="text" class="fadeIn second" name="name" placeholder="">
+            <input required type="text" class="fadeIn second" name="name" placeholder="">
             Content
             <textarea required name="content" class="edit"></textarea>
             Url

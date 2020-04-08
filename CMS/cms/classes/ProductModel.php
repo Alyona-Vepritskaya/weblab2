@@ -64,6 +64,8 @@ class ProductModel
                 $this->params['img'] = $row["img"];
                 $this->params['price'] = $row["price"];
             }
+        } else {
+            return 0;
         }
         $sql_select2 = "select * from " . DBT_PARAM . " where id_product =" . $product_id . ";";
         $result2 = $this->mysqli->query($sql_select2);
@@ -105,6 +107,25 @@ class ProductModel
     }
 
     //comments
+    function getProductsReviews()
+    {
+        $this->comments = array();
+        $sql_select = "select * from " . DBT_REVIEWS . ";";
+        $result = $this->mysqli->query($sql_select);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $item = array();
+                $item['id'] = $row['id'];
+                $item['id_product'] = $row['id_product'];
+                $item['name'] = $row['name'];
+                $item['email'] = $row['email'];
+                $item['comment'] = $row['comment'];
+                $this->comments[] = $item;
+            }
+        }
+        return $this->comments;
+    }
+
     function getProductReviews($product_id)
     {
         $this->comments = array();
