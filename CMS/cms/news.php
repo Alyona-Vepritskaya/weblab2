@@ -36,7 +36,7 @@ switch ($action) {
 
 if ($viewMode == "")
     $list = $model->getArticles();
-
+$mysqli->close();
 include "inc/header.php";
 if ($viewMode == "edit") { ?>
     <div class="form-inside">

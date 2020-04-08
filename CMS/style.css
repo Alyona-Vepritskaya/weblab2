@@ -124,3 +124,19 @@
     color: #fff;
     border-radius: 20px;
 }
+
+.articles{
+    margin: 50px 30px;
+}
+
+.article{
+    border: 2px solid #0000AE;
+    padding: 15px;
+    background: aliceblue;
+    margin: 10px 0;
+}
+
+.published-date{
+    float: right;
+    color: #0000AE;
+}
