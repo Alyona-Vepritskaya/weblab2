@@ -41,9 +41,12 @@ include "inc/header.php";
 if ($viewMode == "edit") { ?>
     <div class="form-inside">
         <form class="f1" action="news.php?action=update&id=<?= $info['id'] ?>" method="post">
-            Title <input class="fadeIn second" type="text" name="name" value="<?= $info['name'] ?>">
-            Content <textarea name="content" class="edit"><?= $info['content'] ?></textarea>
-            Url <input name="url" class="fadeIn second" type="text" value="<?= $info['url'] ?>">
+            Title
+            <input required pattern="[^ ]" class="fadeIn second" type="text" name="name" value="<?= $info['name'] ?>">
+            Content
+            <textarea required name="content" class="edit"><?= $info['content'] ?></textarea>
+            Url
+            <input name="url" required class="fadeIn second" type="text" value="<?= $info['url'] ?>">
             <input type="submit" class="buy-item" value="Update">
         </form>
     </div>
@@ -69,10 +72,13 @@ if ($viewMode == "edit") { ?>
     <div class="form-inside">
         <form class="f1" action="news.php?action=add" method="post">
             <input type="hidden" name="hidden_input" value="add_article">
-            <div>Article name<input type="text" class="fadeIn second" name="name" placeholder=""></div>
-            <div>Content<textarea name="content" class="edit"></textarea></div>
-            <div>Url<input type="text" class="fadeIn second" name="url" placeholder=""></div>
-            <div><input type="submit" class="buy-item" value="Add Article"></div>
+            Article name
+            <input required pattern="[^ ]" type="text" class="fadeIn second" name="name" placeholder="">
+            Content
+            <textarea required name="content" class="edit"></textarea>
+            Url
+            <input required type="text" class="fadeIn second" name="url" placeholder="">
+            <input type="submit" class="buy-item" value="Add Article">
         </form>
     </div>
     <?php

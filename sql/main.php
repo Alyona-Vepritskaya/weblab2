@@ -7,7 +7,7 @@ $path = "http://k503labs.ukrdomen.com/535a/Veprytskaya/images/";
 $mysqli = MyDB::get_db_instance();
 
 $p_model = new ProductModel($mysqli);
-$sections = $p_model->get_sections();
+$sections = $p_model->getSections();
 
 $all_products = null;
 $one_product = null;

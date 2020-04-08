@@ -1,7 +1,7 @@
 <?php
 include "../inc/connect-inc.php";
 include "../classes/MyDB.php";
-include "classes/UserModel.php";
+include "classes/ProductModel.php";
 include_once "../inc/filter_input_.php";
 
 //TODO - check session
@@ -9,12 +9,12 @@ include_once "../inc/filter_input_.php";
 $mysqli = MyDB::get_db_instance();
 $action = filter_input_("action", "");
 $viewMode = "";
-$model = new UserModel($mysqli);
+$model = new ProductModel($mysqli);
 switch ($action) {
     case "edit":
         $id = filter_input_("id", 0);
         $viewMode = "edit";
-        $info = $model->getUser($id);
+        $info = $model->getProductReviews($id);
         break;
     case "delete":
         $id = filter_input_("id", 0);

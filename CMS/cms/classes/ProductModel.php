@@ -15,7 +15,7 @@ class ProductModel
         $this->mysqli = $mysqli;
     }
 
-    function get_sections()
+    function getSections()
     {
         $this->sections = array();
         $sql_select = "select * from " . DBT_SECTIONS . ";";
@@ -28,7 +28,7 @@ class ProductModel
         return $this->sections;
     }
 
-    function get_products($section_id)
+    function getProducts($section_id)
     {
         $this->products = array();
         $sql_select = "select * from " . DBT_PRODUCTS . " where id_section =" . $section_id . ";";
@@ -49,7 +49,7 @@ class ProductModel
         return $this->products;
     }
 
-    function get_product($product_id)
+    function getProduct($product_id)
     {
         $this->params = array();
         $sql_select = "select * from " . DBT_PRODUCTS . " where id =" . $product_id . ";";
@@ -78,7 +78,7 @@ class ProductModel
         return $this->params;
     }
 
-    function update_product($product_id, $name, $country, $price, $year, $img, $s_num)
+    function updateProduct($product_id, $name, $country, $price, $year, $img, $s_num)
     {
         $this->params = array();
         $sql_update = "update " . DBT_PRODUCTS . "
@@ -95,7 +95,7 @@ class ProductModel
         //TODO - update params
     }
 
-    function add_param($product_id,$param_name,$param_value)
+    function addParam($product_id, $param_name, $param_value)
     {
         $sql_insert = "insert into " . DBT_PARAM . " (name, value, id_product)
          values ('$param_name','$param_value','$product_id');";
@@ -105,7 +105,7 @@ class ProductModel
     }
 
     //comments
-    function get_product_reviews($product_id)
+    function getProductReviews($product_id)
     {
         $this->comments = array();
         $sql_select = "select * from " . DBT_REVIEWS . " where id_product ='" . $product_id . "';";
@@ -122,7 +122,7 @@ class ProductModel
         return $this->comments;
     }
 
-    function add_product_reviews($email, $product_id, $name, $comment)
+    function addProductReviews($email, $product_id, $name, $comment)
     {
         $tmp = htmlspecialchars($comment);
         $sql_insert = "insert into " . DBT_REVIEWS . " (name, email, comment, id_product)
@@ -132,7 +132,7 @@ class ProductModel
         }
     }
 
-    function delete_product_reviews($id)
+    function deleteProductReviews($id)
     {
         $sql_del = "delete from " . DBT_REVIEWS . " where id='" . $id . "';";
         if ($this->mysqli->query($sql_del) !== TRUE) {
