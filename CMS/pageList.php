@@ -44,5 +44,4 @@ if (!empty($action)) {
             <?php } ?>
         </div>
     </div>
-<?php
-include "../general/footer.php";
+<?php include "../general/footer.php";

@@ -6,8 +6,7 @@ include "cms/classes/ArticlesModel.php";
 $mysqli = MyDB::get_db_instance();
 $model = new ArticlesModel($mysqli);
 $articles = $model->getArticles();
-include '../general/header.php';
-?>
+include '../general/header.php'; ?>
     <div class="right-col">
     <div class="news-info">
         <a href="">
