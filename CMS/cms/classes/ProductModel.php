@@ -22,16 +22,49 @@ class ProductModel
         $result = $this->mysqli->query($sql_select);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
+                $tmp = array();
+                $tmp["id"] = $row["id"];
+                $tmp["name"] = $row["name"];
+                $this->sections[] = $tmp;
+            }
+        }
+        return $this->sections;
+    }
+
+    function getSectionsNames()
+    {
+        $this->sections = array();
+        $sql_select = "select * from " . DBT_SECTIONS . ";";
+        $result = $this->mysqli->query($sql_select);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
                 $this->sections[$row["id"]] = $row["name"];
             }
         }
         return $this->sections;
     }
 
+    function getAllProducts()
+    {
+        $this->products = array();
+        $sql_select = "select * from " . DBT_PRODUCTS . ";";
+        $result = $this->mysqli->query($sql_select);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $item = array();
+                $item['id'] = $row["id"];
+                $item['name'] = $row["name"];
+                $item['s_num'] = $row["s_num"];
+                $this->products[] = $item;
+            }
+        }
+        return $this->products;
+    }
+
     function getProducts($section_id)
     {
         $this->products = array();
-        $sql_select = "select * from " . DBT_PRODUCTS . " where id_section =" . $section_id . ";";
+        $sql_select = "select * from " . DBT_PRODUCTS . " where id_section ='" . $section_id . "';";
         $result = $this->mysqli->query($sql_select);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
@@ -94,13 +127,51 @@ class ProductModel
         if ($this->mysqli->query($sql_update) !== true) {
             echo "Error updating record: " . $this->mysqli->error;
         }
-        //TODO - update params
     }
 
-    function addParam($product_id, $param_name, $param_value)
+    function addProduct($name, $country, $price, $year, $img, $s_num, $id_section)
     {
-        $sql_insert = "insert into " . DBT_PARAM . " (name, value, id_product)
-         values ('$param_name','$param_value','$product_id');";
+        $sql_insert = "insert into " . DBT_PRODUCTS . " (name, country, price, year, img, s_num, id_section)
+         values ('$name','$country','$price','$year','$img','$s_num','$id_section');";
+        if ($this->mysqli->query($sql_insert) !== TRUE) {
+            echo "Error: " . $sql_insert . "<br>" . $this->mysqli->error;
+        }
+    }
+
+    function getProductBySNum($s_num)
+    {
+        $id = 0;
+        $sql_select = "select * from " . DBT_PRODUCTS . " where s_num ='" . $s_num . "';";
+        $result = $this->mysqli->query($sql_select);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $id = $row['id'];
+            }
+        }
+        return $id;
+    }
+
+    function deleteProduct($id)
+    {
+        $sql_del = "delete from " . DBT_PRODUCTS . " where id='" . $id . "';";
+        if ($this->mysqli->query($sql_del) !== TRUE) {
+            echo "Error: " . $sql_del . "<br>" . $this->mysqli->error;
+        }
+        $this->deleteParams($id);
+    }
+
+    function deleteParams($id)
+    {
+        $sql_del = "delete from " . DBT_PARAM . " where id_product='" . $id . "';";
+        if ($this->mysqli->query($sql_del) !== TRUE) {
+            echo "Error: " . $sql_del . "<br>" . $this->mysqli->error;
+        }
+    }
+
+    function addParam($product_id, $param_name, $param_value, $param_sort)
+    {
+        $sql_insert = "insert into " . DBT_PARAM . " (name, value, id_product,sort)
+         values ('$param_name','$param_value','$product_id','$param_sort');";
         if ($this->mysqli->query($sql_insert) !== TRUE) {
             echo "Error: " . $sql_insert . "<br>" . $this->mysqli->error;
         }

@@ -4,11 +4,11 @@ include_once 'classes/MyDB.php';
 include_once 'inc/connect-inc.php';
 include_once 'cms/classes/ProductModel.php';
 
-$path = "http://k503labs.ukrdomen.com/535a/Veprytskaya/images/";
+$path = "http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/cms/img/";
 $mysqli = MyDB::get_db_instance();
 
 $p_model = new ProductModel($mysqli);
-$sections = $p_model->getSections();
+$sections = $p_model->getSectionsNames();
 
 $all_products = null;
 $one_product = null;
