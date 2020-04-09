@@ -32,10 +32,10 @@ class PagesModel
         return $this->pages;
     }
 
-    public function getPage($a_id)
+    public function getPage($id)
     {
         $this->page = array();
-        $sql_select = "select * from " . DBT_PAGES . " where id='" . $a_id . "';";
+        $sql_select = "select * from " . DBT_PAGES . " where id='" . $id . "';";
         $result = $this->mysqli->query($sql_select);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
@@ -66,22 +66,22 @@ class PagesModel
         return $this->page;
     }
 
-    public function updatePage($a_id, $name, $content, $url)
+    public function updatePage($id, $name, $content, $url)
     {
         $sql_update = "update " . DBT_PAGES . "
         set name   = '" . $name . "',
             url = '$url',
             content = '" . $content . "',
             published_date = CURDATE()
-        where id = '" . $a_id . "';";
+        where id = '" . $id . "';";
         if ($this->mysqli->query($sql_update) !== true) {
             echo "Error updating record: " . $this->mysqli->error;
         }
     }
 
-    public function deletePage($a_id)
+    public function deletePage($id)
     {
-        $sql_del = "delete from " . DBT_PAGES . " where id='" . $a_id . "';";
+        $sql_del = "delete from " . DBT_PAGES . " where id='" . $id . "';";
         if ($this->mysqli->query($sql_del) !== TRUE) {
             echo "Error: " . $sql_del . "<br>" . $this->mysqli->error;
         }

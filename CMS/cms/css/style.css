@@ -155,3 +155,8 @@ input[type=password], input[type=email], input[type=text], select {
     min-width: 98%;
     min-height: 300px;
 }
+
+.m-auto{
+    width: 50%;
+    margin: 10px auto;
+}

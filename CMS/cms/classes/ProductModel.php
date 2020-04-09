@@ -97,14 +97,14 @@ class ProductModel
                 $this->params['img'] = $row["img"];
                 $this->params['price'] = $row["price"];
             }
-        } else {
+        } else
             return 0;
-        }
         $sql_select2 = "select * from " . DBT_PARAM . " where id_product =" . $product_id . ";";
         $result2 = $this->mysqli->query($sql_select2);
         if ($result2->num_rows > 0) {
             while ($row = $result2->fetch_assoc()) {
                 $item = array();
+                $item['id'] = $row["id"];
                 $item['name'] = $row["name"];
                 $item['value'] = $row["value"];
                 $this->params['param'][] = $item;
@@ -115,18 +115,33 @@ class ProductModel
 
     function updateProduct($product_id, $name, $country, $price, $year, $img, $s_num)
     {
-        $this->params = array();
-        $sql_update = "update " . DBT_PRODUCTS . "
+        if (!empty($img)) {
+            $this->params = array();
+            $sql_update = "update " . DBT_PRODUCTS . "
             set name = '" . $name . "',
             s_num ='" . $s_num . "',
             price ='" . $price . "',
             year ='" . $year . "',
             country ='" . $country . "',
-            img ='" . $img . "',
+            img ='" . $img . "'
+            where id = $product_id;";
+            if ($this->mysqli->query($sql_update) !== true) {
+                echo "Error updating record: " . $this->mysqli->error;
+            }
+        } else {
+            $this->params = array();
+            $sql_update = "update " . DBT_PRODUCTS . "
+            set name = '" . $name . "',
+            s_num ='" . $s_num . "',
+            price ='" . $price . "',
+            year ='" . $year . "',
+            country ='" . $country . "'
             where id = '" . $product_id . "';";
-        if ($this->mysqli->query($sql_update) !== true) {
-            echo "Error updating record: " . $this->mysqli->error;
+            if ($this->mysqli->query($sql_update) !== true) {
+                echo "Error updating record: " . $this->mysqli->error;
+            }
         }
+        $this->deleteParams($product_id);
     }
 
     function addProduct($name, $country, $price, $year, $img, $s_num, $id_section)
@@ -160,9 +175,18 @@ class ProductModel
         $this->deleteParams($id);
     }
 
-    function deleteParams($id)
+    //Params
+    function deleteParams($id_product)
     {
-        $sql_del = "delete from " . DBT_PARAM . " where id_product='" . $id . "';";
+        $sql_del = "delete from " . DBT_PARAM . " where id_product='" . $id_product . "';";
+        if ($this->mysqli->query($sql_del) !== TRUE) {
+            echo "Error: " . $sql_del . "<br>" . $this->mysqli->error;
+        }
+    }
+
+    function deleteParam($id)
+    {
+        $sql_del = "delete from " . DBT_PARAM . " where id='" . $id . "';";
         if ($this->mysqli->query($sql_del) !== TRUE) {
             echo "Error: " . $sql_del . "<br>" . $this->mysqli->error;
         }
@@ -177,7 +201,7 @@ class ProductModel
         }
     }
 
-    //comments
+    //Comments
     function getProductsReviews()
     {
         $this->comments = array();

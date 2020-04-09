@@ -10,35 +10,53 @@ $mysqli = MyDB::get_db_instance();
 $action = filter_input_("action", "");
 $viewMode = "";
 $model = new PagesModel($mysqli);
+$error_message = null;
 switch ($action) {
     case "edit":
         $id = filter_input_("id", 0);
-        $viewMode = "edit";
-        $info = $model->getPage($id);
+        if($id != 0) {
+            $viewMode = "edit";
+            $info = $model->getPage($id);
+        }else{
+            $error_message = "Can not edit page, incorrect id";
+        }
         break;
     case "delete":
         $id = filter_input_("id", 0);
-        $model->deletePage($id);
+        if($id != 0) {
+            $model->deletePage($id);
+        }else{
+            $error_message = "Can not delete page, incorrect id";
+        }
         break;
     case "update":
         $id = filter_input_("id", 0);
         $name = filter_input_("name", "");
         $url = filter_input_("url", "");
         $content = filter_input_("content", "");
-        $model->updatePage($id, $name, $content, $url);
+        if($id != 0 && !empty($name) && !empty($content) && !empty($url)) {
+            $model->updatePage($id, $name, $content, $url);
+        }else{
+            $error_message = "Can not add update, incorrect input data";
+        }
         break;
     case "add":
         $name = filter_input_("name", "");
         $url = filter_input_("url", "");
         $content = filter_input_("content", "");
-        $model->addPage($name, $content, $url);
+        if(!empty($name) && !empty($content) && !empty($url)) {
+            $model->addPage($name, $content, $url);
+        }else{
+            $error_message = "Can not add page, incorrect input data";
+        }
 }
 
 if ($viewMode == "")
     $list = $model->getPages();
-
+$mysqli->close();
 include "inc/header.php";
 if ($viewMode == "edit") { ?>
+    <div class="m-auto"> <h4><?= $error_message ?></h4> </div>
     <div class="form-inside">
         <form class="f1" action="pages.php?action=update&id=<?= $info['id'] ?>" method="post">
             Title
@@ -69,6 +87,7 @@ if ($viewMode == "edit") { ?>
             </tr>
         <?php } ?>
     </table>
+    <div class="m-auto"> <h4><?= $error_message ?></h4> </div>
     <div class="form-inside">
         <form class="f1" action="pages.php?action=add" method="post">
             <input type="hidden" name="hidden_input" value="add_page">

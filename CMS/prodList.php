@@ -22,32 +22,22 @@ $comment = trim(filter_input_('comment', ''));
 $q = filter_input_("section", '');
 $id = filter_input_("id", '');
 
-function check()
-{
+function check(){
     $f = filter_input_('hidden_input', '');
-    if ($f == 'first') {
+    if ($f == 'first')
         return true;
-    }
     return false;
 }
-
-function get_products($p_model, $section_id)
-{
+function get_products($p_model, $section_id){
     return $p_model->getProducts($section_id);
 }
-
-function get_product($p_model, $prod_id)
-{
+function get_product($p_model, $prod_id){
     return array("params" => $p_model->getProduct($prod_id), "comments" => $p_model->getProductReviews($prod_id));
 }
-
-function set_comment($p_model, $email, $id, $name, $comment)
-{
+function set_comment($p_model, $email, $id, $name, $comment){
     $p_model->addProductReviews($email, $id, $name, $comment);
 }
-
-function filter_input_($name, $default)
-{
+function filter_input_($name, $default){
     $result = $default;
     if (isset($_POST[$name])) {
         $result = $_POST[$name];
@@ -93,8 +83,7 @@ if (check()) {
         </div>
         <div class="text-content  clearfix">
             <div class="products">
-                <?php
-                if (is_null($one_product)) {
+                <?php if (is_null($one_product)) {
                     foreach ($sections as $key => $value) { ?>
                         <a href="prodList.php?section=<?= $key ?>" class="buy-item"><?= $value ?></a>
                         <?php
@@ -117,8 +106,7 @@ if (check()) {
                             }
                         }
                     }
-                } else {
-                ?>
+                } else { ?>
                 <a href="prodList.php?section=<?= $one_product['id_section'] ?>" class="buy-item more">Back</a>
                 <div class="product">
                     <div class="item-name"><?= $one_product['name'] ?></div>
@@ -136,6 +124,7 @@ if (check()) {
                         </div>
                     </div>
                 </div>
+                <!--Send comment form-->
                 <form action="" name="review" method="POST" class="form2">
                     <input type="hidden" name="hidden_input" value="first">
                     <div class="block">
@@ -169,5 +158,4 @@ if (check()) {
             } ?>
         </div>
     </div>
-
 <?php include '../general/footer.php';

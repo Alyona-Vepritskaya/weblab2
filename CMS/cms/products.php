@@ -5,10 +5,10 @@ include "classes/ProductModel.php";
 include_once "../inc/filter_input_.php";
 
 //TODO - check session
+
 function get_image()
 {
     $path = __DIR__ . '/img/';
-    //echo $path;
     $submit = filter_input_('input_submit', '');
     if (!empty($submit) && (!empty($_FILES['file']['tmp_name']))) {
         $loaded_file = $_FILES['file'];
@@ -18,30 +18,47 @@ function get_image()
     return '';
 }
 
-get_image();
+get_image(); //to load img on server
 $mysqli = MyDB::get_db_instance();
 $action = filter_input_("action", "");
-$viewMode = "";
+$viewMode = '';
 $model = new ProductModel($mysqli);
 $sections = $model->getSections();
+$error_message = null;
 switch ($action) {
-    /*   case "edit":
-           $id = filter_input_("id", 0);
-           $viewMode = "edit";
-           $info = $model->getProduct($id);
-           break;*/
+    case "edit":
+        $id = filter_input_("id", 0);
+        if ($id != 0) {
+            $viewMode = "edit";
+            $info = $model->getProduct($id);
+        } else {
+            $error_message = "Can not edit product, incorrect id";
+        }
+        break;
     case "delete":
         $id = filter_input_("id", 0);
-        $model->deleteProduct($id);
+        if ($id != 0) {
+            $model->deleteProduct($id);
+        } else {
+            $error_message = "Can not delete product, incorrect id";
+        }
         break;
-    /*    case "update_product":
-            //TODO
-            $id = filter_input_("id", 0);
-            $name = filter_input_("name", "");
-            $url = filter_input_("url", "");
-            $content = filter_input_("content", "");
-            /*$model->updateProduct($id, $name, $content, $url);
-            break;*/
+    case "update_product":
+        $id = filter_input_("id", 0);
+        $name = filter_input_("name", "");
+        $country = filter_input_("country", "");
+        $price = filter_input_("price", "");
+        $year = filter_input_("year", "");
+        $s_num = filter_input_("s_num", "");
+        $img_name = get_image();
+        if ($id != 0 && !empty($name) && !empty($country) && !empty($price) && !empty($year) && !empty($s_num)) {
+            $viewMode = "add_extra_info";
+            $model->updateProduct($id, $name, $country, $price, $year, $img_name, $s_num);
+        } else {
+            $viewMode = "add_extra_info";
+            $error_message = "Can not update product, incorrect input data";
+        }
+        break;
     case "add_main_info":
         $name = filter_input_("name", "");
         $country = filter_input_("country", "");
@@ -50,17 +67,27 @@ switch ($action) {
         $s_num = filter_input_("s_num", "");
         $id_section = filter_input_("select", "");
         $img_name = get_image();
-        $model->addProduct($name, $country, $price, $year, $img_name, $s_num, $id_section);
-        $id = $model->getProductBySNum($s_num);
-        $viewMode = "add_extra_info";
+        if (!empty($name) && !empty($country) && !empty($price) && !empty($year) && !empty($s_num) && !empty($img_name)) {
+            $model->addProduct($name, $country, $price, $year, $img_name, $s_num, $id_section);
+            $id = $model->getProductBySNum($s_num);
+            $viewMode = "add_extra_info";
+        } else {
+            $error_message = "Can not add product, incorrect input data";
+            $viewMode = "add_extra_info";
+        }
         break;
     case "add_extra_info":
         $id = filter_input_("id", "");
         $name = filter_input_("param_name", "");
         $value = filter_input_("param_value", "");
         $sort = filter_input_("param_sort", "");
-        $model->addParam($id, $name, $value,$sort);
-        $viewMode = "add_extra_info";
+        if (!empty($name) && !empty($value) && !empty($sort)) {
+            $model->addParam($id, $name, $value, $sort);
+            $viewMode = "add_extra_info";
+        } else {
+            $viewMode = "add_extra_info";
+            $error_message = "Can not add product, incorrect input data";
+        }
         break;
 }
 
@@ -71,9 +98,28 @@ $mysqli->close();
 include "inc/header.php";
 if ($viewMode == "edit") { ?>
     <div class="form-inside">
+        <div class="m-auto"><h4><?= $error_message ?></h4></div>
+        <form class="f1" action="products.php?action=update_product&id=<?= $id ?>" method="post"
+              enctype="multipart/form-data">
+            Name
+            <input required class="fadeIn second" type="text" name="name" value="<?= $info['name'] ?>">
+            Serial number
+            <input name="s_num" required class="fadeIn second" type="text" value="<?= $info['s_num'] ?>">
+            Price:
+            <input name="price" required class="fadeIn second" type="text" value="<?= $info['price'] ?>">
+            Production date
+            <input name="year" required class="fadeIn second" type="text" value="<?= $info['year'] ?>">
+            Production country
+            <input name="country" required class="fadeIn second" type="text" value="<?= $info['country'] ?>">
+            New Image
+            <input name="file" class="fadeIn second" type="file">
+            <input type="submit" class="buy-item" value="Update" name="input_submit">
+        </form>
     </div>
 <?php } elseif ($viewMode == "add_extra_info") { ?>
+    <!--Add params form-->
     <div class="form-inside">
+        <div class="m-auto"><h4><?= $error_message ?></h4></div>
         <form class="f1" action="products.php?action=add_extra_info&id=<?= $id ?>" method="post">
             Param name
             <input required class="fadeIn second" type="text" name="param_name" value="">
@@ -81,7 +127,7 @@ if ($viewMode == "edit") { ?>
             <input name="param_value" required class="fadeIn second" type="text" value="">
             Serial number when display information (number)
             <input name="param_sort" required class="fadeIn second" type="text" value="">
-            <input type="submit" class="buy-item" value="Update">
+            <input type="submit" class="buy-item" value="Add param">
             <a href="products.php" class="buy-item2">Back to tables</a>
         </form>
     </div>
@@ -104,7 +150,9 @@ if ($viewMode == "edit") { ?>
             </tr>
         <?php } ?>
     </table>
+    <div class="m-auto"><h4><?= $error_message ?></h4></div>
     <div class="form-inside">
+        <!--Add form-->
         <form class="f1" action="products.php?action=add_main_info" method="post" enctype="multipart/form-data">
             Name
             <input required class="fadeIn second" type="text" name="name" value="">

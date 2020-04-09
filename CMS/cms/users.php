@@ -3,40 +3,57 @@ include "../inc/connect-inc.php";
 include "../classes/MyDB.php";
 include "classes/UserModel.php";
 include_once "../inc/filter_input_.php";
-
+include "inc/header.php";
 //TODO - check session
 
 $mysqli = MyDB::get_db_instance();
 $action = filter_input_("action", "");
 $viewMode = "";
 $model = new UserModel($mysqli);
+$error_message = null;
 switch ($action) {
     case "edit":
         $id = filter_input_("id", 0);
-        $viewMode = "edit";
-        $info = $model->getUser($id);
+        if($id != 0) {
+            $viewMode = "edit";
+            $info = $model->getUser($id);
+        } else {
+            $error_message = "Can not edit user, incorrect id";
+        }
         break;
     case "delete":
         $id = filter_input_("id", 0);
-        $model->deleteUser($id);
+        if($id != 0) {
+            $model->deleteUser($id);
+        }else{
+            $error_message = "Can not delete user, incorrect id";
+        }
         break;
     case "update":
         $id = filter_input_("id", 0);
         $login = filter_input_("login", "");
         $password = filter_input_("password", "");
-        $model->updateUser($id, $login, $password);
+        if($id != 0 && !empty($login) && !empty($password)) {
+            $model->updateUser($id, $login, $password);
+        }else{
+            $error_message = "Can not update user, incorrect input data";
+        }
         break;
     case "add":
         $login = filter_input_("login", "");
         $password = filter_input_("password", "");
-        $model->addUser($login, $password);
+        if(!empty($login) && !empty($password)) {
+            $model->addUser($login, $password);
+        }else{
+            $error_message = "Can not add user, incorrect input data";
+        }
 }
 
 if ($viewMode == "")
     $list = $model->getUsers();
-
-include "inc/header.php";
+$mysqli->close();
 if ($viewMode == "edit") { ?>
+    <div class="m-auto"> <h4><?= $error_message ?></h4> </div>
     <div class="form-inside">
         <form class="f1" action="users.php?action=update&id=<?= $info['id'] ?>" method="post">
             Login
@@ -63,6 +80,7 @@ if ($viewMode == "edit") { ?>
             </tr>
         <?php } ?>
     </table>
+    <div class="m-auto"> <h4><?= $error_message ?></h4> </div>
     <div class="form-inside">
         <form class="f1" action="users.php?action=add" method="post">
             <input type="hidden" name="hidden_input" value="add_user">
@@ -74,5 +92,4 @@ if ($viewMode == "edit") { ?>
         </form>
     </div>
     <?php
-}
-include "inc/footer.php";
+} include "inc/footer.php";

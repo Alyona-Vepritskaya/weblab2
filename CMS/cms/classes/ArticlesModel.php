@@ -5,7 +5,7 @@ include_once '../../inc/connect-inc.php';
 class ArticlesModel
 {
     private $mysqli;
-    private $news;
+    private $articles;
     private $article;
 
     public function __construct($mysqli)
@@ -15,7 +15,7 @@ class ArticlesModel
 
     public function getArticles()
     {
-        $this->news = array();
+        $this->articles = array();
         $sql_select = "select * from " . DBT_NEWS . ";";
         $result = $this->mysqli->query($sql_select);
         if ($result->num_rows > 0) {
@@ -26,10 +26,10 @@ class ArticlesModel
                 $article['url'] = $row["url"];
                 $article['content'] = $row["content"];
                 $article['published_date'] = $row["published_date"];
-                $this->news[] = $article;
+                $this->articles[] = $article;
             }
         }
-        return $this->news;
+        return $this->articles;
     }
 
     public function getArticle($a_id)
@@ -49,22 +49,22 @@ class ArticlesModel
         return $this->article;
     }
 
-    public function updateArticle($a_id, $name, $content, $url)
+    public function updateArticle($id, $name, $content, $url)
     {
         $sql_update = "update " . DBT_NEWS . "
         set name   = '" . $name . "',
             url = '$url',
             content = '" . $content . "',
             published_date = CURDATE() 
-        where id = $a_id;";
+        where id = $id;";
         if ($this->mysqli->query($sql_update) !== true) {
             echo "Error updating record: " . $this->mysqli->error;
         }
     }
 
-    public function deleteArticle($a_id)
+    public function deleteArticle($id)
     {
-        $sql_del = "delete from " . DBT_NEWS . " where id='" . $a_id . "';";
+        $sql_del = "delete from " . DBT_NEWS . " where id='" . $id . "';";
         if ($this->mysqli->query($sql_del) !== TRUE) {
             echo "Error: " . $sql_del . "<br>" . $this->mysqli->error;
         }
