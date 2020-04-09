@@ -31,17 +31,14 @@ switch ($action) {
         if ($id != 0) {
             $viewMode = "edit";
             $info = $model->getProduct($id);
-        } else {
+        } else
             $error_message = "Can not edit product, incorrect id";
-        }
         break;
     case "delete":
         $id = filter_input_("id", 0);
-        if ($id != 0) {
-            $model->deleteProduct($id);
-        } else {
+        ($id != 0) ?
+            $model->deleteProduct($id) :
             $error_message = "Can not delete product, incorrect id";
-        }
         break;
     case "update_product":
         $id = filter_input_("id", 0);
@@ -51,13 +48,10 @@ switch ($action) {
         $year = filter_input_("year", "");
         $s_num = filter_input_("s_num", "");
         $img_name = get_image();
-        if ($id != 0 && !empty($name) && !empty($country) && !empty($price) && !empty($year) && !empty($s_num)) {
-            $viewMode = "add_extra_info";
-            $model->updateProduct($id, $name, $country, $price, $year, $img_name, $s_num);
-        } else {
-            $viewMode = "add_extra_info";
+        $viewMode = "add_extra_info";
+        ($id != 0 && !empty($name) && !empty($country) && !empty($price) && !empty($year) && !empty($s_num)) ?
+            $model->updateProduct($id, $name, $country, $price, $year, $img_name, $s_num) :
             $error_message = "Can not update product, incorrect input data";
-        }
         break;
     case "add_main_info":
         $name = filter_input_("name", "");
@@ -67,27 +61,22 @@ switch ($action) {
         $s_num = filter_input_("s_num", "");
         $id_section = filter_input_("select", "");
         $img_name = get_image();
+        $viewMode = "add_extra_info";
         if (!empty($name) && !empty($country) && !empty($price) && !empty($year) && !empty($s_num) && !empty($img_name)) {
             $model->addProduct($name, $country, $price, $year, $img_name, $s_num, $id_section);
             $id = $model->getProductBySNum($s_num);
-            $viewMode = "add_extra_info";
-        } else {
+        } else
             $error_message = "Can not add product, incorrect input data";
-            $viewMode = "add_extra_info";
-        }
         break;
     case "add_extra_info":
         $id = filter_input_("id", "");
         $name = filter_input_("param_name", "");
         $value = filter_input_("param_value", "");
         $sort = filter_input_("param_sort", "");
-        if (!empty($name) && !empty($value) && !empty($sort)) {
-            $model->addParam($id, $name, $value, $sort);
-            $viewMode = "add_extra_info";
-        } else {
-            $viewMode = "add_extra_info";
+        $viewMode = "add_extra_info";
+        (!empty($name) && !empty($value) && !empty($sort)) ?
+            $model->addParam($id, $name, $value, $sort) :
             $error_message = "Can not add product, incorrect input data";
-        }
         break;
 }
 

@@ -14,12 +14,10 @@ $model = new ProductModel($mysqli);
 $error_message = null;
 switch ($action) {
     case "delete":
-        if($id != 0) {
-            $id = filter_input_("id", 0);
-        }else{
+        $id = filter_input_("id", 0);
+        ($id != 0) ?
+            $model->deleteProductReviews($id) :
             $error_message = "Can not delete comment, incorrect id";
-        }
-        $model->deleteProductReviews($id);
         break;
     case "add":
         $id_prod = filter_input_("id_prod", "");
@@ -32,9 +30,8 @@ switch ($action) {
             $email = "";
             $name = "";
             $comment = "";
-        } else {
+        } else
             $error_message = "Can not delete comment, no product with this ID";
-        }
 }
 
 if ($viewMode == "")
@@ -59,7 +56,7 @@ include "inc/header.php"; ?>
             </tr>
         <?php } ?>
     </table>
-    <div class="m-auto"> <h4><?= $error_message ?></h4> </div>
+    <div class="m-auto"><h4><?= $error_message ?></h4></div>
     <div class="form-inside">
         <form class="f1" action="comments.php?action=add" method="post">
             <input type="hidden" name="hidden_input" value="add_user">

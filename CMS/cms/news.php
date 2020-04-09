@@ -14,41 +14,34 @@ $error_message = null;
 switch ($action) {
     case "edit":
         $id = filter_input_("id", 0);
-        if($id != 0) {
+        if ($id != 0) {
             $viewMode = "edit";
             $info = $model->getArticle($id);
-        }else{
+        } else
             $error_message = "Can not edit article, incorrect id";
-        }
         break;
     case "delete":
         $id = filter_input_("id", 0);
-        if($id != 0) {
-            $model->deleteArticle($id);
-        }else{
+        ($id != 0) ?
+            $model->deleteArticle($id) :
             $error_message = "Can not delete article, incorrect id";
-        }
         break;
     case "update":
         $id = filter_input_("id", 0);
         $name = filter_input_("name", "");
         $url = filter_input_("url", "");
         $content = filter_input_("content", "");
-        if($id != 0 && !empty($name) && !empty($content)) {
-            $model->updateArticle($id, $name, $content, $url);
-        }else{
+        ($id != 0 && !empty($name) && !empty($content)) ?
+            $model->updateArticle($id, $name, $content, $url) :
             $error_message = "Can not update article, incorrect input data";
-        }
         break;
     case "add":
         $name = filter_input_("name", "");
         $url = filter_input_("url", "");
         $content = filter_input_("content", "");
-        if(!empty($name) && !empty($content)) {
-            $model->addArticle($name, $content, $url);
-        }else{
+        (!empty($name) && !empty($content)) ?
+            $model->addArticle($name, $content, $url) :
             $error_message = "Can not add article, incorrect input data";
-        }
 }
 
 if ($viewMode == "")
@@ -56,11 +49,11 @@ if ($viewMode == "")
 $mysqli->close();
 include "inc/header.php";
 if ($viewMode == "edit") { ?>
-    <div class="m-auto"> <h4><?= $error_message ?></h4> </div>
+    <div class="m-auto"><h4><?= $error_message ?></h4></div>
     <div class="form-inside">
         <form class="f1" action="news.php?action=update&id=<?= $info['id'] ?>" method="post">
             Title
-            <input required  class="fadeIn second" type="text" name="name" value="<?= $info['name'] ?>">
+            <input required class="fadeIn second" type="text" name="name" value="<?= $info['name'] ?>">
             Content
             <textarea required name="content" class="edit"><?= $info['content'] ?></textarea>
             Url
@@ -87,7 +80,7 @@ if ($viewMode == "edit") { ?>
             </tr>
         <?php } ?>
     </table>
-    <div class="m-auto"> <h4><?= $error_message ?></h4> </div>
+    <div class="m-auto"><h4><?= $error_message ?></h4></div>
     <div class="form-inside">
         <form class="f1" action="news.php?action=add" method="post">
             <input type="hidden" name="hidden_input" value="add_article">
@@ -101,4 +94,5 @@ if ($viewMode == "edit") { ?>
         </form>
     </div>
     <?php
-} include "inc/footer.php";
+}
+include "inc/footer.php";

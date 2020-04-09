@@ -8,5 +8,5 @@ function filter_input_($name, $default)
     if (isset($_GET[$name])) {
         $result = $_GET[$name];
     }
-    return trim($result);
+    return htmlspecialchars(trim($result));
 }
