@@ -1,5 +1,4 @@
 <?php
-include '../general/header.php';
 include_once "classes/MyDB.php";
 include_once 'inc/connect-inc.php';
 include "cms/classes/PagesModel.php";
@@ -14,7 +13,7 @@ $action = filter_input_("page", "");
 if (!empty($action)) {
     $current_page = $model->getPageByUrl($action);
 }
-?>
+include '../general/header.php'; ?>
     <div class="right-col">
     <div class="news-info">
         <a href="">

@@ -1,10 +1,6 @@
 <?php
-include_once "classes/Sessions.php";
-include_once "classes/UserSessions.php";
-include_once "classes/UserModel.php";
-include_once "../classes/MyDB.php";
-include_once "../inc/filter_input_.php";
-//TODO - auto register
+include 'init.php';
+
 $mysqli = MyDB::get_db_instance();
 $session = new Sessions();
 $ses_id = $session->getSesId();
