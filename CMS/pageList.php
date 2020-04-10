@@ -5,7 +5,6 @@ $current_page = null;
 $mysqli = MyDB::get_db_instance();
 $model = new PagesModel($mysqli);
 $pages = $model->getPages();
-
 $action = filter_input_("page", "");
 if (!empty($action)) {
     $current_page = $model->getPageByUrl($action);

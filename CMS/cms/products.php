@@ -17,7 +17,6 @@ function get_image()
     }
     return '';
 }
-
 get_image(); //to load img on server
 $mysqli = MyDB::get_db_instance();
 $action = filter_input_("action", "");
@@ -40,6 +39,16 @@ switch ($action) {
             $model->deleteProduct($id) :
             $error_message = "Can not delete product, incorrect id";
         break;
+    case "delete_param":
+        $id_p = filter_input_("id_p", 0);
+        $id = filter_input_("id", 0);
+        $viewMode = "edit";
+        if ($id_p != 0) {
+            $model->deleteParam($id_p);
+        } else
+            $error_message = "Can not delete param, incorrect id";
+        $info = $model->getProduct($id);
+        break;
     case "update_product":
         $id = filter_input_("id", 0);
         $name = filter_input_("name", "");
@@ -48,7 +57,7 @@ switch ($action) {
         $year = filter_input_("year", "");
         $s_num = filter_input_("s_num", "");
         $img_name = get_image();
-        $viewMode = "add_extra_info";
+        $info = $model->getProduct($id);
         ($id != 0 && !empty($name) && !empty($country) && !empty($price) && !empty($year) && !empty($s_num)) ?
             $model->updateProduct($id, $name, $country, $price, $year, $img_name, $s_num) :
             $error_message = "Can not update product, incorrect input data";
@@ -61,7 +70,6 @@ switch ($action) {
         $s_num = filter_input_("s_num", "");
         $id_section = filter_input_("select", "");
         $img_name = get_image();
-        $viewMode = "add_extra_info";
         if (!empty($name) && !empty($country) && !empty($price) && !empty($year) && !empty($s_num) && !empty($img_name)) {
             $model->addProduct($name, $country, $price, $year, $img_name, $s_num, $id_section);
             $id = $model->getProductBySNum($s_num);
@@ -69,14 +77,15 @@ switch ($action) {
             $error_message = "Can not add product, incorrect input data";
         break;
     case "add_extra_info":
-        $id = filter_input_("id", "");
+        $id = filter_input_("id", 0);
         $name = filter_input_("param_name", "");
         $value = filter_input_("param_value", "");
         $sort = filter_input_("param_sort", "");
-        $viewMode = "add_extra_info";
+        $viewMode = "edit";
         (!empty($name) && !empty($value) && !empty($sort)) ?
             $model->addParam($id, $name, $value, $sort) :
             $error_message = "Can not add product, incorrect input data";
+        $info = $model->getProduct($id);
         break;
 }
 if ($viewMode == "") {
@@ -86,9 +95,13 @@ $mysqli->close();
 include "inc/header.php";
 if ($viewMode == "edit") { ?>
     <div class="form-inside">
-        <div class="m-auto"><h4><?= $error_message ?></h4></div>
-        <form class="f1" action="products.php?action=update_product&id=<?= $id ?>" method="post"
-              enctype="multipart/form-data">
+        <div class="m-auto">
+            <a href="products.php" class="buy-item2">Back to tables</a>
+            <h4><?= $error_message ?></h4>
+        </div>
+        <form class="f1" action="products.php?" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="action" value="update_product">
+            <input type="hidden" name="id" value="<?= $id ?>">
             Name
             <input required class="fadeIn second" type="text" name="name" value="<?= $info['name'] ?>">
             Serial number
@@ -103,21 +116,28 @@ if ($viewMode == "edit") { ?>
             <input name="file" class="fadeIn second" type="file">
             <input type="submit" class="buy-item" value="Update" name="input_submit">
         </form>
-    </div>
-<?php } elseif ($viewMode == "add_extra_info") { ?>
-    <!--Add params form-->
-    <div class="form-inside">
-        <div class="m-auto"><h4><?= $error_message ?></h4></div>
-        <form class="f1" action="products.php?action=add_extra_info&id=<?= $id ?>" method="post">
-            Param name
-            <input required class="fadeIn second" type="text" name="param_name" value="">
-            Param value
-            <input name="param_value" required class="fadeIn second" type="text" value="">
-            Serial number when display information (number)
-            <input name="param_sort" required class="fadeIn second" type="text" value="">
-            <input type="submit" class="buy-item" value="Add param">
-            <a href="products.php" class="buy-item2">Back to tables</a>
-        </form>
+        <div class="m-auto">
+            <?php foreach ($info['param'] as $key => $value) { ?>
+                <?= $value['name'] . " : " . $value['value'] ?>
+                <div class="m-auto">
+                    <a href="products.php?action=delete_param&id_p=<?= $value['id'] ?>&id=<?= $id ?>" class="buy-item2">Delete</a>
+                </div>
+            <?php } ?>
+        </div>
+        <div class="form-inside">
+            <div class="m-auto"><h4><?= $error_message ?></h4></div>
+            <form class="f1" action="products.php" method="post">
+                <input type="hidden" name="action" value="add_extra_info">
+                <input type="hidden" name="id" value="<?= $id ?>">
+                Param name
+                <input required class="fadeIn second" type="text" name="param_name" value="">
+                Param value
+                <input name="param_value" required class="fadeIn second" type="text" value="">
+                Serial number when display information (number)
+                <input name="param_sort" required class="fadeIn second" type="text" value="">
+                <input type="submit" class="buy-item" value="Add param">
+            </form>
+        </div>
     </div>
 <?php } else { ?>
     <table id="customers">

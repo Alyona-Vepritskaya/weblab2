@@ -141,7 +141,7 @@ class ProductModel
                 echo "Error updating record: " . $this->mysqli->error;
             }
         }
-        $this->deleteParams($product_id);
+        /*$this->deleteParams($product_id);*/
     }
 
     function addProduct($name, $country, $price, $year, $img, $s_num, $id_section)
