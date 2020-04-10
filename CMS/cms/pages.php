@@ -3,50 +3,54 @@ include "../inc/connect-inc.php";
 include "../classes/MyDB.php";
 include "classes/PagesModel.php";
 include_once "../inc/filter_input_.php";
+include "classes/UserSessions.php";
 
-//TODO - check session
+$u = new UserSessions();
+if ($u->checkUserAuth() != 0) {
+    $mysqli = MyDB::get_db_instance();
+    $action = filter_input_("action", "");
+    $viewMode = "";
+    $model = new PagesModel($mysqli);
+    $error_message = null;
+    switch ($action) {
+        case "edit":
+            $id = filter_input_("id", 0);
+            if ($id != 0) {
+                $viewMode = "edit";
+                $info = $model->getPage($id);
+            } else
+                $error_message = "Can not edit page, incorrect id";
+            break;
+        case "delete":
+            $id = filter_input_("id", 0);
+            ($id != 0) ?
+                $model->deletePage($id) :
+                $error_message = "Can not delete page, incorrect id";
+            break;
+        case "update":
+            $id = filter_input_("id", 0);
+            $name = filter_input_("name", "");
+            $url = filter_input_("url", "");
+            $content = filter_input_("content", "");
+            ($id != 0 && !empty($name) && !empty($content) && !empty($url)) ?
+                $model->updatePage($id, $name, $content, $url) :
+                $error_message = "Can not add update, incorrect input data";
+            break;
+        case "add":
+            $name = filter_input_("name", "");
+            $url = filter_input_("url", "");
+            $content = filter_input_("content", "");
+            (!empty($name) && !empty($content) && !empty($url)) ?
+                $model->addPage($name, $content, $url) :
+                $error_message = "Can not add page, incorrect input data";
+    }
 
-$mysqli = MyDB::get_db_instance();
-$action = filter_input_("action", "");
-$viewMode = "";
-$model = new PagesModel($mysqli);
-$error_message = null;
-switch ($action) {
-    case "edit":
-        $id = filter_input_("id", 0);
-        if ($id != 0) {
-            $viewMode = "edit";
-            $info = $model->getPage($id);
-        } else
-            $error_message = "Can not edit page, incorrect id";
-        break;
-    case "delete":
-        $id = filter_input_("id", 0);
-        ($id != 0) ?
-            $model->deletePage($id) :
-            $error_message = "Can not delete page, incorrect id";
-        break;
-    case "update":
-        $id = filter_input_("id", 0);
-        $name = filter_input_("name", "");
-        $url = filter_input_("url", "");
-        $content = filter_input_("content", "");
-        ($id != 0 && !empty($name) && !empty($content) && !empty($url)) ?
-            $model->updatePage($id, $name, $content, $url) :
-            $error_message = "Can not add update, incorrect input data";
-        break;
-    case "add":
-        $name = filter_input_("name", "");
-        $url = filter_input_("url", "");
-        $content = filter_input_("content", "");
-        (!empty($name) && !empty($content) && !empty($url)) ?
-            $model->addPage($name, $content, $url) :
-            $error_message = "Can not add page, incorrect input data";
+    if ($viewMode == "")
+        $list = $model->getPages();
+    $mysqli->close();
+}else{
+    header('Location: http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/cms/index.php');
 }
-
-if ($viewMode == "")
-    $list = $model->getPages();
-$mysqli->close();
 include "inc/header.php";
 if ($viewMode == "edit") { ?>
     <div class="m-auto"><h4><?= $error_message ?></h4></div>

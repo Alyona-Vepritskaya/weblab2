@@ -4,42 +4,37 @@ include_once "classes/UserSessions.php";
 include_once "classes/UserModel.php";
 include_once "../classes/MyDB.php";
 include_once "../inc/filter_input_.php";
-
-$s = new Sessions();
-$s_id = $s->getSesId();
-function check()
-{
-    $f = filter_input_('hidden_input', '');
-    if ($f == 'omg') {
-        return true;
-    }
-    return false;
+//TODO - auto register
+$mysqli = MyDB::get_db_instance();
+$session = new Sessions();
+$ses_id = $session->getSesId();
+$user_session = new UserSessions();
+$action = filter_input_('action', '');
+if ($action == 'logout') {
+    $user_session->deleteUserAuth($ses_id);
 }
-
-$password = filter_input_('password', '');
-$login = filter_input_('login', '');
-
-//check form submit
-//TODO
-/*if (check()) {
-    $mysqli = MyDB::get_db_instance();
+$error_message = null;
+$user = new UserModel($mysqli);
+if ($user_session->checkUserAuth() != 0) {
+    header('Location: http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/cms/home.php');
+} else {
+    //create record in session table
+    $password = filter_input_('pwd', '');
+    $login = filter_input_('login', '');
     if (!empty($password) && !empty($login)) {
-        $user = new UserModel($mysqli);
-        if ($user->getUserByFields($login) != 0) {
-            //user exist with this login exist
+        if ($user->getUserByLogin($login) != 0) {
+            $u_id = $user->checkUser($login, $password);
+            if ($u_id != 0) {
+                $user_session->makeUserAuth($u_id, $ses_id);
+                header('Location: http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/cms/home.php');
+            } else {
+                $error_message = 'Incorrect password';
+            }
         } else {
-            //create user
-            $user->addUser($login,$password);
-            //get id
-            $u_id = $user->getUserByFields($login);
-            //create session
-            $u_ses = new UserSessions();
-            $u_ses->makeUserAuth($u_id,$u_ses->getSesId());
-            header('Location: http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/cms/home.php');
+            $error_message = 'Permission denied';
         }
     }
-}*/
-header('Location: http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/cms/home.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,14 +47,13 @@ header('Location: http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/cms/home.php
 <body>
 <div class="wrapper fadeInDown">
     <div id="formContent">
-        <!-- Tabs Titles -->
         <h2 class="active">Sign In</h2>
         <h2 class="inactive underlineHover">Sign Up</h2>
-        <!-- Login Form -->
-        <form action="" method="post">
+        <form action="index.php" method="post">
             <input type="hidden" name="hidden_input" value="omg">
+            <?=$error_message?>
             <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-            <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
+            <input type="password" id="password" class="fadeIn third" name="pwd" placeholder="password">
             <input type="submit" class="buy-item" value="Log In">
         </form>
     </div>

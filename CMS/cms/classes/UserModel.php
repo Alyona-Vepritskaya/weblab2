@@ -56,6 +56,19 @@ class UserModel
         return $u_id;
     }
 
+    public function checkUser($login, $pwd)
+    {
+        $u_id = 0;
+        $sql_select = "select * from " . DBT_USERS . " where login='$login' and password=PASSWORD('$pwd');";
+        $result = $this->mysqli->query($sql_select);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $u_id = $row["id"];
+            }
+        }
+        return $u_id;
+    }
+
     public function updateUser($id, $u_login, $_psw)
     {
         $sql_update = "update " . DBT_USERS . "

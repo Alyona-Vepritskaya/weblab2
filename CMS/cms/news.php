@@ -3,50 +3,53 @@ include "../inc/connect-inc.php";
 include "../classes/MyDB.php";
 include "classes/ArticlesModel.php";
 include "../inc/filter_input_.php";
+include "classes/UserSessions.php";
 
-//TODO - check session
-
-$mysqli = MyDB::get_db_instance();
-$action = filter_input_("action", "");
-$viewMode = "";
-$model = new ArticlesModel($mysqli);
-$error_message = null;
-switch ($action) {
-    case "edit":
-        $id = filter_input_("id", 0);
-        if ($id != 0) {
-            $viewMode = "edit";
-            $info = $model->getArticle($id);
-        } else
-            $error_message = "Can not edit article, incorrect id";
-        break;
-    case "delete":
-        $id = filter_input_("id", 0);
-        ($id != 0) ?
-            $model->deleteArticle($id) :
-            $error_message = "Can not delete article, incorrect id";
-        break;
-    case "update":
-        $id = filter_input_("id", 0);
-        $name = filter_input_("name", "");
-        $url = filter_input_("url", "");
-        $content = filter_input_("content", "");
-        ($id != 0 && !empty($name) && !empty($content)) ?
-            $model->updateArticle($id, $name, $content, $url) :
-            $error_message = "Can not update article, incorrect input data";
-        break;
-    case "add":
-        $name = filter_input_("name", "");
-        $url = filter_input_("url", "");
-        $content = filter_input_("content", "");
-        (!empty($name) && !empty($content)) ?
-            $model->addArticle($name, $content, $url) :
-            $error_message = "Can not add article, incorrect input data";
+$u = new UserSessions();
+if ($u->checkUserAuth() != 0) {
+    $mysqli = MyDB::get_db_instance();
+    $action = filter_input_("action", "");
+    $viewMode = "";
+    $model = new ArticlesModel($mysqli);
+    $error_message = null;
+    switch ($action) {
+        case "edit":
+            $id = filter_input_("id", 0);
+            if ($id != 0) {
+                $viewMode = "edit";
+                $info = $model->getArticle($id);
+            } else
+                $error_message = "Can not edit article, incorrect id";
+            break;
+        case "delete":
+            $id = filter_input_("id", 0);
+            ($id != 0) ?
+                $model->deleteArticle($id) :
+                $error_message = "Can not delete article, incorrect id";
+            break;
+        case "update":
+            $id = filter_input_("id", 0);
+            $name = filter_input_("name", "");
+            $url = filter_input_("url", "");
+            $content = filter_input_("content", "");
+            ($id != 0 && !empty($name) && !empty($content)) ?
+                $model->updateArticle($id, $name, $content, $url) :
+                $error_message = "Can not update article, incorrect input data";
+            break;
+        case "add":
+            $name = filter_input_("name", "");
+            $url = filter_input_("url", "");
+            $content = filter_input_("content", "");
+            (!empty($name) && !empty($content)) ?
+                $model->addArticle($name, $content, $url) :
+                $error_message = "Can not add article, incorrect input data";
+    }
+    if ($viewMode == "")
+        $list = $model->getArticles();
+    $mysqli->close();
+} else {
+    header('Location: http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/cms/index.php');
 }
-
-if ($viewMode == "")
-    $list = $model->getArticles();
-$mysqli->close();
 include "inc/header.php";
 if ($viewMode == "edit") { ?>
     <div class="m-auto"><h4><?= $error_message ?></h4></div>

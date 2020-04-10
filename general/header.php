@@ -167,13 +167,13 @@
                 </div>
             </a>
             <div class="item-image">
-                <a href="#">
+                <a href="http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/pageList.php?page=pain">
                     <img src="http://k503labs.ukrdomen.com/535a/Veprytskaya/images/Layer_comer.png" alt="comer">
                     <div class="link">
                         Comer SP-2001
                     </div>
                 </a>
-                <a href="">
+                <a href="http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/pageList.php?page=page1">
                     <img src="http://k503labs.ukrdomen.com/535a/Veprytskaya/images/Layer_mouse.png" alt="mouse">
                     <div class="link">
                         BenQ M301

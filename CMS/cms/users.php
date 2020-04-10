@@ -3,49 +3,52 @@ include "../inc/connect-inc.php";
 include "../classes/MyDB.php";
 include "classes/UserModel.php";
 include_once "../inc/filter_input_.php";
-include "inc/header.php";
+include "classes/UserSessions.php";
 
-//TODO - check session
-
-$mysqli = MyDB::get_db_instance();
-$action = filter_input_("action", "");
-$viewMode = "";
-$model = new UserModel($mysqli);
-$error_message = null;
-switch ($action) {
-    case "edit":
-        $id = filter_input_("id", 0);
-        if ($id != 0) {
-            $viewMode = "edit";
-            $info = $model->getUser($id);
-        } else
-            $error_message = "Can not edit user, incorrect id";
-        break;
-    case "delete":
-        $id = filter_input_("id", 0);
-        ($id != 0) ?
-            $model->deleteUser($id) :
-            $error_message = "Can not delete user, incorrect id";
-        break;
-    case "update":
-        $id = filter_input_("id", 0);
-        $login = filter_input_("login", "");
-        $password = filter_input_("password", "");
-        ($id != 0 && !empty($login) && !empty($password)) ?
-            $model->updateUser($id, $login, $password) :
-            $error_message = "Can not update user, incorrect input data";
-        break;
-    case "add":
-        $login = filter_input_("login", "");
-        $password = filter_input_("password", "");
-        (!empty($login) && !empty($password)) ?
-            $model->addUser($login, $password) :
-            $error_message = "Can not add user, incorrect input data";
+$u = new UserSessions();
+if ($u->checkUserAuth() != 0) {
+    $mysqli = MyDB::get_db_instance();
+    $action = filter_input_("action", "");
+    $viewMode = "";
+    $model = new UserModel($mysqli);
+    $error_message = null;
+    switch ($action) {
+        case "edit":
+            $id = filter_input_("id", 0);
+            if ($id != 0) {
+                $viewMode = "edit";
+                $info = $model->getUser($id);
+            } else
+                $error_message = "Can not edit user, incorrect id";
+            break;
+        case "delete":
+            $id = filter_input_("id", 0);
+            ($id != 0) ?
+                $model->deleteUser($id) :
+                $error_message = "Can not delete user, incorrect id";
+            break;
+        case "update":
+            $id = filter_input_("id", 0);
+            $login = filter_input_("login", "");
+            $password = filter_input_("password", "");
+            ($id != 0 && !empty($login) && !empty($password)) ?
+                $model->updateUser($id, $login, $password) :
+                $error_message = "Can not update user, incorrect input data";
+            break;
+        case "add":
+            $login = filter_input_("login", "");
+            $password = filter_input_("password", "");
+            (!empty($login) && !empty($password)) ?
+                $model->addUser($login, $password) :
+                $error_message = "Can not add user, incorrect input data";
+    }
+    if ($viewMode == "")
+        $list = $model->getUsers();
+    $mysqli->close();
+}else{
+    header('Location: http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/cms/index.php');
 }
-
-if ($viewMode == "")
-    $list = $model->getUsers();
-$mysqli->close();
+include "inc/header.php";
 if ($viewMode == "edit") { ?>
     <div class="m-auto"><h4><?= $error_message ?></h4></div>
     <div class="form-inside">
