@@ -33,10 +33,11 @@ switch ($action) {
     case "update":
         $id = filter_input_("id", 0);
         $login = filter_input_("login", "");
+        $name = filter_input_("name", "");
         $password = filter_input_("password", "");
         $password2 = filter_input_("password2", "");
-        if ($id != 0 && !empty($login) && !empty($password) && !empty($password2) && ($password2 == $password)) {
-            $model->updateUser($id, $login, $password);
+        if ($id != 0 && !empty($login) && !empty($password) && !empty($name) && ($password2 == $password)) {
+            $model->updateUser($id, $login, $password, $name);
         } else {
             $info['id'] = $id;
             $info['login'] = $login;
@@ -46,10 +47,11 @@ switch ($action) {
         break;
     case "add":
         $login = filter_input_("login", "");
+        $name = filter_input_("name", "");
         $password = filter_input_("password", "");
         $password2 = filter_input_("password2", "");
-        (!empty($login) && !empty($password) && !empty($password2) && ($password2 == $password)) ?
-            $model->addUser($login, $password) :
+        (!empty($login) && !empty($password) && !empty($name) && ($password2 == $password)) ?
+            $model->addUser($login, $password, $name) :
             $error_message = "Can not add user, incorrect input data";
 }
 if ($viewMode == "")
@@ -62,6 +64,8 @@ if ($viewMode == "edit") { ?>
         <form class="f1" action="users.php" method="post">
             <input type="hidden" name="action" value="update">
             <input type="hidden" name="id" value="<?= $info['id'] ?>">
+            Name
+            <input required type="text" class="fadeIn second" name="name" placeholder="" value="<?= $info['name'] ?>">
             Login
             <input required class="fadeIn second" type="text" name="login" value="<?= $info['login'] ?>">
             Password
@@ -75,6 +79,7 @@ if ($viewMode == "edit") { ?>
         <tr>
             <td>Id</td>
             <td>Login</td>
+            <td>Name</td>
             <td>Edit</td>
             <td>Delete</td>
         </tr>
@@ -82,6 +87,7 @@ if ($viewMode == "edit") { ?>
             <tr>
                 <td> <?= $value['id'] ?></td>
                 <td> <?= $value['login'] ?></td>
+                <td> <?= $value['name'] ?></td>
                 <td><a href="users.php?action=edit&id=<?= $value['id'] ?>" class="buy-item2">Edit</a></td>
                 <td><a href="users.php?action=delete&id=<?= $value['id'] ?>" class="buy-item2">Delete</a></td>
             </tr>
@@ -91,6 +97,8 @@ if ($viewMode == "edit") { ?>
     <div class="form-inside">
         <form class="f1" action="users.php" method="post">
             <input type="hidden" name="action" value="add">
+            Name
+            <input required type="text" class="fadeIn second" name="name" placeholder="">
             Login
             <input required type="text" class="fadeIn second" name="login" placeholder="">
             Password

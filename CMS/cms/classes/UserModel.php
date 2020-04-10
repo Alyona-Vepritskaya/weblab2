@@ -23,6 +23,7 @@ class UserModel
                 $user = array();
                 $user['login'] = $row["login"];
                 $user['id'] = $row["id"];
+                $user['name'] = $row["name"];
                 $this->users[] = $user;
             }
         }
@@ -38,6 +39,7 @@ class UserModel
             while ($row = $result->fetch_assoc()) {
                 $this->user['login'] = $row["login"];
                 $this->user['id'] = $row["id"];
+                $this->user['name'] = $row["name"];
             }
         }
         return $this->user;
@@ -69,10 +71,11 @@ class UserModel
         return $u_id;
     }
 
-    public function updateUser($id, $u_login, $_psw)
+    public function updateUser($id, $u_login, $_psw, $name)
     {
         $sql_update = "update " . DBT_USERS . "
         set login   = '" . $u_login . "',
+            name   = '" . $name . "',
             password = PASSWORD('" . $_psw . "')
         where id = '" . $id . "';";
         if ($this->mysqli->query($sql_update) !== true) {
@@ -88,10 +91,10 @@ class UserModel
         }
     }
 
-    public function addUser($login, $password)
+    public function addUser($login, $password, $name)
     {
-        $sql_insert = "insert into " . DBT_USERS . " (login, password)
-         values ('$login',PASSWORD('$password'));";
+        $sql_insert = "insert into " . DBT_USERS . " (login, password,name)
+         values ('$login',PASSWORD('$password'),'$name');";
         if ($this->mysqli->query($sql_insert) !== TRUE) {
             echo "Error: " . $sql_insert . "<br>" . $this->mysqli->error;
         }

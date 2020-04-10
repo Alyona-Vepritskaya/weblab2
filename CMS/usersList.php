@@ -18,10 +18,11 @@ include '../general/header.php'; ?>
     </div>
     <div class="text-content  clearfix">
         <div class="articles">
-            <h3>User's login</h3>
+            <h3>User's data</h3>
             <?php foreach ($users as $key => $value) { ?>
                 <div class="article">
-                    <h3>User -> <?= $value['login'] ?></h3>
+                    <h3>User login -> <?= $value['login'] ?></h3>
+                    <h3>User name -> <?= $value['name'] ?></h3>
                 </div>
             <?php } ?>
         </div>

@@ -28,6 +28,7 @@ function create_extra_tables($mysqli)
     (
         id       int primary key auto_increment,
         login    varchar(100) not null unique,
+        name     varchar(100) not null,
         password varchar(100) not null
     );";
     $sql1 = "create table " . DBT_USERS_SESSIONS . "
