@@ -1,8 +1,5 @@
 <?php
-include '../general/header.php';
-include_once 'classes/MyDB.php';
-include_once 'inc/connect-inc.php';
-include_once 'cms/classes/ProductModel.php';
+include_once 'init.php';
 
 $path = "http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/cms/img/";
 $mysqli = MyDB::get_db_instance();
@@ -16,36 +13,33 @@ $current_section = null;
 $current_product = null;
 $comments = null;
 
-$email = trim(filter_input_('email', ''));
-$name = trim(filter_input_('name', ''));
-$comment = trim(filter_input_('comment', ''));
+$email = filter_input_('email', '');
+$name = filter_input_('name', '');
+$comment = filter_input_('comment', '');
 $q = filter_input_("section", '');
 $id = filter_input_("id", '');
 
-function check(){
+function check()
+{
     $f = filter_input_('hidden_input', '');
     if ($f == 'first')
         return true;
     return false;
 }
-function get_products($p_model, $section_id){
+
+function get_products($p_model, $section_id)
+{
     return $p_model->getProducts($section_id);
 }
-function get_product($p_model, $prod_id){
+
+function get_product($p_model, $prod_id)
+{
     return array("params" => $p_model->getProduct($prod_id), "comments" => $p_model->getProductReviews($prod_id));
 }
-function set_comment($p_model, $email, $id, $name, $comment){
+
+function set_comment($p_model, $email, $id, $name, $comment)
+{
     $p_model->addProductReviews($email, $id, $name, $comment);
-}
-function filter_input_($name, $default){
-    $result = $default;
-    if (isset($_POST[$name])) {
-        $result = $_POST[$name];
-    }
-    if (isset($_GET[$name])) {
-        $result = $_GET[$name];
-    }
-    return $result;
 }
 
 //section click
@@ -69,7 +63,7 @@ if (check()) {
         $comments = $tmp['comments'];
     }
 }
-?>
+include '../general/header.php'; ?>
     <div class="right-col">
         <div class="news-info">
             <a href="">

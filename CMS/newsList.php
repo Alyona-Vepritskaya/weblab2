@@ -1,7 +1,5 @@
 <?php
-include_once "classes/MyDB.php";
-include_once 'inc/connect-inc.php';
-include "cms/classes/ArticlesModel.php";
+include_once 'init.php';
 
 $mysqli = MyDB::get_db_instance();
 $model = new ArticlesModel($mysqli);

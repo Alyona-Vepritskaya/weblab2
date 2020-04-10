@@ -1,8 +1,5 @@
 <?php
-include_once "classes/MyDB.php";
-include_once 'inc/connect-inc.php';
-include "cms/classes/PagesModel.php";
-include "inc/filter_input_.php";
+include_once 'init.php';
 
 $current_page = null;
 $mysqli = MyDB::get_db_instance();
