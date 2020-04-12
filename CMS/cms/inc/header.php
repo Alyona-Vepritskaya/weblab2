@@ -15,6 +15,7 @@
     <li><a href="http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/cms/users.php">Users</a></li>
     <li><a href="http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/cms/pages.php">Pages</a></li>
     <li><a href="http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/cms/comments.php">Comments</a></li>
+    <li><a href="http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/cms/sections.php">Sections</a></li>
     <li><a href="http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/cms/index.php?action=logout">Log out</a></li>
 </ul>
 

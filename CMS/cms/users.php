@@ -41,6 +41,7 @@ switch ($action) {
         } else {
             $info['id'] = $id;
             $info['login'] = $login;
+            $info['name'] = $name;
             $viewMode = "edit";
             $error_message = "Can not update user, incorrect input data";
         }

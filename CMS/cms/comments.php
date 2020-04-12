@@ -24,14 +24,14 @@ switch ($action) {
         $email = filter_input_("email", "");
         $name = filter_input_("name", "");
         $comment = filter_input_("comment", "");
-        if ($model->getProduct($id_prod) != 0) {
+        if ($model->getProduct($id_prod) != 0 && !empty($name) && !empty($comment) && !empty($email)) {
             $model->addProductReviews($email, $id_prod, $name, $comment);
             $id_prod = "";
             $email = "";
             $name = "";
             $comment = "";
         } else
-            $error_message = "Can not delete comment, no product with this ID";
+            $error_message = "Can not add comment, incorrect input data";
 }
 if ($viewMode == "")
     $list = $model->getProductsReviews();

@@ -5,6 +5,7 @@ include_once '../../inc/connect-inc.php';
 class ProductModel
 {
     private $sections;
+    private $section;
     private $products;
     private $params;
     private $mysqli;
@@ -29,6 +30,47 @@ class ProductModel
             }
         }
         return $this->sections;
+    }
+
+    function getSection($id)
+    {
+        $sql_select = "select * from " . DBT_SECTIONS . " where id='" . $id . "';";
+        $result = $this->mysqli->query($sql_select);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $this->section["id"] = $row["id"];
+                $this->section["name"] = $row["name"];
+            }
+        }
+        return $this->section;
+    }
+
+    function deleteSection($id)
+    {
+        $sql_del = "delete from " . DBT_SECTIONS . " where id='" . $id . "';";
+        if ($this->mysqli->query($sql_del) !== TRUE) {
+            echo "Error: " . $sql_del . "<br>" . $this->mysqli->error;
+        }
+        $this->deleteParams($id);
+    }
+
+    function addSection($name)
+    {
+        $sql_insert = "insert into " . DBT_SECTIONS . " (name)
+         values ('$name');";
+        if ($this->mysqli->query($sql_insert) !== TRUE) {
+            echo "Error: " . $sql_insert . "<br>" . $this->mysqli->error;
+        }
+    }
+
+    public function updateSection($id, $name)
+    {
+        $sql_update = "update " . DBT_SECTIONS . "
+        set name   = '" . $name . "'
+        where id = '" . $id . "';";
+        if ($this->mysqli->query($sql_update) !== true) {
+            echo "Error updating record: " . $this->mysqli->error;
+        }
     }
 
     function getSectionsNames()
