@@ -3,7 +3,7 @@ include 'init.php';
 
 
 if ($u->checkUserAuth() == 0) {
-    header('Location: '.SITE_HOST.'cms/index.php');
+    header('Location: ' . SITE_HOST . 'cms/index.php');
     exit();
 }
 $action = filter_input_("action", "");
@@ -37,6 +37,8 @@ switch ($action) {
         $password2 = filter_input_("password2", "");
         if ($id != 0 && !empty($login) && !empty($password) && !empty($name) && ($password2 == $password)) {
             $model->updateUser($id, $login, $password, $name);
+            $name = "";
+            $login = "";
         } else {
             $info['id'] = $id;
             $info['login'] = $login;
@@ -50,8 +52,11 @@ switch ($action) {
         $name = filter_input_("name", "");
         $password = filter_input_("password", "");
         $password2 = filter_input_("password2", "");
-        (!empty($login) && !empty($password) && !empty($name) && ($password2 == $password)) ?
-            $model->addUser($login, $password, $name) :
+        if (!empty($login) && !empty($password) && !empty($name) && ($password2 == $password)) {
+            $model->addUser($login, $password, $name);
+            $name = "";
+            $login = "";
+        } else
             $error_message = "Can not add user, incorrect input data";
 }
 if ($viewMode == "")
@@ -98,9 +103,9 @@ if ($viewMode == "edit") { ?>
         <form class="f1" action="users.php" method="post">
             <input type="hidden" name="action" value="add">
             Name
-            <input required type="text" class="fadeIn second" name="name" placeholder="">
+            <input value="<?=$name?>" required type="text" class="fadeIn second" name="name" placeholder="">
             Login
-            <input required type="text" class="fadeIn second" name="login" placeholder="">
+            <input value="<?=$login?>" required type="text" class="fadeIn second" name="login" placeholder="">
             Password
             <input required type="password" class="fadeIn second" name="password" placeholder="">
             <input required type="password" class="fadeIn second" name="password2" placeholder="">

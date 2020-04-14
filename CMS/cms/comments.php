@@ -33,7 +33,6 @@ switch ($action) {
 }
 if ($viewMode == "")
     $list = $model->getProductsReviews();
-$mysqli->close();
 include "inc/header.php"; ?>
     <table id="customers">
         <tr>
@@ -65,9 +64,9 @@ include "inc/header.php"; ?>
             <textarea required class="edit" name="comment"><?= $comment ?></textarea>
             Product ID
             <input required type="text" class="fadeIn second" name="id_prod" placeholder="" value="<?= $id_prod ?>">
-            <?= $error_message ?>
             <input type="submit" class="buy-item" value="Add Comment">
         </form>
     </div>
 <?php
 include "inc/footer.php";
+$mysqli->close();

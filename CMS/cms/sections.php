@@ -2,7 +2,7 @@
 include 'init.php';
 
 if ($u->checkUserAuth() == 0) {
-    header('Location: '.SITE_HOST.'cms/index.php');
+    header('Location: ' . SITE_HOST . 'cms/index.php');
     exit();
 }
 $action = filter_input_("action", "");
@@ -29,6 +29,7 @@ switch ($action) {
         $name = filter_input_("name", "");
         if ($id != 0 && !empty($name)) {
             $model->updateSection($id, $name);
+            $name = "";
         } else {
             $info['id'] = $id;
             $info['name'] = $name;
@@ -38,8 +39,10 @@ switch ($action) {
         break;
     case "add":
         $name = filter_input_("name", "");
-        (!empty($name)) ?
-            $model->addSection($name) :
+        if (!empty($name)) {
+            $model->addSection($name);
+            $name = "";
+        } else
             $error_message = "Can not add section, incorrect input data";
 }
 if ($viewMode == "")
@@ -79,7 +82,7 @@ if ($viewMode == "edit") { ?>
         <form class="f1" action="sections.php" method="post">
             <input type="hidden" name="action" value="add">
             New name
-            <input required type="text" class="fadeIn second" name="name" placeholder="">
+            <input required type="text" class="fadeIn second" name="name" placeholder="" value="<?=$name?>">
             <input type="submit" class="buy-item" value="Add Section">
         </form>
     </div>

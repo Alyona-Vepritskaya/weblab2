@@ -157,6 +157,7 @@ input[type=password], input[type=email], input[type=text], select {
 }
 
 .m-auto{
+    color: #AE0000;
     text-align: center;
     width: 50%;
     margin: 10px auto;

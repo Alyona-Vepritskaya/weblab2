@@ -26,6 +26,7 @@ if ($u->checkUserAuth() != 0) {
                 $error_message = 'Incorrect password';
             }
         } else {
+            $login = '';
             $error_message = 'Permission denied';
         }
     }
@@ -47,7 +48,7 @@ if ($u->checkUserAuth() != 0) {
         <form action="index.php" method="post">
             <input type="hidden" name="hidden_input" value="omg">
             <?=$error_message?>
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" value="<?=$login?>">
             <input type="password" id="password" class="fadeIn third" name="pwd" placeholder="password">
             <input type="submit" class="buy-item" value="Log In">
         </form>

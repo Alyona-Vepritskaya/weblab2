@@ -3,7 +3,7 @@ include 'init.php';
 
 
 if ($u->checkUserAuth() == 0) {
-    header('Location: '.SITE_HOST.'cms/index.php');
+    header('Location: ' . SITE_HOST . 'cms/index.php');
     exit();
 }
 $action = filter_input_("action", "");
@@ -32,6 +32,9 @@ switch ($action) {
         $content = filter_input_("content", "");
         if ($id != 0 && !empty($name) && !empty($content) && !empty($url)) {
             $model->updatePage($id, $name, $content, $url);
+            $name = "";
+            $url = "";
+            $content = "";
         } else {
             $info['id'] = $id;
             $info['name'] = $name;
@@ -45,14 +48,17 @@ switch ($action) {
         $name = filter_input_("name", "");
         $url = filter_input_("url", "");
         $content = filter_input_("content", "");
-        (!empty($name) && !empty($content) && !empty($url)) ?
-            $model->addPage($name, $content, $url) :
+        if (!empty($name) && !empty($content) && !empty($url)) {
+            $model->addPage($name, $content, $url);
+            $name = "";
+            $url = "";
+            $content = "";
+        } else
             $error_message = "Can not add page, incorrect input data";
 }
 
 if ($viewMode == "")
     $list = $model->getPages();
-$mysqli->close();
 include "inc/header.php";
 if ($viewMode == "edit") { ?>
     <div class="m-auto"><h4><?= $error_message ?></h4></div>
@@ -93,14 +99,15 @@ if ($viewMode == "edit") { ?>
         <form class="f1" action="pages.php" method="post">
             <input type="hidden" name="action" value="add">
             Title
-            <input required type="text" class="fadeIn second" name="name" placeholder="">
+            <input required type="text" class="fadeIn second" name="name" placeholder="" value="<?=$name?>">
             Content
-            <textarea required name="content" class="edit"></textarea>
+            <textarea required name="content" class="edit"><?=$content?></textarea>
             Url
-            <input required type="text" class="fadeIn second" name="url" placeholder="">
+            <input required type="text" class="fadeIn second" name="url" placeholder="" value="<?=$url?>">
             <input type="submit" class="buy-item" value="Add Page">
         </form>
     </div>
     <?php
 }
 include "inc/footer.php";
+$mysqli->close();

@@ -2,7 +2,7 @@
 include 'init.php';
 
 if ($u->checkUserAuth() == 0) {
-    header('Location: '.SITE_HOST.'cms/index.php');
+    header('Location: ' . SITE_HOST . 'cms/index.php');
     exit();
 }
 function get_image()
@@ -56,9 +56,24 @@ switch ($action) {
         $s_num = filter_input_("s_num", "");
         $img_name = get_image();
         $info = $model->getProduct($id);
-        ($id != 0 && !empty($name) && !empty($country) && !empty($price) && !empty($year) && !empty($s_num)) ?
-            $model->updateProduct($id, $name, $country, $price, $year, $img_name, $s_num) :
+        if ($id != 0 && !empty($name) && !empty($country) && !empty($price) && !empty($year) && !empty($s_num)) {
+            $model->updateProduct($id, $name, $country, $price, $year, $img_name, $s_num);
+            $name = '';
+            $country = '';
+            $price = '';
+            $year = '';
+            $s_num = '';
+            $img_name = '';
+        } else {
             $error_message = "Can not update product, incorrect input data";
+            $viewMode = "edit";
+            $info['id'] = $model->getProductBySNum($s_num);
+            $info['name'] = $name;
+            $info['year'] = $year;
+            $info['s_num'] = $s_num;
+            $info['country'] = $country;
+            $info['price'] = $price;
+        }
         break;
     case "add_main_info":
         $name = filter_input_("name", "");
@@ -71,25 +86,42 @@ switch ($action) {
         if (!empty($name) && !empty($country) && !empty($price) && !empty($year) && !empty($s_num) && !empty($img_name)) {
             $model->addProduct($name, $country, $price, $year, $img_name, $s_num, $id_section);
             $id = $model->getProductBySNum($s_num);
-        } else
+            $name = '';
+            $country = '';
+            $price = '';
+            $year = '';
+            $s_num = '';
+            $img_name = '';
+        } else {
             $error_message = "Can not add product, incorrect input data";
+            $info['name'] = $name;
+            $info['year'] = $year;
+            $info['s_num'] = $s_num;
+            $info['country'] = $country;
+            $info['price'] = $price;
+        }
         break;
     case "add_extra_info":
         $id = filter_input_("id", 0);
-        $name = filter_input_("param_name", "");
-        $value = filter_input_("param_value", "");
+        $n = filter_input_("param_name", "");
+        $v = filter_input_("param_value", "");
         $sort = filter_input_("param_sort", "");
         $viewMode = "edit";
-        (!empty($name) && !empty($value) && !empty($sort)) ?
-            $model->addParam($id, $name, $value, $sort) :
+        if(!empty($n) && !empty($v) && !empty($sort)) {
+            $model->addParam($id, $n, $v, $sort);
+            $n = '';
+            $v = '';
+            $sort = '';
+        }else {
             $error_message = "Can not add product, incorrect input data";
+        }
         $info = $model->getProduct($id);
         break;
 }
 if ($viewMode == "") {
     $list = $model->getALLProducts();
 }
-$mysqli->close();
+
 include "inc/header.php";
 if ($viewMode == "edit") { ?>
     <div class="form-inside">
@@ -128,11 +160,11 @@ if ($viewMode == "edit") { ?>
                 <input type="hidden" name="action" value="add_extra_info">
                 <input type="hidden" name="id" value="<?= $id ?>">
                 Param name
-                <input required class="fadeIn second" type="text" name="param_name" value="">
+                <input required class="fadeIn second" type="text" name="param_name" value="<?=$n?>">
                 Param value
-                <input name="param_value" required class="fadeIn second" type="text" value="">
+                <input name="param_value" required class="fadeIn second" type="text" value="<?=$v?>">
                 Serial number when display information (number)
-                <input name="param_sort" required class="fadeIn second" type="text" value="">
+                <input name="param_sort" required class="fadeIn second" type="text" value="<?=$sort?>">
                 <input type="submit" class="buy-item" value="Add param">
             </form>
         </div>
@@ -162,15 +194,15 @@ if ($viewMode == "edit") { ?>
         <form class="f1" action="products.php?action=add_main_info" method="post" enctype="multipart/form-data">
             <input type="hidden" name="action" value="add_main_info">
             Name
-            <input required class="fadeIn second" type="text" name="name" value="">
+            <input required class="fadeIn second" type="text" name="name" value="<?=$name?>">
             Serial number
-            <input name="s_num" required class="fadeIn second" type="text" value="">
+            <input name="s_num" required class="fadeIn second" type="text" value="<?=$s_num?>">
             Price:
-            <input name="price" required class="fadeIn second" type="text" value="">
+            <input name="price" required class="fadeIn second" type="text" value="<?=$price?>">
             Production date
-            <input name="year" required class="fadeIn second" type="text" value="">
+            <input name="year" required class="fadeIn second" type="text" value="<?=$year?>">
             Production country
-            <input name="country" required class="fadeIn second" type="text" value="">
+            <input name="country" required class="fadeIn second" type="text" value="<?=$country?>">
             <select name="select">
                 <?php foreach ($sections as $key => $value) { ?>
                     <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
@@ -184,3 +216,4 @@ if ($viewMode == "edit") { ?>
     <?php
 }
 include "inc/footer.php";
+$mysqli->close();
