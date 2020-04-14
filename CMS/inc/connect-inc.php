@@ -3,6 +3,7 @@ define('DB_HOST', '10.0.0.5'); // http://k503labs.ukrdomen.com/phpmyadmin/
 define('DB_USER', 'k503labs_u2');
 define('DB_PASS', 'VrXkCm5ZO');
 define('DB_NAME', 'k503labs_db2');
+define('SITE_HOST', 'http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/');
 //Tables
 define("DB_PREFIX", "veprytskaya_");
 define("DBT_PRODUCTS", DB_PREFIX . "products");

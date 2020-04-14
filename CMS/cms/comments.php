@@ -1,9 +1,9 @@
 <?php
 include 'init.php';
 
-$u = new UserSessions();
+/*$u = new UserSessions();*/
 if ($u->checkUserAuth() == 0) {
-    header('Location: http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/cms/index.php');
+    header('Location: '.SITE_HOST.'cms/index.php');
     exit();
 }
 $error_message = null;

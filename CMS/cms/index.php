@@ -1,18 +1,18 @@
 <?php
 include 'init.php';
 
-$mysqli = MyDB::get_db_instance();
+/*$mysqli = MyDB::get_db_instance();*/
 $session = new Sessions();
 $ses_id = $session->getSesId();
-$user_session = new UserSessions();
+/*$u = new UserSessions();*/
 $action = filter_input_('action', '');
 if ($action == 'logout') {
-    $user_session->deleteUserAuth($ses_id);
+    $u->deleteUserAuth($ses_id);
 }
 $error_message = null;
 $user = new UserModel($mysqli);
-if ($user_session->checkUserAuth() != 0) {
-    header('Location: http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/cms/home.php');
+if ($u->checkUserAuth() != 0) {
+    header('Location: '.SITE_HOST.'cms/home.php');
 } else {
     //create record in session table
     $password = filter_input_('pwd', '');
@@ -21,8 +21,8 @@ if ($user_session->checkUserAuth() != 0) {
         if ($user->getUserByLogin($login) != 0) {
             $u_id = $user->checkUser($login, $password);
             if ($u_id != 0) {
-                $user_session->makeUserAuth($u_id, $ses_id);
-                header('Location: http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/cms/home.php');
+                $u->makeUserAuth($u_id, $ses_id);
+                header('Location: '.SITE_HOST.'cms/home.php');
             } else {
                 $error_message = 'Incorrect password';
             }

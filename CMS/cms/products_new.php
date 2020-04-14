@@ -1,11 +1,10 @@
 <?php
+///////////////////////////////////////////////////////////////////////
+// Global initialization
 include 'init.php';
 
-/*$u = new UserSessions();*/
-if ($u->checkUserAuth() == 0) {
-    header('Location: '.SITE_HOST.'cms/index.php');
-    exit();
-}
+///////////////////////////////////////////////////////////////////////
+// Global function definition
 function get_image()
 {
     $path = __DIR__ . '/img/';
@@ -18,12 +17,35 @@ function get_image()
     return '';
 }
 
-/*$mysqli = MyDB::get_db_instance();*/
+///////////////////////////////////////////////////////////////////////
+// Check is user have access to this page
+if ($u->checkUserAuth() == 0) 
+{
+    header(SITE_HOST.'cms/index.php');
+    exit();
+}
+
+/// !!!!!!! Зачем оно тут вызывалось? функция же внутри switch вызывается! get_image(); //to load img on server
+
+///////////////////////////////////////////////////////////////////////
+// Global variables
 $action = filter_input_("action", "");
 $viewMode = '';
+$error_message = null;
+
+$name = filter_input_("name", "");
+$country = filter_input_("country", "");
+$price = filter_input_("price", "");
+$year = filter_input_("year", "");
+$s_num = filter_input_("s_num", "");
+$id_section = filter_input_("select", "");
+
+///////////////////////////////////////////////////////////////////////
+// Get data
 $model = new ProductModel($mysqli);
 $sections = $model->getSections();
-$error_message = null;
+
+
 switch ($action) {
     case "edit":
         $id = filter_input_("id", 0);
@@ -33,15 +55,18 @@ switch ($action) {
         } else
             $error_message = "Can not edit product, incorrect id";
         break;
+		
     case "delete":
         $id = filter_input_("id", 0);
         ($id != 0) ?
             $model->deleteProduct($id) :
             $error_message = "Can not delete product, incorrect id";
         break;
+		
     case "delete_param":
         $id_p = filter_input_("id_p", 0);
         $id = filter_input_("id", 0);
+		
         $viewMode = "edit";
         if ($id_p != 0) {
             $model->deleteParam($id_p);
@@ -49,38 +74,33 @@ switch ($action) {
             $error_message = "Can not delete param, incorrect id";
         $info = $model->getProduct($id);
         break;
+		
     case "update_product":
         $id = filter_input_("id", 0);
-        $name = filter_input_("name", "");
-        $country = filter_input_("country", "");
-        $price = filter_input_("price", "");
-        $year = filter_input_("year", "");
-        $s_num = filter_input_("s_num", "");
+		
         $img_name = get_image();
         $info = $model->getProduct($id);
         ($id != 0 && !empty($name) && !empty($country) && !empty($price) && !empty($year) && !empty($s_num)) ?
             $model->updateProduct($id, $name, $country, $price, $year, $img_name, $s_num) :
             $error_message = "Can not update product, incorrect input data";
         break;
-    case "add_main_info":
-        $name = filter_input_("name", "");
-        $country = filter_input_("country", "");
-        $price = filter_input_("price", "");
-        $year = filter_input_("year", "");
-        $s_num = filter_input_("s_num", "");
-        $id_section = filter_input_("select", "");
+		
+    case "add_main_info":		
         $img_name = get_image();
         if (!empty($name) && !empty($country) && !empty($price) && !empty($year) && !empty($s_num) && !empty($img_name)) {
             $model->addProduct($name, $country, $price, $year, $img_name, $s_num, $id_section);
             $id = $model->getProductBySNum($s_num);
-        } else
-            $error_message = "Can not add product, incorrect input data";
+        } else {
+            $error_message = "Can not add product, incorrect input data";			
+		}
         break;
+		
     case "add_extra_info":
         $id = filter_input_("id", 0);
         $name = filter_input_("param_name", "");
         $value = filter_input_("param_value", "");
         $sort = filter_input_("param_sort", "");
+		
         $viewMode = "edit";
         (!empty($name) && !empty($value) && !empty($sort)) ?
             $model->addParam($id, $name, $value, $sort) :
@@ -88,12 +108,24 @@ switch ($action) {
         $info = $model->getProduct($id);
         break;
 }
+
+//////////////////////////////////////////////////////////////
+// 
 if ($viewMode == "") {
     $list = $model->getALLProducts();
 }
-$mysqli->close();
+
+///////////////////////////////////////// MAKE PAGE LAYOUT ////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////
+//
 include "inc/header.php";
-if ($viewMode == "edit") { ?>
+//
+//////////////////////////////////////////////////////////////
+
+if ($viewMode == "edit") 
+{ 
+?>
     <div class="form-inside">
         <div class="m-auto">
             <a href="products.php" class="buy-item2">Back to tables</a>
@@ -139,7 +171,11 @@ if ($viewMode == "edit") { ?>
             </form>
         </div>
     </div>
-<?php } else { ?>
+<?php 
+} 
+else 
+{ 
+?>
     <table id="customers">
         <tr>
             <td>Id</td>
@@ -164,18 +200,18 @@ if ($viewMode == "edit") { ?>
         <form class="f1" action="products.php?action=add_main_info" method="post" enctype="multipart/form-data">
             <input type="hidden" name="action" value="add_main_info">
             Name
-            <input required class="fadeIn second" type="text" name="name" value="">
+            <input required class="fadeIn second" type="text" name="name" value="<?=$name;?>">
             Serial number
-            <input name="s_num" required class="fadeIn second" type="text" value="">
+            <input name="s_num" required class="fadeIn second" type="text" value="<?=$s_num;?>">
             Price:
-            <input name="price" required class="fadeIn second" type="text" value="">
+            <input name="price" required class="fadeIn second" type="text" value="<?=$price;?>">
             Production date
-            <input name="year" required class="fadeIn second" type="text" value="">
+            <input name="year" required class="fadeIn second" type="text" value="<?=$year;?>">
             Production country
             <input name="country" required class="fadeIn second" type="text" value="">
             <select name="select">
                 <?php foreach ($sections as $key => $value) { ?>
-                    <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                    <option value="<?= $value['id'] ?>"<?=( $id_section == $value['id'] ? " selected" : "" );?>><?= $value['name'] ?></option>
                 <?php } ?>
             </select>
             Image
@@ -183,6 +219,12 @@ if ($viewMode == "edit") { ?>
             <input type="submit" class="buy-item" value="Add product" name="input_submit">
         </form>
     </div>
-    <?php
+<?php
 }
+
+///////////////////////////////////////////////////
+//
 include "inc/footer.php";
+
+$mysqli->close();	// Я бы это делал тут, так как футер тоже может обращаться к базе для формирования каких то элементов
+//
