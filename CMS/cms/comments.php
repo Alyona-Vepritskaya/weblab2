@@ -1,15 +1,30 @@
-<?php
+<?php //--Done--
+///////////////////////////////////////////////////////////////////////
+// Global initialization
 include 'init.php';
 
+///////////////////////////////////////////////////////////////////////
+// Check is user have access to this page
 if ($u->checkUserAuth() == 0) {
     header('Location: '.SITE_HOST.'cms/index.php');
     exit();
 }
+
+///////////////////////////////////////////////////////////////////////
+// Global variables
 $error_message = null;
 $action = filter_input_("action", "");
 $viewMode = "";
+
+$email = filter_input_("email", "");
+$name = filter_input_("name", "");
+$comment = filter_input_("comment", "");
+
+///////////////////////////////////////////////////////////////////////
+// Get data
 $model = new ProductModel($mysqli);
-$error_message = null;
+
+
 switch ($action) {
     case "delete":
         $id = filter_input_("id", 0);
@@ -17,6 +32,7 @@ switch ($action) {
             $model->deleteProductReviews($id) :
             $error_message = "Can not delete comment, incorrect id";
         break;
+
     case "add":
         $id_prod = filter_input_("id_prod", "");
         $email = filter_input_("email", "");
@@ -30,9 +46,18 @@ switch ($action) {
             $comment = "";
         } else
             $error_message = "Can not add comment, incorrect input data";
+        break;
 }
+
+//////////////////////////////////////////////////////////////
+
 if ($viewMode == "")
     $list = $model->getProductsReviews();
+
+///////////////////////////////////////// MAKE PAGE LAYOUT ////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 include "inc/header.php"; ?>
     <table id="customers">
         <tr>
@@ -68,5 +93,6 @@ include "inc/header.php"; ?>
         </form>
     </div>
 <?php
+
 include "inc/footer.php";
 $mysqli->close();

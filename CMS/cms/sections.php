@@ -1,14 +1,27 @@
-<?php
+<?php //Done
+///////////////////////////////////////////////////////////////////////
+// Global initialization
 include 'init.php';
 
+///////////////////////////////////////////////////////////////////////
+// Check is user have access to this page
 if ($u->checkUserAuth() == 0) {
     header('Location: ' . SITE_HOST . 'cms/index.php');
     exit();
 }
+
+///////////////////////////////////////////////////////////////////////
+// Global variables
 $action = filter_input_("action", "");
 $viewMode = "";
-$model = new ProductModel($mysqli);
 $error_message = null;
+
+$name = filter_input_("name", "");
+
+///////////////////////////////////////////////////////////////////////
+// Get data
+$model = new ProductModel($mysqli);
+
 switch ($action) {
     case "edit":
         $id = filter_input_("id", 0);
@@ -45,11 +58,22 @@ switch ($action) {
         } else
             $error_message = "Can not add section, incorrect input data";
 }
+
+//////////////////////////////////////////////////////////////
+//
 if ($viewMode == "")
     $list = $model->getSections();
-$mysqli->close();
+
+///////////////////////////////////////// MAKE PAGE LAYOUT ////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 include "inc/header.php";
-if ($viewMode == "edit") { ?>
+
+//////////////////////////////////////////////////////////////
+
+if ($viewMode == "edit")
+{ ?>
     <div class="m-auto"><h4><?= $error_message ?></h4></div>
     <div class="form-inside">
         <form class="f1" action="sections.php" method="post">
@@ -60,7 +84,11 @@ if ($viewMode == "edit") { ?>
             <input type="submit" class="buy-item" value="Update">
         </form>
     </div>
-<?php } else { ?>
+<?php
+}
+else
+{
+?>
     <table id="customers">
         <tr>
             <td>Id</td>
@@ -88,4 +116,9 @@ if ($viewMode == "edit") { ?>
     </div>
     <?php
 }
+
+//////////////////////////////////////////////////////////////
+
 include "inc/footer.php";
+
+$mysqli->close();

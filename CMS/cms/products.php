@@ -1,10 +1,10 @@
-<?php
+<?php //Todo - select,format
+///////////////////////////////////////////////////////////////////////
+// Global initialization
 include 'init.php';
 
-if ($u->checkUserAuth() == 0) {
-    header('Location: ' . SITE_HOST . 'cms/index.php');
-    exit();
-}
+///////////////////////////////////////////////////////////////////////
+// Global function definition
 function get_image()
 {
     $path = __DIR__ . '/img/';
@@ -17,11 +17,32 @@ function get_image()
     return '';
 }
 
+///////////////////////////////////////////////////////////////////////
+// Check is user have access to this page
+if ($u->checkUserAuth() == 0) {
+    header('Location: ' . SITE_HOST . 'cms/index.php');
+    exit();
+}
+
+///////////////////////////////////////////////////////////////////////
+// Global variables
 $action = filter_input_("action", "");
 $viewMode = '';
+$error_message = null;
+
+$name = filter_input_("name", "");
+$country = filter_input_("country", "");
+$price = filter_input_("price", "");
+$year = filter_input_("year", "");
+$s_num = filter_input_("s_num", "");
+$id_section = filter_input_("select", "");
+
+///////////////////////////////////////////////////////////////////////
+// Get data
 $model = new ProductModel($mysqli);
 $sections = $model->getSections();
-$error_message = null;
+
+
 switch ($action) {
     case "edit":
         $id = filter_input_("id", 0);
@@ -31,12 +52,14 @@ switch ($action) {
         } else
             $error_message = "Can not edit product, incorrect id";
         break;
+
     case "delete":
         $id = filter_input_("id", 0);
         ($id != 0) ?
             $model->deleteProduct($id) :
             $error_message = "Can not delete product, incorrect id";
         break;
+
     case "delete_param":
         $id_p = filter_input_("id_p", 0);
         $id = filter_input_("id", 0);
@@ -47,6 +70,7 @@ switch ($action) {
             $error_message = "Can not delete param, incorrect id";
         $info = $model->getProduct($id);
         break;
+
     case "update_product":
         $id = filter_input_("id", 0);
         $name = filter_input_("name", "");
@@ -75,6 +99,7 @@ switch ($action) {
             $info['price'] = $price;
         }
         break;
+
     case "add_main_info":
         $name = filter_input_("name", "");
         $country = filter_input_("country", "");
@@ -101,6 +126,7 @@ switch ($action) {
             $info['price'] = $price;
         }
         break;
+
     case "add_extra_info":
         $id = filter_input_("id", 0);
         $n = filter_input_("param_name", "");
