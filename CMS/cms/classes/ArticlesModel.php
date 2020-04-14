@@ -1,6 +1,5 @@
 <?php
-include_once '../../classes/MyDB.php';
-include_once '../../inc/connect-inc.php';
+include '../init.php';
 
 class ArticlesModel
 {

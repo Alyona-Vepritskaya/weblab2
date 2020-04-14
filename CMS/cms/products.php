@@ -1,7 +1,6 @@
 <?php
 include 'init.php';
 
-/*$u = new UserSessions();*/
 if ($u->checkUserAuth() == 0) {
     header('Location: '.SITE_HOST.'cms/index.php');
     exit();
@@ -18,7 +17,6 @@ function get_image()
     return '';
 }
 
-/*$mysqli = MyDB::get_db_instance();*/
 $action = filter_input_("action", "");
 $viewMode = '';
 $model = new ProductModel($mysqli);

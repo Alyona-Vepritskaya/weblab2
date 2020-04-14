@@ -1,6 +1,5 @@
 <?php
-include_once "Sessions.php";
-include_once '../../classes/MyDB.php';
+include '../init.php';
 
 class UserSessions extends Sessions
 {

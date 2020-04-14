@@ -1,12 +1,12 @@
 <?php
 include 'init.php';
 
-/*$u = new UserSessions();*/
+
 if ($u->checkUserAuth() == 0) {
     header('Location: '.SITE_HOST.'cms/index.php');
     exit();
 }
-/*$mysqli = MyDB::get_db_instance();*/
+
 $action = filter_input_("action", "");
 $viewMode = "";
 $model = new ArticlesModel($mysqli);

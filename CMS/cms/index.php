@@ -1,10 +1,9 @@
 <?php
 include 'init.php';
 
-/*$mysqli = MyDB::get_db_instance();*/
+
 $session = new Sessions();
 $ses_id = $session->getSesId();
-/*$u = new UserSessions();*/
 $action = filter_input_('action', '');
 if ($action == 'logout') {
     $u->deleteUserAuth($ses_id);
