@@ -1,4 +1,4 @@
-<?php //--Done--
+<?php
 ///////////////////////////////////////////////////////////////////////
 // Global initialization
 include 'init.php';
@@ -93,6 +93,8 @@ include "inc/header.php"; ?>
         </form>
     </div>
 <?php
+//////////////////////////////////////////////////////////////////
 
 include "inc/footer.php";
+
 $mysqli->close();

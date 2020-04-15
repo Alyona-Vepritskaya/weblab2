@@ -1,21 +1,37 @@
-<?php //Todo -- format
+<?php
 ///////////////////////////////////////////////////////////////////////
 // Global initialization
 include 'init.php';
 
 
+///////////////////////////////////////////////////////////////////////
+// Global variables
+$error_message = null;
+$action = filter_input_('action', '');
+$login = filter_input_('login', '');
+
+
+///////////////////////////////////////////////////////////////////////
+// Get data
 $session = new Sessions();
 $ses_id = $session->getSesId();
-$action = filter_input_('action', '');
+$user = new UserModel($mysqli);
+
+
+///////////////////////////////////////////////////////////////////////
+// User leaves admin page
 if ($action == 'logout') {
     $u->deleteUserAuth($ses_id);
 }
-$error_message = null;
-$user = new UserModel($mysqli);
+
+///////////////////////////////////////////////////////////////////////
+// Check is user have access to this page
 if ($u->checkUserAuth() != 0) {
     header('Location: '.SITE_HOST.'cms/home.php');
 } else {
-    //create record in session table
+
+    ///////////////////////////////////////////////////////////////////////
+    //Create record in session table if user is admin
     $password = filter_input_('pwd', '');
     $login = filter_input_('login', '');
     if (!empty($password) && !empty($login)) {
@@ -33,6 +49,11 @@ if ($u->checkUserAuth() != 0) {
         }
     }
 }
+
+///////////////////////////////////////// MAKE PAGE LAYOUT ////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

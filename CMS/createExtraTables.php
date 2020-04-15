@@ -1,6 +1,6 @@
 <?php
-include_once 'inc/connect-inc.php';
-include_once "classes/MyDB.php";
+include_once 'init.php';
+
 
 function create_extra_tables($mysqli)
 {
@@ -9,6 +9,7 @@ function create_extra_tables($mysqli)
     $sql_drop1 = "drop table if exists " . DBT_USERS_SESSIONS . ";";
     $sql_drop2 = "drop table if exists " . DBT_NEWS . ";";
     $sql_drop3 = "drop table if exists " . DBT_PAGES . ";";
+
 
     if ($mysqli->query($sql_drop0) !== true) {
         echo "Error dropping table: " . $mysqli->error;
@@ -22,6 +23,7 @@ function create_extra_tables($mysqli)
     if ($mysqli->query($sql_drop3) !== true) {
         echo "Error dropping table: " . $mysqli->error;
     }
+
 
     // sql to create tables
     $sql0 = "create table " . DBT_USERS . "
@@ -56,6 +58,7 @@ function create_extra_tables($mysqli)
         published_date datetime
     );";
 
+
     if ($mysqli->query($sql0) !== true) {
         echo "Error creating table: " . $mysqli->error;
     }
@@ -70,5 +73,4 @@ function create_extra_tables($mysqli)
     }
 }
 
-$mysqli = MyDB::get_db_instance();
 create_extra_tables($mysqli);

@@ -1,4 +1,4 @@
-<?php //Done
+<?php
 ///////////////////////////////////////////////////////////////////////
 // Global initialization
 include 'init.php';
@@ -31,12 +31,14 @@ switch ($action) {
         } else
             $error_message = "Can not edit section, incorrect id";
         break;
+
     case "delete":
         $id = filter_input_("id", 0);
         ($id != 0) ?
             $model->deleteSection($id) :
             $error_message = "Can not delete section, incorrect id";
         break;
+
     case "update":
         $id = filter_input_("id", 0);
         $name = filter_input_("name", "");
@@ -50,6 +52,7 @@ switch ($action) {
             $error_message = "Can not update section, incorrect input data";
         }
         break;
+
     case "add":
         $name = filter_input_("name", "");
         if (!empty($name)) {
@@ -57,6 +60,7 @@ switch ($action) {
             $name = "";
         } else
             $error_message = "Can not add section, incorrect input data";
+        break;
 }
 
 //////////////////////////////////////////////////////////////

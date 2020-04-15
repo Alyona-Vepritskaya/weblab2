@@ -1,12 +1,12 @@
 <?php
+///////////////////////////////////////////////////////////////////////
+// Global initialization
 include_once 'init.php';
 
-$path = "http://k503labs.ukrdomen.com/535a/Veprytskaya/CMS/cms/img/";
-$mysqli = MyDB::get_db_instance();
 
-$p_model = new ProductModel($mysqli);
-$sections = $p_model->getSectionsNames();
-
+///////////////////////////////////////////////////////////////////////
+// Global variables
+$path = SITE_HOST."cms/img/";
 $all_products = null;
 $one_product = null;
 $current_section = null;
@@ -19,6 +19,14 @@ $comment = filter_input_('comment', '');
 $q = filter_input_("section", '');
 $id = filter_input_("id", '');
 
+
+///////////////////////////////////////////////////////////////////////
+// Get data
+$p_model = new ProductModel($mysqli);
+$sections = $p_model->getSectionsNames();
+
+///////////////////////////////////////////////////////////////////////
+// Global function definition
 function check()
 {
     $f = filter_input_('hidden_input', '');
@@ -42,19 +50,24 @@ function set_comment($p_model, $email, $id, $name, $comment)
     $p_model->addProductReviews($email, $id, $name, $comment);
 }
 
-//section click
+////////////////////////////////////////////////////////////////////////
+/// Section click
 if (!empty($q)) {
     $current_section = $q;
     $all_products = get_products($p_model, $current_section);
 }
-//product click
+
+/////////////////////////////////////////////////////////////////////
+/// Product click
 if (!empty($id)) {
     $current_product = $id;
     $tmp = get_product($p_model, $current_product);
     $one_product = $tmp['params'];
     $comments = $tmp['comments'];
 }
-//check form submit
+
+////////////////////////////////////////////////////////////////////////
+/// Check form submit
 if (check()) {
     if (!empty($email) && !empty($name) && !empty($comment) && !empty($id)) {
         set_comment($p_model, $email, $id, $name, $comment);
@@ -63,7 +76,13 @@ if (check()) {
         $comments = $tmp['comments'];
     }
 }
+
+///////////////////////////////////////// MAKE PAGE LAYOUT ////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 include '../general/header.php'; ?>
+
     <div class="right-col">
         <div class="news-info">
             <a href="">
@@ -152,4 +171,7 @@ include '../general/header.php'; ?>
             } ?>
         </div>
     </div>
-<?php include '../general/footer.php';
+<?php
+//////////////////////////////////////////////////////////////////////////
+
+include '../general/footer.php';

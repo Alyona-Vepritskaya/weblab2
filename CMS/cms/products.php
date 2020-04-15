@@ -1,4 +1,4 @@
-<?php //Todo - select,format
+<?php
 ///////////////////////////////////////////////////////////////////////
 // Global initialization
 include 'init.php';
@@ -117,6 +117,7 @@ switch ($action) {
             $year = '';
             $s_num = '';
             $img_name = '';
+            $id_section = '';
         } else {
             $error_message = "Can not add product, incorrect input data";
             $info['name'] = $name;
@@ -144,12 +145,22 @@ switch ($action) {
         $info = $model->getProduct($id);
         break;
 }
+
+//////////////////////////////////////
+///
 if ($viewMode == "") {
     $list = $model->getALLProducts();
 }
 
+///////////////////////////////////////// MAKE PAGE LAYOUT ////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 include "inc/header.php";
-if ($viewMode == "edit") { ?>
+
+
+if ($viewMode == "edit")
+{ ?>
     <div class="form-inside">
         <div class="m-auto">
             <a href="products.php" class="buy-item2">Back to tables</a>
@@ -195,7 +206,11 @@ if ($viewMode == "edit") { ?>
             </form>
         </div>
     </div>
-<?php } else { ?>
+<?php
+}
+else
+{
+?>
     <table id="customers">
         <tr>
             <td>Id</td>
@@ -231,7 +246,7 @@ if ($viewMode == "edit") { ?>
             <input name="country" required class="fadeIn second" type="text" value="<?=$country?>">
             <select name="select">
                 <?php foreach ($sections as $key => $value) { ?>
-                    <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                    <option value="<?= $value['id'] ?>"<?=( $id_section == $value['id'] ? " selected" : "" );?>><?= $value['name'] ?></option>
                 <?php } ?>
             </select>
             Image
@@ -241,5 +256,8 @@ if ($viewMode == "edit") { ?>
     </div>
     <?php
 }
+/////////////////////////////////////////////////////////////////
+///
 include "inc/footer.php";
+
 $mysqli->close();
