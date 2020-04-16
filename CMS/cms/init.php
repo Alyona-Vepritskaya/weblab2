@@ -10,6 +10,6 @@ spl_autoload_register(function ($class_name){
         include_once "../" . $inc_file;
 });
 
-$u = new UserSessions();
-
 $mysqli = MyDB::get_db_instance();
+
+$u = new UserSessions();
