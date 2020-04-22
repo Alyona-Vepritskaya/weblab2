@@ -1,4 +1,4 @@
-<?php //+
+<?php
 include "../init.php";
 
 class PageView extends View
@@ -22,7 +22,7 @@ class PageView extends View
         $this->footer_file = $filepath;
     }
 
-    public function buildView($view_name = "", $data = null){ //data?
+    public function buildView($view_name = ""){
 
         include $this->header_file;
 
@@ -44,7 +44,6 @@ class PageView extends View
             if(file_exists('views/'.$ctrl.'/index.php'))
                 include_once 'views/'.$ctrl.'/index.php';
         }
-
         ////////////////////////////////////////////////////////////
 
         include $this->footer_file;

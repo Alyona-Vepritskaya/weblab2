@@ -21,6 +21,8 @@ class UsersController extends PageController
     }
 
     public function action_default(){
+        ////////////////////////////////////////////////////
+        /// Format output
         $this->view->ulist = $this->userModel->getUsers();
         $views = array('list', 'add');
         $this->view->buildView($views);

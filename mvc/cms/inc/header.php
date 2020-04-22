@@ -20,6 +20,6 @@ include '../init.php';
     <li><a href=<?=SITE_HOST."cms/pages.php"?>>Pages</a></li>
     <li><a href=<?=SITE_HOST."cms/comments.php"?>>Comments</a></li>
     <li><a href=<?=SITE_HOST."cms/sections.php"?>>Sections</a></li>
-    <li><a href=<?=SITE_HOST."cms/index.php?action=logout"?>>Log out</a></li>
+    <li><a href=<?=SITE_HOST."cms/index.php?controller=LoginController&action=logout"?>>Log out</a></li>
 </ul>
 
