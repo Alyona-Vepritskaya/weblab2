@@ -1,0 +1,8 @@
+<?php
+///////////////////////////////////////////////////////////////////////
+// Global initialization
+include "init.php";
+
+
+$app = new Application();
+$app->run();

@@ -133,27 +133,27 @@
                 </a>
             </div>
             <div class="item">
-                <a href="../CMS/prodList.php">
+                <a href="../mvc/prodList.php">
                     <img src="http://k503labs.ukrdomen.com/535a/Veprytskaya/images/more.png" alt=">">
-                    CMS products
+                    mvc products
                 </a>
             </div>
             <div class="item">
-                <a href="../CMS/newsList.php">
+                <a href="../mvc/newsList.php">
                     <img src="http://k503labs.ukrdomen.com/535a/Veprytskaya/images/more.png" alt=">">
-                    CMS news
+                    mvc news
                 </a>
             </div>
             <div class="item">
-                <a href="../CMS/pageList.php">
+                <a href="../mvc/pageList.php">
                     <img src="http://k503labs.ukrdomen.com/535a/Veprytskaya/images/more.png" alt=">">
-                    CMS pages
+                    mvc pages
                 </a>
             </div>
             <div class="item">
-                <a href="../CMS/usersList.php">
+                <a href="../mvc/usersList.php">
                     <img src="http://k503labs.ukrdomen.com/535a/Veprytskaya/images/more.png" alt=">">
-                    CMS users
+                    mvc users
                 </a>
             </div>
             <div class="bottom-img">
