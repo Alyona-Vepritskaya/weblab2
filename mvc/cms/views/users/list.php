@@ -1,6 +1,7 @@
 <?php //?
-include_once '../../init.php';
-//Todo
+//include_once '../../init.php';
+
+
 $error_message = $this->error_message;
 $list = $this->ulist;
 

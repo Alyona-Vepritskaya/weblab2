@@ -1,4 +1,4 @@
-<?php // + -
+<?php
 include_once '../init.php';
 
 class UsersController extends PageController
@@ -106,11 +106,13 @@ class UsersController extends PageController
         /// Add user
         if (!empty($login) && !empty($password) && !empty($name) && ($password2 == $password)) {
             $this->userModel->addUser($login, $password, $name);
-            // ??
-            $name = "";
-            $login = "";
-        } else
+            $this->view->name = '';
+            $this->view->login = '';
+        } else {
+            $this->view->name = $name;
+            $this->view->login = $login;
             $this->view->error_message = "Can not add user, incorrect input data";
+        }
 
         ////////////////////////////////////////////////////
         /// Format output
