@@ -6,14 +6,12 @@ class PageView extends View
     protected $controller_name;
     protected $header_file;
     protected $footer_file;
-    public $error_message;
 
     public function __construct($controller_name){
         parent::__construct();
         $this->controller_name = $controller_name;
-        $this->header_file = "../inc/header.php";
-        $this->footer_file = "../inc/footer.php";
-        $this->error_message = '';
+        $this->header_file = "inc/header.php";
+        $this->footer_file = "inc/footer.php";
     }
 
     public function setHeader($filepath){
@@ -38,13 +36,16 @@ class PageView extends View
                 if(file_exists('views/'.$ctrl.'/'.$item.'.php'))
                     include_once 'views/'.$ctrl.'/'.$item.'.php';
             }
-        } else if(!empty($view_name)){
+        } else
+            if(!empty($view_name)){
             if(file_exists('views/'.$ctrl.'/'.$view_name.'.php'))
                 include_once 'views/'.$ctrl.'/'.$view_name.'.php';
         } else {
             if(file_exists('views/'.$ctrl.'/index.php'))
                 include_once 'views/'.$ctrl.'/index.php';
         }
+
+        ////////////////////////////////////////////////////////////
 
         include $this->footer_file;
     }

@@ -1,5 +1,6 @@
 <?php
 include '../init.php';
+//TODO
 ?>
 <!DOCTYPE html>
 <html lang="ru">

@@ -26,6 +26,6 @@ class Controller
 
         return $url=(empty($url))?
             SITE_HOST.'cms/index.php':
-            SITE_HOST.'index.php?'.$url;
+            SITE_HOST.'cms/index.php?'.$url;
     }
 }
