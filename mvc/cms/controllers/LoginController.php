@@ -15,7 +15,7 @@ class LoginController extends PageController
         ///////////////////////////////////////////////////////////////////////
         // Check is user have access to this page
         if($this->user_session->checkUserAuth()){
-            $url = Controller::formatUrl('UsersController');
+            $url = Controller::formatUrl('HomeController');
             $this->goUrl($url);
             return;
         }
@@ -35,7 +35,7 @@ class LoginController extends PageController
                 $u_id = $user->checkUser($login, $password);
                 if ($u_id != 0) {
                     $this->user_session->makeUserAuth($u_id, $this->user_session->getSesId());
-                    $url = Controller::formatUrl('UsersController');
+                    $url = Controller::formatUrl('HomeController');
                     $this->goUrl($url);
                     return;
                 } else {

@@ -1,7 +1,7 @@
 <?php
 include '../init.php';
-//TODO
 ?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -13,13 +13,13 @@ include '../init.php';
 </head>
 <body>
 <ul>
-    <li><a href=<?=SITE_HOST."cms/home.php"?>>Home</a></li>
-    <li><a href=<?=SITE_HOST."cms/news.php"?>>News</a></li>
-    <li><a href=<?=SITE_HOST."cms/products.php"?>>Products</a></li>
-    <li><a href=<?=SITE_HOST."cms/users.php"?>>Users</a></li>
-    <li><a href=<?=SITE_HOST."cms/pages.php"?>>Pages</a></li>
-    <li><a href=<?=SITE_HOST."cms/comments.php"?>>Comments</a></li>
-    <li><a href=<?=SITE_HOST."cms/sections.php"?>>Sections</a></li>
+    <li><a href=<?=SITE_HOST."cms/index.php?controller=HomeController"?>>Home</a></li>
+    <li><a href=<?=SITE_HOST."cms/index.php?controller=NewsController"?>>News</a></li>
+    <li><a href=<?=SITE_HOST."cms/index.php?controller=ProductsController"?>>Products</a></li>
+    <li><a href=<?=SITE_HOST."cms/index.php?controller=UsersController"?>>Users</a></li>
+    <li><a href=<?=SITE_HOST."cms/index.php?controller=PagesController"?>>Pages</a></li>
+    <li><a href=<?=SITE_HOST."cms/index.php?controller=CommentsController"?>>Comments</a></li>
+    <li><a href=<?=SITE_HOST."cms/index.php?controller=SectionsController"?>>Sections</a></li>
     <li><a href=<?=SITE_HOST."cms/index.php?controller=LoginController&action=logout"?>>Log out</a></li>
 </ul>
 
