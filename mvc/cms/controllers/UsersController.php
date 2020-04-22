@@ -3,7 +3,7 @@ include_once '../init.php';
 
 class UsersController extends PageController
 {
-    protected $userModel;
+    protected $user_model;
     protected $user_id;
 
     public function __construct(){
@@ -17,13 +17,13 @@ class UsersController extends PageController
             exit();
         }
 
-        $this->userModel = new UserModel(MyDB::get_db_instance());
+        $this->user_model = new UserModel(MyDB::get_db_instance());
     }
 
     public function action_default(){
         ////////////////////////////////////////////////////
         /// Format output
-        $this->view->ulist = $this->userModel->getUsers();
+        $this->view->ulist = $this->user_model->getUsers();
         $views = array('list', 'add');
         $this->view->buildView($views);
     }
@@ -40,11 +40,11 @@ class UsersController extends PageController
         ////////////////////////////////////////////////////
         /// Update user if possible
         if ($id != 0 && !empty($login) && !empty($password) && !empty($name) && ($password2 == $password)) {
-            $this->userModel->updateUser($id, $login, $password, $name);
+            $this->user_model->updateUser($id, $login, $password, $name);
 
             ////////////////////////////////////////////////////
             /// Format output
-            $this->view->ulist = $this->userModel->getUsers();
+            $this->view->ulist = $this->user_model->getUsers();
             $views = array('list','add');
             $this->view->buildView($views);
         } else {
@@ -69,7 +69,7 @@ class UsersController extends PageController
 
         ////////////////////////////////////////////////////
         /// Format output
-        $this->view->user = $this->userModel->getUser($id);
+        $this->view->user = $this->user_model->getUser($id);
         $views = array('edit');
         $this->view->buildView($views);
     }
@@ -85,13 +85,13 @@ class UsersController extends PageController
             $this->view->error_message = "!!! Can not delete yourself !!!";
         } else {
             ($id != 0) ?
-                $this->userModel->deleteUser($id) :
+                $this->user_model->deleteUser($id) :
                 $this->view->error_message = "Can not delete user, incorrect id";
         }
 
         ////////////////////////////////////////////////////
         /// Format output
-        $this->view->ulist = $this->userModel->getUsers();
+        $this->view->ulist = $this->user_model->getUsers();
         $views = array('list', 'add');
         $this->view->buildView($views);
     }
@@ -107,7 +107,7 @@ class UsersController extends PageController
         ////////////////////////////////////////////////////
         /// Add user
         if (!empty($login) && !empty($password) && !empty($name) && ($password2 == $password)) {
-            $this->userModel->addUser($login, $password, $name);
+            $this->user_model->addUser($login, $password, $name);
             $this->view->name = '';
             $this->view->login = '';
         } else {
@@ -118,7 +118,7 @@ class UsersController extends PageController
 
         ////////////////////////////////////////////////////
         /// Format output
-        $this->view->ulist = $this->userModel->getUsers();
+        $this->view->ulist = $this->user_model->getUsers();
         $views = array('list', 'add');
         $this->view->buildView($views);
     }
