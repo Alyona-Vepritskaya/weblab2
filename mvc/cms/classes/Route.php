@@ -1,4 +1,4 @@
-<?php //+
+<?php
 include_once '../init.php';
 
 class Route
@@ -10,11 +10,12 @@ class Route
         $ctrl_name = filter_input_('controller','');
         $ctrl_action = filter_input_('action','');
 
+
         if(empty($ctrl_name))
             $ctrl_name = 'LoginController';
 
         if(file_exists('controllers/'.$ctrl_name.'.php')){
-            include_once 'controllers/'.$ctrl_name.'.php'; //Redo
+            include_once 'controllers/'.$ctrl_name.'.php';
 
             /////////////////////////////////////////////
             // Dynamic controller creation
@@ -31,8 +32,6 @@ class Route
                 Application::error404();
                 return;
             }
-        } else {
-            // File not found
         }
     }
 }

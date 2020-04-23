@@ -21,7 +21,7 @@ class NewsController extends PageController
 
     public function action_default(){
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $this->view->list = $this->model->getArticles();
         $views = array('list', 'add');
         $this->view->buildView($views);
@@ -40,7 +40,7 @@ class NewsController extends PageController
 
 
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $this->view->list = $this->model->getArticles();
         $views = array('list', 'add');
         $this->view->buildView($views);
@@ -57,6 +57,7 @@ class NewsController extends PageController
         /// Add article
         if(!empty($name) && !empty($content)) {
             $this->model->addArticle($name, $content, $url);
+
             $this->view->name = '';
             $this->view->url = '';
             $this->view->content = '';
@@ -68,7 +69,7 @@ class NewsController extends PageController
         }
 
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $this->view->list = $this->model->getArticles();
         $views = array('list', 'add');
         $this->view->buildView($views);
@@ -80,7 +81,7 @@ class NewsController extends PageController
         $id = filter_input_("id", 0);
 
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $this->view->article = $this->model->getArticle($id);
         $views = array('edit');
         $this->view->buildView($views);
@@ -100,7 +101,7 @@ class NewsController extends PageController
             $this->model->updateArticle($id, $name, $content, $url);
 
             ////////////////////////////////////////////////////
-            /// Format output
+            /// Form output
             $this->view->list = $this->model->getArticles();
             $views = array('list','add');
             $this->view->buildView($views);
@@ -111,7 +112,7 @@ class NewsController extends PageController
             $info['content'] = $content;
 
             ////////////////////////////////////////////////////
-            /// Format output
+            /// Form output
             $this->view->error_message = "Can not update article, incorrect input data";
             $this->view->article = $info;
             $views = array('edit');

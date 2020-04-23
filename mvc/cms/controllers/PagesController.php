@@ -21,7 +21,7 @@ class PagesController extends PageController
 
     public function action_default(){
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $this->view->list = $this->model->getPages();
         $views = array('list', 'add');
         $this->view->buildView($views);
@@ -40,7 +40,7 @@ class PagesController extends PageController
 
 
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $this->view->list = $this->model->getPages();
         $views = array('list', 'add');
         $this->view->buildView($views);
@@ -57,6 +57,7 @@ class PagesController extends PageController
         /// Add page
         if(!empty($name) && !empty($content) && !empty($url)) {
             $this->model->addPage($name, $content, $url);
+
             $this->view->name = '';
             $this->view->url = '';
             $this->view->content = '';
@@ -68,7 +69,7 @@ class PagesController extends PageController
         }
 
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $this->view->list = $this->model->getPages();
         $views = array('list', 'add');
         $this->view->buildView($views);
@@ -80,7 +81,7 @@ class PagesController extends PageController
         $id = filter_input_("id", 0);
 
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $this->view->page = $this->model->getPage($id);
         $views = array('edit');
         $this->view->buildView($views);
@@ -100,7 +101,7 @@ class PagesController extends PageController
             $this->model->updatePage($id, $name, $content, $url);
 
             ////////////////////////////////////////////////////
-            /// Format output
+            /// Form output
             $this->view->list = $this->model->getPages();
             $views = array('list','add');
             $this->view->buildView($views);
@@ -111,7 +112,7 @@ class PagesController extends PageController
             $info['content'] = $content;
 
             ////////////////////////////////////////////////////
-            /// Format output
+            /// Form output
             $this->view->error_message = "Can not update page, incorrect input data";
             $this->view->page = $info;
             $views = array('edit');

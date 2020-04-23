@@ -1,4 +1,4 @@
-<?php //+
+<?php
 include_once '../init.php';
 
 class PageController extends Controller

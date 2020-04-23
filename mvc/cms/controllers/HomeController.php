@@ -16,7 +16,7 @@ class HomeController extends PageController
 
     public function action_default(){
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $views = array('home');
         $this->view->buildView($views);
     }

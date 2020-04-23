@@ -21,7 +21,7 @@ class SectionsController extends PageController
 
     public function action_default(){
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $this->view->list = $this->model->getSections();
         $views = array('list', 'add');
         $this->view->buildView($views);
@@ -39,7 +39,7 @@ class SectionsController extends PageController
             $this->view->error_message = "Can not delete sections, incorrect id";
 
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $this->view->list = $this->model->getSections();
         $views = array('list', 'add');
         $this->view->buildView($views);
@@ -61,7 +61,7 @@ class SectionsController extends PageController
         }
 
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $this->view->list = $this->model->getSections();
         $views = array('list', 'add');
         $this->view->buildView($views);
@@ -73,7 +73,7 @@ class SectionsController extends PageController
         $id = filter_input_("id", 0);
 
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $this->view->section = $this->model->getSection($id);
         $views = array('edit');
         $this->view->buildView($views);
@@ -91,7 +91,7 @@ class SectionsController extends PageController
             $this->model->updateSection($id, $name);
 
             ////////////////////////////////////////////////////
-            /// Format output
+            /// Form output
             $this->view->list = $this->model->getSections();
             $views = array('list','add');
             $this->view->buildView($views);
@@ -100,7 +100,7 @@ class SectionsController extends PageController
             $info['name'] = $name;
 
             ////////////////////////////////////////////////////
-            /// Format output
+            /// Form output
             $this->view->error_message = "Can not update section, incorrect input data";
             $this->view->section = $info;
             $views = array('edit');

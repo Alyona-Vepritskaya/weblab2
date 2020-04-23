@@ -22,7 +22,7 @@ class UsersController extends PageController
 
     public function action_default(){
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $this->view->ulist = $this->user_model->getUsers();
         $views = array('list', 'add');
         $this->view->buildView($views);
@@ -43,7 +43,7 @@ class UsersController extends PageController
             $this->user_model->updateUser($id, $login, $password, $name);
 
             ////////////////////////////////////////////////////
-            /// Format output
+            /// Form output
             $this->view->ulist = $this->user_model->getUsers();
             $views = array('list','add');
             $this->view->buildView($views);
@@ -54,7 +54,7 @@ class UsersController extends PageController
             $info['name'] = $name;
 
             ////////////////////////////////////////////////////
-            /// Format output
+            /// Form output
             $this->view->error_message = "Can not update user, incorrect input data";
             $this->view->user = $info;
             $views = array('edit');
@@ -68,7 +68,7 @@ class UsersController extends PageController
         $id = filter_input_("id", 0);
 
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $this->view->user = $this->user_model->getUser($id);
         $views = array('edit');
         $this->view->buildView($views);
@@ -90,7 +90,7 @@ class UsersController extends PageController
         }
 
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $this->view->ulist = $this->user_model->getUsers();
         $views = array('list', 'add');
         $this->view->buildView($views);
@@ -117,7 +117,7 @@ class UsersController extends PageController
         }
 
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $this->view->ulist = $this->user_model->getUsers();
         $views = array('list', 'add');
         $this->view->buildView($views);

@@ -22,7 +22,7 @@ class CommentsController extends PageController
 
     public function action_default(){
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $this->view->list = $this->model->getProductsReviews();
         $views = array('list', 'add');
         $this->view->buildView($views);
@@ -41,7 +41,7 @@ class CommentsController extends PageController
 
 
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $this->view->list = $this->model->getProductsReviews();
         $views = array('list', 'add');
         $this->view->buildView($views);
@@ -59,6 +59,7 @@ class CommentsController extends PageController
         /// Add comment
         if ($this->model->getProduct($id_prod) != 0 && !empty($name) && !empty($comment) && !empty($email)) {
             $this->model->addProductReviews($email, $id_prod, $name, $comment);
+
             $this->view->id_prod = "";
             $this->view->email = "";
             $this->view->name = "";
@@ -72,7 +73,7 @@ class CommentsController extends PageController
         }
 
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $this->view->list = $this->model->getProductsReviews();
         $views = array('list', 'add');
         $this->view->buildView($views);

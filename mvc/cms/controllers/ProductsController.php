@@ -21,7 +21,7 @@ class ProductsController extends PageController
 
     public function action_default(){
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $this->view->list = $this->model->getAllProducts();
         $this->view->sections = $this->model->getSections();
         $views = array('list', 'add');
@@ -62,7 +62,7 @@ class ProductsController extends PageController
         }
 
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $this->view->list = $this->model->getAllProducts();
         $this->view->sections = $this->model->getSections();
         $views = array('list', 'add');
@@ -82,7 +82,7 @@ class ProductsController extends PageController
 
 
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $this->view->list = $this->model->getAllProducts();
         $this->view->sections = $this->model->getSections();
         $views = array('list', 'add');
@@ -107,7 +107,7 @@ class ProductsController extends PageController
             $this->model->updateProduct($id, $name, $country, $price, $year, $img_name, $s_num);
 
             ////////////////////////////////////////////////////
-            /// Format output
+            /// Form output
             $this->view->list = $this->model->getAllProducts();
             $views = array('list','add');
             $this->view->buildView($views);
@@ -121,7 +121,7 @@ class ProductsController extends PageController
             $info['price'] = $price;
 
             ////////////////////////////////////////////////////
-            /// Format output
+            /// Form output
             $this->view->id = $id;
             $this->view->info = $info;
             $this->view->info_params = $this->model->getProduct($id);
@@ -137,7 +137,7 @@ class ProductsController extends PageController
         $id = filter_input_("id", 0);
 
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $this->view->info = $this->model->getProduct($id);
         $this->view->info_params = $this->model->getProduct($id);
         $this->view->id = $id;
@@ -160,7 +160,7 @@ class ProductsController extends PageController
         }
 
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $this->view->id = $id;
         $this->view->info_params = $this->model->getProduct($id);
         $this->view->info = $this->model->getProduct($id);
@@ -191,7 +191,7 @@ class ProductsController extends PageController
         }
 
         ////////////////////////////////////////////////////
-        /// Format output
+        /// Form output
         $this->view->id = $id;
         $this->view->info = $this->model->getProduct($id);
         $this->view->info_params = $this->model->getProduct($id);
