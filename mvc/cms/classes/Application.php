@@ -23,7 +23,8 @@ class Application
     }
 
     public static function error404(){
-        //Todo
+        header("HTTP/1.0 404 Not Found");
+        echo "<h1>404<br>Page not found !!!</h1>";
         exit();
     }
 

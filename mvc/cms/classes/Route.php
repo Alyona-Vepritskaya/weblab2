@@ -32,6 +32,9 @@ class Route
                 Application::error404();
                 return;
             }
+        }else{
+            Application::error404();
+            return;
         }
     }
 }
