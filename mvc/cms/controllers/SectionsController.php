@@ -1,7 +1,7 @@
 <?php
 include_once '../init.php';
 
-class PagesController extends PageController
+class SectionsController extends PageController
 {
     protected $model;
 
@@ -16,13 +16,13 @@ class PagesController extends PageController
             exit();
         }
 
-        $this->model = new PagesModel(MyDB::get_db_instance());
+        $this->model = new ProductModel(MyDB::get_db_instance());
     }
 
     public function action_default(){
         ////////////////////////////////////////////////////
         /// Format output
-        $this->view->list = $this->model->getPages();
+        $this->view->list = $this->model->getSections();
         $views = array('list', 'add');
         $this->view->buildView($views);
     }
@@ -33,15 +33,14 @@ class PagesController extends PageController
         $id = filter_input_("id", 0);
 
         ////////////////////////////////////////////////////
-        /// Delete page
+        /// Delete sections
         ($id != 0) ?
-            $this->model->deletePage($id) :
-            $this->view->error_message = "Can not delete page, incorrect id";
-
+            $this->model->deleteSection($id) :
+            $this->view->error_message = "Can not delete sections, incorrect id";
 
         ////////////////////////////////////////////////////
         /// Format output
-        $this->view->list = $this->model->getPages();
+        $this->view->list = $this->model->getSections();
         $views = array('list', 'add');
         $this->view->buildView($views);
     }
@@ -50,26 +49,20 @@ class PagesController extends PageController
         //////////////////////////////////////////
         /// Get data
         $name = filter_input_("name", "");
-        $url = filter_input_("url", "");
-        $content = filter_input_("content", "");
 
         ////////////////////////////////////////////////////
-        /// Add page
-        if(!empty($name) && !empty($content) && !empty($url)) {
-            $this->model->addPage($name, $content, $url);
+        /// Add user
+        if (!empty($name)) {
+            $this->model->addSection($name);
             $this->view->name = '';
-            $this->view->url = '';
-            $this->view->content = '';
         } else {
-            $this->view->error_message = "Can not add page, incorrect input data";
             $this->view->name = $name;
-            $this->view->url = $url;
-            $this->view->content = $content;
+            $this->view->error_message = "Can not add section, incorrect input data";
         }
 
         ////////////////////////////////////////////////////
         /// Format output
-        $this->view->list = $this->model->getPages();
+        $this->view->list = $this->model->getSections();
         $views = array('list', 'add');
         $this->view->buildView($views);
     }
@@ -81,7 +74,7 @@ class PagesController extends PageController
 
         ////////////////////////////////////////////////////
         /// Format output
-        $this->view->page = $this->model->getPage($id);
+        $this->view->section = $this->model->getSection($id);
         $views = array('edit');
         $this->view->buildView($views);
     }
@@ -91,29 +84,25 @@ class PagesController extends PageController
         /// Get data
         $id = filter_input_("id", 0);
         $name = filter_input_("name", "");
-        $url = filter_input_("url", "");
-        $content = filter_input_("content", "");
 
         ////////////////////////////////////////////////////
-        /// Update page
-        if ($id != 0 && !empty($name) && !empty($content) && !empty($url)) {
-            $this->model->updatePage($id, $name, $content, $url);
+        /// Update user if possible
+        if ($id != 0 && !empty($name)) {
+            $this->model->updateSection($id, $name);
 
             ////////////////////////////////////////////////////
             /// Format output
-            $this->view->list = $this->model->getPages();
+            $this->view->list = $this->model->getSections();
             $views = array('list','add');
             $this->view->buildView($views);
         } else {
             $info['id'] = $id;
             $info['name'] = $name;
-            $info['url'] = $url;
-            $info['content'] = $content;
 
             ////////////////////////////////////////////////////
             /// Format output
-            $this->view->error_message = "Can not update page, incorrect input data";
-            $this->view->page = $info;
+            $this->view->error_message = "Can not update section, incorrect input data";
+            $this->view->section = $info;
             $views = array('edit');
             $this->view->buildView($views);
         }

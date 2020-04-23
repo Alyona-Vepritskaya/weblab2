@@ -14,5 +14,3 @@ spl_autoload_register(function ($class_name){
 });
 
 $mysqli = MyDB::get_db_instance();
-
-//$u = new UserSessions();
