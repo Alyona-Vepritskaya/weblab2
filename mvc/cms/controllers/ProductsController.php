@@ -31,12 +31,12 @@ class ProductsController extends PageController
     public function action_add(){
         //////////////////////////////////////////
         /// Get data
-        $name = filter_input_("name", "");
-        $country = filter_input_("country", "");
-        $price = filter_input_("price", "");
-        $year = filter_input_("year", "");
-        $s_num = filter_input_("s_num", "");
-        $id_section = filter_input_("select", "");
+        $name = Application::filter_input_("name", "");
+        $country = Application::filter_input_("country", "");
+        $price = Application::filter_input_("price", "");
+        $year = Application::filter_input_("year", "");
+        $s_num = Application::filter_input_("s_num", "");
+        $id_section = Application::filter_input_("select", "");
         $img_name = $this->get_image();
 
         ////////////////////////////////////////////////////
@@ -72,7 +72,7 @@ class ProductsController extends PageController
     public function action_delete(){
         ////////////////////////////////////////////////////
         /// Get data
-        $id = filter_input_("id", 0);
+        $id = Application::filter_input_("id", 0);
 
         ////////////////////////////////////////////////////
         /// Delete product
@@ -92,12 +92,12 @@ class ProductsController extends PageController
     public function action_update_product(){
         ////////////////////////////////////////////////////
         /// Get data
-        $id = filter_input_("id", 0);
-        $name = filter_input_("name", "");
-        $country = filter_input_("country", "");
-        $price = filter_input_("price", "");
-        $year = filter_input_("year", "");
-        $s_num = filter_input_("s_num", "");
+        $id = Application::filter_input_("id", 0);
+        $name = Application::filter_input_("name", "");
+        $country = Application::filter_input_("country", "");
+        $price = Application::filter_input_("price", "");
+        $year = Application::filter_input_("year", "");
+        $s_num = Application::filter_input_("s_num", "");
         $img_name = $this->get_image();
         $info = $this->model->getProduct($id);
 
@@ -134,7 +134,7 @@ class ProductsController extends PageController
     public function action_edit(){
         ////////////////////////////////////////////////////
         /// Get data
-        $id = filter_input_("id", 0);
+        $id = Application::filter_input_("id", 0);
 
         ////////////////////////////////////////////////////
         /// Form output
@@ -148,8 +148,8 @@ class ProductsController extends PageController
     public function action_delete_param(){
         /////////////////////////////////////////////////////
         /// Get data
-        $id_p = filter_input_("id_p", 0);
-        $id = filter_input_("id", 0);
+        $id_p = Application::filter_input_("id_p", 0);
+        $id = Application::filter_input_("id", 0);
 
         ////////////////////////////////////////////////////
         /// Delete param
@@ -171,10 +171,10 @@ class ProductsController extends PageController
     public  function action_add_extra_info(){
         /////////////////////////////////////////////////////
         /// Get data
-        $id = filter_input_("id", 0);
-        $n = filter_input_("param_name", "");
-        $v = filter_input_("param_value", "");
-        $sort = filter_input_("param_sort", "");
+        $id = Application::filter_input_("id", 0);
+        $n = Application::filter_input_("param_name", "");
+        $v = Application::filter_input_("param_value", "");
+        $sort = Application::filter_input_("param_sort", "");
 
         ////////////////////////////////////////////////////
         /// Add param
@@ -202,7 +202,7 @@ class ProductsController extends PageController
     private function get_image()
     {
         $path = str_replace('controllers','img/',__DIR__);
-        $submit = filter_input_('input_submit', '');
+        $submit = Application::filter_input_('input_submit', '');
         if (!empty($submit) && (!empty($_FILES['file']['tmp_name']))) {
             $loaded_file = $_FILES['file'];
             move_uploaded_file($loaded_file['tmp_name'], trim($path . $loaded_file['name']));

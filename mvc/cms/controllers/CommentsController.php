@@ -31,7 +31,7 @@ class CommentsController extends PageController
     public function action_delete(){
         ////////////////////////////////////////////////////
         /// Get data
-        $id = filter_input_("id", 0);
+        $id = Application::filter_input_("id", 0);
 
         ////////////////////////////////////////////////////
         /// Delete comment
@@ -50,10 +50,10 @@ class CommentsController extends PageController
     public function action_add(){
         //////////////////////////////////////////
         /// Get data
-        $id_prod = filter_input_("id_prod", "");
-        $email = filter_input_("email", "");
-        $name = filter_input_("name", "");
-        $comment = filter_input_("comment", "");
+        $id_prod = Application::filter_input_("id_prod", "");
+        $email = Application::filter_input_("email", "");
+        $name = Application::filter_input_("name", "");
+        $comment = Application::filter_input_("comment", "");
 
         ////////////////////////////////////////////////////
         /// Add comment

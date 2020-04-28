@@ -23,4 +23,7 @@ $error_message = $this->error_message;
         </tr>
     <?php } ?>
 </table>
-<div class="m-auto"><h4><?= $error_message ?></h4></div>
+
+<?php if (!empty($error_message)) { ?>
+    <div class="m-auto"><h4><?= $error_message ?></h4></div>
+<?php } ?>

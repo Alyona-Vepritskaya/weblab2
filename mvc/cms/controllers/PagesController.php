@@ -30,7 +30,7 @@ class PagesController extends PageController
     public function action_delete(){
         ////////////////////////////////////////////////////
         /// Get data
-        $id = filter_input_("id", 0);
+        $id = Application::filter_input_("id", 0);
 
         ////////////////////////////////////////////////////
         /// Delete page
@@ -49,9 +49,9 @@ class PagesController extends PageController
     public function action_add(){
         //////////////////////////////////////////
         /// Get data
-        $name = filter_input_("name", "");
-        $url = filter_input_("url", "");
-        $content = filter_input_("content", "");
+        $name = Application::filter_input_("name", "");
+        $url = Application::filter_input_("url", "");
+        $content = Application::filter_input_("content", "");
 
         ////////////////////////////////////////////////////
         /// Add page
@@ -78,7 +78,7 @@ class PagesController extends PageController
     public function action_edit(){
         ////////////////////////////////////////////////////
         /// Get data
-        $id = filter_input_("id", 0);
+        $id = Application::filter_input_("id", 0);
 
         ////////////////////////////////////////////////////
         /// Form output
@@ -90,10 +90,10 @@ class PagesController extends PageController
     public function action_update(){
         ////////////////////////////////////////////////////
         /// Get data
-        $id = filter_input_("id", 0);
-        $name = filter_input_("name", "");
-        $url = filter_input_("url", "");
-        $content = filter_input_("content", "");
+        $id = Application::filter_input_("id", 0);
+        $name = Application::filter_input_("name", "");
+        $url = Application::filter_input_("url", "");
+        $content = Application::filter_input_("content", "");
 
         ////////////////////////////////////////////////////
         /// Update page

@@ -7,8 +7,8 @@ class Route
 
     public  function route(){
 
-        $ctrl_name = filter_input_('controller','');
-        $ctrl_action = filter_input_('action','');
+        $ctrl_name = Application::filter_input_('controller','');
+        $ctrl_action = Application::filter_input_('action','');
 
 
         if(empty($ctrl_name))

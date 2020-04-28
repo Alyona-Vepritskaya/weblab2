@@ -30,7 +30,7 @@ class SectionsController extends PageController
     public function action_delete(){
         ////////////////////////////////////////////////////
         /// Get data
-        $id = filter_input_("id", 0);
+        $id = Application::filter_input_("id", 0);
 
         ////////////////////////////////////////////////////
         /// Delete sections
@@ -48,7 +48,7 @@ class SectionsController extends PageController
     public function action_add(){
         //////////////////////////////////////////
         /// Get data
-        $name = filter_input_("name", "");
+        $name = Application::filter_input_("name", "");
 
         ////////////////////////////////////////////////////
         /// Add user
@@ -70,7 +70,7 @@ class SectionsController extends PageController
     public function action_edit(){
         ////////////////////////////////////////////////////
         /// Get data
-        $id = filter_input_("id", 0);
+        $id = Application::filter_input_("id", 0);
 
         ////////////////////////////////////////////////////
         /// Form output
@@ -82,8 +82,8 @@ class SectionsController extends PageController
     public function action_update(){
         ////////////////////////////////////////////////////
         /// Get data
-        $id = filter_input_("id", 0);
-        $name = filter_input_("name", "");
+        $id = Application::filter_input_("id", 0);
+        $name = Application::filter_input_("name", "");
 
         ////////////////////////////////////////////////////
         /// Update user if possible

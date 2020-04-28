@@ -92,7 +92,7 @@ div, h2, p, figure {
     font: inherit;
     font-size: 24px;
     display: block;
-    padding: 10px 70px;
+    padding: 10px 10px;
     border: none;
     background: linear-gradient(360deg, #0734ED, #10106c);
     color: white;

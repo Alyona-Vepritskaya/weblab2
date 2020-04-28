@@ -1,6 +1,5 @@
 <?php
 include_once "../inc/connect-inc.php";
-include_once "../inc/filter_input_.php";
 include_once '../classes/MyDB.php';
 
 spl_autoload_register(function ($class_name){

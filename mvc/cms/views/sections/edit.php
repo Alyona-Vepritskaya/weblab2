@@ -5,7 +5,10 @@ $info = $this->section;
 
 ?>
 
-<div class="m-auto"><h4><?= $error_message ?></h4></div>
+<?php if (!empty($error_message)) { ?>
+    <div class="m-auto"><h4><?= $error_message ?></h4></div>
+<?php } ?>
+
 <div class="form-inside">
     <form class="f1" action="index.php" method="post">
         <input type="hidden" name="controller" value="SectionsController">

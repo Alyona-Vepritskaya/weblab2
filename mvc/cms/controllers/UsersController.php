@@ -31,11 +31,11 @@ class UsersController extends PageController
     public function action_update(){
         ////////////////////////////////////////////////////
         /// Get data
-        $id = filter_input_("id", 0);
-        $login = filter_input_("login", "");
-        $name = filter_input_("name", "");
-        $password = filter_input_("password", "");
-        $password2 = filter_input_("password2", "");
+        $id = Application::filter_input_("id", 0);
+        $login = Application::filter_input_("login", "");
+        $name = Application::filter_input_("name", "");
+        $password = Application::filter_input_("password", "");
+        $password2 = Application::filter_input_("password2", "");
 
         ////////////////////////////////////////////////////
         /// Update user if possible
@@ -65,7 +65,7 @@ class UsersController extends PageController
     public function action_edit(){
         ////////////////////////////////////////////////////
         /// Get data
-        $id = filter_input_("id", 0);
+        $id = Application::filter_input_("id", 0);
 
         ////////////////////////////////////////////////////
         /// Form output
@@ -77,7 +77,7 @@ class UsersController extends PageController
     public function action_delete(){
         ////////////////////////////////////////////////////
         /// Get data
-        $id = filter_input_("id", 0);
+        $id = Application::filter_input_("id", 0);
 
         ////////////////////////////////////////////////////
         /// Delete user if possible
@@ -99,10 +99,10 @@ class UsersController extends PageController
     public function action_add(){
         //////////////////////////////////////////
         /// Get data
-        $login = filter_input_("login", "");
-        $name = filter_input_("name", "");
-        $password = filter_input_("password", "");
-        $password2 = filter_input_("password2", "");
+        $login = Application::filter_input_("login", "");
+        $name = Application::filter_input_("name", "");
+        $password = Application::filter_input_("password", "");
+        $password2 = Application::filter_input_("password2", "");
 
         ////////////////////////////////////////////////////
         /// Add user

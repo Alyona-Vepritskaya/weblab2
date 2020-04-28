@@ -18,7 +18,11 @@ $sort = $this->sort;
     <?php } ?>
 </div>
 <div class="form-inside">
-    <div class="m-auto"><h4><?= $error_message ?></h4></div>
+
+    <?php if (!empty($error_message)) { ?>
+        <div class="m-auto"><h4><?= $error_message ?></h4></div>
+    <?php } ?>
+
     <form class="f1" action="index.php" method="post">
         <input type="hidden" name="controller" value="ProductsController">
         <input type="hidden" name="action" value="add_extra_info">

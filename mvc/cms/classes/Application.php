@@ -22,6 +22,17 @@ class Application
         return self::$userSession;
     }
 
+    public static function filter_input_($name, $default){
+        $result = $default;
+        if (isset($_POST[$name])) {
+            $result = $_POST[$name];
+        }
+        if (isset($_GET[$name])) {
+            $result = $_GET[$name];
+        }
+        return htmlspecialchars(trim($result));
+    }
+
     public static function error404(){
         header("HTTP/1.0 404 Not Found");
         echo "<h1>404<br>Page not found !!!</h1>";

@@ -9,7 +9,11 @@ $error_message = $this->error_message;
 <div class="form-inside">
     <div class="m-auto">
         <a href="index.php?controller=ProductsController" class="buy-item2">Back to tables</a>
-        <h4><?= $error_message ?></h4>
+
+        <?php if (!empty($error_message)) { ?>
+            <h4><?= $error_message ?></h4>
+        <?php } ?>
+
     </div>
     <form class="f1" action="index.php" method="post" enctype="multipart/form-data">
         <input type="hidden" name="controller" value="ProductsController">

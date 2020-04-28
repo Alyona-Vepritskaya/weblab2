@@ -24,8 +24,8 @@ class LoginController extends PageController
     }
 
     public function action_login(){
-        $password = filter_input_('pwd', '');
-        $login = filter_input_('login', '');
+        $password = Application::filter_input_('pwd', '');
+        $login = Application::filter_input_('login', '');
         $user = new UserModel(MyDB::get_db_instance());
 
         ///////////////////////////////////////////////////////////////////////
