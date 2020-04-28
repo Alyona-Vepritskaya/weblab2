@@ -31,6 +31,8 @@ class MyDB
             $without_quotes = 'PASSWORD';
         } elseif ($f == 'date') {
             $without_quotes = 'CURDATE()';
+        } elseif ($f == 'datetime') {
+            $without_quotes = 'CURDATE() NOW()';
         } else {
             $without_quotes = '';
         }
@@ -46,7 +48,7 @@ class MyDB
         } else {
             foreach ($data as $key => $value) {
                 $field_names .= $key . ',';
-                $field_values .= (strrpos($value, $without_quotes) === false) ? '\'' . $value . '\',' : $value . ',';
+                $field_values .= (strrpos($without_quotes,$value) === false) ? '\'' . $value . '\',' : $value . ',';
             }
         }
 

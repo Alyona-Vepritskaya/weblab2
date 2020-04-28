@@ -27,19 +27,19 @@ class UserSessions extends Sessions
 
     public function makeUserAuth($user_id, $ses_id)
     {
-        $sql_insert = "insert into " . DBT_USERS_SESSIONS . " (user_id, ses_id, last_access, add_date)
+        $data = array('user_id' => $user_id, 'ses_id' => $ses_id, 'last_access' => 'NOW()', 'add_date' => 'CURDATE()');
+        MyDB::add_me($this->mysqli, DBT_USERS_SESSIONS, $data,'datetime');
+
+       /* $sql_insert = "insert into " . DBT_USERS_SESSIONS . " (user_id, ses_id, last_access, add_date)
          values ('$user_id','$ses_id',NOW(),CURDATE());";
         if ($this->mysqli->query($sql_insert) !== TRUE) {
             echo "Error: " . $sql_insert . "<br>" . $this->mysqli->error;
-        }
+        }*/
     }
 
     public function deleteUserAuth($ses_id)
     {
-        $sql_del = "delete from " . DBT_USERS_SESSIONS . " where ses_id='" . $ses_id . "';";
-        if ($this->mysqli->query($sql_del) !== TRUE) {
-            echo "Error: " . $sql_del . "<br>" . $this->mysqli->error;
-        }
+        MyDB::delete_me($this->mysqli, DBT_USERS_SESSIONS, 'ses_id', $ses_id);
     }
 
     public function getUserId()
