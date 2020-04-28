@@ -24,7 +24,7 @@ class MyDB
         }
     }
 
-    public static function add_me($mysqli, $table_name, $data, $f)
+    public static function add_me($mysqli, $table_name, $data, $f = null)
     {
 
         if ($f == 'pwd') {

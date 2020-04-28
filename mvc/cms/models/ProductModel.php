@@ -46,16 +46,13 @@ class ProductModel extends Model
 
     function deleteSection($id)
     {
-        MyDB::delete_me($this->mysqli,DBT_SECTIONS,'id',$id);
+        MyDB::delete_me($this->mysqli, DBT_SECTIONS, 'id', $id);
     }
 
     function addSection($name)
     {
-        $sql_insert = "insert into " . DBT_SECTIONS . " (name)
-         values ('$name');";
-        if ($this->mysqli->query($sql_insert) !== TRUE) {
-            echo "Error: " . $sql_insert . "<br>" . $this->mysqli->error;
-        }
+        $data = array('name' => $name);
+        MyDB::add_me($this->mysqli, DBT_SECTIONS, $data);
     }
 
     public function updateSection($id, $name)
@@ -178,16 +175,13 @@ class ProductModel extends Model
                 echo "Error updating record: " . $this->mysqli->error;
             }
         }
-        /*$this->deleteParams($product_id);*/
     }
 
     function addProduct($name, $country, $price, $year, $img, $s_num, $id_section)
     {
-        $sql_insert = "insert into " . DBT_PRODUCTS . " (name, country, price, year, img, s_num, id_section)
-         values ('$name','$country','$price','$year','$img','$s_num','$id_section');";
-        if ($this->mysqli->query($sql_insert) !== TRUE) {
-            echo "Error: " . $sql_insert . "<br>" . $this->mysqli->error;
-        }
+        $data = array('name' => $name, 'country' => $country, 'price' => $price,
+            'year' => $year, 'img' => $img, 's_num' => $s_num, 'id_section' => $id_section);
+        MyDB::add_me($this->mysqli, DBT_PRODUCTS, $data);
     }
 
     function getProductBySNum($s_num)
@@ -205,7 +199,7 @@ class ProductModel extends Model
 
     function deleteProduct($id)
     {
-        MyDB::delete_me($this->mysqli,DBT_PRODUCTS,'id',$id);
+        MyDB::delete_me($this->mysqli, DBT_PRODUCTS, 'id', $id);
 
         $this->deleteParams($id);
     }
@@ -213,21 +207,18 @@ class ProductModel extends Model
     //Params
     function deleteParams($id_product)
     {
-        MyDB::delete_me($this->mysqli,DBT_PARAM,'id_product',$id_product);
+        MyDB::delete_me($this->mysqli, DBT_PARAM, 'id_product', $id_product);
     }
 
     function deleteParam($id)
     {
-        MyDB::delete_me($this->mysqli,DBT_PARAM,'id',$id);
+        MyDB::delete_me($this->mysqli, DBT_PARAM, 'id', $id);
     }
 
     function addParam($product_id, $param_name, $param_value, $param_sort)
     {
-        $sql_insert = "insert into " . DBT_PARAM . " (name, value, id_product,sort)
-         values ('$param_name','$param_value','$product_id','$param_sort');";
-        if ($this->mysqli->query($sql_insert) !== TRUE) {
-            echo "Error: " . $sql_insert . "<br>" . $this->mysqli->error;
-        }
+        $data = array('name' => $param_name, 'value' => $param_value, 'id_product' => $product_id, 'sort' => $param_sort);
+        MyDB::add_me($this->mysqli, DBT_PARAM, $data);
     }
 
     //Comments
@@ -269,16 +260,12 @@ class ProductModel extends Model
 
     function addProductReviews($email, $product_id, $name, $comment)
     {
-        $tmp = htmlspecialchars($comment);
-        $sql_insert = "insert into " . DBT_REVIEWS . " (name, email, comment, id_product)
-         values ('$name','$email','$tmp','$product_id');";
-        if ($this->mysqli->query($sql_insert) !== TRUE) {
-            echo "Error: " . $sql_insert . "<br>" . $this->mysqli->error;
-        }
+        $data = array('name' => $name, 'email' => $email, 'comment' => $comment, 'id_product' => $product_id);
+        MyDB::add_me($this->mysqli, DBT_REVIEWS, $data);
     }
 
     function deleteProductReviews($id)
     {
-        MyDB::delete_me($this->mysqli,DBT_REVIEWS,'id',$id);
+        MyDB::delete_me($this->mysqli, DBT_REVIEWS, 'id', $id);
     }
 }

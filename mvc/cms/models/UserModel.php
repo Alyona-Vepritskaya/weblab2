@@ -91,11 +91,5 @@ class UserModel extends Model
     {
         $data = array('login' => $login, 'password' => "PASSWORD('$password')", 'name' => $name);
         MyDB::add_me($this->mysqli, DBT_USERS, $data,'pwd');
-
-        /*$sql_insert = "insert into " . DBT_USERS . " (login, password,name)
-         values ('$login',PASSWORD('$password'),'$name');";
-        if ($this->mysqli->query($sql_insert) !== TRUE) {
-            echo "Error: " . $sql_insert . "<br>" . $this->mysqli->error;
-        }*/
     }
 }
