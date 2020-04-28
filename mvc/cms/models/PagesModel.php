@@ -80,15 +80,12 @@ class PagesModel extends Model
 
     public function deletePage($id)
     {
-        MyDB::delete_me($this->mysqli,DBT_PAGES,'id',$id);
+        MyDB::delete_me($this->mysqli, DBT_PAGES, 'id', $id);
     }
 
     public function addPage($name, $content, $url)
     {
-        $sql_insert = "insert into " . DBT_PAGES . " (name,content,published_date,url)
-         values ('$name','$content',CURDATE(),'$url');";
-        if ($this->mysqli->query($sql_insert) !== TRUE) {
-            echo "Error: " . $sql_insert . "<br>" . $this->mysqli->error;
-        }
+        $data = array('name' => $name, 'content' => $content, 'published_date' => 'CURDATE()', 'url' => $url);
+        MyDB::add_me($this->mysqli, DBT_PAGES, $data,'date');
     }
 }

@@ -46,11 +46,7 @@ class ProductModel extends Model
 
     function deleteSection($id)
     {
-        $sql_del = "delete from " . DBT_SECTIONS . " where id='" . $id . "';";
-        if ($this->mysqli->query($sql_del) !== TRUE) {
-            echo "Error: " . $sql_del . "<br>" . $this->mysqli->error;
-        }
-        $this->deleteParams($id);
+        MyDB::delete_me($this->mysqli,DBT_SECTIONS,'id',$id);
     }
 
     function addSection($name)

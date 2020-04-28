@@ -68,10 +68,7 @@ class ArticlesModel extends Model
 
     public function addArticle($name, $content, $url)
     {
-        $sql_insert = "insert into " . DBT_NEWS . " (name,content,published_date,url)
-         values ('$name','$content',CURDATE(),'$url');";
-        if ($this->mysqli->query($sql_insert) !== TRUE) {
-            echo "Error: " . $sql_insert . "<br>" . $this->mysqli->error;
-        }
+        $data = array('name' => $name, 'content' => $content, 'published_date' => 'CURDATE()', 'url' => $url);
+        MyDB::add_me($this->mysqli, DBT_NEWS, $data,'date');
     }
 }
