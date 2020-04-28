@@ -80,10 +80,7 @@ class PagesModel extends Model
 
     public function deletePage($id)
     {
-        $sql_del = "delete from " . DBT_PAGES . " where id='" . $id . "';";
-        if ($this->mysqli->query($sql_del) !== TRUE) {
-            echo "Error: " . $sql_del . "<br>" . $this->mysqli->error;
-        }
+        MyDB::delete_me($this->mysqli,DBT_PAGES,'id',$id);
     }
 
     public function addPage($name, $content, $url)

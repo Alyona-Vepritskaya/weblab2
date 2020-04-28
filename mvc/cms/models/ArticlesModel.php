@@ -63,10 +63,7 @@ class ArticlesModel extends Model
 
     public function deleteArticle($id)
     {
-        $sql_del = "delete from " . DBT_NEWS . " where id='" . $id . "';";
-        if ($this->mysqli->query($sql_del) !== TRUE) {
-            echo "Error: " . $sql_del . "<br>" . $this->mysqli->error;
-        }
+        MyDB::delete_me($this->mysqli,DBT_NEWS,'id',$id);
     }
 
     public function addArticle($name, $content, $url)

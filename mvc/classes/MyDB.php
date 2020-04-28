@@ -14,4 +14,11 @@ class MyDB {
         return self::$mysqli;
     }
 
+    public static function delete_me($mysqli,$table_name,$field_name,$field_value){
+        $sql_del = "delete from $table_name where $field_name = '$field_value';";
+        if ($mysqli->query($sql_del) !== TRUE) {
+            echo "Error: " . $sql_del . "<br>" . $mysqli->error;
+        }
+    }
+
 }

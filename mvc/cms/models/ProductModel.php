@@ -209,28 +209,20 @@ class ProductModel extends Model
 
     function deleteProduct($id)
     {
-        $sql_del = "delete from " . DBT_PRODUCTS . " where id='" . $id . "';";
-        if ($this->mysqli->query($sql_del) !== TRUE) {
-            echo "Error: " . $sql_del . "<br>" . $this->mysqli->error;
-        }
+        MyDB::delete_me($this->mysqli,DBT_PRODUCTS,'id',$id);
+
         $this->deleteParams($id);
     }
 
     //Params
     function deleteParams($id_product)
     {
-        $sql_del = "delete from " . DBT_PARAM . " where id_product='" . $id_product . "';";
-        if ($this->mysqli->query($sql_del) !== TRUE) {
-            echo "Error: " . $sql_del . "<br>" . $this->mysqli->error;
-        }
+        MyDB::delete_me($this->mysqli,DBT_PARAM,'id_product',$id_product);
     }
 
     function deleteParam($id)
     {
-        $sql_del = "delete from " . DBT_PARAM . " where id='" . $id . "';";
-        if ($this->mysqli->query($sql_del) !== TRUE) {
-            echo "Error: " . $sql_del . "<br>" . $this->mysqli->error;
-        }
+        MyDB::delete_me($this->mysqli,DBT_PARAM,'id',$id);
     }
 
     function addParam($product_id, $param_name, $param_value, $param_sort)
@@ -291,9 +283,6 @@ class ProductModel extends Model
 
     function deleteProductReviews($id)
     {
-        $sql_del = "delete from " . DBT_REVIEWS . " where id='" . $id . "';";
-        if ($this->mysqli->query($sql_del) !== TRUE) {
-            echo "Error: " . $sql_del . "<br>" . $this->mysqli->error;
-        }
+        MyDB::delete_me($this->mysqli,DBT_REVIEWS,'id',$id);
     }
 }

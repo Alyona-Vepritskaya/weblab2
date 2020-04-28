@@ -84,10 +84,7 @@ class UserModel extends Model
 
     public function deleteUser($id)
     {
-        $sql_del = "delete from " . DBT_USERS . " where id='" . $id . "';";
-        if ($this->mysqli->query($sql_del) !== TRUE) {
-            echo "Error: " . $sql_del . "<br>" . $this->mysqli->error;
-        }
+        MyDB::delete_me($this->mysqli,DBT_USERS,'id',$id);
     }
 
     public function addUser($login, $password, $name)
