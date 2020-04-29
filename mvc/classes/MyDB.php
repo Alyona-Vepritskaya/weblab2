@@ -16,7 +16,7 @@ class MyDB
         return self::$mysqli;
     }
 
-    public static function hard_select_me($mysqli, $table_name, $field_name1, $field_name2,$field_value1, $field_value2,$field_names)
+    public static function hard_select_me($mysqli, $table_name, $field_name1, $field_name2, $field_value1, $field_value2, $field_names)
     {
         $item = null;
 

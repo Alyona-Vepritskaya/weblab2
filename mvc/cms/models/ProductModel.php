@@ -52,20 +52,6 @@ class ProductModel extends Model
         }
     }
 
-    function getSectionsNames()
-    {
-        //Todo
-        $this->sections = array();
-        $sql_select = "select * from " . DBT_SECTIONS . ";";
-        $result = $this->mysqli->query($sql_select);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $this->sections[$row["id"]] = $row["name"];
-            }
-        }
-        return $this->sections;
-    }
-
     function getAllProducts()
     {
         $field_names = array('id', 'name', 's_num');

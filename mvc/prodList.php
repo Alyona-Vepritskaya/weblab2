@@ -23,7 +23,12 @@ $id = filter_input_("id", '');
 ///////////////////////////////////////////////////////////////////////
 // Get data
 $p_model = new ProductModel($mysqli);
-$sections = $p_model->getSectionsNames();
+$sections_arr = $p_model->getSections();
+$sections = array();
+
+for ($i=0;$i<count($sections_arr);$i++){
+    $sections[$sections_arr[$i]['id']]= $sections_arr[$i]['name'];
+}
 
 ///////////////////////////////////////////////////////////////////////
 // Global function definition
