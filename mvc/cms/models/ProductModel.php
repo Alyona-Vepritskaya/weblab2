@@ -17,30 +17,17 @@ class ProductModel extends Model
 
     function getSections()
     {
-        $this->sections = array();
-        $sql_select = "select * from " . DBT_SECTIONS . ";";
-        $result = $this->mysqli->query($sql_select);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $tmp = array();
-                $tmp["id"] = $row["id"];
-                $tmp["name"] = $row["name"];
-                $this->sections[] = $tmp;
-            }
-        }
+        $field_names = array('id', 'name');
+        $this->sections = MyDB::global_select_me($this->mysqli, DBT_SECTIONS,$field_names);
+
         return $this->sections;
     }
 
     function getSection($id)
     {
-        $sql_select = "select * from " . DBT_SECTIONS . " where id='" . $id . "';";
-        $result = $this->mysqli->query($sql_select);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $this->section["id"] = $row["id"];
-                $this->section["name"] = $row["name"];
-            }
-        }
+        $field_names = array('id', 'name');
+        $this->section = MyDB::select_me($this->mysqli, DBT_SECTIONS, 'id', $id, $field_names);
+
         return $this->section;
     }
 
@@ -67,6 +54,7 @@ class ProductModel extends Model
 
     function getSectionsNames()
     {
+        //Todo
         $this->sections = array();
         $sql_select = "select * from " . DBT_SECTIONS . ";";
         $result = $this->mysqli->query($sql_select);
@@ -80,71 +68,35 @@ class ProductModel extends Model
 
     function getAllProducts()
     {
-        $this->products = array();
-        $sql_select = "select * from " . DBT_PRODUCTS . ";";
-        $result = $this->mysqli->query($sql_select);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $item = array();
-                $item['id'] = $row["id"];
-                $item['name'] = $row["name"];
-                $item['s_num'] = $row["s_num"];
-                $this->products[] = $item;
-            }
-        }
+        $field_names = array('id', 'name', 's_num');
+        $this->products = MyDB::global_select_me($this->mysqli, DBT_PRODUCTS,$field_names);
+
         return $this->products;
     }
 
     function getProducts($section_id)
     {
-        $this->products = array();
-        $sql_select = "select * from " . DBT_PRODUCTS . " where id_section ='" . $section_id . "';";
-        $result = $this->mysqli->query($sql_select);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $item = array();
-                $item['id'] = $row["id"];
-                $item['name'] = $row["name"];
-                $item['year'] = $row["year"];
-                $item['country'] = $row["country"];
-                $item['s_num'] = $row["s_num"];
-                $item['img'] = $row["img"];
-                $item['price'] = $row["price"];
-                $this->products[] = $item;
-            }
-        }
+        $field_names = array('id', 'name', 'year', 'country', 's_num', 'img', 'price');
+        $this->products = MyDB::select_all_of_me($this->mysqli, DBT_PRODUCTS, 'id_section', $section_id, $field_names);
+
         return $this->products;
     }
 
     function getProduct($product_id)
     {
-        $this->params = array();
-        $sql_select = "select * from " . DBT_PRODUCTS . " where id =" . $product_id . ";";
-        $result = $this->mysqli->query($sql_select);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $this->params['name'] = $row["name"];
-                $this->params['id_section'] = $row["id_section"];
-                $this->params['year'] = $row["year"];
-                $this->params['country'] = $row["country"];
-                $this->params['s_num'] = $row["s_num"];
-                $this->params['img'] = $row["img"];
-                $this->params['price'] = $row["price"];
+        $field_names = array('name', 'id_section', 'year', 'country', 's_num', 'img', 'price');
+        $this->params = MyDB::select_me($this->mysqli, DBT_PRODUCTS, 'id', $product_id, $field_names);
+
+        if (!is_null($this->params)) {
+            $field_names = array('id', 'name', 'value');
+            $tmp = MyDB::select_all_of_me($this->mysqli, DBT_PARAM, 'id_product', $product_id, $field_names);
+            if (!is_null($tmp)) {
+                $this->params['param'] = $tmp;
             }
-        } else
-            return 0;
-        $sql_select2 = "select * from " . DBT_PARAM . " where id_product =" . $product_id . ";";
-        $result2 = $this->mysqli->query($sql_select2);
-        if ($result2->num_rows > 0) {
-            while ($row = $result2->fetch_assoc()) {
-                $item = array();
-                $item['id'] = $row["id"];
-                $item['name'] = $row["name"];
-                $item['value'] = $row["value"];
-                $this->params['param'][] = $item;
-            }
+            return $this->params;
         }
-        return $this->params;
+
+        return null;
     }
 
     function updateProduct($product_id, $name, $country, $price, $year, $img, $s_num)
@@ -186,14 +138,12 @@ class ProductModel extends Model
 
     function getProductBySNum($s_num)
     {
-        $id = 0;
-        $sql_select = "select * from " . DBT_PRODUCTS . " where s_num ='" . $s_num . "';";
-        $result = $this->mysqli->query($sql_select);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $id = $row['id'];
-            }
-        }
+
+        $field_names = array('id');
+        $product = MyDB::select_me($this->mysqli, DBT_PRODUCTS, 's_num', $s_num, $field_names);
+
+        $id = (is_null($product))? 0 : $product['id'];
+
         return $id;
     }
 
@@ -224,37 +174,17 @@ class ProductModel extends Model
     //Comments
     function getProductsReviews()
     {
-        $this->comments = array();
-        $sql_select = "select * from " . DBT_REVIEWS . ";";
-        $result = $this->mysqli->query($sql_select);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $item = array();
-                $item['id'] = $row['id'];
-                $item['id_product'] = $row['id_product'];
-                $item['name'] = $row['name'];
-                $item['email'] = $row['email'];
-                $item['comment'] = $row['comment'];
-                $this->comments[] = $item;
-            }
-        }
+        $field_names = array('id', 'id_product', 'name', 'email', 'comment');
+        $this->comments = MyDB::global_select_me($this->mysqli, DBT_REVIEWS, $field_names);
+
         return $this->comments;
     }
 
     function getProductReviews($product_id)
     {
-        $this->comments = array();
-        $sql_select = "select * from " . DBT_REVIEWS . " where id_product ='" . $product_id . "';";
-        $result = $this->mysqli->query($sql_select);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $item = array();
-                $item['name'] = $row['name'];
-                $item['email'] = $row['email'];
-                $item['comment'] = $row['comment'];
-                $this->comments[] = $item;
-            }
-        }
+        $field_names = array('name', 'email', 'comment');
+        $this->comments = MyDB::select_all_of_me($this->mysqli, DBT_REVIEWS, 'id_product', $product_id, $field_names);
+
         return $this->comments;
     }
 

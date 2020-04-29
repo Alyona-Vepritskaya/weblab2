@@ -14,54 +14,25 @@ class PagesModel extends Model
 
     public function getPages()
     {
-        $this->pages = array();
-        $sql_select = "select * from " . DBT_PAGES . ";";
-        $result = $this->mysqli->query($sql_select);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $article = array();
-                $article['name'] = $row["name"];
-                $article['id'] = $row["id"];
-                $article['url'] = $row["url"];
-                $article['content'] = $row["content"];
-                $article['published_date'] = $row["published_date"];
-                $this->pages[] = $article;
-            }
-        }
+        $field_names = array('id', 'name','url','content','published_date');
+        $this->pages = MyDB::global_select_me($this->mysqli, DBT_PAGES,$field_names);
+
         return $this->pages;
     }
 
     public function getPage($id)
     {
-        $this->page = array();
-        $sql_select = "select * from " . DBT_PAGES . " where id='" . $id . "';";
-        $result = $this->mysqli->query($sql_select);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $this->page['name'] = $row["name"];
-                $this->page['url'] = $row["url"];
-                $this->page['id'] = $row["id"];
-                $this->page['content'] = $row["content"];
-                $this->page['published_date'] = $row["published_date"];
-            }
-        }
+        $field_names = array('name', 'url','id','content','published_date');
+        $this->page = MyDB::select_me($this->mysqli, DBT_PAGES, 'id', $id, $field_names);
+
         return $this->page;
     }
 
     public function getPageByUrl($url)
     {
-        $this->page = array();
-        $sql_select = "select * from " . DBT_PAGES . " where url='" . $url . "';";
-        $result = $this->mysqli->query($sql_select);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $this->page['name'] = $row["name"];
-                $this->page['url'] = $row["url"];
-                $this->page['id'] = $row["id"];
-                $this->page['content'] = $row["content"];
-                $this->page['published_date'] = $row["published_date"];
-            }
-        }
+        $field_names = array('name', 'url','id','content','published_date');
+        $this->page = MyDB::select_me($this->mysqli, DBT_PAGES, 'url', $url, $field_names);
+
         return $this->page;
     }
 

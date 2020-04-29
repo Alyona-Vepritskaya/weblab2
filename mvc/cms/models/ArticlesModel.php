@@ -1,4 +1,4 @@
-<?php //+
+<?php
 include_once '../init.php';
 
 class ArticlesModel extends Model
@@ -14,37 +14,17 @@ class ArticlesModel extends Model
 
     public function getArticles()
     {
-        $this->articles = array();
-        $sql_select = "select * from " . DBT_NEWS . ";";
-        $result = $this->mysqli->query($sql_select);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $article = array();
-                $article['name'] = $row["name"];
-                $article['id'] = $row["id"];
-                $article['url'] = $row["url"];
-                $article['content'] = $row["content"];
-                $article['published_date'] = $row["published_date"];
-                $this->articles[] = $article;
-            }
-        }
+        $field_names = array('id', 'name','url','content','published_date');
+        $this->articles = MyDB::global_select_me($this->mysqli, DBT_NEWS,$field_names);
+
         return $this->articles;
     }
 
     public function getArticle($a_id)
     {
-        $this->article = array();
-        $sql_select = "select * from " . DBT_NEWS . " where id='" . $a_id . "';";
-        $result = $this->mysqli->query($sql_select);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $this->article['name'] = $row["name"];
-                $this->article['url'] = $row["url"];
-                $this->article['id'] = $row["id"];
-                $this->article['content'] = $row["content"];
-                $this->article['published_date'] = $row["published_date"];
-            }
-        }
+        $field_names = array('name', 'url','id','content','published_date');
+        $this->article = MyDB::select_me($this->mysqli, DBT_NEWS, 'id', $a_id, $field_names);
+
         return $this->article;
     }
 

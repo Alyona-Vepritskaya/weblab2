@@ -14,51 +14,31 @@ class UserModel extends Model
 
     public function getUsers()
     {
-        $this->users = array();
-        $sql_select = "select * from " . DBT_USERS . ";";
-        $result = $this->mysqli->query($sql_select);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $user = array();
-                $user['login'] = $row["login"];
-                $user['id'] = $row["id"];
-                $user['name'] = $row["name"];
-                $this->users[] = $user;
-            }
-        }
+        $field_names = array('id', 'name','login');
+        $this->users = MyDB::global_select_me($this->mysqli, DBT_USERS,$field_names);
+
         return $this->users;
     }
 
     public function getUser($id)
     {
-        $this->user = array();
-        $sql_select = "select * from " . DBT_USERS . " where id='" . $id . "';";
-        $result = $this->mysqli->query($sql_select);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $this->user['login'] = $row["login"];
-                $this->user['id'] = $row["id"];
-                $this->user['name'] = $row["name"];
-            }
-        }
+        $field_names = array('login', 'id', 'name');
+        $this->user = MyDB::select_me($this->mysqli, DBT_USERS, 'id', $id, $field_names);
+
         return $this->user;
     }
 
     public function getUserByLogin($login)
     {
-        $u_id = 0;
-        $sql_select = "select * from " . DBT_USERS . " where login='$login';";
-        $result = $this->mysqli->query($sql_select);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $u_id = $row["id"];
-            }
-        }
+        $field_names = array('id');
+        $this->user = MyDB::select_me($this->mysqli, DBT_USERS, 'login', $login, $field_names);
+        $u_id = !(is_null($this->user)) ? $this->user['id'] : 0;
         return $u_id;
     }
 
     public function checkUser($login, $pwd)
     {
+        //Todo
         $u_id = 0;
         $sql_select = "select * from " . DBT_USERS . " where login='$login' and password=PASSWORD('$pwd');";
         $result = $this->mysqli->query($sql_select);
@@ -84,12 +64,12 @@ class UserModel extends Model
 
     public function deleteUser($id)
     {
-        MyDB::delete_me($this->mysqli,DBT_USERS,'id',$id);
+        MyDB::delete_me($this->mysqli, DBT_USERS, 'id', $id);
     }
 
     public function addUser($login, $password, $name)
     {
         $data = array('login' => $login, 'password' => "PASSWORD('$password')", 'name' => $name);
-        MyDB::add_me($this->mysqli, DBT_USERS, $data,'pwd');
+        MyDB::add_me($this->mysqli, DBT_USERS, $data, 'pwd');
     }
 }

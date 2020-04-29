@@ -16,6 +16,61 @@ class MyDB
         return self::$mysqli;
     }
 
+    public static function select_me($mysqli, $table_name, $field_name, $field_value, $field_names)
+    {
+        $item = null;
+
+        $sql_select = "select * from $table_name where $field_name = '$field_value'";
+        $result = $mysqli->query($sql_select);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                foreach ($field_names as $k => $v)
+                    $item[$v] = $row[$v];
+            }
+        }
+
+        return $item;
+    }
+
+    public static function select_all_of_me($mysqli, $table_name, $field_name, $field_value, $field_names)
+    {
+        $items = null;
+
+        $sql_select = "select * from $table_name where $field_name = '$field_value'";
+        $result = $mysqli->query($sql_select);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $item = array();
+                foreach ($field_names as $k => $v)
+                    $item[$v] = $row[$v];
+                $items[] = $item;
+            }
+        }
+
+        return $items;
+    }
+
+    public static function global_select_me($mysqli, $table_name, $field_names)
+    {
+        $items = null;
+
+        $sql_select = "select * from $table_name ;";
+        $result = $mysqli->query($sql_select);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $item = array();
+                foreach ($field_names as $k => $v)
+                    $item[$v] = $row[$v];
+                $items[] = $item;
+            }
+        }
+
+        return $items;
+    }
+
     public static function delete_me($mysqli, $table_name, $field_name, $field_value)
     {
         $sql_del = "delete from $table_name where $field_name = '$field_value';";
@@ -48,7 +103,7 @@ class MyDB
         } else {
             foreach ($data as $key => $value) {
                 $field_names .= $key . ',';
-                $field_values .= (strrpos($without_quotes,$value) === false) ? '\'' . $value . '\',' : $value . ',';
+                $field_values .= (strrpos($without_quotes, $value) === false) ? '\'' . $value . '\',' : $value . ',';
             }
         }
 
