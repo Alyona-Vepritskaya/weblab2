@@ -44,12 +44,8 @@ class ProductModel extends Model
 
     public function updateSection($id, $name)
     {
-        $sql_update = "update " . DBT_SECTIONS . "
-        set name   = '" . $name . "'
-        where id = '" . $id . "';";
-        if ($this->mysqli->query($sql_update) !== true) {
-            echo "Error updating record: " . $this->mysqli->error;
-        }
+        $data = array('name' => $name);
+        MyDB::update_me($this->mysqli, DBT_SECTIONS, $data,'id',$id);
     }
 
     function getAllProducts()
@@ -88,30 +84,15 @@ class ProductModel extends Model
     function updateProduct($product_id, $name, $country, $price, $year, $img, $s_num)
     {
         if (!empty($img)) {
-            $this->params = array();
-            $sql_update = "update " . DBT_PRODUCTS . "
-            set name = '" . $name . "',
-            s_num ='" . $s_num . "',
-            price ='" . $price . "',
-            year ='" . $year . "',
-            country ='" . $country . "',
-            img ='" . $img . "'
-            where id = $product_id;";
-            if ($this->mysqli->query($sql_update) !== true) {
-                echo "Error updating record: " . $this->mysqli->error;
-            }
+
+            $data = array('name' => $name,'s_num'=>$s_num,'price'=>$price,'year'=>$year,'country'=>$country,'img'=>$img);
+            MyDB::update_me($this->mysqli, DBT_PRODUCTS, $data,'id',$product_id);
+
         } else {
-            $this->params = array();
-            $sql_update = "update " . DBT_PRODUCTS . "
-            set name = '" . $name . "',
-            s_num ='" . $s_num . "',
-            price ='" . $price . "',
-            year ='" . $year . "',
-            country ='" . $country . "'
-            where id = '" . $product_id . "';";
-            if ($this->mysqli->query($sql_update) !== true) {
-                echo "Error updating record: " . $this->mysqli->error;
-            }
+
+            $data = array('name' => $name,'s_num'=>$s_num,'price'=>$price,'year'=>$year,'country'=>$country);
+            MyDB::update_me($this->mysqli, DBT_PRODUCTS, $data,'id',$product_id);
+
         }
     }
 

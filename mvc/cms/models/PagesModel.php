@@ -38,15 +38,8 @@ class PagesModel extends Model
 
     public function updatePage($id, $name, $content, $url)
     {
-        $sql_update = "update " . DBT_PAGES . "
-        set name   = '" . $name . "',
-            url = '$url',
-            content = '" . $content . "',
-            published_date = CURDATE()
-        where id = '" . $id . "';";
-        if ($this->mysqli->query($sql_update) !== true) {
-            echo "Error updating record: " . $this->mysqli->error;
-        }
+        $data = array('name' => $name,'url'=>$url,'content'=>$content);
+        MyDB::update_me($this->mysqli, DBT_PAGES, $data,'id',$id);
     }
 
     public function deletePage($id)

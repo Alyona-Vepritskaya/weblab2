@@ -43,26 +43,14 @@ class UserModel extends Model
             $login, "PASSWORD('$pwd')", $field_names);
 
         $u_id = (is_null($tmp)) ? 0 : $tmp['id'];
-        /*$sql_select = "select * from " . DBT_USERS . " where login='$login' and password=PASSWORD('$pwd');";
-        $result = $this->mysqli->query($sql_select);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $u_id = $row["id"];
-            }
-        }*/
+
         return $u_id;
     }
 
     public function updateUser($id, $u_login, $_psw, $name)
     {
-        $sql_update = "update " . DBT_USERS . "
-        set login   = '" . $u_login . "',
-            name   = '" . $name . "',
-            password = PASSWORD('" . $_psw . "')
-        where id = '" . $id . "';";
-        if ($this->mysqli->query($sql_update) !== true) {
-            echo "Error updating record: " . $this->mysqli->error;
-        }
+        $data = array('name' => $name,'login'=>$u_login,'password'=>"PASSWORD($_psw)");
+        MyDB::update_me($this->mysqli, DBT_USERS, $data,'id',$id,'pwd');
     }
 
     public function deleteUser($id)

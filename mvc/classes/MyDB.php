@@ -134,4 +134,32 @@ class MyDB
         }
     }
 
+    public static function update_me($mysqli, $table_name, $data, $field_name, $field_value, $f = null)
+    {
+        if($f=='pwd'){
+            $without_quotes = $data['password'];
+        }else{
+            $without_quotes = '';
+        }
+
+        $field_names_values = '';
+
+        if (empty($without_quotes)) {
+            foreach ($data as $key => $value) {
+                $field_names_values .= " $key = '$value',";
+            }
+        }else{
+            foreach ($data as $key => $value) {
+                $field_names_values .= (strrpos($without_quotes, $value) === false) ? " $key = '$value'," : " $key = $value,";
+            }
+        }
+
+        $field_names_values = substr($field_names_values, 0, -1);
+
+        $sql_update = "update $table_name set $field_names_values  where $field_name = '$field_value';";
+        if ($mysqli->query($sql_update) !== true) {
+            echo "Error updating record: " . $mysqli->error;
+        }
+    }
+
 }

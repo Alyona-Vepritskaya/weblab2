@@ -30,15 +30,8 @@ class ArticlesModel extends Model
 
     public function updateArticle($id, $name, $content, $url)
     {
-        $sql_update = "update " . DBT_NEWS . "
-        set name   = '" . $name . "',
-            url = '$url',
-            content = '" . $content . "',
-            published_date = CURDATE() 
-        where id = $id;";
-        if ($this->mysqli->query($sql_update) !== true) {
-            echo "Error updating record: " . $this->mysqli->error;
-        }
+        $data = array('name' => $name,'url'=>$url,'content'=>$content);
+        MyDB::update_me($this->mysqli, DBT_NEWS, $data,'id',$id);
     }
 
     public function deleteArticle($id)
