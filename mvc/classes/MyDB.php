@@ -83,7 +83,7 @@ class MyDB
     {
 
         if ($f == 'pwd') {
-            $without_quotes = 'PASSWORD';
+            $without_quotes = $data['password'];
         } elseif ($f == 'date') {
             $without_quotes = 'CURDATE()';
         } elseif ($f == 'datetime') {
