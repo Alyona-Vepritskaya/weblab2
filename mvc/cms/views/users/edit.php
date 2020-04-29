@@ -13,10 +13,10 @@ $info = $this->user;
 <?php } ?>
 
 <div class="form-inside">
-    <form class="f1" action="index.php" method="post">
-        <input type="hidden" name="controller" value="UsersController">
+    <form class="f1" action="<?= Controller::formatUrl('UsersController', 'update',array('id'=>$info['id']))?>" method="post">
+        <!--<input type="hidden" name="controller" value="UsersController">
         <input type="hidden" name="action" value="update">
-        <input type="hidden" name="id" value="<?= $info['id'] ?>">
+        <input type="hidden" name="id" value="<?/*= $info['id'] */?>">-->
         Name
         <input required type="text" class="fadeIn second" name="name" placeholder="" value="<?= $info['name'] ?>">
         Login

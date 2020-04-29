@@ -20,9 +20,13 @@ $list = $this->ulist;
             <td> <?= $value['id'] ?></td>
             <td> <?= $value['login'] ?></td>
             <td> <?= $value['name'] ?></td>
-            <td><a href="index.php?controller=UsersController&action=edit&id=<?= $value['id'] ?>"
-                   class="buy-item2">Edit</a></td>
-            <td><a href="index.php?controller=UsersController&action=delete&id=<?= $value['id'] ?>" class="buy-item2">Delete</a>
+            <td>
+                <a href="<?= Controller::formatUrl('UsersController', 'edit',array('id'=>$value['id']))?>"
+                   class="buy-item2">Edit</a>
+            </td>
+            <td>
+                <a href="<?= Controller::formatUrl('UsersController', 'delete',array('id'=>$value['id']))?>"
+                   class="buy-item2">Delete</a>
             </td>
         </tr>
     <?php } ?>

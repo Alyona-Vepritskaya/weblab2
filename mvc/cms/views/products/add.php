@@ -12,9 +12,9 @@ $id_section = $this->id_section;
 
 <div class="form-inside">
     <!--Add form-->
-    <form class="f1" action="index.php" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="controller" value="ProductsController">
-        <input type="hidden" name="action" value="add">
+    <form class="f1" action="<?= Controller::formatUrl('ProductsController', 'add')?>" method="post" enctype="multipart/form-data">
+    <!--    <input type="hidden" name="controller" value="ProductsController">
+        <input type="hidden" name="action" value="add">-->
         Name
         <input required class="fadeIn second" type="text" name="name" value="<?=$name?>">
         Serial number

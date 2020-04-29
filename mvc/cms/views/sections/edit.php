@@ -10,10 +10,10 @@ $info = $this->section;
 <?php } ?>
 
 <div class="form-inside">
-    <form class="f1" action="index.php" method="post">
-        <input type="hidden" name="controller" value="SectionsController">
+    <form class="f1" action="<?= Controller::formatUrl('SectionsController', 'update',array('id'=>$info['id']))?>" method="post">
+       <!-- <input type="hidden" name="controller" value="SectionsController">
         <input type="hidden" name="action" value="update">
-        <input type="hidden" name="id" value="<?= $info['id'] ?>">
+        <input type="hidden" name="id" value="<?/*= $info['id'] */?>">-->
         New name
         <input required class="fadeIn second" type="text" name="name" value="<?= $info['name'] ?>">
         <input type="submit" class="buy-item" value="Update">

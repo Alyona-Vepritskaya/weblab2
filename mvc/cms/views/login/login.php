@@ -21,9 +21,9 @@ $error_message = $this->error_message;
     <div id="formContent">
         <h2 class="active">Sign In</h2>
         <h2 class="inactive underlineHover">Sign Up</h2>
-        <form action="index.php" method="post">
-            <input type="hidden" name="controller" value="LoginController">
-            <input type="hidden" name="action" value="login">
+        <form action="<?= Controller::formatUrl('LoginController', 'login')?>" method="post">
+           <!-- <input type="hidden" name="controller" value="LoginController">
+            <input type="hidden" name="action" value="login">-->
             <?=$error_message?>
             <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" value="<?=$login?>">
             <input type="password" id="password" class="fadeIn third" name="pwd" placeholder="password">

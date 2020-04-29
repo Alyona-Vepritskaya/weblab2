@@ -10,10 +10,10 @@ $info = $this->article;
 <?php } ?>
 
 <div class="form-inside">
-    <form class="f1" action="index.php" method="post">
-        <input type="hidden" name="controller" value="NewsController">
+    <form class="f1" action="<?= Controller::formatUrl('NewsController', 'update',array('id'=>$info['id']))?>" method="post">
+        <!--<input type="hidden" name="controller" value="NewsController">
         <input type="hidden" name="action" value="update">
-        <input type="hidden" name="id" value="<?= $info['id'] ?>">
+        <input type="hidden" name="id" value="<?/*= $info['id'] */?>">-->
         Title
         <input required class="fadeIn second" type="text" name="name" value="<?= $info['name'] ?>">
         Content

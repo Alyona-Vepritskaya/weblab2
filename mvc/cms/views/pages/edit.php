@@ -10,10 +10,10 @@ $info = $this->page;
 <?php } ?>
 
 <div class="form-inside">
-    <form class="f1" action="index.php" method="post">
-        <input type="hidden" name="controller" value="PagesController">
+    <form class="f1" action="<?= Controller::formatUrl('PagesController', 'update',array('id'=>$info['id']))?>" method="post">
+       <!-- <input type="hidden" name="controller" value="PagesController">
         <input type="hidden" name="action" value="update">
-        <input type="hidden" name="id" value="<?= $info['id'] ?>">
+        <input type="hidden" name="id" value="<?/*= $info['id'] */?>">-->
         Name
         <input required class="fadeIn second" type="text" name="name" value="<?= $info['name'] ?>">
         Content

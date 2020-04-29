@@ -8,9 +8,9 @@ $login = $this->login;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ?>
 <div class="form-inside">
-    <form class="f1" action="index.php" method="post">
-        <input type="hidden" name="controller" value="UsersController">
-        <input type="hidden" name="action" value="add">
+    <form class="f1" action="<?= Controller::formatUrl('UsersController', 'add')?>" method="post">
+        <!--<input type="hidden" name="controller" value="UsersController">
+        <input type="hidden" name="action" value="add">-->
         Name
         <input value="<?=$name?>" required type="text" class="fadeIn second" name="name" placeholder="">
         Login

@@ -8,9 +8,9 @@ $id_prod = $this->id_prod;
 ?>
 
 <div class="form-inside">
-    <form class="f1" action="index.php" method="post">
-        <input type="hidden" name="action" value="add">
-        <input type="hidden" name="controller" value="CommentsController">
+    <form class="f1" action="<?= Controller::formatUrl('CommentsController', 'add')?>" method="post">
+        <!--<input type="hidden" name="action" value="add">
+        <input type="hidden" name="controller" value="CommentsController">-->
         Name
         <input required type="text" class="fadeIn second" name="name" placeholder="" value="<?= $name ?>">
         Email

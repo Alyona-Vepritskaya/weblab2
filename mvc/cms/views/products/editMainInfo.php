@@ -15,10 +15,10 @@ $error_message = $this->error_message;
         <?php } ?>
 
     </div>
-    <form class="f1" action="index.php" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="controller" value="ProductsController">
+    <form class="f1" action="<?= Controller::formatUrl('ProductsController', 'update_product',array('id'=>$id))?>" method="post" enctype="multipart/form-data">
+       <!-- <input type="hidden" name="controller" value="ProductsController">
         <input type="hidden" name="action" value="update_product">
-        <input type="hidden" name="id" value="<?= $id ?>">
+        <input type="hidden" name="id" value="<?/*= $id */?>">-->
         Name
         <input required class="fadeIn second" type="text" name="name" value="<?= $info['name'] ?>">
         Serial number

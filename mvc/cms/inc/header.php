@@ -13,13 +13,13 @@ include '../init.php';
 </head>
 <body>
 <ul>
-    <li><a href=<?=SITE_HOST."cms/index.php?controller=HomeController"?>>Home</a></li>
-    <li><a href=<?=SITE_HOST."cms/index.php?controller=NewsController"?>>News</a></li>
-    <li><a href=<?=SITE_HOST."cms/index.php?controller=ProductsController"?>>Products</a></li>
-    <li><a href=<?=SITE_HOST."cms/index.php?controller=UsersController"?>>Users</a></li>
-    <li><a href=<?=SITE_HOST."cms/index.php?controller=PagesController"?>>Pages</a></li>
-    <li><a href=<?=SITE_HOST."cms/index.php?controller=CommentsController"?>>Comments</a></li>
-    <li><a href=<?=SITE_HOST."cms/index.php?controller=SectionsController"?>>Sections</a></li>
-    <li><a href=<?=SITE_HOST."cms/index.php?controller=LoginController&action=logout"?>>Log out</a></li>
+    <li><a href="<?= Controller::formatUrl('HomeController')?>">Home</a></li>
+    <li><a href="<?= Controller::formatUrl('NewsController')?>">News</a></li>
+    <li><a href="<?= Controller::formatUrl('ProductsController')?>">Products</a></li>
+    <li><a href="<?= Controller::formatUrl('UsersController')?>">Users</a></li>
+    <li><a href="<?= Controller::formatUrl('PagesController')?>">Pages</a></li>
+    <li><a href="<?= Controller::formatUrl('CommentsController')?>">Comments</a></li>
+    <li><a href="<?= Controller::formatUrl('SectionsController')?>">Sections</a></li>
+    <li><a href="<?= Controller::formatUrl('LoginController','logout')?>">Log out</a></li>
 </ul>
 

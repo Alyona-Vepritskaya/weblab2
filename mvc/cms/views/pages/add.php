@@ -7,9 +7,9 @@ $url = $this->url;
 ?>
 
 <div class="form-inside">
-    <form class="f1" action="index.php" method="post">
-        <input type="hidden" name="action" value="add">
-        <input type="hidden" name="controller" value="PagesController">
+    <form class="f1" action="<?= Controller::formatUrl('PagesController', 'add')?>" method="post">
+        <!--<input type="hidden" name="action" value="add">
+        <input type="hidden" name="controller" value="PagesController">-->
         Page name
         <input required type="text" class="fadeIn second" name="name" placeholder="" value="<?=$name?>">
         Content

@@ -18,8 +18,8 @@ $error_message = $this->error_message;
             <td> <?= $value['id'] ?></td>
             <td> <?= $value['name'] ?></td>
             <td> <?= $value['published_date'] ?> </td>
-            <td><a href="index.php?controller=NewsController&action=edit&id=<?= $value['id'] ?>" class="buy-item2">Edit</a></td>
-            <td><a href="index.php?controller=NewsController&action=delete&id=<?= $value['id'] ?>" class="buy-item2">Delete</a></td>
+            <td><a href="<?= Controller::formatUrl('NewsController', 'edit',array('id'=>$value['id']))?>" class="buy-item2">Edit</a></td>
+            <td><a href="<?= Controller::formatUrl('NewsController', 'delete',array('id'=>$value['id']))?>" class="buy-item2">Delete</a></td>
         </tr>
     <?php } ?>
 </table>

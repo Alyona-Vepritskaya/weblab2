@@ -23,10 +23,10 @@ $sort = $this->sort;
         <div class="m-auto"><h4><?= $error_message ?></h4></div>
     <?php } ?>
 
-    <form class="f1" action="index.php" method="post">
-        <input type="hidden" name="controller" value="ProductsController">
+    <form class="f1" action="<?= Controller::formatUrl('ProductsController', 'add_extra_info',array('id'=>$id))?>" method="post">
+        <!--<input type="hidden" name="controller" value="ProductsController">
         <input type="hidden" name="action" value="add_extra_info">
-        <input type="hidden" name="id" value="<?= $id ?>">
+        <input type="hidden" name="id" value="<?/*= $id */?>">-->
         Param name
         <input required class="fadeIn second" type="text" name="param_name" value="<?=$n?>">
         Param value

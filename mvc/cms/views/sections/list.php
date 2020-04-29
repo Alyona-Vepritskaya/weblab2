@@ -16,8 +16,8 @@ $error_message = $this->error_message;
         <tr>
             <td> <?= $value['id'] ?></td>
             <td> <?= $value['name'] ?></td>
-            <td><a href="index.php?controller=SectionsController&action=edit&id=<?= $value['id'] ?>" class="buy-item2">Edit</a></td>
-            <td><a href="index.php?controller=SectionsController&action=delete&id=<?= $value['id'] ?>" class="buy-item2">Delete</a></td>
+            <td><a href="<?= Controller::formatUrl('SectionsController', 'edit',array('id'=>$value['id']))?>" class="buy-item2">Edit</a></td>
+            <td><a href="<?= Controller::formatUrl('SectionsController', 'delete',array('id'=>$value['id']))?>" class="buy-item2">Delete</a></td>
         </tr>
     <?php } ?>
 </table>

@@ -19,7 +19,10 @@ $error_message = $this->error_message;
             <td> <?= $value['name'] ?></td>
             <td> <?= $value['email'] ?></td>
             <td> <?= $value['id_product'] ?></td>
-            <td><a href="index.php?controller=CommentsController&action=delete&id=<?= $value['id'] ?>" class="buy-item2">Delete</a></td>
+            <td>
+                <a href="<?= Controller::formatUrl('CommentsController', 'delete', array('id' => $value['id'])) ?>"
+                   class="buy-item2">Delete</a>
+            </td>
         </tr>
     <?php } ?>
 </table>
