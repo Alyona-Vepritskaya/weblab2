@@ -14,8 +14,8 @@ class UserModel extends Model
 
     public function getUsers()
     {
-        $field_names = array('id', 'name','login');
-        $this->users = MyDB::global_select_me($this->mysqli, DBT_USERS,$field_names);
+        $field_names = array('id', 'name', 'login');
+        $this->users = MyDB::global_select_me($this->mysqli, DBT_USERS, $field_names);
 
         return $this->users;
     }
@@ -38,15 +38,18 @@ class UserModel extends Model
 
     public function checkUser($login, $pwd)
     {
-        //Todo
-        $u_id = 0;
-        $sql_select = "select * from " . DBT_USERS . " where login='$login' and password=PASSWORD('$pwd');";
+        $field_names = array('id');
+        $tmp = MyDB::hard_select_me($this->mysqli, DBT_USERS, 'login', 'password',
+            $login, "PASSWORD('$pwd')", $field_names);
+
+        $u_id = (is_null($tmp)) ? 0 : $tmp['id'];
+        /*$sql_select = "select * from " . DBT_USERS . " where login='$login' and password=PASSWORD('$pwd');";
         $result = $this->mysqli->query($sql_select);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $u_id = $row["id"];
             }
-        }
+        }*/
         return $u_id;
     }
 
