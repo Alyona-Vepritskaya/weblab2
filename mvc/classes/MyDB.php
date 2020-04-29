@@ -150,7 +150,7 @@ class MyDB
             }
         }else{
             foreach ($data as $key => $value) {
-                $field_names_values .= (strrpos($without_quotes, $value) === false) ? " $key = '$value'," : " $key = $value,";
+                $field_names_values .= (strrpos($without_quotes, $value) === false) ? " $key = '$value'," : " $key = $value ,";
             }
         }
 

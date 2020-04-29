@@ -49,7 +49,7 @@ class UserModel extends Model
 
     public function updateUser($id, $u_login, $_psw, $name)
     {
-        $data = array('name' => $name,'login'=>$u_login,'password'=>"PASSWORD($_psw)");
+        $data = array('name' => $name,'login'=>$u_login,'password'=>"PASSWORD('$_psw')");
         MyDB::update_me($this->mysqli, DBT_USERS, $data,'id',$id,'pwd');
     }
 
