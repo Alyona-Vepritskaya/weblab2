@@ -60,14 +60,14 @@ class ProductModel extends Model
         return $this->sections;
     }
 
-
     function getSection($id)
     {
         $this->section = $this->getSth(DBT_SECTIONS,'id',$id);
 
         if(count($this->section)==1){
-        $this->section = $this->section[0];
+            $this->section = $this->section[0];
         }
+
         return $this->section;
     }
 
@@ -92,9 +92,11 @@ class ProductModel extends Model
         $data = array('name' => "'$name'");
 
         $field_names_values = '';
+
         foreach ($data as $key => $value) {
             $field_names_values .= " $key = $value,";
         }
+
         $field_names_values = substr($field_names_values, 0, -1);
         $sql_update = "update ".DBT_SECTIONS." set $field_names_values  where $field_name = '$id';";
 
@@ -112,29 +114,24 @@ class ProductModel extends Model
     {
         $this->products = $this->getSth(DBT_PRODUCTS,'id_section',$section_id);
 
-
-           /* $this->section = $this->section[0];*/
-
         return $this->products;
-        /*$field_names = array('id', 'name', 'year', 'country', 's_num', 'img', 'price');
-        $this->products = MyDB::select_all_of_me($this->mysqli, DBT_PRODUCTS, 'id_section', $section_id, $field_names);
-
-        return $this->products;*/
     }
 
     function getProduct($product_id)
     {
-        /*$this->params = MyDB::select_me($this->mysqli, DBT_PRODUCTS, 'id', $product_id, $field_names);*/
         $this->params = $this->getSth(DBT_PRODUCTS,'id',$product_id);
+
         if(count($this->params)==1){
             $this->params = $this->params[0];
         }
+
         if (!is_null($this->params)) {
             $tmp = $this->getSth(DBT_PARAM,'id_product',$product_id);
-           /* $tmp = MyDB::select_all_of_me($this->mysqli, DBT_PARAM, 'id_product', $product_id, $field_names);*/
+
             if (!is_null($tmp)) {
                 $this->params['param'] = $tmp;
             }
+
             return $this->params;
         }
 
@@ -185,9 +182,6 @@ class ProductModel extends Model
         if(count($product)==1){
             $product = $product[0];
         }
-
-       /* $field_names = array('id');
-        $product = MyDB::select_me($this->mysqli, DBT_PRODUCTS, 's_num', $s_num, $field_names);*/
 
         $id = (is_null($product))? 0 : $product['id'];
 

@@ -77,12 +77,13 @@ class UserModel extends Model
     public function checkUser($login, $pwd)
     {
         $sql = "SELECT * FROM " . DBT_USERS . " where login = '$login' and password = PASSWORD('$pwd');";
-        /*$tmp = MyDB::hard_select_me($this->mysqli, DBT_USERS, 'login', 'password',
-            $login, "PASSWORD('$pwd')", $field_names);*/
+
         $tmp = MyDB::query_select($sql);
+
         if(count($tmp)==1){
             $tmp = $tmp[0];
         }
+
         $u_id = (is_null($tmp)) ? 0 : $tmp['id'];
 
         return $u_id;
