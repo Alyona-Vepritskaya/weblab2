@@ -12,44 +12,91 @@ class PagesModel extends Model
         $this->mysqli = $mysqli;
     }
 
-    public function getPages()
+    public function getPages($fldname = "", $fldvalue = "", $fields = null, $sortby = "id", $pi = -1, $pn = 20)
     {
-        $field_names = array('id', 'name','url','content','published_date');
-        $this->pages = MyDB::global_select_me($this->mysqli, DBT_PAGES,$field_names);
+
+        $sql_sort = " id ";
+
+        switch ($sortby) {
+            case "name":
+                $sql_sort = "name";
+                break;
+
+            case "add":
+                $sql_sort = "add_date";
+                break;
+        }
+
+        $sql_fields = " * ";
+
+        if ($fields != null) {
+            $sql_fields = implode(", ", $fields);
+        }
+
+        $sql_limit = "";
+
+        if ($pi >= 0) {
+            $sql_limit = " LIMIT " . ($pi * $pn) . ", " . $pn . " ";
+        }
+
+        $sql_cond = "";
+        if ($fldname != "") {
+            $sql_cond = " WHERE $fldname = $fldvalue";
+        }
+        $sql = "SELECT " . $sql_fields . " FROM " . DBT_PAGES . " " . $sql_cond . " ORDER BY " . $sql_sort . " " . $sql_limit;
+
+        $this->pages = MyDB::query($sql);
 
         return $this->pages;
     }
 
     public function getPage($id)
     {
-        $field_names = array('name', 'url','id','content','published_date');
-        $this->page = MyDB::select_me($this->mysqli, DBT_PAGES, 'id', $id, $field_names);
+        $this->page = $this->getPages('id', "'$id'");
 
+        if(count($this->page)==1){
+            $this->page = $this->page[0];
+        }
         return $this->page;
     }
 
     public function getPageByUrl($url)
     {
-        $field_names = array('name', 'url','id','content','published_date');
-        $this->page = MyDB::select_me($this->mysqli, DBT_PAGES, 'url', $url, $field_names);
+        $this->page = $this->getPages('url', "'$url'");
 
+        if(count($this->page)==1){
+            $this->page = $this->page[0];
+        }
         return $this->page;
     }
 
-    public function updatePage($id, $name, $content, $url)
+    public function updatePage($id, $name, $content, $url,$field_name='id')
     {
-        $data = array('name' => $name,'url'=>$url,'content'=>$content);
-        MyDB::update_me($this->mysqli, DBT_PAGES, $data,'id',$id);
+        $data = array('name' => "'$name'",'url'=>"'$url'",'content'=>"'$content'");
+
+        $field_names_values = '';
+        foreach ($data as $key => $value) {
+            $field_names_values .= " $key = $value,";
+        }
+        $field_names_values = substr($field_names_values, 0, -1);
+        $sql_update = "update ".DBT_PAGES." set $field_names_values  where $field_name = '$id';";
+
+        MyDB::query_add_del_upd($sql_update);
     }
 
-    public function deletePage($id)
+    public function deletePage($fldvalue,$fldname='id')
     {
-        MyDB::delete_me($this->mysqli, DBT_PAGES, 'id', $id);
+        $sql_del = "delete from ".DBT_PAGES." where $fldname = '$fldvalue';";
+        MyDB::query_add_del_upd($sql_del);
     }
 
     public function addPage($name, $content, $url)
     {
-        $data = array('name' => $name, 'content' => $content, 'published_date' => 'CURDATE()', 'url' => $url);
-        MyDB::add_me($this->mysqli, DBT_PAGES, $data,'date');
+        $field_names = implode(", ", array('name','content','published_date','url'));
+        $field_values = implode(", ", array("'$name'","'$content'",'CURDATE()',"'$url'"));
+
+        $sql_insert = "insert into ".DBT_PAGES." ($field_names) values ($field_values);";
+
+        MyDB::query_add_del_upd($sql_insert);
     }
 }

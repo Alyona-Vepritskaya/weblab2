@@ -64,7 +64,7 @@ class MyDB
         return $item;
     }
 
-    public static function select_me($mysqli, $table_name, $field_name, $field_value, $field_names)
+/*    public static function select_me($mysqli, $table_name, $field_name, $field_value, $field_names)
     {
         $item = null;
 
@@ -117,7 +117,7 @@ class MyDB
         }
 
         return $items;
-    }
+    }*/
 
 
 /*    public static function add_me($mysqli, $table_name, $data, $f = null)

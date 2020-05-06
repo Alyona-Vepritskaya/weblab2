@@ -98,7 +98,6 @@ class UserModel extends Model
         $sql_update = "update ".DBT_USERS." set $field_names_values  where $field_name = '$id';";
 
         MyDB::query_add_del_upd($sql_update);
-        echo $sql_update;
     }
 
     public function deleteUser($fldvalue, $fldname='id')
