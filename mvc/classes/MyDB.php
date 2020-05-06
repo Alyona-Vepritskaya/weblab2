@@ -16,6 +16,37 @@ class MyDB
         return self::$mysqli;
     }
 
+    public static function query($sql)
+    {
+        $data = Array();
+
+        if( !is_null(self::$mysqli) )
+        {
+            if( $res = self::$mysqli->query($sql) )
+            {
+                while( $row = $res->fetch_assoc() )
+                {
+                    $data[] = $row;
+                }
+                $res->free();
+            } else{
+                echo 'PAIN';
+            }
+        }
+
+        return $data;
+    }
+
+    public static function query_add_del_upd($sql)
+    {
+        if( !is_null(self::$mysqli) )
+        {
+            if( $res = self::$mysqli->query($sql) !== true ) {
+                echo "Error !!!";
+            }
+        }
+    }
+
     public static function hard_select_me($mysqli, $table_name, $field_name1, $field_name2, $field_value1, $field_value2, $field_names)
     {
         $item = null;
@@ -88,15 +119,8 @@ class MyDB
         return $items;
     }
 
-    public static function delete_me($mysqli, $table_name, $field_name, $field_value)
-    {
-        $sql_del = "delete from $table_name where $field_name = '$field_value';";
-        if ($mysqli->query($sql_del) !== TRUE) {
-            echo "Error: " . $sql_del . "<br>" . $mysqli->error;
-        }
-    }
 
-    public static function add_me($mysqli, $table_name, $data, $f = null)
+/*    public static function add_me($mysqli, $table_name, $data, $f = null)
     {
 
         if ($f == 'pwd') {
@@ -132,9 +156,9 @@ class MyDB
         if ($mysqli->query($sql_insert) !== TRUE) {
             echo "Error: " . $sql_insert . "<br>" . $mysqli->error;
         }
-    }
+    }*/
 
-    public static function update_me($mysqli, $table_name, $data, $field_name, $field_value, $f = null)
+   /* public static function update_me($mysqli, $table_name, $data, $field_name, $field_value, $f = null)
     {
         if($f=='pwd'){
             $without_quotes = $data['password'];
@@ -160,6 +184,6 @@ class MyDB
         if ($mysqli->query($sql_update) !== true) {
             echo "Error updating record: " . $mysqli->error;
         }
-    }
+    }*/
 
 }
