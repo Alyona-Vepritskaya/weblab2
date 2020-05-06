@@ -45,7 +45,7 @@ class ArticlesModel extends Model
         }
         $sql = "SELECT " . $sql_fields . " FROM " . DBT_NEWS . " " . $sql_cond . " ORDER BY " . $sql_sort . " " . $sql_limit;
 
-        $this->articles = MyDB::query($sql);
+        $this->articles = MyDB::query_select($sql);
 
         return $this->articles;
     }

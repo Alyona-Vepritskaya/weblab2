@@ -109,6 +109,7 @@ class ProductsController extends PageController
             ////////////////////////////////////////////////////
             /// Form output
             $this->view->list = $this->model->getAllProducts();
+            $this->view->sections = $this->model->getSections();
             $views = array('list','add');
             $this->view->buildView($views);
         } else {

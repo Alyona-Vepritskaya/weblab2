@@ -14,23 +14,36 @@ class UserSessions extends Sessions
 
     public function checkUserAuth()
     {
-        $field_names = array('user_id');
-        $u = MyDB::select_me($this->mysqli, DBT_USERS_SESSIONS, 'ses_id', $this->getSesId(), $field_names);
+        $sql_fields = 'user_id';
+        $id = $this->getSesId();
 
-        $this->user_id =(is_null($u))? 0:$u['user_id'];
+        $sql = "SELECT $sql_fields FROM " . DBT_USERS_SESSIONS . " where ses_id = '$id'";
+        $u = MyDB::query_select($sql);
 
+        if (count($u) > 0) {
+            $u = $u[0];
+        }
+
+        $this->user_id = (is_null($u)) ? 0 : $u['user_id'];
+        $this->user_id = (is_null($u)) ? 0 : $u['user_id'];
         return $this->user_id;
     }
 
     public function makeUserAuth($user_id, $ses_id)
     {
-        $data = array('user_id' => $user_id, 'ses_id' => $ses_id, 'last_access' => 'NOW()', 'add_date' => 'CURDATE()');
-        MyDB::add_me($this->mysqli, DBT_USERS_SESSIONS, $data,'datetime');
+        $field_names = implode(", ", array('user_id', 'ses_id', 'last_access', 'add_date'));
+        $field_values = implode(", ", array("'$user_id'", "'$ses_id'", 'NOW()', "CURDATE()"));
+
+        $sql_insert = "insert into " . DBT_USERS_SESSIONS . " ($field_names) values ($field_values);";
+
+        MyDB::query_add_del_upd($sql_insert);
     }
 
     public function deleteUserAuth($ses_id)
     {
-        MyDB::delete_me($this->mysqli, DBT_USERS_SESSIONS, 'ses_id', $ses_id);
+        $fldname = 'ses_id';
+        $sql_del = "delete from " . DBT_USERS_SESSIONS . " where $fldname = '$ses_id';";
+        MyDB::query_add_del_upd($sql_del);
     }
 
     public function getUserId()

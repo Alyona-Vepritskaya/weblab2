@@ -45,7 +45,7 @@ class PagesModel extends Model
         }
         $sql = "SELECT " . $sql_fields . " FROM " . DBT_PAGES . " " . $sql_cond . " ORDER BY " . $sql_sort . " " . $sql_limit;
 
-        $this->pages = MyDB::query($sql);
+        $this->pages = MyDB::query_select($sql);
 
         return $this->pages;
     }
