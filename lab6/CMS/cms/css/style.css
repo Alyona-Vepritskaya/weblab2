@@ -1,0 +1,164 @@
+* {
+    font-family: 'Ubuntu', sans-serif;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #000033;
+    font-size: 26px;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    transition: 0.3s ease-in-out;
+    background: linear-gradient(360deg, #95DBFE, #5AA9FB);
+    color: blue;
+}
+
+li a:focus {
+    background: linear-gradient(360deg, #95DBFE, #5AA9FB);
+    color: blue;
+    font-weight: bold;
+}
+
+.content {
+    text-align: center;
+}
+
+/*.footer{
+    background: #000033;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}*/
+
+
+a {
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+}
+
+div, h2, p, figure {
+    margin: 0;
+    padding: 0;
+}
+
+#customers {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 10px auto;
+}
+
+#customers td, #customers th {
+    border: 1px solid #0000AE;
+    padding: 8px;
+}
+
+#customers tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#customers tr:hover {
+    background-color: #ddd;
+}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.buy-item {
+    transition: all ease 0.5s;
+    margin: 10px auto;
+    font: inherit;
+    font-size: 24px;
+    display: block;
+    padding: 10px 70px;
+    border: none;
+    background: linear-gradient(360deg, #0734ED, #10106c);
+    color: white;
+    letter-spacing: 1px;
+    border-radius: 18px;
+}
+
+.buy-item:focus,
+.close:focus {
+    outline: none;
+}
+
+.buy-item:hover,
+.buy-item2:hover {
+    transition: all ease 0.5s;
+    background: linear-gradient(360deg, #95DBFE, #5AA9FB);
+    color: #0000AE;
+}
+
+.buy-item:disabled {
+    background: linear-gradient(360deg, slategrey, #6979a0);
+    color: white;
+}
+
+input[type=password], input[type=email], input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.buy-item2 {
+    text-align: center;
+    transition: all ease 0.5s;
+    font: inherit;
+    display: block;
+    padding: 10px 10px;
+    border: none;
+    background: linear-gradient(360deg, #0734ED, #10106c);
+    color: white;
+    letter-spacing: 1px;
+    border-radius: 18px;
+}
+
+.f1 {
+    color: inherit;
+    text-align: center;
+    width: 60%;
+    margin: 20px auto;
+    background: #5AA9FB;
+    padding: 10px;
+    border: 3px solid #0000AE;
+}
+
+.edit {
+    margin: 10px auto;
+    min-width: 98%;
+    min-height: 300px;
+}
+
+.m-auto{
+    color: #AE0000;
+    text-align: center;
+    width: 50%;
+    margin: 10px auto;
+}
