@@ -1,2 +1,4 @@
 # web_labs
-web lab JS HTML CSS PHP Ajax Jquery SQL CMS MVC
+Laboratory work on the course web programming.
+Technologies:
+JS HTML CSS PHP Ajax Jquery SQL CMS MVC
